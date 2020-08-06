@@ -1,5 +1,5 @@
 package Controller;
-//Commit 2
+//Updated Therapist Pane
 import Util.FxmlLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
