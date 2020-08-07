@@ -1,0 +1,7 @@
+#NavBox {
+ -fx-background-color : #ffcac9;
+}
+.Button{
+	-fx-background-color : inherited;
+	
+}

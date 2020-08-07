@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="AnchorMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="964.0" prefWidth="1403.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<AnchorPane fx:id="AnchorMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1530.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
-      <BorderPane fx:id="BorderMainPane" layoutX="-9.0" layoutY="-4.0" prefHeight="969.0" prefWidth="1412.0">
+      <BorderPane fx:id="BorderMainPane" layoutX="-9.0" layoutY="-4.0" prefHeight="810.0" prefWidth="1543.0" stylesheets="@../Css/css.css">
          <left>
-            <VBox prefHeight="978.0" prefWidth="379.0" style="-fx-background-color: #ffcac9;" BorderPane.alignment="CENTER">
+            <VBox fx:id="NavBox" prefHeight="978.0" prefWidth="379.0" BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER" prefHeight="174.0" prefWidth="226.0">
                      <children>
@@ -34,7 +34,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnNursing" mnemonicParsing="false" onAction="#OnClickNursing" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Nursing" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+                        <Button fx:id="BtnNursing" mnemonicParsing="false" onAction="#OnClickNursing" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Nursing" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: #ff9391; -fx-border-color: #ffffff;">
@@ -47,7 +47,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnPatient" mnemonicParsing="false" onAction="#OnClickPatient" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Patient Management" textAlignment="CENTER" />
+                        <Button fx:id="BtnPatient" mnemonicParsing="false" onAction="#OnClickPatient" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Patient Management" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: #ff9391; -fx-border-color: #ffffff;">
@@ -60,7 +60,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnMeals" mnemonicParsing="false" onAction="#OnClickMeals" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Meals Manager" textAlignment="CENTER" />
+                        <Button fx:id="BtnMeals" mnemonicParsing="false" onAction="#OnClickMeals" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Meals Manager" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: #ff9391; -fx-border-color: #ffffff;">
@@ -73,7 +73,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnMed" mnemonicParsing="false" onAction="#OnClickMed" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Medicines Manager" textAlignment="CENTER" />
+                        <Button fx:id="BtnMed" mnemonicParsing="false" onAction="#OnClickMed" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Medicines Manager" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: #ff9391; -fx-border-color: #ffffff;">
@@ -86,7 +86,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnReports" mnemonicParsing="false" onAction="#OnClickReports" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Reports" textAlignment="CENTER" />
+                        <Button fx:id="BtnReports" mnemonicParsing="false" onAction="#OnClickReports" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Reports" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: #ff9391; -fx-border-color: #ffffff;">
@@ -99,7 +99,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnStaff" mnemonicParsing="false" onAction="#OnClickStaff" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Staff Manager" textAlignment="CENTER" />
+                        <Button fx:id="BtnStaff" mnemonicParsing="false" onAction="#OnClickStaff" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Staff Manager" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: #ff9391; -fx-border-color: #ffffff;">
@@ -112,7 +112,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnConn" mnemonicParsing="false" onAction="#OnClickConn" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Connection" textAlignment="CENTER" />
+                        <Button fx:id="BtnConn" mnemonicParsing="false" onAction="#OnClickConn" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Connection" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="226.0" style="-fx-background-color: #ff9391; -fx-border-color: #ffffff;">
@@ -125,7 +125,7 @@
                               <Insets right="40.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Button fx:id="BtnSett" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: inherited;" text="Settings" textAlignment="CENTER" />
+                        <Button fx:id="BtnSett" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="50.0" prefWidth="230.0" styleClass="Button" text="Settings" textAlignment="CENTER" />
                      </children>
                   </HBox>
                </children>

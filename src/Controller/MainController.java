@@ -1,5 +1,5 @@
 package Controller;
-//great
+
 import Util.FxmlLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,8 +45,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void OnClickMeals(ActionEvent event) {
-
+    void OnClickMeals(ActionEvent event) throws IOException {
+        System.out.println("Meals Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("Meals");
+        BorderMainPane.setCenter(view);
     }
 
     @FXML
