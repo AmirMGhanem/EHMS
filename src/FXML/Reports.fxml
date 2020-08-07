@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutY="-6.0" prefHeight="673.0" prefWidth="1004.0">
+         <children>
+            <Pane layoutX="148.0" layoutY="20.0" prefHeight="59.0" prefWidth="685.0" style="-fx-background-color: #ff9391;">
+               <children>
+                  <Label alignment="CENTER" layoutX="-10.0" layoutY="11.0" prefHeight="37.0" prefWidth="706.0" text="Reports Panel" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold Italic" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <TextArea layoutX="45.0" layoutY="403.0" prefHeight="250.0" prefWidth="900.0" />
+            <Button fx:id="BtnLoadPatient2" layoutX="18.0" layoutY="175.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Export Meals Report To File" />
+            <Button fx:id="BtnLoadPatient211" layoutX="18.0" layoutY="135.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Load Meals Report" />
+            <Button fx:id="BtnLoadPatient2121" layoutX="258.0" layoutY="175.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Export Medicine Report To File" />
+            <Button fx:id="BtnLoadPatient21211" layoutX="258.0" layoutY="135.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Load Medicine Report" />
+            <Button fx:id="BtnLoadPatient212111" layoutX="498.0" layoutY="137.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Load Allergies Report" />
+            <Button fx:id="BtnLoadPatient21212" layoutX="498.0" layoutY="175.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Export Allergies Report To File" />
+            <Button fx:id="BtnLoadPatient212121" layoutX="738.0" layoutY="137.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Load Schedule Report" />
+            <Button fx:id="BtnLoadPatient21213" layoutX="738.0" layoutY="177.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Export Schedule Report To File" />
+            <Button fx:id="BtnLoadPatient2121211" layoutX="258.0" layoutY="313.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Load Schedule Report" />
+            <Button fx:id="BtnLoadPatient212131" layoutX="498.0" layoutY="313.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="233.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Export Schedule Report To File" />
+            <Label layoutX="330.0" layoutY="262.0" prefHeight="34.0" prefWidth="150.0" text="Choose Therapist:" textOverrun="CLIP">
+               <font>
+                  <Font name="Guttman Yad" size="17.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="ChoicePatient1" layoutX="515.0" layoutY="263.0" prefWidth="150.0" />
+         </children>
+      </Pane>
+      <ChoiceBox fx:id="ChoicePatient" layoutX="515.0" layoutY="88.0" prefWidth="150.0" />
+      <Label layoutX="330.0" layoutY="85.0" prefHeight="34.0" prefWidth="150.0" text="Choose Patient :" textOverrun="CLIP">
+         <font>
+            <Font name="Guttman Yad" size="17.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
