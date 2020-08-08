@@ -7,6 +7,8 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -47,27 +49,24 @@
                      <content>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <Label layoutX="198.0" layoutY="154.0" prefHeight="17.0" prefWidth="174.0" text="Breakfast" />
+                              <TableView layoutX="8.0" layoutY="131.0" prefHeight="134.0" prefWidth="631.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
                            </children>
                         </Pane>
                      </content>
                   </Tab>
                 <Tab text="Lunch">
                      <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="222.0" layoutY="93.0" text="Lunch" />
-                           </children>
-                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
                      </content>
                   </Tab>
                   <Tab text="Dinner">
                      <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="241.0" layoutY="145.0" text="Dinner" />
-                           </children>
-                        </Pane>
+                        <Pane prefHeight="200.0" prefWidth="200.0" />
                      </content>
                      <graphic>
                         <Label text="Label" />

@@ -4,6 +4,8 @@ import Util.FxmlLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.event.ActionEvent;
@@ -36,12 +38,22 @@ public class MainController implements Initializable {
     @FXML
     private Button BtnSett;
 
+    @FXML
+    private ImageView LogoHome;
 
+    @FXML
+    void LogoHomeClicked(MouseEvent event) throws IOException {
+        System.out.println("LOGOOOOOOOO Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("MainPane");
+        BorderMainPane.setCenter(view);
+    }
 
 
     @FXML
     void OnClickConn(ActionEvent event) {
-    System.out.println("Workssssss");
+
+        System.out.println("Workssssss");
     }
 
     @FXML
@@ -53,7 +65,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void OnClickMed(ActionEvent event) {
+    void OnClickMed(ActionEvent event) throws IOException {
+        System.out.println("Medicine Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("MedicinePane");
+        BorderMainPane.setCenter(view);
 
     }
 
@@ -74,8 +90,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void OnClickReports(ActionEvent event) {
-
+    void OnClickReports(ActionEvent event) throws IOException {
+        System.out.println("Reports Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("Reports");
+        BorderMainPane.setCenter(view);
     }
 
     @FXML
