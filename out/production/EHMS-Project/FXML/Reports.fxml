@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ReportsController">
    <children>
       <Pane layoutY="-6.0" prefHeight="662.0" prefWidth="1004.0">
          <children>
@@ -31,43 +31,43 @@
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <TextField layoutX="126.0" layoutY="91.0" />
+            <TextField fx:id="TextFieldID" layoutX="126.0" layoutY="91.0" />
             <Group layoutX="90.0" layoutY="130.0">
                <children>
-                  <RadioButton mnemonicParsing="false" text="Therapist" />
-                  <RadioButton layoutY="24.0" mnemonicParsing="false" text="Patient" />
-                  <RadioButton layoutY="48.0" mnemonicParsing="false" text="Staff" />
+                  <RadioButton fx:id="RadioTherapist" mnemonicParsing="false" text="Therapist" />
+                  <RadioButton fx:id="RadioPatient" layoutY="24.0" mnemonicParsing="false" text="Patient" />
+                  <RadioButton fx:id="RadioStaff" layoutY="48.0" mnemonicParsing="false" text="Staff" />
                </children>
             </Group>
-            <Button layoutX="231.0" layoutY="204.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Preview " />
-            <Button layoutX="92.0" layoutY="204.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Clear" />
-            <CheckBox layoutX="648.0" layoutY="107.0" mnemonicParsing="false" text="Medicines" />
-            <CheckBox layoutX="648.0" layoutY="132.0" mnemonicParsing="false" text="Allergies" />
-            <CheckBox layoutX="648.0" layoutY="157.0" mnemonicParsing="false" text="Meals" />
-            <CheckBox layoutX="648.0" layoutY="182.0" mnemonicParsing="false" text="Last Requests" />
-            <CheckBox layoutX="527.0" layoutY="107.0" mnemonicParsing="false" text="Personal info" />
-            <CheckBox layoutX="527.0" layoutY="132.0" mnemonicParsing="false" text="Address" />
-            <CheckBox layoutX="527.0" layoutY="157.0" mnemonicParsing="false" text="HR" />
-            <CheckBox layoutX="527.0" layoutY="182.0" mnemonicParsing="false" text="Schedule" />
-            <Button layoutX="792.0" layoutY="155.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Deselect All" />
-            <Button layoutX="792.0" layoutY="114.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Select All" />
+            <Button fx:id="BtnPreview" layoutX="231.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnClickPreview" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Preview " />
+            <Button fx:id="BtnClear" layoutX="92.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnClickClear" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Clear" />
+            <CheckBox fx:id="CheckBoxMedicine" layoutX="648.0" layoutY="107.0" mnemonicParsing="false" text="Medicines" />
+            <CheckBox fx:id="CheckBoxAllergies" layoutX="648.0" layoutY="132.0" mnemonicParsing="false" text="Allergies" />
+            <CheckBox fx:id="CheckBoxMeals" layoutX="648.0" layoutY="157.0" mnemonicParsing="false" text="Meals" />
+            <CheckBox fx:id="CheckBoxRequests" layoutX="648.0" layoutY="182.0" mnemonicParsing="false" text="Last Requests" />
+            <CheckBox fx:id="CheckBoxPresonalInfo" layoutX="527.0" layoutY="107.0" mnemonicParsing="false" text="Personal info" />
+            <CheckBox fx:id="CheckBoxAddress" layoutX="527.0" layoutY="132.0" mnemonicParsing="false" text="Address" />
+            <CheckBox fx:id="CheckBoxHR" layoutX="527.0" layoutY="157.0" mnemonicParsing="false" text="HR" />
+            <CheckBox fx:id="CheckBoxSchedule" layoutX="527.0" layoutY="182.0" mnemonicParsing="false" text="Schedule" />
+            <Button fx:id="BtnDeSelectAll" layoutX="792.0" layoutY="155.0" mnemonicParsing="false" onAction="#OnClickDeSelectAll" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Deselect All" />
+            <Button fx:id="BtnSelectAll" layoutX="792.0" layoutY="114.0" mnemonicParsing="false" onAction="#OnClickSelectAll" prefHeight="33.0" prefWidth="128.0" style="-fx-background-color: aeaeae; -fx-border-color: #ff9391;" text="Select All" />
             <Pane layoutX="81.0" layoutY="253.0" prefHeight="398.0" prefWidth="814.0">
                <children>
                   <TabPane prefHeight="407.0" prefWidth="809.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
                         <Tab text="File">
                            <content>
-                              <TextArea prefHeight="7.0" prefWidth="245.0" />
+                              <TextArea fx:id="TextAreaFile" prefHeight="7.0" prefWidth="245.0" />
                            </content>
                         </Tab>
                         <Tab text="XML">
                            <content>
-                              <TextArea prefHeight="7.0" prefWidth="245.0" />
+                              <TextArea fx:id="TextAreaXML" prefHeight="7.0" prefWidth="245.0" />
                            </content>
                         </Tab>
                         <Tab text="HTML">
                            <content>
-                              <TextArea prefHeight="7.0" prefWidth="245.0" />
+                              <TextArea fx:id="TextAreaHTML" prefHeight="7.0" prefWidth="245.0" />
                            </content>
                         </Tab>
                      </tabs>
