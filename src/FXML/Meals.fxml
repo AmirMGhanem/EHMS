@@ -34,46 +34,79 @@
                         <Label layoutX="38.0" layoutY="14.0" prefHeight="18.0" prefWidth="71.0" text="Elderly ID :" />
                         <Label layoutX="226.0" layoutY="14.0" prefHeight="18.0" prefWidth="71.0" text="Meal :" />
                         <Label layoutX="368.0" layoutY="14.0" prefHeight="18.0" prefWidth="42.0" text="Day:" />
-                        <DatePicker layoutX="362.0" layoutY="47.0" />
-                        <Button layoutX="515.0" layoutY="92.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" style="-fx-background-color: #ff9391;" text="Find" />
-                        <TextField layoutX="14.0" layoutY="47.0" />
-                        <ChoiceBox layoutX="187.0" layoutY="47.0" prefWidth="150.0" />
-                        <Button layoutX="377.0" layoutY="92.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" style="-fx-background-color: #ff9391;" text="Clear" />
+                        <DatePicker fx:id="DatePicker" layoutX="362.0" layoutY="47.0" />
+                        <Button fx:id="BtnFind" layoutX="515.0" layoutY="92.0" mnemonicParsing="false" onAction="#OnClickFind" prefHeight="35.0" prefWidth="129.0" style="-fx-background-color: #ff9391;" text="Find" />
+                        <TextField fx:id="TextFieldID" layoutX="14.0" layoutY="47.0" />
+                        <ChoiceBox fx:id="ChoiceMeal" layoutX="187.0" layoutY="47.0" prefWidth="150.0" />
+                        <Button fx:id="BtnClear" layoutX="377.0" layoutY="92.0" mnemonicParsing="false" onAction="#OnClickClear" prefHeight="35.0" prefWidth="129.0" style="-fx-background-color: #ff9391;" text="Clear" />
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
-            <TabPane layoutX="69.0" layoutY="248.0" prefHeight="354.0" prefWidth="672.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="69.0" layoutY="248.0" prefHeight="354.0" prefWidth="672.0" stylesheets="@../Css/css.css" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Breakfast">
+                <Tab styleClass="Tab" text="Lunch">
                      <content>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TableView layoutX="8.0" layoutY="131.0" prefHeight="134.0" prefWidth="631.0">
+                              <TableView layoutX="21.0" layoutY="102.0" prefHeight="134.0" prefWidth="631.0">
+                                 <columns>
+                                    <TableColumn prefWidth="139.20001220703125" text="Meal" />
+                                    <TableColumn minWidth="0.0" prefWidth="86.40003967285156" text="Weight" />
+                                    <TableColumn minWidth="0.0" prefWidth="124.79998779296875" text="Date" />
+                                    <TableColumn minWidth="0.0" prefWidth="140.79998779296875" text="Time" />
+                                 </columns>
+                              </TableView>
+                           </children></Pane>
+                     </content>
+                  </Tab>
+                  <Tab styleClass="Tab" text="Dinner">
+                     <content>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="21.0" layoutY="102.0" prefHeight="134.0" prefWidth="631.0">
+                                 <columns>
+                                    <TableColumn prefWidth="139.20001220703125" text="Meal" />
+                                    <TableColumn minWidth="0.0" prefWidth="86.40003967285156" text="Weight" />
+                                    <TableColumn minWidth="0.0" prefWidth="124.79998779296875" text="Date" />
+                                    <TableColumn minWidth="0.0" prefWidth="140.79998779296875" text="Time" />
+                                 </columns>
+                              </TableView>
+                           </children></Pane>
+                     </content>
+                  </Tab>
+                <Tab styleClass="Tab" text="Breakfast">
+                     <content>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView layoutX="21.0" layoutY="102.0" prefHeight="134.0" prefWidth="631.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn prefWidth="139.20001220703125" text="Meal" />
+                                  <TableColumn minWidth="0.0" prefWidth="86.40003967285156" text="Weight" />
+                                    <TableColumn minWidth="0.0" prefWidth="124.79998779296875" text="Date" />
+                                    <TableColumn minWidth="0.0" prefWidth="140.79998779296875" text="Time" />
                                 </columns>
                               </TableView>
                            </children>
                         </Pane>
                      </content>
                   </Tab>
-                <Tab text="Lunch">
-                     <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-                  <Tab text="Dinner">
-                     <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0" />
-                     </content>
-                     <graphic>
-                        <Label text="Label" />
-                     </graphic>
-                  </Tab>
               </tabs>
             </TabPane>
+            <Pane layoutX="774.0" layoutY="66.0" prefHeight="235.0" prefWidth="216.0">
+               <children>
+                  <Button fx:id="BtnAddMeal" layoutX="79.0" layoutY="159.0" mnemonicParsing="false" onAction="#OnClickAddMeal" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3bff00;" text="AddMeal" />
+                  <Label layoutX="23.0" layoutY="53.0" prefHeight="18.0" prefWidth="65.0" text="Elderly ID :" />
+                  <Label fx:id="LabelID" layoutX="98.0" layoutY="53.0" prefHeight="18.0" prefWidth="65.0" text="#########" textFill="RED" />
+                  <TextField layoutX="17.0" layoutY="86.0" promptText="Meal Name" />
+                  <TextField layoutX="17.0" layoutY="121.0" promptText="Meal Weight" />
+                  <Label layoutX="41.0" layoutY="-2.0" prefHeight="28.0" prefWidth="104.0" style="-fx-background-color: #ff9391;" text="Add Meals:">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

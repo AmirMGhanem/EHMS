@@ -1,7 +1,19 @@
 #NavBox {
  -fx-background-color : #ffcac9;
+
+}
+
+.Tab{
+ -fx-background-color : #ffcac9;
+
+}
+
+#notificationPanel
+{
+
+-fx-background-color : linear-gradient(#ffffff 25%, #ffcac9 50%,#ffffff 75%);
 }
 .Button{
 	-fx-background-color : inherited;
-	
 }
+

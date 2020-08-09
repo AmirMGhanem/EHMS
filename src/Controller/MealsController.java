@@ -1,10 +1,7 @@
 package Controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
 public class MealsController {
@@ -23,6 +20,17 @@ public class MealsController {
 
     @FXML
     private Button BtnClear;
+
+    @FXML
+    private Button BtnAddMeal;
+
+    @FXML
+    private Label LabelID;
+
+    @FXML
+    void OnClickAddMeal(ActionEvent event) {
+
+    }
 
     @FXML
     void OnClickClear(ActionEvent event) {
