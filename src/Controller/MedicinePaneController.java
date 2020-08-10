@@ -10,7 +10,6 @@ public class MedicinePaneController {
 
     @FXML
     private Button BtnLoadData;
-
     @FXML
     private ChoiceBox<?> ChoicePatient;
 
@@ -22,6 +21,7 @@ public class MedicinePaneController {
 
     @FXML
     private TableView<?> AllrgyTable;
+
 
     @FXML
     void OnLoadDataClick(ActionEvent event) {

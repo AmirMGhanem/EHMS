@@ -12,21 +12,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PatientPaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PatientPaneController">
    <children>
-      <Pane layoutY="-6.0" prefHeight="673.0" prefWidth="1004.0">
+      <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
          <children>
-            <Pane layoutX="148.0" layoutY="20.0" prefHeight="59.0" prefWidth="685.0" style="-fx-background-color: #ff9391;">
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
                <children>
-                  <Label alignment="CENTER" layoutX="-10.0" layoutY="11.0" prefHeight="37.0" prefWidth="706.0" text="Patient Management Panel" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="151.0" text="Patient " textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold Italic" size="32.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="BtnPrint" layoutX="800.0" layoutY="525.0" mnemonicParsing="false" onAction="#OnClickPrint" prefHeight="77.0" prefWidth="117.0" style="-fx-background-color: #ff9391;" text="Print Patient Chart" />
-            <TableView fx:id="PatientTable" layoutX="35.0" layoutY="122.0" prefHeight="224.0" prefWidth="902.0" style="-fx-border-color: #ff9391; -fx-border-width: 4px;">
+            <TableView fx:id="PatientTable" layoutX="53.0" layoutY="215.0" prefHeight="224.0" prefWidth="842.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px;">
                <columns>
                   <TableColumn prefWidth="140.0" text="Id" />
                   <TableColumn prefWidth="140.0" text="Name" />
@@ -36,36 +35,37 @@
                   <TableColumn prefWidth="140.0" text="Experience" />
                </columns>
             </TableView>
-            <Label layoutX="35.0" layoutY="363.0" text="Choose Patient :" textOverrun="CLIP">
+            <Button fx:id="BtnPatientFile" layoutX="802.0" layoutY="457.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Export To File" />
+            <Button fx:id="BtnPatientXML" layoutX="802.0" layoutY="491.0" mnemonicParsing="false" onAction="#OnClickPatientXML" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Export To XML" />
+            <Button fx:id="BtnRemovePatient" layoutX="642.0" layoutY="457.0" mnemonicParsing="false" onAction="#OnClickRemovePatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Remove Patient" />
+            <Button fx:id="BtnLoadPatient" layoutX="477.0" layoutY="456.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #3bff3b;" text="Load Patient" />
+            <Button fx:id="BtnAddPatient" layoutX="476.0" layoutY="491.0" mnemonicParsing="false" onAction="#OnClickAddPatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Add Patient" />
+            <Button fx:id="BtnEditPatient" layoutX="642.0" layoutY="491.0" mnemonicParsing="false" onAction="#OnClickEditPatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Edit Patient" />
+            <Label layoutX="96.0" layoutY="472.0" text="Choose Patient :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="ChoicePatient" layoutX="183.0" layoutY="368.0" prefWidth="150.0" />
-            <BarChart fx:id="PatientBarChart" layoutX="14.0" layoutY="446.0" prefHeight="214.0" prefWidth="642.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
+            <ChoiceBox fx:id="ChoicePatient" layoutX="244.0" layoutY="477.0" prefWidth="150.0" />
+            <BarChart fx:id="PatientBarChart" layoutX="75.0" layoutY="555.0" prefHeight="214.0" prefWidth="642.0">
+               <xAxis>
+                  <CategoryAxis side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis side="LEFT" />
+               </yAxis>
             </BarChart>
-            <Button fx:id="BtnPatientFile" layoutX="753.0" layoutY="355.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #ff9391;" text="Export To File" />
-            <Button fx:id="BtnPatientXML" layoutX="753.0" layoutY="387.0" mnemonicParsing="false" onAction="#OnClickPatientXML" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #ff9391;" text="Export To XML" />
-            <Button fx:id="BtnRemovePatient" layoutX="593.0" layoutY="356.0" mnemonicParsing="false" onAction="#OnClickRemovePatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #ff9391;" text="Remove Patient" />
-            <Button fx:id="BtnLoadPatient" layoutX="427.0" layoutY="356.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #3bff3b;" text="Load Patient" />
-            <Button fx:id="BtnAddPatient" layoutX="427.0" layoutY="389.0" mnemonicParsing="false" onAction="#OnClickAddPatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #ff9391;" text="Add Patient" />
-            <Button fx:id="BtnEditPatient" layoutX="593.0" layoutY="389.0" mnemonicParsing="false" onAction="#OnClickEditPatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #ff9391;" text="Edit Patient" />
-            <Label layoutX="35.0" layoutY="401.0" text="Patient ID :" textOverrun="CLIP">
+            <Label layoutX="96.0" layoutY="510.0" text="Patient ID :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="LblPatientID" layoutX="148.0" layoutY="402.0" text="#########" textFill="RED" textOverrun="CLIP">
+            <Label fx:id="LblPatientID" layoutX="209.0" layoutY="511.0" text="#########" textFill="RED" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
+            <Button fx:id="BtnPrint" layoutX="769.0" layoutY="555.0" mnemonicParsing="false" onAction="#OnClickPrint" prefHeight="77.0" prefWidth="117.0" style="-fx-background-color: #59b7ff;" text="Print Patient Chart" />
          </children>
       </Pane>
    </children>
