@@ -24,7 +24,7 @@
                   <TableColumn minWidth="0.0" prefWidth="213.5999755859375" text="Time" />
               </columns>
             </TableView>
-            <Pane id="notificationPanel" layoutX="338.0" layoutY="40.0" prefHeight="53.0" prefWidth="364.0" stylesheets="@../Css/css.css">
+            <Pane id="notificationPanel" layoutX="338.0" layoutY="40.0" prefHeight="53.0" prefWidth="328.0" stylesheets="@../Css/css.css">
                <children>
                   <Label alignment="CENTER" layoutX="-335.0" layoutY="-3.0" prefHeight="59.0" prefWidth="994.0" text=" Notification Center">
                      <font>
@@ -34,6 +34,7 @@
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
                               <Stop color="#444444" />
+                              <Stop color="BLACK" offset="0.7335616438356163" />
                               <Stop color="BLACK" offset="1.0" />
                            </stops>
                         </LinearGradient>
