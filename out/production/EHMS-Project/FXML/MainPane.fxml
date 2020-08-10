@@ -3,45 +3,75 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="662.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainPaneController">
    <children>
-      <Pane layoutY="-6.0" prefHeight="662.0" prefWidth="1004.0">
+      <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
          <children>
-            <TableView layoutX="7.0" layoutY="125.0" prefHeight="538.0" prefWidth="988.0">
-              <columns>
-                <TableColumn prefWidth="91.99999713897705" text="No." />
-                <TableColumn minWidth="0.0" prefWidth="121.60000610351562" text="Request Type" />
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+               <children>
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="217.0" text="Notification" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold Italic" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <TableView layoutX="23.0" layoutY="276.0" prefHeight="480.0" prefWidth="926.0">
+               <columns>
+                  <TableColumn prefWidth="91.99999713897705" text="No." />
+                  <TableColumn minWidth="0.0" prefWidth="121.60000610351562" text="Request Type" />
                   <TableColumn minWidth="0.0" prefWidth="169.6000518798828" text="Request Description" />
                   <TableColumn minWidth="0.0" prefWidth="143.199951171875" text="Patient Name" />
                   <TableColumn minWidth="0.0" prefWidth="126.4000244140625" text="Patient ID" />
                   <TableColumn minWidth="0.0" prefWidth="113.5999755859375" text="Therapist " />
-                  <TableColumn minWidth="0.0" prefWidth="213.5999755859375" text="Time" />
-              </columns>
+                  <TableColumn minWidth="0.0" prefWidth="154.39996337890625" text="Time" />
+               </columns>
             </TableView>
-            <Pane id="notificationPanel" layoutX="338.0" layoutY="40.0" prefHeight="53.0" prefWidth="328.0" stylesheets="@../Css/css.css">
+            <Pane layoutX="1020.0" layoutY="543.0" prefHeight="213.0" prefWidth="208.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;">
                <children>
-                  <Label alignment="CENTER" layoutX="-335.0" layoutY="-3.0" prefHeight="59.0" prefWidth="994.0" text=" Notification Center">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/therapistStatics.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="35.0" layoutY="141.0" text="Active Therapists">
                      <font>
-                        <Font size="27.0" />
+                        <Font name="Arial Bold Italic" size="18.0" />
                      </font>
-                     <textFill>
-                        <LinearGradient endX="1.0" endY="1.0">
-                           <stops>
-                              <Stop color="#444444" />
-                              <Stop color="BLACK" offset="0.7335616438356163" />
-                              <Stop color="BLACK" offset="1.0" />
-                           </stops>
-                        </LinearGradient>
-                     </textFill>
+                  </Label>
+                  <Label layoutX="98.0" layoutY="179.0" text="##" textFill="RED">
+                     <font>
+                        <Font name="Arial Black" size="20.0" />
+                     </font>
                   </Label>
                </children>
             </Pane>
-         </children></Pane>
+            <Pane layoutX="1020.0" layoutY="314.0" prefHeight="213.0" prefWidth="208.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/patientStatics.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="65.0" layoutY="141.0" text="Patients">
+                     <font>
+                        <Font name="Arial Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="98.0" layoutY="179.0" text="##" textFill="RED">
+                     <font>
+                        <Font name="Arial Black" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
