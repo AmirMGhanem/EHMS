@@ -1,22 +1,22 @@
 package Controller;
 
 import Util.FxmlLoader;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+import java.util.concurrent.TimeUnit;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
 
-    //666
     @FXML
     private AnchorPane AnchorMainPane;
     @FXML
@@ -40,6 +40,43 @@ public class MainController implements Initializable {
 
     @FXML
     private ImageView LogoHome;
+
+
+
+    TranslateTransition openNav;
+    TranslateTransition closeNav;
+
+    @FXML
+    private VBox NavBox;
+    @FXML
+    private Button btest;
+    @FXML
+    private ImageView ImageSlide;
+
+    @FXML
+    void OnMouseClickedSlide(MouseEvent event) {
+        if (NavBox.getTranslateX() != 0) {
+            BorderMainPane.setLeft(NavBox);
+            openNav.play();
+
+        }
+        else {
+            closeNav.setToX(-(NavBox.getWidth())+50);
+            closeNav.play();
+
+        }
+
+    }
+
+
+    private void drawerAction() {
+         openNav = new TranslateTransition(new Duration(350), NavBox);
+        openNav.setToX(0);
+         closeNav = new TranslateTransition(new Duration(350), NavBox);
+
+
+    }
+
 
     @FXML
     void LogoHomeClicked(MouseEvent event) throws IOException {
@@ -109,7 +146,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        drawerAction();
     }
 
    public void RemovePane(Pane pane){
