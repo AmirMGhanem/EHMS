@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -22,56 +27,69 @@
                   </Label>
                </children>
             </Pane>
-            <TableView layoutX="23.0" layoutY="276.0" prefHeight="480.0" prefWidth="926.0">
+            <TableView layoutX="50.0" layoutY="123.0" prefHeight="280.0" prefWidth="1147.0">
                <columns>
                   <TableColumn prefWidth="91.99999713897705" text="No." />
                   <TableColumn minWidth="0.0" prefWidth="121.60000610351562" text="Request Type" />
                   <TableColumn minWidth="0.0" prefWidth="169.6000518798828" text="Request Description" />
                   <TableColumn minWidth="0.0" prefWidth="143.199951171875" text="Patient Name" />
                   <TableColumn minWidth="0.0" prefWidth="126.4000244140625" text="Patient ID" />
-                  <TableColumn minWidth="0.0" prefWidth="113.5999755859375" text="Therapist " />
-                  <TableColumn minWidth="0.0" prefWidth="154.39996337890625" text="Time" />
+                  <TableColumn minWidth="0.0" prefWidth="162.0" text="Therapist " />
+                  <TableColumn minWidth="0.0" prefWidth="329.0" text="Time" />
                </columns>
             </TableView>
-            <Pane layoutX="1020.0" layoutY="543.0" prefHeight="213.0" prefWidth="208.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;">
+            <Pane layoutX="1089.0" layoutY="403.0" prefHeight="150.0" prefWidth="159.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="81.0" fitWidth="90.0" layoutX="39.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/therapistStatics.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="35.0" layoutY="141.0" text="Active Therapists">
+                  <Label layoutX="21.0" layoutY="81.0" prefHeight="21.0" prefWidth="117.0" text="Active Therapists">
                      <font>
-                        <Font name="Arial Bold Italic" size="18.0" />
+                        <Font name="Arial Bold Italic" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="98.0" layoutY="179.0" text="##" textFill="RED">
+                  <Label layoutX="66.0" layoutY="110.0" text="##" textFill="RED">
                      <font>
                         <Font name="Arial Black" size="20.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="1020.0" layoutY="314.0" prefHeight="213.0" prefWidth="208.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;">
+            <PieChart layoutX="14.0" layoutY="406.0" prefHeight="130.0" prefWidth="123.0" />
+            <PieChart layoutX="14.0" layoutY="565.0" prefHeight="117.0" prefWidth="200.0" />
+            <Pane layoutX="1088.0" layoutY="565.0" prefHeight="150.0" prefWidth="159.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true">
+                  <Label layoutX="30.0" layoutY="90.0" prefHeight="21.0" prefWidth="101.0" text="Active Patinet">
+                     <font>
+                        <Font name="Arial Bold Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="69.0" layoutY="112.0" text="##" textFill="RED">
+                     <font>
+                        <Font name="Arial Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="81.0" fitWidth="81.0" layoutX="40.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Images/patientStatics.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="65.0" layoutY="141.0" text="Patients">
-                     <font>
-                        <Font name="Arial Bold Italic" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="98.0" layoutY="179.0" text="##" textFill="RED">
-                     <font>
-                        <Font name="Arial Black" size="20.0" />
-                     </font>
-                  </Label>
                </children>
             </Pane>
+            <Button layoutX="283.0" layoutY="423.0" mnemonicParsing="false" text="Day" />
+            <Button layoutX="324.0" layoutY="423.0" mnemonicParsing="false" text="Monthly" />
+            <Button layoutX="389.0" layoutY="423.0" mnemonicParsing="false" text="Quarterly" />
          </children>
       </Pane>
+      <BarChart layoutX="227.0" layoutY="450.0" prefHeight="341.0" prefWidth="846.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </BarChart>
    </children>
 </AnchorPane>

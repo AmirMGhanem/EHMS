@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AnchorMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1530.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<AnchorPane fx:id="AnchorMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1530.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
       <BorderPane fx:id="BorderMainPane" layoutX="-9.0" layoutY="-4.0" prefHeight="810.0" prefWidth="1543.0">
          <left>
@@ -27,7 +27,7 @@
                                     <Image url="@../Images/LOGO.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="223.0" layoutY="62.0" prefHeight="22.0" prefWidth="95.0" rotate="-90.0" text="Notification" textFill="#2879d0">
+                              <Label layoutX="228.0" layoutY="89.0" prefHeight="22.0" prefWidth="95.0" rotate="-90.0" text="Notification" textFill="#2879d0">
                                  <font>
                                     <Font name="David Bold" size="18.0" />
                                  </font>
@@ -37,6 +37,11 @@
                                     <Font name="David Bold" size="35.0" />
                                  </font>
                               </Label>
+                              <ImageView fx:id="ImageSlide" fitHeight="32.0" fitWidth="38.0" layoutX="257.0" layoutY="1.0" onMouseClicked="#OnMouseClickedSlide" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Images/slidebutton.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </Pane>
                      </children>
@@ -54,9 +59,14 @@
                         <Button fx:id="BtnNursing" mnemonicParsing="false" onAction="#OnClickNursing" prefHeight="43.0" prefWidth="196.0" style="-fx-background-color: inherited;" text="Nursing" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
+                  <HBox fx:id="test" alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff; " >
                      <children>
                         <Button fx:id="BtnSett11" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Nurse" textAlignment="CENTER" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
+                     <children>
+                        <Button fx:id="BtnSett111" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Nurse" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="295.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;">
@@ -74,6 +84,16 @@
                      <VBox.margin>
                         <Insets top="3.0" />
                      </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
+                     <children>
+                        <Button fx:id="BtnSett112" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Patient" textAlignment="CENTER" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
+                     <children>
+                        <Button fx:id="BtnSett1111" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Patient" textAlignment="CENTER" />
+                     </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="379.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;">
                      <children>

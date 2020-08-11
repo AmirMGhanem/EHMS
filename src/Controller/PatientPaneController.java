@@ -97,7 +97,6 @@ public class PatientPaneController implements Initializable {
         list.addAll(a,b);
         ChoicePatient.setValue("Choose Patient");
         ChoicePatient.getItems().addAll(list);
-
     }
 
 
