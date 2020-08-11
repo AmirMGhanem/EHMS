@@ -59,14 +59,14 @@
                         <Button fx:id="BtnNursing" mnemonicParsing="false" onAction="#OnClickNursing" prefHeight="43.0" prefWidth="196.0" style="-fx-background-color: inherited;" text="Nursing" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
                      </children>
                   </HBox>
-                  <HBox fx:id="test" alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff; ">
+                  <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff; ">
                      <children>
-                        <Button fx:id="BtnSett11" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Nurse" textAlignment="CENTER" />
+                        <Button fx:id="BtnAddNurse" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickAddNurse" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Nurse" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
-                        <Button fx:id="BtnSett111" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Nurse" textAlignment="CENTER" />
+                        <Button fx:id="BtnEditNurse" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickEditNurse" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Nurse" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="52.0" prefWidth="295.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;">
@@ -87,12 +87,12 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
-                        <Button fx:id="BtnSett112" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Patient" textAlignment="CENTER" />
+                        <Button fx:id="BtnAddPatient" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickAddPatient" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Patient" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
-                        <Button fx:id="BtnSett1111" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Patient" textAlignment="CENTER" />
+                        <Button fx:id="BtnEditPatient" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickEditPatient" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Patient" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="40.0" prefWidth="379.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;">
@@ -129,7 +129,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
-                        <Button fx:id="BtnSett11111" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="CRUD Medicine" textAlignment="CENTER" />
+                        <Button fx:id="BtnCrudMed" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickCrudMed" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="CRUD Medicine" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="379.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;">

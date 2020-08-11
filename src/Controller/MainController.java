@@ -42,7 +42,6 @@ public class MainController implements Initializable {
     private ImageView LogoHome;
 
 
-
     TranslateTransition openNav;
     TranslateTransition closeNav;
 
@@ -54,7 +53,21 @@ public class MainController implements Initializable {
     private ImageView ImageSlide;
 
     @FXML
+    private Button BtnAddNurse;
+
+    @FXML
+    private Button BtnEditNurse;
+
+    @FXML
+    private Button BtnAddPatient;
+
+    @FXML
+    private Button BtnEditPatient;
+
+
+    @FXML
     void OnMouseClickedSlide(MouseEvent event) {
+
         if (NavBox.getTranslateX() != 0) {
             BorderMainPane.setLeft(NavBox);
             openNav.play();
@@ -135,8 +148,12 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void OnClickSettings(ActionEvent event) {
+    void OnClickSettings(ActionEvent event) throws IOException {
 
+        System.out.println("Settings Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("Settings");
+        BorderMainPane.setCenter(view);
     }
 
     @FXML
@@ -144,9 +161,42 @@ public class MainController implements Initializable {
 
     }
 
+    @FXML
+    void OnClickAddNurse(ActionEvent event) throws IOException {
+        System.out.println("EditNurse Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("addNurse");
+        BorderMainPane.setCenter(view);
+    }
+
+    @FXML
+    void OnClickAddPatient(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickCrudMed(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickEditNurse(ActionEvent event) throws IOException {
+        System.out.println("EditNurse Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("editNurse");
+        BorderMainPane.setCenter(view);
+    }
+
+    @FXML
+    void OnClickEditPatient(ActionEvent event) {
+
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         drawerAction();
+
     }
 
    public void RemovePane(Pane pane){
@@ -154,4 +204,19 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(pane);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
