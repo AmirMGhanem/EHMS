@@ -37,7 +37,7 @@
                                     <Font name="David Bold" size="35.0" />
                                  </font>
                               </Label>
-                              <ImageView fx:id="ImageSlide" fitHeight="32.0" fitWidth="38.0" layoutX="257.0" layoutY="1.0" onMouseClicked="#OnMouseClickedSlide" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="ImageSlide" fitHeight="32.0" fitWidth="38.0" layoutX="259.0" layoutY="13.0" onMouseClicked="#OnMouseClickedSlide" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../Images/slidebutton.png" />
                                  </image>
@@ -59,7 +59,7 @@
                         <Button fx:id="BtnNursing" mnemonicParsing="false" onAction="#OnClickNursing" prefHeight="43.0" prefWidth="196.0" style="-fx-background-color: inherited;" text="Nursing" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
                      </children>
                   </HBox>
-                  <HBox fx:id="test" alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff; " >
+                  <HBox fx:id="test" alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff; ">
                      <children>
                         <Button fx:id="BtnSett11" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Nurse" textAlignment="CENTER" />
                      </children>
@@ -126,6 +126,11 @@
                      <VBox.margin>
                         <Insets top="3.0" />
                      </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
+                     <children>
+                        <Button fx:id="BtnSett11111" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickSettings" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="CRUD Medicine" textAlignment="CENTER" />
+                     </children>
                   </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="35.0" prefWidth="379.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;">
                      <children>
