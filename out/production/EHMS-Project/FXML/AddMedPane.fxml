@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicinePaneController">
+   <children>
+      <Pane layoutX="2.0" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
+         <children>
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+               <children>
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="269.0" text="CRUD Medicine" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold Italic" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <TabPane layoutX="41.0" layoutY="137.0" prefHeight="206.0" prefWidth="535.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Add">
+                     <content>
+                        <Pane prefHeight="239.0" prefWidth="361.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="31.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="141.0" layoutY="38.0" />
+                              <Label layoutX="11.0" layoutY="76.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Type" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox layoutX="140.0" layoutY="83.0" prefWidth="150.0" />
+                              <Label layoutX="11.0" layoutY="127.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Spinner layoutX="135.0" layoutY="132.0" />
+                              <Button layoutX="389.0" layoutY="81.0" mnemonicParsing="false" styleClass="Button" text="Add" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <TabPane layoutX="41.0" layoutY="466.0" prefHeight="206.0" prefWidth="599.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Edit">
+                     <content>
+                        <Pane prefHeight="239.0" prefWidth="361.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="31.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="11.0" layoutY="76.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Type" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox layoutX="139.0" layoutY="40.0" prefWidth="150.0" />
+                              <Label layoutX="11.0" layoutY="127.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Spinner layoutX="140.0" layoutY="132.0" />
+                              <TextField layoutX="349.0" layoutY="40.0" />
+                              <ChoiceBox layoutX="139.0" layoutY="82.0" prefWidth="150.0" />
+                              <ChoiceBox layoutX="348.0" layoutY="81.0" prefWidth="150.0" />
+                              <Spinner layoutX="349.0" layoutY="132.0" />
+                              <Separator layoutX="313.0" layoutY="3.0" orientation="VERTICAL" prefHeight="174.0" prefWidth="6.0" />
+                              <Label layoutX="178.0" layoutY="-1.0" prefHeight="34.0" prefWidth="73.0" text="Current" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="399.0" layoutY="-1.0" prefHeight="34.0" prefWidth="49.0" text="New" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="534.0" layoutY="82.0" mnemonicParsing="false" styleClass="Button" text="Submit" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <TabPane layoutX="649.0" layoutY="137.0" prefHeight="133.0" prefWidth="599.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Remove">
+                     <content>
+                        <Pane prefHeight="239.0" prefWidth="361.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="35.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox layoutX="139.0" layoutY="44.0" prefWidth="150.0" />
+                              <Button layoutX="489.0" layoutY="44.0" mnemonicParsing="false" styleClass="Button" text="Remove" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <TabPane layoutX="701.0" layoutY="469.0" prefHeight="206.0" prefWidth="545.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Changes Log">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextArea disable="true" layoutX="-1.0" prefHeight="176.0" prefWidth="545.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
