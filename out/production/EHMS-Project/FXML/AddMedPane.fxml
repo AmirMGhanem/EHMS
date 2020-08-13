@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicinePaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicineCRUDController">
    <children>
       <Pane layoutX="2.0" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
          <children>
@@ -37,20 +37,20 @@
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="141.0" layoutY="38.0" />
+                              <TextField fx:id="TextFieldAddName" layoutX="141.0" layoutY="38.0" />
                               <Label layoutX="11.0" layoutY="76.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Type" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox layoutX="140.0" layoutY="83.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="ChoiceAddType" layoutX="140.0" layoutY="83.0" prefWidth="150.0" />
                               <Label layoutX="11.0" layoutY="127.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <Spinner layoutX="135.0" layoutY="132.0" />
-                              <Button layoutX="389.0" layoutY="81.0" mnemonicParsing="false" styleClass="Button" text="Add" />
+                              <Spinner fx:id="AddTimesPerDay" layoutX="135.0" layoutY="132.0" />
+                              <Button fx:id="BtnAdd" layoutX="389.0" layoutY="81.0" mnemonicParsing="false" onAction="#OnClickBtnAdd" styleClass="Button" text="Add" />
                            </children>
                         </Pane>
                      </content>
@@ -73,17 +73,17 @@
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox layoutX="139.0" layoutY="40.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="ChoiceEditCurrName" layoutX="139.0" layoutY="40.0" prefWidth="150.0" />
                               <Label layoutX="11.0" layoutY="127.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <Spinner layoutX="140.0" layoutY="132.0" />
-                              <TextField layoutX="349.0" layoutY="40.0" />
-                              <ChoiceBox layoutX="139.0" layoutY="82.0" prefWidth="150.0" />
-                              <ChoiceBox layoutX="348.0" layoutY="81.0" prefWidth="150.0" />
-                              <Spinner layoutX="349.0" layoutY="132.0" />
+                              <Spinner fx:id="EditCurrTimesPerDay" layoutX="140.0" layoutY="132.0" />
+                              <TextField fx:id="EditNewName" layoutX="349.0" layoutY="40.0" />
+                              <ChoiceBox fx:id="ChoiceEditCurrType" layoutX="139.0" layoutY="82.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="ChoiceEditNewType" layoutX="348.0" layoutY="81.0" prefWidth="150.0" />
+                              <Spinner fx:id="EditNewTimesPerDay" layoutX="349.0" layoutY="132.0" />
                               <Separator layoutX="313.0" layoutY="3.0" orientation="VERTICAL" prefHeight="174.0" prefWidth="6.0" />
                               <Label layoutX="178.0" layoutY="-1.0" prefHeight="34.0" prefWidth="73.0" text="Current" textOverrun="CLIP">
                                  <font>
@@ -95,7 +95,7 @@
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="534.0" layoutY="82.0" mnemonicParsing="false" styleClass="Button" text="Submit" />
+                              <Button fx:id="BtnEditSubmit" layoutX="534.0" layoutY="82.0" mnemonicParsing="false" onAction="#OnClickBtnEditSubmit" styleClass="Button" text="Submit" />
                            </children>
                         </Pane>
                      </content>
@@ -113,8 +113,8 @@
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox layoutX="139.0" layoutY="44.0" prefWidth="150.0" />
-                              <Button layoutX="489.0" layoutY="44.0" mnemonicParsing="false" styleClass="Button" text="Remove" />
+                              <ChoiceBox fx:id="ChoiceRemoveName" layoutX="139.0" layoutY="44.0" prefWidth="150.0" />
+                              <Button fx:id="BtnRemove" layoutX="489.0" layoutY="44.0" mnemonicParsing="false" onAction="#OnClickBtnRemove" styleClass="Button" text="Remove" />
                            </children>
                         </Pane>
                      </content>
@@ -127,7 +127,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextArea disable="true" layoutX="-1.0" prefHeight="176.0" prefWidth="545.0" />
+                              <TextArea fx:id="TextArea" disable="true" layoutX="-1.0" prefHeight="176.0" prefWidth="545.0" />
                            </children>
                         </AnchorPane>
                   </content>

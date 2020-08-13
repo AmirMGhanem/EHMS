@@ -170,13 +170,24 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void OnClickAddPatient(ActionEvent event) {
+    void OnClickAddPatient(ActionEvent event) throws IOException {
+
+        System.out.println("Add Patient Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("addPatient");
+        BorderMainPane.setCenter(view);
+
+
 
     }
 
     @FXML
-    void OnClickCrudMed(ActionEvent event) {
+    void OnClickCrudMed(ActionEvent event) throws IOException {
 
+        System.out.println("CRUD Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("AddMedPane");
+        BorderMainPane.setCenter(view);
     }
 
     @FXML
@@ -188,8 +199,12 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void OnClickEditPatient(ActionEvent event) {
+    void OnClickEditPatient(ActionEvent event) throws IOException {
 
+        System.out.println("Add Patient Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("editPatient");
+        BorderMainPane.setCenter(view);
     }
 
 

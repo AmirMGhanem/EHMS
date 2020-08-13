@@ -42,23 +42,8 @@ public class PatientPaneController implements Initializable {
     private Button BtnLodPatient;
 
     @FXML
-    private Button BtnAddPatient;
-
-    @FXML
-    private Button BtnEditPatient;
-
-    @FXML
     private Label LblPatientID;
 
-    @FXML
-    void OnClickAddPatient(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnClickEditPatient(ActionEvent event) {
-
-    }
 
     @FXML
     void OnClickLoadPatient(ActionEvent event) {
