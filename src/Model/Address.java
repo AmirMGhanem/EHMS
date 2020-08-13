@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Objects;
 
-abstract class address {
+abstract class Address {
     private String city;
     private String contactNo;
     private String street;
@@ -51,7 +51,7 @@ abstract class address {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        address address = (address) o;
+        Address address = (Address) o;
         return houseNum == address.houseNum &&
                 Objects.equals(city, address.city) &&
                 Objects.equals(contactNo, address.contactNo) &&

@@ -6,7 +6,7 @@ import java.util.Objects;
 abstract class Person {
     private int ID;
     private String name;
-    private address address;
+    private Address address;
     private String gender;
     private Date date;
 
@@ -20,7 +20,7 @@ abstract class Person {
         this.name = name;
     }
 
-    public void setAddress(Model.address address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -40,7 +40,7 @@ abstract class Person {
         return name;
     }
 
-    public Model.address getAddress() {
+    public Address getAddress() {
         return address;
     }
 
