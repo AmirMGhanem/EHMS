@@ -101,10 +101,12 @@ public class MainController implements Initializable {
 
 
     @FXML
-    void OnClickConn(ActionEvent event) {
+    void OnClickConn(ActionEvent event) throws IOException {
 
-        System.out.println("Workssssss");
-    }
+        System.out.println("Connection Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("ConnectionPane");
+        BorderMainPane.setCenter(view);    }
 
     @FXML
     void OnClickMeals(ActionEvent event) throws IOException {
