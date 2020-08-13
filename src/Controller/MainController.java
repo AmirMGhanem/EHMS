@@ -159,8 +159,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void OnClickStaff(ActionEvent event) {
-
+    void OnClickStaff(ActionEvent event) throws IOException {
+        System.out.println("staff Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("MainPane");
+        BorderMainPane.setCenter(view);
     }
 
     @FXML
