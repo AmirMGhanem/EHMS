@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PatientPaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPatientController">
    <children>
       <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
          <children>
@@ -30,18 +30,16 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="187.0" prefWidth="835.0" style="-fx-border-color: #59b7ff;">
                            <children>
-                              <Label layoutX="85.0" layoutY="13.0" prefHeight="26.0" prefWidth="105.0" text=" First Name :" />
-                              <Label layoutX="85.0" layoutY="58.0" prefHeight="26.0" prefWidth="105.0" text="Last Name :" />
-                              <Label layoutX="85.0" layoutY="103.0" prefHeight="26.0" prefWidth="105.0" text="ID :" />
-                              <TextField layoutX="215.0" layoutY="13.0" prefHeight="31.0" prefWidth="221.0" />
-                              <TextField layoutX="215.0" layoutY="58.0" prefHeight="31.0" prefWidth="221.0" />
-                              <TextField layoutX="215.0" layoutY="103.0" prefHeight="31.0" prefWidth="221.0" />
+                              <Label layoutX="86.0" layoutY="60.0" prefHeight="26.0" prefWidth="105.0" text=" First Name :" />
+                              <Label layoutX="86.0" layoutY="105.0" prefHeight="26.0" prefWidth="105.0" text="Last Name :" />
+                              <TextField fx:id="TextFieldFirstName" layoutX="216.0" layoutY="60.0" prefHeight="31.0" prefWidth="221.0" />
+                              <TextField fx:id="TextFieldLastName" layoutX="216.0" layoutY="105.0" prefHeight="31.0" prefWidth="221.0" />
                               <Label layoutX="520.0" layoutY="8.0" prefHeight="26.0" prefWidth="105.0" text="Gender:" />
                               <Label layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="105.0" text="Birth date :" />
-                              <Label layoutX="520.0" layoutY="98.0" prefHeight="26.0" prefWidth="105.0" text="Date :" />
-                              <ChoiceBox layoutX="655.0" layoutY="8.0" prefHeight="31.0" prefWidth="221.0" />
-                              <DatePicker layoutX="655.0" layoutY="53.0" prefHeight="31.0" prefWidth="221.0" />
-                              <DatePicker layoutX="655.0" layoutY="98.0" prefHeight="31.0" prefWidth="221.0" />
+                              <ChoiceBox fx:id="ChoiceGender" layoutX="655.0" layoutY="8.0" prefHeight="31.0" prefWidth="221.0" />
+                              <DatePicker fx:id="DatePickerBirthDate" layoutX="655.0" layoutY="53.0" prefHeight="31.0" prefWidth="221.0" />
+                              <Label layoutX="86.0" layoutY="18.0" prefHeight="26.0" prefWidth="105.0" text="ID :" />
+                              <TextField fx:id="TextFieldID" layoutX="216.0" layoutY="18.0" prefHeight="31.0" prefWidth="221.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -55,22 +53,20 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="848.0" style="-fx-border-color: #59b7ff;">
                            <children>
                               <Label layoutX="85.0" layoutY="23.0" prefHeight="26.0" prefWidth="124.0" text="Contact Number :" />
-                              <TextField layoutX="296.0" layoutY="22.0" prefHeight="31.0" prefWidth="138.0" />
-                              <ChoiceBox layoutX="214.0" layoutY="23.0" prefHeight="31.0" prefWidth="80.0" />
+                              <TextField fx:id="TextFieldContactNum" layoutX="296.0" layoutY="22.0" prefHeight="31.0" prefWidth="138.0" />
+                              <ChoiceBox fx:id="Choice3Digits" layoutX="214.0" layoutY="23.0" prefHeight="31.0" prefWidth="80.0" />
                               <Label layoutX="520.0" layoutY="16.0" prefHeight="26.0" prefWidth="105.0" text="Street :" />
                               <Label layoutX="520.0" layoutY="65.0" prefHeight="26.0" prefWidth="105.0" text="House Num :" />
                               <Label layoutX="85.0" layoutY="65.0" prefHeight="26.0" prefWidth="105.0" text="City :" />
-                              <TextField layoutX="215.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" />
-                              <TextField layoutX="655.0" layoutY="16.0" prefHeight="31.0" prefWidth="221.0" />
-                              <TextField layoutX="655.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" />
+                              <TextField fx:id="TextFieldCity" layoutX="215.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" />
+                              <TextField fx:id="TextFieldStreet" layoutX="655.0" layoutY="16.0" prefHeight="31.0" prefWidth="221.0" />
+                              <TextField fx:id="TextFieldHouseNum" layoutX="655.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" />
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
                </tabs>
             </TabPane>
-            <Button fx:id="BtnLoadPatient212131" layoutX="502.0" layoutY="662.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" text="SUBMIT" textFill="WHITE" />
-            <Button fx:id="BtnLoadPatient2121211" layoutX="662.0" layoutY="663.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="33.0" prefWidth="105.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" text="CLEAR" textFill="WHITE" />
             <TabPane layoutX="132.0" layoutY="519.0" prefHeight="115.0" prefWidth="1000.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab text="Add Allergy ">
@@ -78,15 +74,16 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="848.0" style="-fx-border-color: #59b7ff;">
                            <children>
                               <Label layoutX="520.0" layoutY="21.0" prefHeight="26.0" prefWidth="90.0" text="medicines" />
-                              <ChoiceBox layoutX="655.0" layoutY="18.0" prefHeight="31.0" prefWidth="221.0" />
+                              <ChoiceBox fx:id="ChoiceMedicine" layoutX="655.0" layoutY="18.0" prefHeight="31.0" prefWidth="221.0" />
                               <Label layoutX="85.0" layoutY="24.0" prefHeight="26.0" prefWidth="105.0" text="allergy name:" />
-                              <TextField layoutX="215.0" layoutY="19.0" prefHeight="31.0" prefWidth="223.0" />
+                              <TextField fx:id="TextFieldAllergyName" layoutX="215.0" layoutY="19.0" prefHeight="31.0" prefWidth="223.0" />
                            </children>
                         </AnchorPane>
                      </content>
                   </Tab>
                </tabs>
             </TabPane>
+            <Button fx:id="BtnAdd" layoutX="845.0" layoutY="709.0" mnemonicParsing="false" onAction="#OnClckBtnAdd" styleClass="Button" text="Add" />
          </children>
       </Pane>
    </children>

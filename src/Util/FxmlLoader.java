@@ -3,7 +3,6 @@ package Util;
 import View.MultipleFxmlHandlingJavaFX;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +13,6 @@ public class FxmlLoader {
     public Pane getPage(String fileName) throws IOException {
 
         try {
-
             URL fileUrl = MultipleFxmlHandlingJavaFX.class.getResource("/FXML/" + fileName + ".fxml");
 
             if (fileUrl == null) {
