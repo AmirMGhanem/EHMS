@@ -7,8 +7,6 @@ public class User {
     private String password;
     private String patientID;
 
-
-
     public User() {
     }
 
