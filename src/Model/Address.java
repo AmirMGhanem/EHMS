@@ -2,12 +2,15 @@ package Model;
 
 import java.util.Objects;
 
-abstract class Address {
+public class Address {
     private String city;
     private String contactNo;
     private String street;
     private int houseNum;
 
+    public Address(String city) {
+        setCity(city);
+    }
 
 
     public String getCity() {

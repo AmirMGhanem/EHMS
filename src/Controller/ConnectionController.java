@@ -2,10 +2,14 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class ConnectionController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ConnectionController implements Initializable,Util.JavafxPaneHandler {
 
     @FXML
     private Button BtnRegister;
@@ -32,4 +36,26 @@ public class ConnectionController {
 
     }
 
+    //Overrided by implementing Initializable
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+    //Overrided by implementing JavafxPaneHandler
+    @Override
+    public void JavafxTableFill() {
+
+    }
+
+    @Override
+    public void JavafxChoiceFill() {
+
+    }
+
+    @Override
+    public void JavafxDiagramFill() {
+
+    }
 }

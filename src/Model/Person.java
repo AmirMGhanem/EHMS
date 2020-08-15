@@ -4,17 +4,15 @@ import java.util.Date;
 import java.util.Objects;
 
 abstract class Person {
-    private int ID;
+
+    private String ID;
     private String name;
     private Address address;
     private String gender;
     private Date date;
 
 
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
+    public void setID(String ID) { this.ID = ID;}
 
     public void setName(String name) {
         this.name = name;
@@ -32,7 +30,7 @@ abstract class Person {
         this.date = date;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 

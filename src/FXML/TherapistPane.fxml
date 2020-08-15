@@ -14,12 +14,12 @@
          <children>
             <TableView fx:id="NurseTable" layoutX="87.0" layoutY="214.0" prefHeight="290.0" prefWidth="834.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px;">
                <columns>
-                  <TableColumn prefWidth="140.0" text="Id" />
-                  <TableColumn prefWidth="140.0" text="Name" />
-                  <TableColumn prefWidth="140.0" text="Address" />
-                  <TableColumn minWidth="0.0" prefWidth="140.0" text="Gender" />
-                  <TableColumn prefWidth="140.0" text="Birth Date" />
-                  <TableColumn prefWidth="140.0" text="Experience" />
+                  <TableColumn fx:id="ColID" prefWidth="140.0" text="Id" />
+                  <TableColumn fx:id="ColName" prefWidth="140.0" text="Name" />
+                  <TableColumn fx:id="ColAddress" prefWidth="140.0" text="Address" />
+                  <TableColumn fx:id="ColGender" minWidth="0.0" prefWidth="140.0" text="Gender" />
+                  <TableColumn fx:id="ColBdate" prefWidth="140.0" text="Birth Date" />
+                  <TableColumn fx:id="ColExperience" prefWidth="140.0" text="Experience" />
                </columns>
             </TableView>
             <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">

@@ -5,18 +5,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class therapist extends Person{
-    Date dateWorkStart ;
-    ArrayList<Date> workSchedule;
+public class Therapist extends Person{
+   private Date dateWorkStart ;
+   private ArrayList<Date> workSchedule;
 
-    public therapist ()
+    public Therapist()
     {
 
     }
 
-    public therapist(Date dateWorkStart, ArrayList<Date> workSchedule) {
+    public Therapist(Date dateWorkStart, ArrayList<Date> workSchedule) {
         this.dateWorkStart = dateWorkStart;
         this.workSchedule = workSchedule;
+    }
+
+
+    public Double getExperience()
+    {
+        return 1.1;
     }
 
     public Date getDateWorkStart() {
@@ -40,6 +46,6 @@ public class therapist extends Person{
         return "therapist{" +
                 "dateWorkStart=" + dateWorkStart +
                 ", workSchedule=" + workSchedule +
-                '}';
+                '}' + super.toString();
     }
 }
