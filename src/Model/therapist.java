@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class therapist extends Person{
+public class Therapist extends Person{
     Date dateWorkStart ;
     ArrayList<Date> workSchedule;
 
-    public therapist ()
+    public Therapist ()
     {
 
     }
 
-    public therapist(Date dateWorkStart, ArrayList<Date> workSchedule) {
+    public Therapist(Date dateWorkStart, ArrayList<Date> workSchedule) {
         this.dateWorkStart = dateWorkStart;
         this.workSchedule = workSchedule;
     }

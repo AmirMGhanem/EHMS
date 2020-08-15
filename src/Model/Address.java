@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Objects;
 
-abstract class Address {
+public abstract class Address {
     private String city;
     private String contactNo;
     private String street;

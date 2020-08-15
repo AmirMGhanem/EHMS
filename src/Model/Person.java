@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 abstract class Person {
-    private int ID;
+    private String ID;
     private String name;
     private Address address;
     private String gender;
@@ -12,7 +12,7 @@ abstract class Person {
 
 
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -32,7 +32,7 @@ abstract class Person {
         this.date = date;
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
 

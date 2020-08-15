@@ -1,6 +1,8 @@
 package Model;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Patient extends Person {
     private ArrayList<Allergy> allergies = new ArrayList<Allergy>();
@@ -11,8 +13,20 @@ public class Patient extends Person {
     public Patient() {
     }
 
+    public Patient(String ID , String name , Address address , String gender , Date date , ArrayList<Allergy> allergies , ArrayList<Medicine> medicines, ArrayList<Meal> meal, ArrayList<Meeting> meeting)
+    {
+        this.setID(ID);
+        this.setName(name);
+        this.setAddress(address);
+        this.setGender(gender);
+        this.setDate(date);
+        this.setAllergies(allergies);
+        this.setMedicines(medicines);
+        this.setMeals(meal);
+        this.setMeetings(meeting);
+    }
 
-    public void addAllergy(Allergy allergy)
+        public void addAllergy(Allergy allergy)
     {
         allergies.add(allergy);
     }
@@ -32,6 +46,16 @@ public class Patient extends Person {
         meetings.add(meeting);
     }
 
+    public ArrayList<String> getAllMedicinesNames(){
+         ArrayList<String> namesArrayList = new ArrayList<String>();
+        for (Medicine medicine: medicines)
+        {
+            namesArrayList.add(medicine.getName());
+        }
+        return namesArrayList;
+    }
+
+    
 
     public ArrayList<Allergy> getAllergies() {
         return allergies;

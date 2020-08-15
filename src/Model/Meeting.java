@@ -4,17 +4,23 @@ import java.util.Date;
 
 public class Meeting {
 
+    private int meetingID;
     private String type;
     private Date time;
+    private Address address;
 
     public Meeting() {
     }
 
-    public Meeting(String type, Date time, Address address) {
+    public Meeting(int meetingID , String type, Date time, Address address) {
+        this.meetingID = meetingID;
         this.type = type;
         this.time = time;
         this.address = address;
     }
+    public int getMeetingID(){return meetingID;}
+
+    public  void setMeetingID(int meetingID){this.meetingID = meetingID;}
 
     public String getType() {
         return type;
@@ -39,8 +45,6 @@ public class Meeting {
     public void setAddress(Address address) {
         this.address = address;
     }
-
-    private Address address;
 
     @Override
     public String toString() {
