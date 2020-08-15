@@ -1,5 +1,6 @@
 package Controller;
 
+import Util.JavafxPaneHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -71,26 +72,10 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     }
 
 
-
-
-    private void loadDataChoicePatient(){
-        list.removeAll();
-        String a="Amir";
-        String b="Alam";
-        list.addAll(a,b);
-        ChoicePatient.setValue("Choose Patient");
-        ChoicePatient.getItems().addAll(list);
-    }
-
-
-
-
-
-
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        JavafxChoiceFill();
     }
 
 
@@ -102,13 +87,21 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
 
     @Override
     public void JavafxChoiceFill() {
-
+        list.removeAll();
+        String a="Amir";
+        String b="Alam";
+        String c="Osnat";
+        list.addAll(a,b);
+        ChoicePatient.setValue("Choose Patient");
+        ChoicePatient.getItems().addAll(list);
     }
 
     @Override
     public void JavafxDiagramFill() {
 
     }
+
+
 
 
 

@@ -80,7 +80,7 @@ public class TherapistPaneController implements Initializable,Util.JavafxPaneHan
 
         JavafxTableFill();
     }
-        
+
 
     //Overrided by implementing JavafxPaneHandler
     @Override
