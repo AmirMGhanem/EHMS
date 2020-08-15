@@ -1,5 +1,6 @@
 package View;
 
+import Model.Therapist;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
@@ -21,5 +22,7 @@ public class MultipleFxmlHandlingJavaFX extends Application {
     public static void main(String[] args)
     {
         launch(args);
+
+
     }
 }

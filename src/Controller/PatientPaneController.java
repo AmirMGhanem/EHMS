@@ -14,7 +14,7 @@ import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PatientPaneController implements Initializable {
+public class PatientPaneController implements Initializable,Util.JavafxPaneHandler {
 
     @FXML
     private Button BtnPrint;
@@ -70,10 +70,8 @@ public class PatientPaneController implements Initializable {
     System.out.println(1);
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadDataChoicePatient();
-    }
+
+
 
     private void loadDataChoicePatient(){
         list.removeAll();
@@ -83,6 +81,37 @@ public class PatientPaneController implements Initializable {
         ChoicePatient.setValue("Choose Patient");
         ChoicePatient.getItems().addAll(list);
     }
+
+
+
+
+
+
+    //Overrided by implementing Initializable
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+    //Overrided by implementing JavafxPaneHandler
+    @Override
+    public void JavafxTableFill() {
+
+    }
+
+    @Override
+    public void JavafxChoiceFill() {
+
+    }
+
+    @Override
+    public void JavafxDiagramFill() {
+
+    }
+
+
+
 
 
 }

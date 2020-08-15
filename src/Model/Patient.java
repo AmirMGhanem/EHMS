@@ -9,6 +9,7 @@ public class Patient extends Person {
     private ArrayList<Meeting> meetings = new ArrayList<Meeting>();
 
     public Patient() {
+
     }
 
 

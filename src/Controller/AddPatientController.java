@@ -2,12 +2,16 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-public class AddPatientController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddPatientController implements Initializable,Util.JavafxPaneHandler {
 
     @FXML
     private TextField TextFieldFirstName;
@@ -53,4 +57,26 @@ public class AddPatientController {
 
     }
 
+    //Overrided by implementing Initializable
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+    //Overrided by implementing JavafxPaneHandler
+    @Override
+    public void JavafxTableFill() {
+
+    }
+
+    @Override
+    public void JavafxChoiceFill() {
+
+    }
+
+    @Override
+    public void JavafxDiagramFill() {
+
+    }
 }

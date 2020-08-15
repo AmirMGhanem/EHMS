@@ -1,6 +1,7 @@
 package Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
@@ -8,7 +9,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
-public class ReportsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ReportsController implements Initializable,Util.JavafxPaneHandler {
 
     @FXML
     private TextField TextFieldID;
@@ -87,4 +91,26 @@ public class ReportsController {
 
     }
 
+    //Overrided by implementing Initializable
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+    //Overrided by implementing JavafxPaneHandler
+    @Override
+    public void JavafxTableFill() {
+
+    }
+
+    @Override
+    public void JavafxChoiceFill() {
+
+    }
+
+    @Override
+    public void JavafxDiagramFill() {
+
+    }
 }
