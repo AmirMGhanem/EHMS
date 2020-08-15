@@ -11,6 +11,7 @@ public class Patient extends Person {
     private ArrayList<Meeting> meetings = new ArrayList<Meeting>();
 
     public Patient() {
+
     }
 
     public Patient(String ID , String name , Address address , String gender , Date date , ArrayList<Allergy> allergies , ArrayList<Medicine> medicines, ArrayList<Meal> meal, ArrayList<Meeting> meeting)

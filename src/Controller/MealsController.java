@@ -1,10 +1,14 @@
 package Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 
-public class MealsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MealsController implements Initializable,Util.JavafxPaneHandler {
 
     @FXML
     private DatePicker DatePicker;
@@ -42,4 +46,26 @@ public class MealsController {
 
     }
 
+    //Overrided by implementing Initializable
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+
+    //Overrided by implementing JavafxPaneHandler
+    @Override
+    public void JavafxTableFill() {
+
+    }
+
+    @Override
+    public void JavafxChoiceFill() {
+
+    }
+
+    @Override
+    public void JavafxDiagramFill() {
+
+    }
 }

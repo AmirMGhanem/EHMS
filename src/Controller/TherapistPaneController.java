@@ -1,27 +1,46 @@
 package Controller;
 
-import Util.FxmlLoader;
+import Model.*;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
+import java.net.URL;
+import java.util.Date;
+import java.util.ResourceBundle;
 
-public class TherapistPaneController {
+public class TherapistPaneController implements Initializable,Util.JavafxPaneHandler {
 
     @FXML
-    private TableView<?> NurseTable;
+    private TableView<Therapist> NurseTable;
 
     @FXML
-    private Button BtnAddNurse;
+    private TableColumn<Therapist,String> ColID;
+
+    @FXML
+    private TableColumn<Therapist,String> ColName;
+
+    @FXML
+    private TableColumn<Therapist,String> ColAddress;
+
+    @FXML
+    private TableColumn<Therapist, String> ColGender;
+
+    @FXML
+    private TableColumn<Therapist, Date> ColBdate;
+
+    @FXML
+    private TableColumn<Therapist ,Double> ColExperience;
 
     @FXML
     private Button BtnRemoveNurse;
-
-    @FXML
-    private Button BtnEditNurse;
 
     @FXML
     private Button BtnNurseInvest;
@@ -31,31 +50,6 @@ public class TherapistPaneController {
 
     @FXML
     private Button BtnNurseXML;
-
-    @FXML
-    private Button BtnBack;
-
-    @FXML
-    void OnClickAdd(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnClickBack(ActionEvent event) throws IOException {
-
-        System.out.println("Back Clicked");
-
-
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("PatientManagementPane");
-
-
-    }
-
-    @FXML
-    void OnClickEdit(ActionEvent event) {
-
-    }
 
     @FXML
     void OnClickInvestigation(ActionEvent event) {
@@ -79,4 +73,45 @@ public class TherapistPaneController {
 
 
 
+
+    //Overrided by implementing Initializable
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        JavafxTableFill();
+    }
+
+
+    //Overrided by implementing JavafxPaneHandler
+    @Override
+    public void JavafxTableFill() {
+        ObservableList<Therapist> Therapist = FXCollections.observableArrayList();
+        Model.Therapist t = new Therapist();
+        t.setID("666");
+        t.setName("Amir");
+        t.setGender("Male");
+        t.setDate(new Date());
+        t.setAddress(new Address("Mughar"));
+        Therapist.add(t);
+
+        //Table Init
+        ColID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        ColName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        ColGender.setCellValueFactory(new PropertyValueFactory<>("Gender"));
+        ColAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        ColBdate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        ColExperience.setCellValueFactory(new PropertyValueFactory<>("Experience"));
+        //add your data to the table here.
+        NurseTable.setItems(Therapist);
+    }
+
+    @Override
+    public void JavafxChoiceFill() {
+
+    }
+
+    @Override
+    public void JavafxDiagramFill() {
+
+    }
 }

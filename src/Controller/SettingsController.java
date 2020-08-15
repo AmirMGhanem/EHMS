@@ -2,6 +2,7 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
@@ -11,7 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
-public class SettingsController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class SettingsController implements Initializable {
 
     @FXML
     private ColorPicker ColorPickerThemeDesgin;
@@ -81,4 +85,8 @@ public class SettingsController {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
