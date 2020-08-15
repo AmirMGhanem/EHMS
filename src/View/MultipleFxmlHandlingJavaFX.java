@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.Stage;
 
-
 public class MultipleFxmlHandlingJavaFX extends Application {
 
     @Override
@@ -16,7 +15,6 @@ public class MultipleFxmlHandlingJavaFX extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
-
     }
 
     public static void main(String[] args)
