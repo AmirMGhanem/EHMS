@@ -12,6 +12,15 @@ public class Address {
         setCity(city);
     }
 
+    public Address(String city, String street, int houseNum,String contactNum) {
+        setCity(city);
+        setStreet(street);
+        setHouseNum(houseNum);
+        setContactNo(contactNum);
+    }
+
+
+
 
     public String getCity() {
         return city;

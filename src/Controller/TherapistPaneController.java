@@ -13,10 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class TherapistPaneController implements Initializable,Util.JavafxPaneHandler {
+    private ArrayList<Therapist> ALTHERAPIST = new ArrayList<Therapist>();
+    private ObservableList<Therapist> Therapist = FXCollections.observableArrayList();
 
     @FXML
     private TableView<Therapist> NurseTable;
@@ -37,7 +40,7 @@ public class TherapistPaneController implements Initializable,Util.JavafxPaneHan
     private TableColumn<Therapist, Date> ColBdate;
 
     @FXML
-    private TableColumn<Therapist ,Double> ColExperience;
+    private TableColumn<Therapist ,Long> ColExperience;
 
     @FXML
     private Button BtnRemoveNurse;
@@ -72,28 +75,28 @@ public class TherapistPaneController implements Initializable,Util.JavafxPaneHan
     }
 
 
-
-
     //Overrided by implementing Initializable
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        Therapist t = new Therapist();
+        t.setID("123");
+        t.setName("Alam");
+        t.setGender("Male");
+        t.setAddress(new Address("Haifa"));
+        t.setDate(new Date());
+        t.setDateWorkStart(new Date(2010,5,15));
+        ALTHERAPIST.add(t);
         JavafxTableFill();
+
+
+
     }
 
 
-    //Overrided by implementing JavafxPaneHandler
-    @Override
-    public void JavafxTableFill() {
-        ObservableList<Therapist> Therapist = FXCollections.observableArrayList();
-        Model.Therapist t = new Therapist();
-        t.setID("666");
-        t.setName("Amir");
-        t.setGender("Male");
-        t.setDate(new Date());
-        t.setAddress(new Address("Mughar"));
-        Therapist.add(t);
-
+    private void TableInit()
+    {
         //Table Init
         ColID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         ColName.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -101,8 +104,28 @@ public class TherapistPaneController implements Initializable,Util.JavafxPaneHan
         ColAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         ColBdate.setCellValueFactory(new PropertyValueFactory<>("date"));
         ColExperience.setCellValueFactory(new PropertyValueFactory<>("Experience"));
+        ColExperience.setEditable(true);
         //add your data to the table here.
         NurseTable.setItems(Therapist);
+    }
+
+
+    //Overrided by implementing JavafxPaneHandler
+    @Override
+    public void JavafxTableFill() {
+        TableInit();
+
+        Model.Therapist t = new Therapist();
+        t.setID("666");
+        t.setName("Amir");
+        t.setGender("Male");
+        t.setDate(new Date());
+        t.setAddress(new Address("Mughar"));
+        Therapist.add(t);
+        Therapist.addAll(ALTHERAPIST);
+
+
+
     }
 
     @Override
@@ -112,6 +135,8 @@ public class TherapistPaneController implements Initializable,Util.JavafxPaneHan
 
     @Override
     public void JavafxDiagramFill() {
+
+
 
     }
 }

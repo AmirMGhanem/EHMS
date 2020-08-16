@@ -1,6 +1,5 @@
 package Model;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +7,7 @@ import java.util.Date;
 public class Therapist extends Person{
    private Date dateWorkStart ;
    private ArrayList<Date> workSchedule;
-
+    Calendar cal = Calendar.getInstance();
     public Therapist()
     {
 
@@ -17,12 +16,6 @@ public class Therapist extends Person{
     public Therapist(Date dateWorkStart, ArrayList<Date> workSchedule) {
         this.dateWorkStart = dateWorkStart;
         this.workSchedule = workSchedule;
-    }
-
-
-    public Double getExperience()
-    {
-        return 1.1;
     }
 
     public Date getDateWorkStart() {

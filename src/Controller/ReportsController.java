@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Patient;
+import Model.Report;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,66 +12,31 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReportsController implements Initializable,Util.JavafxPaneHandler {
+    public ArrayList<Report> ALREPORTS = new ArrayList<Report>();
 
-    @FXML
-    private TextField TextFieldID;
-
-    @FXML
-    private RadioButton RadioTherapist;
-
-    @FXML
-    private RadioButton RadioPatient;
-
-    @FXML
-    private RadioButton RadioStaff;
-
-    @FXML
-    private Button BtnPreview;
-
-    @FXML
-    private Button BtnClear;
-
-    @FXML
-    private CheckBox CheckBoxMedicine;
-
-    @FXML
-    private CheckBox CheckBoxAllergies;
-
-    @FXML
-    private CheckBox CheckBoxMeals;
-
-    @FXML
-    private CheckBox CheckBoxRequests;
-
-    @FXML
-    private CheckBox CheckBoxPresonalInfo;
-
-    @FXML
-    private CheckBox CheckBoxAddress;
-
-    @FXML
-    private CheckBox CheckBoxHR;
-
-    @FXML
-    private CheckBox CheckBoxSchedule;
-
-    @FXML
-    private Button BtnDeSelectAll;
-
-    @FXML
-    private Button BtnSelectAll;
-
-    @FXML
-    private TextArea TextAreaFile;
-
-    @FXML
-    private TextArea TextAreaXML;
-
-    @FXML
-    private TextArea TextAreaHTML;
+    @FXML private TextField TextFieldID;
+    @FXML private RadioButton RadioTherapist;
+    @FXML private RadioButton RadioPatient;
+    @FXML private RadioButton RadioStaff;
+    @FXML private Button BtnPreview;
+    @FXML private Button BtnClear;
+    @FXML private CheckBox CheckBoxMedicine;
+    @FXML private CheckBox CheckBoxAllergies;
+    @FXML private CheckBox CheckBoxMeals;
+    @FXML private CheckBox CheckBoxRequests;
+    @FXML private CheckBox CheckBoxPresonalInfo;
+    @FXML private CheckBox CheckBoxAddress;
+    @FXML private CheckBox CheckBoxHR;
+    @FXML private CheckBox CheckBoxSchedule;
+    @FXML private Button BtnDeSelectAll;
+    @FXML private Button BtnSelectAll;
+    @FXML private TextArea TextAreaFile;
+    @FXML private TextArea TextAreaXML;
+    @FXML private TextArea TextAreaHTML;
 
     @FXML
     void OnClickClear(ActionEvent event) {

@@ -11,20 +11,12 @@ import java.util.ResourceBundle;
 
 public class ConnectionController implements Initializable,Util.JavafxPaneHandler {
 
-    @FXML
-    private Button BtnRegister;
+    @FXML private Button BtnRegister;
+    @FXML private TextField TextFieldRegisterUser;
+    @FXML private TextField TextFieldRegisterPass;
+    @FXML private TextField TextFieldRegisterID;
+    @FXML private Button BtnCheck;
 
-    @FXML
-    private TextField TextFieldRegisterUser;
-
-    @FXML
-    private TextField TextFieldRegisterPass;
-
-    @FXML
-    private TextField TextFieldRegisterID;
-
-    @FXML
-    private Button BtnCheck;
 
     @FXML
     void OnClickBtnCheck(ActionEvent event) {

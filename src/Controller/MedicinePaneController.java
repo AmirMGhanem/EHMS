@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Medicine;
+import Model.Patient;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,23 +11,19 @@ import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MedicinePaneController implements Initializable,Util.JavafxPaneHandler {
+    public ArrayList<Medicine> ALMEDICINE = new ArrayList<Medicine>();
 
-    @FXML
-    private Button BtnLoadData;
-    @FXML
-    private ChoiceBox<?> ChoicePatient;
+    @FXML private Button BtnLoadData;
+    @FXML private ChoiceBox<?> ChoicePatient;
+    @FXML private Label LabelPatientID;
+    @FXML private TableView<?> MedTable;
+    @FXML private TableView<?> AllrgyTable;
 
-    @FXML
-    private Label LabelPatientID;
 
-    @FXML
-    private TableView<?> MedTable;
-
-    @FXML
-    private TableView<?> AllrgyTable;
 
 
     @FXML

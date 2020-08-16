@@ -13,47 +13,21 @@ import java.util.ResourceBundle;
 
 public class EditPatientController implements Initializable,Util.JavafxPaneHandler {
 
-    @FXML
-    private TextField TextFieldFirstName;
+    @FXML private TextField TextFieldFirstName;
+    @FXML private TextField TextFieldLastName;
+    @FXML private TextField TextFieldCity;
+    @FXML private TextField TextFieldContactNum;
+    @FXML private ChoiceBox<?> Choice3Digits;
+    @FXML private TextField TextFieldStreet;
+    @FXML private TextField TextFieldHouseNum;
+    @FXML private TextField TextFieldAddAllergyName;
+    @FXML private ChoiceBox<?> ChoiceMedicine;
+    @FXML private ChoiceBox<?> ChoiceDeleteAllergyName;
+    @FXML private Button BtnClear;
+    @FXML private Button BtnSave;
+    @FXML private ChoiceBox<?> ChoiceNurse;
+    @FXML private Label LblNurseID;
 
-    @FXML
-    private TextField TextFieldLastName;
-
-    @FXML
-    private TextField TextFieldCity;
-
-    @FXML
-    private TextField TextFieldContactNum;
-
-    @FXML
-    private ChoiceBox<?> Choice3Digits;
-
-    @FXML
-    private TextField TextFieldStreet;
-
-    @FXML
-    private TextField TextFieldHouseNum;
-
-    @FXML
-    private TextField TextFieldAddAllergyName;
-
-    @FXML
-    private ChoiceBox<?> ChoiceMedicine;
-
-    @FXML
-    private ChoiceBox<?> ChoiceDeleteAllergyName;
-
-    @FXML
-    private Button BtnClear;
-
-    @FXML
-    private Button BtnSave;
-
-    @FXML
-    private ChoiceBox<?> ChoiceNurse;
-
-    @FXML
-    private Label LblNurseID;
 
     @FXML
     void OnClickBtnClear(ActionEvent event) {
