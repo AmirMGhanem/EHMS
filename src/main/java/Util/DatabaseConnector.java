@@ -1,15 +1,21 @@
 package Util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import Model.Address;
+import Model.Person;
+import Model.Therapist;
+import com.mysql.cj.protocol.Resultset;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.*;
 
 public class DatabaseConnector {
 
     private static Connection con = null;
+
     static
     {
-        String url="jdbc:mysql://localhost:3306/[TODO add Databse]"; //TODO
+        String url="jdbc:mysql://localhost:3306/ehms";
         String user = "root";
         String pass = "";
         try {
@@ -20,9 +26,14 @@ public class DatabaseConnector {
             e.printStackTrace();
             System.out.println("Denied");
         }
+
     }
+
 
     public static Connection getConnection() {
         return con;
     }
+
+
+
 }

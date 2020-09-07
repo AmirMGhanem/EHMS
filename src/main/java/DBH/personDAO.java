@@ -1,6 +1,7 @@
 package DBH;
 
 import Model.Address;
+import Model.Person;
 import Util.DatabaseConnector;
 import Util.JPQLHandler;
 
@@ -13,20 +14,22 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class adressDAO implements JPQLHandler {
+public class personDAO implements JPQLHandler {
 
     static Connection con = DatabaseConnector.getConnection();
 
-    public int insertAddress(Address address) throws SQLException {
+    public int insertperson(Person person) throws SQLException {
 
-        String sql = "insert into address(addresscode,city ,street,housenum) values(?,?,?,?)";
+        String sql = "insert into person(id,name,address,gender,birthdate,contactno) values(?,?,?,?,?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setInt(1, address.getAddresscode());
-        ps.setString(2, address.getCity());
-        ps.setString(3, address.getStreet());
-        ps.setInt(4,address.getHouseNum());
+        ps.setString(1, person.getID());
+        ps.setString(2, person.getName());
+        ps.setInt(3, person.getAddress().getAddresscode());
+        ps.setString(4,person.getGender());
+        ps.setString(5,person.getDate().toString());
+        ps.setString(6,person.getContactNo());
 
         int rows = ps.executeUpdate();
 

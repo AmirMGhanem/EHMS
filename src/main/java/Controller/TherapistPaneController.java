@@ -1,7 +1,5 @@
 package Controller;
-
 import Model.*;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,16 +9,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+
 public class TherapistPaneController implements Initializable, Util.JavafxPaneHandler {
 
     private ArrayList<Therapist> ALTHERAPIST = new ArrayList<Therapist>();
-    private ObservableList<Therapist> Therapist = FXCollections.observableArrayList();
+    private ObservableList<Therapist> Therapist = FXCollections.observableArrayList(ALTHERAPIST);
 
     public ObservableList<Model.Therapist> getTherapist() {
         return Therapist;
@@ -82,6 +80,8 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     public void transferMessage(Therapist t)
     {
         ALTHERAPIST.add(t);
+        NurseTable.getItems().clear();
+        NurseTable.getItems().addAll(ALTHERAPIST);
         NurseTable.setItems(Therapist);
         for(Therapist t1 : ALTHERAPIST)
             System.out.println("TESTTTTTTTTTT"+t1.toString());
