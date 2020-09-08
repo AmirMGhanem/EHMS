@@ -1,3 +1,3 @@
 # EHMS
 Elderly health management system java application
-![Alt text](EHMS/toplogy.jpg?raw=true "Optional Title")
+![Alt text](EHMS/Topology.jpg?raw=true "Optional Title")
