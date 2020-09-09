@@ -17,8 +17,6 @@ public class Medicine {
         this.timesPerDay = timesPerDay;
     }
 
-
-
     public String getName() {
         return name;
     }
@@ -42,13 +40,6 @@ public class Medicine {
     public void setTimesPerDay(int timesPerDay) {
         this.timesPerDay = timesPerDay;
     }
-
-
-
-
-
-
-
 
 
 //-------------Equals And Hash Code ----------------------

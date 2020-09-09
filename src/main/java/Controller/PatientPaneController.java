@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Address;
 import Model.Patient;
+import Model.Therapist;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -21,21 +23,16 @@ import java.util.ResourceBundle;
 public class PatientPaneController implements Initializable,Util.JavafxPaneHandler {
 
     public ArrayList<Patient> ALPATIENT = new ArrayList<Patient>();
+    private ObservableList<Model.Patient> Patients = FXCollections.observableArrayList(ALPATIENT);
 
-
-
-
-
-    
-
-
-
-    private ObservableList<Model.Patient> Patients = FXCollections.observableArrayList();
-
+    DBH.patientDAO PDH = new DBH.patientDAO();
 
 
     @FXML private Button BtnPrint;
-    @FXML private TableView<Patient> PatientTable;
+    @FXML public TableView<Patient> PatientTable;
+
+
+
     @FXML private TableColumn<Patient,String> ColID;
     @FXML private TableColumn<Patient,String> ColName;
     @FXML private TableColumn<Patient,String> ColAddress;
@@ -44,6 +41,7 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
 
     @FXML
     private ChoiceBox<String> ChoicePatient;
+
     ObservableList list = FXCollections.observableArrayList();
 
     @FXML
@@ -68,6 +66,13 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     @FXML
     void OnClickLoadPatient(ActionEvent event) {
 
+        for(Patient p : Patients)
+        {
+                if(p.getName().equals(ChoicePatient.getValue().toString()))
+                    LblPatientID.setText(p.getID());
+
+        }
+
     }
 
     @FXML
@@ -81,8 +86,16 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     }
 
     @FXML
-    void OnClickRemovePatient(ActionEvent event) {
+    void OnClickRemovePatient(ActionEvent event) throws SQLException {
+        String id = PatientTable.getSelectionModel().getSelectedItem().getID();
+        int addressCode = PatientTable.getSelectionModel().getSelectedItem().getAddress().getAddresscode();
 
+        System.out.println(id);
+        System.out.println(addressCode);
+
+        PDH.removePatientByID(id , addressCode);
+
+        PatientTable.getItems().removeAll(PatientTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -95,52 +108,54 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+
+        try {
+            TableInit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         JavafxChoiceFill();
-        JavafxDiagramFill();
-        Patient p = new Patient();
-        p.setID("123");
-        p.setName("Alam");
-        p.setGender("Male");
-        p.setAddress(new Address("Haifa"));
-        p.setDate(new Date());
-        ALPATIENT.add(p);
-        JavafxTableFill();
+
     }
 
 
 
-
-
-
-    private void TableInit()
-    {
+    private void TableInit() throws SQLException {
         //Table Init
         ColID.setCellValueFactory(new PropertyValueFactory<Patient, String>("ID"));
         ColName.setCellValueFactory(new PropertyValueFactory<Patient, String>("Name"));
         ColGender.setCellValueFactory(new PropertyValueFactory<Patient, String>("Gender"));
         ColAddress.setCellValueFactory(new PropertyValueFactory<Patient, String>("Address"));
         ColBdate.setCellValueFactory(new PropertyValueFactory<Patient, Date>("date"));
-
-        //add your data to the table here.
+        JavafxTableFill();
         PatientTable.setItems(Patients);
+
+
+        /*
+        //Table Init
+
+        JavafxTableFill();
+        NurseTable.setItems(Therapist);
+         */
     }
 
     //Overrided by implementing JavafxPaneHandler
     @Override
-    public void JavafxTableFill() {
+    public void JavafxTableFill() throws SQLException {
 
-        TableInit();
         Patients.addAll(ALPATIENT);
+        Patients=PDH.selectPatients();
 
     }
 
     @Override
     public void JavafxChoiceFill() {
         list.removeAll();
-        String a="Amir";
-        String b="Alam";
+ ;
 
-        list.addAll(a,b);
+    for(Patient p : Patients)
+            list.add(p.getName());
         ChoicePatient.setValue("Choose Patient");
         ChoicePatient.getItems().addAll(list);
     }

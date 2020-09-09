@@ -1,21 +1,26 @@
 package Controller;
 
+import DBH.*;
+import Model.Address;
+import Model.Medicine;
+import Model.Therapist;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MedicineCRUDController implements Initializable,Util.JavafxPaneHandler {
 
+    @FXML private TextField TextFieldAddPatientID;
     @FXML private TextField TextFieldAddName;
-    @FXML private ChoiceBox<?> ChoiceAddType;
+    @FXML private ChoiceBox<String> ChoiceAddType;
     @FXML private Spinner<?> AddTimesPerDay;
     @FXML private Button BtnAdd;
     @FXML private ChoiceBox<?> ChoiceEditCurrName;
@@ -31,8 +36,19 @@ public class MedicineCRUDController implements Initializable,Util.JavafxPaneHand
 
 
     @FXML
-    void OnClickBtnAdd(ActionEvent event) {
+    void OnClickBtnAdd(ActionEvent event) throws SQLException {
 
+        Medicine m = new Medicine();
+
+        m.setName(TextFieldAddName.getText());
+        m.setType(ChoiceAddType.getValue());
+        m.setTimesPerDay(1);
+
+        DBH.medicineDAO mdo = new medicineDAO();
+        mdo.insertMedicine(m);
+
+        DBH.patient_medicineDAO pmdo = new patient_medicineDAO();
+        pmdo.insertToPatient_Medicine(TextFieldAddPatientID.getText() , m.getName());
     }
 
     @FXML
@@ -47,7 +63,7 @@ public class MedicineCRUDController implements Initializable,Util.JavafxPaneHand
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        JavafxChoiceFill();
     }
 
 
@@ -59,8 +75,15 @@ public class MedicineCRUDController implements Initializable,Util.JavafxPaneHand
 
     @Override
     public void JavafxChoiceFill() {
+        ObservableList TypeList = FXCollections.observableArrayList();
 
+        String o = "Ointment";
+        String c = "Capsules";
+
+        TypeList.addAll(o, c);
+        ChoiceAddType.getItems().addAll(TypeList);
     }
+
 
     @Override
     public void JavafxDiagramFill() {

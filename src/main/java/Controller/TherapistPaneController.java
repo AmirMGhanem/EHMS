@@ -1,5 +1,9 @@
 package Controller;
 import Model.*;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -19,6 +24,8 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
     private ArrayList<Therapist> ALTHERAPIST = new ArrayList<Therapist>();
     private ObservableList<Therapist> Therapist = FXCollections.observableArrayList(ALTHERAPIST);
+    DBH.therapistDAO TDBH = new DBH.therapistDAO();
+
 
     public ObservableList<Model.Therapist> getTherapist() {
         return Therapist;
@@ -34,17 +41,27 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     @FXML
     public TableView<Therapist> NurseTable;
     @FXML
-    private TableColumn<Therapist, String> ColID;
+    public TableColumn<Therapist, String> ColID;
     @FXML
-    private TableColumn<Therapist, String> ColName;
+    public TableColumn<Therapist, String> ColName;
     @FXML
-    private TableColumn<Therapist, String> ColAddress;
+    public TableColumn<Therapist, String> ColAddress;
     @FXML
-    private TableColumn<Therapist, String> ColGender;
+    private TableColumn<Therapist, Number> ColAddressCode;
     @FXML
-    private TableColumn<Therapist, Date> ColBdate;
+    private TableColumn<Therapist, String> ColAddressCity;
     @FXML
-    private TableColumn<Model.Therapist, Double> ColExperience;
+    private TableColumn<Therapist,String> ColAddressStreet;
+    @FXML
+    private TableColumn<Therapist,Number> ColAddressHouse;
+    @FXML
+    public TableColumn<Therapist, String> ColGender;
+    @FXML
+    public TableColumn<Person, Date> ColBdate;
+    @FXML
+    public TableColumn<Model.Therapist, Number> ColExperience;
+    @FXML
+    public TableColumn<Therapist,String> ColContactNo;
     @FXML
     private Button BtnRemoveNurse;
     @FXML
@@ -62,8 +79,17 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     }
 
     @FXML
-    void OnClickRemove(ActionEvent event) {
+    void OnClickRemove(ActionEvent event) throws SQLException {
 
+        String id = NurseTable.getSelectionModel().getSelectedItem().getID();
+        int addressCode = NurseTable.getSelectionModel().getSelectedItem().getAddress().getAddresscode();
+
+        System.out.println(id);
+        System.out.println(addressCode);
+
+        TDBH.removeTherapistByID(id , addressCode);
+
+        NurseTable.getItems().removeAll(NurseTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
@@ -77,8 +103,7 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
 
 
-    public void transferMessage(Therapist t)
-    {
+    public void transferMessage(Therapist t) throws SQLException {
         ALTHERAPIST.add(t);
         NurseTable.getItems().clear();
         NurseTable.getItems().addAll(ALTHERAPIST);
@@ -88,31 +113,41 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
         JavafxTableFill();
     }
 
-
-
     //Overrided by implementing Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TableInit();
+        try {
+            TableInit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void TableInit() {
+    private void TableInit() throws SQLException {
         //Table Init
         ColID.setCellValueFactory(new PropertyValueFactory<Model.Therapist, String>("ID"));
         ColName.setCellValueFactory(new PropertyValueFactory<Model.Therapist, String>("Name"));
         ColGender.setCellValueFactory(new PropertyValueFactory<Model.Therapist, String>("Gender"));
         ColAddress.setCellValueFactory(new PropertyValueFactory<Model.Therapist, String>("Address"));
-        ColBdate.setCellValueFactory(new PropertyValueFactory<Model.Therapist, Date>("date"));
-        ColExperience.setCellValueFactory(new PropertyValueFactory<Model.Therapist, Double>("Experience"));
+        ColAddressCode.setCellValueFactory(CellData->new SimpleIntegerProperty(CellData.getValue().getAddress().getAddresscode()));
+        ColAddressCity.setCellValueFactory(CellData->new SimpleStringProperty(CellData.getValue().getAddress().getCity()));
+        ColAddressStreet.setCellValueFactory(CellData->new SimpleStringProperty(CellData.getValue().getAddress().getStreet()));
+        ColAddressHouse.setCellValueFactory(CellData->new SimpleIntegerProperty(CellData.getValue().getAddress().getHouseNum()));
+        ColBdate.setCellValueFactory(new PropertyValueFactory<Person, Date>("date"));
+        ColExperience.setCellValueFactory(CellData->new SimpleIntegerProperty(CellData.getValue().getExperience()));
+        ColContactNo.setCellValueFactory(new PropertyValueFactory<Therapist,String>("ContactNo"));
         ColExperience.setEditable(true);
         //add your data to the table here.
+        JavafxTableFill();
         NurseTable.setItems(Therapist);
     }
     //Overrided by implementing JavafxPaneHandler
     @Override
-    public void JavafxTableFill() {
+    public void JavafxTableFill() throws SQLException {
         Therapist.addAll(ALTHERAPIST);
+
+        Therapist = TDBH.selectTherapists();
     }
     @Override
     public void JavafxChoiceFill() {

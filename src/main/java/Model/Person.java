@@ -22,6 +22,20 @@ public class Person {
         this.contactNo = contactNo;
     }
 
+
+
+    public String getFirstName()
+    {
+        String[] name = new String[2];
+        name = this.name.split(" ");
+        return name[0];
+    }
+    public String getLasttName()
+    {
+        String[] name = new String[2];
+        name = this.name.split(" ");
+        return name[1];
+    }
     public void setID(String ID) { this.id = ID;}
 
     public void setName(String name) {

@@ -1,7 +1,14 @@
 package Controller;
 
+import DBH.patientDAO;
+import DBH.personDAO;
+import DBH.therapistDAO;
+import Model.Therapist;
 import Util.FxmlLoader;
 import javafx.animation.TranslateTransition;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,6 +19,8 @@ import javafx.event.ActionEvent;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -86,18 +95,34 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(view);
     }
     @FXML
-    void OnClickNursing(ActionEvent event) throws IOException {
-    System.out.println("Nursing Clicked");
+    void OnClickNursing(ActionEvent event) throws IOException, SQLException {
+
+        TherapistPaneController tpc = new TherapistPaneController();
+        ObservableList obTherapist = FXCollections.observableArrayList();
+
+        DBH.therapistDAO tdo = new therapistDAO();
+        obTherapist = tdo.selectTherapists();
+        System.out.println("==========" + obTherapist);
+
+        System.out.println("Nursing Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("TherapistPane");
         BorderMainPane.setCenter(view);
     }
     @FXML
-    void OnClickPatient(ActionEvent event) throws IOException {
+    void OnClickPatient(ActionEvent event) throws IOException, SQLException {
+        PatientPaneController ppc = new PatientPaneController();
+        ObservableList obPatient = FXCollections.observableArrayList();
+
+        DBH.patientDAO pdo = new patientDAO();
+        obPatient = pdo.selectPatients();
+        System.out.println("==========" + obPatient);
+
         System.out.println("Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("PatientManagementPane");
         BorderMainPane.setCenter(view);
+
     }
     @FXML
     void OnClickReports(ActionEvent event) throws IOException {

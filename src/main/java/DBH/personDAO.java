@@ -1,9 +1,15 @@
 package DBH;
 
+import Controller.TherapistPaneController;
 import Model.Address;
 import Model.Person;
+import Model.Therapist;
 import Util.DatabaseConnector;
 import Util.JPQLHandler;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +17,9 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class personDAO implements JPQLHandler {
@@ -36,6 +44,20 @@ public class personDAO implements JPQLHandler {
         ps.close();
 
         return rows;
+
+    }
+
+    public void updatePerson(Therapist t) throws SQLException{
+
+        String sql = "update person set name=? where addresscode=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1 , t.getName());
+        ps.setString(2 , t.getContactNo());
+        ps.setString(3 , t.getID());
+
+        ps.executeQuery();
+        ps.close();
 
     }
 
