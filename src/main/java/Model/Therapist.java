@@ -1,29 +1,30 @@
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Therapist extends Person{
-   private Double experience;
+   private Date WorkDateStart;
    private ArrayList<Date> workSchedule;
-    private Calendar cal = Calendar.getInstance();
+   private Calendar cal = Calendar.getInstance();
 
     public Therapist() {
     }
 
-    public Therapist(String id, String name, Address address, String gender, Date date, String contactNo, Double experience, ArrayList<Date> workSchedule) {
+    public Therapist(String id, String name, Address address, String gender, Date date, String contactNo, Date WorkDateStart, ArrayList<Date> workSchedule) {
         super(id, name, address, gender, date, contactNo);
-        this.experience = experience;
+        this.WorkDateStart = WorkDateStart;
         this.workSchedule = workSchedule;
     }
 
-    public Double getExperience() {
-        return experience;
+    public Date getWorkDateStart() {
+        return WorkDateStart;
     }
 
-    public void setexperience(double experience) {
-        this.experience = experience;
+    public void setWorkDateStart(Date WorkDateStart) {
+        this.WorkDateStart = WorkDateStart;
     }
 
     public ArrayList<Date> getWorkSchedule() {
@@ -37,8 +38,19 @@ public class Therapist extends Person{
     @Override
     public String toString() {
         return "therapist{" +
-                "experience=" + experience +
+                "Work Date Start=" + WorkDateStart +
                 ", workSchedule=" + workSchedule +
                 '}' + super.toString();
+    }
+
+    public int getExperience() {
+       return getYear(WorkDateStart,new Date());
+    }
+    int getYear(Date date1,Date date2){
+        SimpleDateFormat simpleDateformat=new SimpleDateFormat("yyyy");
+        Integer.parseInt(simpleDateformat.format(date1));
+
+        return Integer.parseInt(simpleDateformat.format(date2))- Integer.parseInt(simpleDateformat.format(date1));
+
     }
 }

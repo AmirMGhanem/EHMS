@@ -20,8 +20,15 @@ public class Address {
         setHouseNum(houseNum);
     }
 
+    public Address() {
 
+    }
 
+    public Address(String city , String street , int houseNum){
+        setCity(city);
+        setStreet(street);
+        setHouseNum(houseNum);
+    }
 
 
     public int getAddresscode() {
