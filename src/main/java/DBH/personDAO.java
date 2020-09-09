@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-public class personDAO implements JPQLHandler {
+public class personDAO {
 
     static Connection con = DatabaseConnector.getConnection();
 
@@ -61,30 +61,4 @@ public class personDAO implements JPQLHandler {
 
     }
 
-    @Override
-    public void SelectQuery() {
-
-
-    }
-
-    @Override
-    public void InsertQuery() {
-
-    }
-
-    @Override
-    public void RemoveQuery() {
-
-    }
-
-    @Override
-    public int CountQuery() {
-        return 0;
-    }
-
-    @Override
-    public List SelectAllQuery() {
-
-        return null;
-    }
 }

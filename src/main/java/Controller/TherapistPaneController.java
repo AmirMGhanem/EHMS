@@ -1,5 +1,6 @@
 package Controller;
 import Model.*;
+import Util.FilesHandler;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,6 +14,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -74,8 +77,11 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
 
     @FXML
-    void OnClickInvestigation(ActionEvent event) {
-
+    void OnClickInvestigation(ActionEvent event) throws IOException {
+        Util.FilesHandler fh = new FilesHandler();
+        for(Model.Therapist t : Therapist)
+            if(t.getID().equals("000000000"))
+                fh.SaveNurse("Amir",t);
     }
 
     @FXML

@@ -24,7 +24,7 @@ public class therapistDAO {
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, therapist.getID());
-        ps.setString(2, therapist.getDate().toString());
+        ps.setString(2, therapist.getWorkDateStart().toString());
 
         int rows = ps.executeUpdate();
 
@@ -104,11 +104,12 @@ public class therapistDAO {
     public void Updateherapist(Therapist t) throws SQLException {
 
 
-        String sql1 = "update person SET name = ?, contactno=?";
+        String sql1 = "update person SET name = ?, contactno=? where id = ?";
         PreparedStatement ps = con.prepareStatement(sql1);
 
         ps.setString(1, t.getName());
         ps.setString(2,t.getContactNo());
+        ps.setString(3,t.getID());
         int rows = ps.executeUpdate();
         ps.close();
 
