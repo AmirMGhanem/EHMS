@@ -72,7 +72,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
 
         java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthdate.getValue());
         t.setDate(sqlDate);
-
+  
         java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
         t.setWorkDateStart(sqlWorkDate);
 
