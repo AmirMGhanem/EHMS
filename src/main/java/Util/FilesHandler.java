@@ -1,20 +1,120 @@
 package Util;
 
-import Model.Medicine;
+import Controller.TherapistPaneController;
+import DBH.patientDAO;
+import DBH.therapistDAO;
+import Model.Patient;
 import Model.Therapist;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 
 public class FilesHandler {
 
-    public static void SaveNurse(String fileName, Therapist therapist) throws IOException, IOException {
+
+    public static void SaveNurse() throws IOException, IOException {
+        FileWriter fr = null;
+        DBH.therapistDAO tdb = new therapistDAO();
+        ArrayList<Therapist> ALTHERAPIST = new ArrayList<Therapist>();
+        try {
+            fr = new FileWriter("src/main/resources/Files/TherapistFiles/Therapists.txt");
+            fr.write("ID           Name           Address           Gender           Date           ContactNo");
+            fr.write("\n --------------------------------------------------------------------------------------");
+            ALTHERAPIST = tdb.selectAll();
+            System.out.println(ALTHERAPIST.size());
+            for (Therapist t : ALTHERAPIST) {
+                fr.write("\n" + t.getID() + "     " + t.getName() + "     " + t.getAddress().getCity() + " , " + t.getAddress().getStreet() + " , " + t.getAddress().getHouseNum() + "     " + t.getGender() + "     " + t.getDate() + "     " + t.getContactNo());
+            }
+            fr.close();
+            System.out.println("Test6 Applied");
+        } catch (IOException | SQLException e1) {
+            e1.printStackTrace();
+
+
+        }
+
 
     }
 
+    public void SaveSpecificNurse(Therapist t) {
+        FileWriter fr = null;
+        try {
+            File f = new File("src/main/resources/Files/TherapistFiles/detailed/" + t.getName() + ".txt");
+            if(f.exists())
+            {
+                fr = new FileWriter(f,true);
+                fr.append("\n 122313123123123");
+
+            }else
+            {
+                fr = new FileWriter(f);
+                fr.write("ID           Name           Address           Gender           Date           ContactNo");
+                fr.write("\n --------------------------------------------------------------------------------------");
+                fr.write("\n" + t.getID() + "   " + t.getName() + "   " + t.getAddress().getCity() + " , " + t.getAddress().getStreet() + " , " + t.getAddress().getHouseNum() + "   " + t.getGender() + "   " + t.getDate() + "   " + t.getContactNo());
+
+            }
+            fr.close();
+            System.out.println("Test6 Applied");
+        } catch (IOException e1) {
+            e1.printStackTrace();
 
 
+        }
+
+    }
+
+    public void SaveSpecificPatient(Patient p) {
+        FileWriter fr = null;
+        try {
+            File f = new File("src/main/resources/Files/PatientFiles/detailed/" + p.getName() + ".txt");
+            if(f.exists())
+            {
+                fr = new FileWriter(f,true);
+                fr.append("\n 122313123123123");
+
+            }else
+            {
+                fr = new FileWriter(f);
+                fr.write("ID           Name           Address           Gender           Date           ContactNo");
+                fr.write("\n --------------------------------------------------------------------------------------");
+                fr.write("\n" + p.getID() + "   " + p.getName() + "   " + p.getAddress().getCity() + " , " + p.getAddress().getStreet() + " , " + p.getAddress().getHouseNum() + "   " + p.getGender() + "   " + p.getDate() + "   " + p.getContactNo());
+
+            }
+            fr.close();
+            System.out.println("Test6 Applied");
+        } catch (IOException e1) {
+            e1.printStackTrace();
+
+
+        }
+
+    }
+
+    public static void SavePatient() throws IOException, IOException {
+        FileWriter fr = null;
+        DBH.patientDAO pdb = new patientDAO();
+        ArrayList<Patient> ALPATIENT = new ArrayList<Patient>();
+        try {
+            fr = new FileWriter("src/main/resources/Files/PatientFiles/Patients.txt");
+            fr.write("ID           Name           Address           Gender           Date           ContactNo");
+            fr.write("\n --------------------------------------------------------------------------------------");
+            ALPATIENT = pdb.selectAll();
+            System.out.println(ALPATIENT.size());
+            for (Patient p : ALPATIENT) {
+                fr.write("\n" + p.getID() + "     " + p.getName() + "     " + p.getAddress().getCity() + " , " + p.getAddress().getStreet() + " , " + p.getAddress().getHouseNum() + "     " + p.getGender() + "     " + p.getDate() + "     " + p.getContactNo());
+            }
+            fr.close();
+            System.out.println("Test7 Applied");
+        } catch (IOException | SQLException e1) {
+            e1.printStackTrace();
+
+
+        }
+
+
+    }
 }

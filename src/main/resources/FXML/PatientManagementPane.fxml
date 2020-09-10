@@ -46,10 +46,10 @@
             <ChoiceBox fx:id="ChoicePatient" layoutX="244.0" layoutY="477.0" prefWidth="150.0" />
             <BarChart fx:id="PatientBarChart" layoutX="75.0" layoutY="555.0" prefHeight="214.0" prefWidth="642.0">
                <xAxis>
-                  <CategoryAxis side="BOTTOM" />
+                  <CategoryAxis fx:id="y" side="BOTTOM" />
                </xAxis>
                <yAxis>
-                  <NumberAxis side="LEFT" />
+                  <NumberAxis side="LEFT" fx:id="x" />
                </yAxis>
             </BarChart>
             <Label layoutX="96.0" layoutY="510.0" text="Patient ID :" textOverrun="CLIP">
@@ -63,6 +63,7 @@
                </font>
             </Label>
             <Button fx:id="BtnPrint" layoutX="642.0" layoutY="494.0" mnemonicParsing="false" onAction="#OnClickPrint" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Print Patient Chart" />
+            <Button fx:id="BtnSpecPatientFile" layoutX="968.0" layoutY="457.0" mnemonicParsing="false" onAction="#OnClickSpecToFile" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Export Specific" />
          </children>
       </Pane>
    </children>
