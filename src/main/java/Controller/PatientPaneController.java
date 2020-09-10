@@ -3,24 +3,29 @@ package Controller;
 import Model.Address;
 import Model.Patient;
 import Model.Therapist;
+import Util.FilesHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class PatientPaneController implements Initializable,Util.JavafxPaneHandler {
+public class PatientPaneController implements Initializable, Util.JavafxPaneHandler {
 
     public ArrayList<Patient> ALPATIENT = new ArrayList<Patient>();
     private ObservableList<Model.Patient> Patients = FXCollections.observableArrayList(ALPATIENT);
@@ -28,16 +33,22 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     DBH.patientDAO PDH = new DBH.patientDAO();
 
 
-    @FXML private Button BtnPrint;
-    @FXML public TableView<Patient> PatientTable;
+    @FXML
+    private Button BtnPrint;
+    @FXML
+    public TableView<Patient> PatientTable;
 
 
-
-    @FXML private TableColumn<Patient,String> ColID;
-    @FXML private TableColumn<Patient,String> ColName;
-    @FXML private TableColumn<Patient,String> ColAddress;
-    @FXML private TableColumn<Patient, String> ColGender;
-    @FXML private TableColumn<Patient, Date> ColBdate;
+    @FXML
+    private TableColumn<Patient, String> ColID;
+    @FXML
+    private TableColumn<Patient, String> ColName;
+    @FXML
+    private TableColumn<Patient, String> ColAddress;
+    @FXML
+    private TableColumn<Patient, String> ColGender;
+    @FXML
+    private TableColumn<Patient, Date> ColBdate;
 
     @FXML
     private ChoiceBox<String> ChoicePatient;
@@ -48,7 +59,15 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     private BarChart<?, ?> PatientBarChart;
 
     @FXML
+    private CategoryAxis y;
+
+    @FXML
+    private NumberAxis x;
+    @FXML
     private Button BtnPatientFile;
+
+    @FXML
+    private Button BtnSpecPatientFile;
 
     @FXML
     private Button BtnPatientXML;
@@ -66,10 +85,9 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     @FXML
     void OnClickLoadPatient(ActionEvent event) {
 
-        for(Patient p : Patients)
-        {
-                if(p.getName().equals(ChoicePatient.getValue().toString()))
-                    LblPatientID.setText(p.getID());
+        for (Patient p : Patients) {
+            if (p.getName().equals(ChoicePatient.getValue().toString()))
+                LblPatientID.setText(p.getID());
 
         }
 
@@ -93,32 +111,42 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
         System.out.println(id);
         System.out.println(addressCode);
 
-        PDH.removePatientByID(id , addressCode);
+        PDH.removePatientByID(id, addressCode);
 
         PatientTable.getItems().removeAll(PatientTable.getSelectionModel().getSelectedItem());
     }
 
+
     @FXML
-    void OnClickToFile(ActionEvent event) {
-    System.out.println(1);
+    void OnClickSpecToFile(ActionEvent event) {
+        Util.FilesHandler fh = new FilesHandler();
+        String id = PatientTable.getSelectionModel().getSelectedItem().getID();
+        for (Model.Patient p : ALPATIENT)
+            if (p.getID().equals(id)) {
+                fh.SaveSpecificPatient(p);
+            }
+    }
+
+    @FXML
+    void OnClickToFile(ActionEvent event) throws IOException {
+        Util.FilesHandler fh = new FilesHandler();
+        fh.SavePatient();
     }
 
 
     //Overrided by implementing Initializable
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
             TableInit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        JavafxDiagramFill();
         JavafxChoiceFill();
 
     }
-
 
 
     private void TableInit() throws SQLException {
@@ -144,17 +172,17 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
     @Override
     public void JavafxTableFill() throws SQLException {
 
-        Patients.addAll(ALPATIENT);
-        Patients=PDH.selectPatients();
+        Patients = PDH.selectPatients();
+        ALPATIENT = PDH.selectAll();
 
     }
 
     @Override
     public void JavafxChoiceFill() {
         list.removeAll();
- ;
+        ;
 
-    for(Patient p : Patients)
+        for (Patient p : Patients)
             list.add(p.getName());
         ChoicePatient.setValue("Choose Patient");
         ChoicePatient.getItems().addAll(list);
@@ -162,20 +190,47 @@ public class PatientPaneController implements Initializable,Util.JavafxPaneHandl
 
     @Override
     public void JavafxDiagramFill() {
+        String[] month = {"January","Last-Month","Current"};
 
-       // ObservableList<PieChart.Data> pielist = FXCollections.observableArrayList();
-        //pielist.add(new PieChart.Data("Medicine",5));
-        //pielist.add(new PieChart.Data("allergy",3));
-        //pielist.add(new PieChart.Data("meetings",1));
-        //PieChart patientchart = new PieChart(list);
-        //patientchart.setTitle("Daily Patient Statics");
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setCategories(FXCollections.<String>observableArrayList(month));
+        NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
+        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
+                new BarChart.Series("Medicines", FXCollections.observableArrayList(
+
+                        new BarChart.Data(month[0], 5),
+                        new BarChart.Data(month[1], 0d),
+                        new BarChart.Data(month[2], 3d)
+
+
+                )),
+                new BarChart.Series("Allergies", FXCollections.observableArrayList(
+                        new BarChart.Data(month[0], 2d),
+                        new BarChart.Data(month[1], 1d),
+                        new BarChart.Data(month[2], 0d)
+
+
+                )),
+                new BarChart.Series("Meetings", FXCollections.observableArrayList(
+                        new BarChart.Data(month[0], 1d),
+                        new BarChart.Data(month[1], 1d),
+                        new BarChart.Data(month[2], 2d)
+
+
+                )),
+                new BarChart.Series("Requests", FXCollections.observableArrayList(
+                        new BarChart.Data(month[0], 8d),
+                        new BarChart.Data(month[1], 1d),
+                        new BarChart.Data(month[2], 0d)
+
+
+                ))
+        );
+        BarChart chart = new BarChart(xAxis, yAxis, barChartData, 25.0d);
+        PatientBarChart.getData().addAll(chart.getData());
+
 
     }
-
-
-
-
-
 
 
 }

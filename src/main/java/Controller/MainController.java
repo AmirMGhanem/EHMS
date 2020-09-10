@@ -65,12 +65,14 @@ public class MainController implements Initializable {
          closeNav = new TranslateTransition(new Duration(350), NavBox);
     }
 
+
     @FXML
     void LogoHomeClicked(MouseEvent event) throws IOException {
         System.out.println("LOGOOOOOOOO Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("MainPane");
         BorderMainPane.setCenter(view);
+
     }
     @FXML
     void OnClickConn(ActionEvent event) throws IOException {
@@ -186,9 +188,15 @@ public class MainController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FxmlLoader object = new FxmlLoader();
+        Pane view2 = null;
+        try {
+            view2 = object.getPage("MainPane");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BorderMainPane.setCenter(view2);
         drawerAction();
     }
-   public void RemovePane(Pane pane){
-        BorderMainPane.setCenter(pane);
-    }
+
 }

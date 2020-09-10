@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TherapistPaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TherapistPaneController">
    <children>
       <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
          <children>
@@ -42,6 +42,7 @@
             <Button fx:id="BtnNurseInvest" layoutX="349.0" layoutY="662.0" mnemonicParsing="false" onAction="#OnClickInvestigation" prefHeight="28.0" prefWidth="210.0" style="-fx-background-color: #59b7ff;" text="Nurse Investigation" />
             <Button fx:id="BtnNurseFile" layoutX="567.0" layoutY="617.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="28.0" prefWidth="210.0" style="-fx-background-color: #59b7ff;" text="Export To File" />
             <Button fx:id="BtnNurseXML" layoutX="566.0" layoutY="662.0" mnemonicParsing="false" onAction="#OnClickToXML" prefHeight="28.0" prefWidth="210.0" style="-fx-background-color: #59b7ff;" text="Export To XML" />
+            <Button fx:id="BtnSpecNurseFile" layoutX="795.0" layoutY="617.0" mnemonicParsing="false" onAction="#OnClickSpecToFile" prefHeight="28.0" prefWidth="210.0" style="-fx-background-color: #59b7ff;" text="Export Specific Therapist" />
          </children>
       </Pane>
    </children>
