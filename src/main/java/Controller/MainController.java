@@ -37,8 +37,8 @@ public class MainController implements Initializable {
     @FXML private Button BtnConn;
     @FXML private Button BtnSett;
     @FXML private ImageView LogoHome;
-    TranslateTransition openNav;     //IMAGEVIEW TRANSITION
-    TranslateTransition closeNav;    //IMAGEVIEW TRANSITION
+     TranslateTransition openNav;     //IMAGEVIEW TRANSITION
+     TranslateTransition closeNav;    //IMAGEVIEW TRANSITION
     @FXML private VBox NavBox;
     @FXML private Button btest;
     @FXML private ImageView ImageSlide;
@@ -191,7 +191,7 @@ public class MainController implements Initializable {
         FxmlLoader object = new FxmlLoader();
         Pane view2 = null;
         try {
-            view2 = object.getPage("MainPane");
+            view2 = object.getPage("SignInPane");
         } catch (IOException e) {
             e.printStackTrace();
         }
