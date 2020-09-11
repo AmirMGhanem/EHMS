@@ -122,7 +122,6 @@ public class MainController implements Initializable {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("PatientManagementPane");
         BorderMainPane.setCenter(view);
-
     }
     @FXML
     void OnClickReports(ActionEvent event) throws IOException {

@@ -120,8 +120,6 @@ public class patientDAO {
 
         rows = ps.executeUpdate();
         ps.close();
-
-
     }
 
 }

@@ -74,7 +74,6 @@ public class EditNurseController implements Initializable,Util.JavafxPaneHandler
                 t.setAddress(address);
                 tbh.Updateherapist(t);
             }
-
         }
     }
 

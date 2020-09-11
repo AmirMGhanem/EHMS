@@ -24,7 +24,7 @@ public class therapistDAO {
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, therapist.getID());
-        ps.setString(2, therapist.getDate().toString());
+        ps.setString(2, therapist.getWorkDateStart().toString());
 
         int rows = ps.executeUpdate();
 

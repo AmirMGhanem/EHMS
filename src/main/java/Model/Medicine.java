@@ -1,9 +1,12 @@
 package Model;
 
+import javafx.scene.control.SpinnerValueFactory;
+
 import java.util.Objects;
 
 public class Medicine {
 
+    private  int medicineNum ;
     private String name;
     private String type;
     private int timesPerDay;
@@ -11,7 +14,8 @@ public class Medicine {
     public Medicine() {
     }
 
-    public Medicine(String name, String type, int timesPerDay) {
+    public Medicine(int medicineNum, String name, String type, int timesPerDay) {
+        this.medicineNum = medicineNum;
         this.name = name;
         this.type = type;
         this.timesPerDay = timesPerDay;
@@ -33,7 +37,7 @@ public class Medicine {
         this.type = type;
     }
 
-    public int getTimesPerDay() {
+    public int getTimesPerDay(){
         return timesPerDay;
     }
 
@@ -41,7 +45,13 @@ public class Medicine {
         this.timesPerDay = timesPerDay;
     }
 
+    public int getMedicineNum() {
+        return medicineNum;
+    }
 
+    public void setMedicineNum (int medicineNum) {
+        this.medicineNum = medicineNum;
+    }
 //-------------Equals And Hash Code ----------------------
     @Override
     public boolean equals(Object o) {
