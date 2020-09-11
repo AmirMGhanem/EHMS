@@ -58,6 +58,44 @@ public class therapistDAO {
         return list;
     }
 
+
+    public ArrayList<String> TherapistsPDF() throws SQLException {
+        ArrayList<String> list = new ArrayList<String>();
+
+        System.out.println(list);
+
+        String sql = "select * from address , person , therapist where address.addresscode = person.address and person.id = therapist.id";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        String str="";
+        while (rs.next()) {
+            Address address = new Address(rs.getInt("addresscode"), rs.getString("city"), rs.getString("street"), rs.getInt("housenum"));
+            Therapist t = new Therapist(rs.getString("id"), rs.getString("name"), address, rs.getString("gender"), rs.getDate("birthdate"), rs.getString("contactno"), rs.getDate("dateworkstart"), null);
+            str=t.getID()+"  "+t.getName()+"  "+t.getAddress().getCity()+"|"+t.getAddress().getStreet()+"|"+t.getAddress().getHouseNum()+"  "+t.getGender()+"  "+t.getDate()+"  "+t.getContactNo();
+            list.add(str);
+        }
+
+        //System.out.println(list);
+
+        ps.close();
+        rs.close();
+
+        return list;
+    }
+
+
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from therapist";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
+
+
     public ArrayList<Therapist> selectAll() throws SQLException {
         ArrayList<Therapist> list = new ArrayList<Therapist>();
 
@@ -104,11 +142,12 @@ public class therapistDAO {
     public void Updateherapist(Therapist t) throws SQLException {
 
 
-        String sql1 = "update person SET name = ?, contactno=?";
+        String sql1 = "update person SET name = ?, contactno=? where id = ?";
         PreparedStatement ps = con.prepareStatement(sql1);
 
         ps.setString(1, t.getName());
         ps.setString(2,t.getContactNo());
+        ps.setString(3,t.getID());
         int rows = ps.executeUpdate();
         ps.close();
 

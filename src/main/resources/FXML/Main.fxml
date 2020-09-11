@@ -16,7 +16,7 @@
    <children>
       <BorderPane fx:id="BorderMainPane" layoutX="-9.0" layoutY="-4.0" prefHeight="810.0" prefWidth="1543.0">
          <left>
-            <VBox fx:id="NavBox" prefHeight="810.0" prefWidth="295.0" style="-fx-background-color: #d6d6d6;" BorderPane.alignment="CENTER">
+            <VBox fx:id="NavBox" alignment="TOP_CENTER" prefHeight="810.0" prefWidth="295.0" style="-fx-background-color: #d6d6d6;" BorderPane.alignment="CENTER">
                <children>
                   <VBox alignment="CENTER" prefHeight="146.0" prefWidth="295.0">
                      <children>
@@ -61,11 +61,29 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff; ">
                      <children>
-                        <Button fx:id="BtnAddNurse" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickAddNurse" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Nurse" textAlignment="CENTER" />
+                        <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/addTherapist.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="55.0" right="15.0" />
+                           </HBox.margin>
+                        </ImageView>
+
+
+                        <Button fx:id="BtnAddNurse" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#OnClickAddNurse" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Nurse" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
+                        <ImageView cache="true" depthTest="DISABLE" fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/EditTherapist.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="55.0" right="15.0" />
+                           </HBox.margin>
+                        </ImageView>
                         <Button fx:id="BtnEditNurse" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickEditNurse" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Nurse" textAlignment="CENTER" />
                      </children>
                   </HBox>
@@ -87,11 +105,27 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
+                        <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/addTherapist.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="55.0" right="15.0" />
+                           </HBox.margin>
+                        </ImageView>
                         <Button fx:id="BtnAddPatient" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickAddPatient" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Add Patient" textAlignment="CENTER" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
+                        <ImageView cache="true" depthTest="DISABLE" fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/EditTherapist.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="55.0" right="15.0" />
+                           </HBox.margin>
+                        </ImageView>
                         <Button fx:id="BtnEditPatient" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickEditPatient" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="Edit Patient" textAlignment="CENTER" />
                      </children>
                   </HBox>
@@ -129,6 +163,14 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="295.0" style="-fx-background-color: #787878; -fx-border-color: #ffffff;">
                      <children>
+                        <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Images/medicineCRUD.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="55.0" right="15.0" />
+                           </HBox.margin>
+                        </ImageView>
                         <Button fx:id="BtnCrudMed" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#OnClickCrudMed" prefHeight="31.0" prefWidth="197.0" style="-fx-background-color: inherited;" text="CRUD Medicine" textAlignment="CENTER" />
                      </children>
                   </HBox>
@@ -196,6 +238,16 @@
                         <Insets top="3.0" />
                      </VBox.margin>
                   </HBox>
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="281.0" text="CopyRight © 2020 - EHMS">
+                     <font>
+                        <Font name="Book Antiqua Bold" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="42.0" prefWidth="281.0" text="AmirWayne666 &amp; AlamAslan">
+                     <font>
+                        <Font name="Book Antiqua" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
          </left>

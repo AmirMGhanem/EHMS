@@ -1,7 +1,9 @@
 package Controller;
 import Model.*;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import Util.FilesHandler;
+import Util.FooterPageEvent;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -13,6 +15,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -70,11 +76,12 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     private Button BtnNurseFile;
     @FXML
     private Button BtnNurseXML;
-
+    @FXML
+    private Button BtnSpecNurseFile;
 
 
     @FXML
-    void OnClickInvestigation(ActionEvent event) {
+    void OnClickInvestigation(ActionEvent event)  {
 
     }
 
@@ -93,12 +100,77 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     }
 
     @FXML
-    void OnClickToFile(ActionEvent event) {
+    void OnClickSpecToFile(ActionEvent event) {
+
+        Util.FilesHandler fh = new FilesHandler();
+        String id = NurseTable.getSelectionModel().getSelectedItem().getID();
+        for(Model.Therapist t : ALTHERAPIST)
+            if(t.getID().equals(id))
+                fh.SaveSpecificNurse(t);
     }
 
     @FXML
-    void OnClickToXML(ActionEvent event) {
+    void OnClickToFile(ActionEvent event) throws IOException {
+
+        Util.FilesHandler fh = new FilesHandler();
+        fh.SaveNurse();
+
     }
+
+    @FXML
+    void OnClickToXML(ActionEvent event) throws IOException, DocumentException, URISyntaxException, SQLException {
+
+        //Create PDF, Initilaize and Open
+        Document document = new Document();
+        PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/TherapistsPDF.pdf"));
+        document.open();
+
+        //Adding the footer to the pdf file, by class created on the utils
+        Util.FooterPageEvent footer = new FooterPageEvent();
+        writer.setPageEvent(footer);
+
+        //creating paragraph
+        Paragraph p1 = new Paragraph();
+        Paragraph pNew5Lines = new Paragraph();
+        for(int i=0 ; i<5;i++)
+            p1.add("\n");
+
+        //Printing Chunk Text on the pdf
+        Font font = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
+        p1.add("ID        Name        Address        Gender         Date        ContactNo");
+        p1.add("\n-------------------------------------------------------------------------------\n");
+        font = FontFactory.getFont(FontFactory.COURIER, 10, BaseColor.BLACK);
+        for(String s : TDBH.TherapistsPDF())
+        {
+            Chunk chunk = new Chunk(s, font);
+            p1.add(chunk);
+            p1.add("\n");
+        }
+
+
+        //Drawing an image from the resources folder
+        Image img = Image.getInstance("src/main/resources/Images/banner.png");
+        BufferedImage bimg = ImageIO.read(new File("src/main/resources/Images/banner.png"));
+        new Chunk(img, 0, 0, true);
+        //Get Sizes
+        float scaler = ((document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin() - 0) / img.getWidth()) * 90;
+        //setting the scaler on the image for resizing the image by percentage
+        img.scalePercent(scaler);
+        img.setAlignment(Element.ALIGN_CENTER);
+        //creating paragraph and adding the banner with text
+        Paragraph preface = new Paragraph();
+        preface.add(img);
+        document.add(preface);
+        document.add(pNew5Lines);
+        document.add(p1);
+        document.close();
+        writer.close();
+
+
+    }
+
+
+
 
 
 
@@ -145,8 +217,8 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     //Overrided by implementing JavafxPaneHandler
     @Override
     public void JavafxTableFill() throws SQLException {
-        Therapist.addAll(ALTHERAPIST);
 
+        ALTHERAPIST=TDBH.selectAll();
         Therapist = TDBH.selectTherapists();
     }
     @Override

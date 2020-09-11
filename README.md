@@ -2,7 +2,7 @@
 Elderly health management system java application
 
    
-- Toplogy :  
+- Topology :  
 ![alt tag](https://github.com/AmirWayne/EHMS/blob/master/Topology.jpg)   
 - Files Management        
 ![alt tag](https://github.com/AmirWayne/EHMS/blob/master/Files.jpg)   

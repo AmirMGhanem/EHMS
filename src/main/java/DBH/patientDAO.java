@@ -76,6 +76,18 @@ public class patientDAO {
         ps.close();
     }
 
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from patient";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
+
+
     public ArrayList<Patient> selectAll() throws SQLException {
         ArrayList<Patient> list = new ArrayList<Patient>();
 

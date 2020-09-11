@@ -1,0 +1,4 @@
+ID           Name           Address           Gender           Date           ContactNo
+ --------------------------------------------------------------------------------------
+000000000     Amir Wayne     haifa , downtown , 34     Male     1995-11-11     0503907901
+12234567     william asakly     haifa , downtown , 34     Male     2017-09-13     050123456787

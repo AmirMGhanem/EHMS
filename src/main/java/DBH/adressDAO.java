@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-public class adressDAO implements JPQLHandler {
+public class adressDAO  {
 
     static Connection con = DatabaseConnector.getConnection();
 
@@ -37,30 +37,4 @@ public class adressDAO implements JPQLHandler {
 
     }
 
-    @Override
-    public void SelectQuery() {
-
-
-    }
-
-    @Override
-    public void InsertQuery() {
-
-    }
-
-    @Override
-    public void RemoveQuery() {
-
-    }
-
-    @Override
-    public int CountQuery() {
-        return 0;
-    }
-
-    @Override
-    public List SelectAllQuery() {
-
-        return null;
-    }
 }
