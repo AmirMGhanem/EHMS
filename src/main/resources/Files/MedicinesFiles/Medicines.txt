@@ -1,0 +1,6 @@
+#        Medicine Name        Medicine Type        Medicine Times Per Day      
+--------------------------------------------------------------------------------------------
+
+14      |      aaaa      |      Capsules      |      Capsules      |      5
+15      |      bbbbb      |      Capsules      |      Capsules      |      5
+16      |      ccccc      |      Powder      |      Powder      |      3

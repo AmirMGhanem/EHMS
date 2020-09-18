@@ -1,23 +1,18 @@
 package Controller;
 
-import Model.Address;
+
 import Model.Patient;
-import Model.Therapist;
 import Util.FilesHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -180,7 +175,7 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
     @Override
     public void JavafxChoiceFill() {
         list.removeAll();
-        ;
+
 
         for (Patient p : Patients)
             list.add(p.getName());

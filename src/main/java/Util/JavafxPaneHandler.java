@@ -5,6 +5,6 @@ import java.sql.SQLException;
 
 public interface JavafxPaneHandler {
      void JavafxTableFill() throws SQLException;
-     void JavafxChoiceFill();
+     void JavafxChoiceFill() throws SQLException;
      void JavafxDiagramFill() throws IOException;
 }

@@ -1,6 +1,7 @@
 package DBH;
 
 
+import Model.patient_allergy;
 import Util.DatabaseConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,17 +12,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class patient_medicineDAO {
+public class patient_allergyDAO {
     static Connection con = DatabaseConnector.getConnection();
+    public int insertToPatient_allergy(patient_allergy pm) throws SQLException {
 
-    public int insertToPatient_Medicine(String patientid , int medicinenum) throws SQLException {
-
-        String sql = "insert into patient_medicine(patientid, medicinenum) values(?,?)";
+        String sql = "insert into patient_allergy(patientid, allergyname) values(?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setString(1, patientid);
-        ps.setInt(2, medicinenum);
+        ps.setString(1, pm.getPatientid());
+        ps.setString(2, pm.getAllergyName());
 
         int rows = ps.executeUpdate();
 
@@ -29,7 +29,7 @@ public class patient_medicineDAO {
 
         return rows;
     }
-
+/*
     public void removeByMedicineNum(int medicinenum,String patientid) throws SQLException {
         String sql1 = "DELETE FROM patient_medicine WHERE patient_medicine.medicinenum=? and patient_medicine.patientid=? ";
         PreparedStatement ps = con.prepareStatement(sql1);
@@ -40,19 +40,19 @@ public class patient_medicineDAO {
         ps.executeUpdate();
         ps.close();
     }
-
-    public ObservableList<Model.patient_medicine> selectAllObservable() throws SQLException {
+*/
+    public ObservableList<Model.patient_allergy> selectAllObservable() throws SQLException {
         ObservableList list = FXCollections.observableArrayList();
 
-        String sql = "select * from patient_medicine";
+        String sql = "select * from patient_allergy";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Model.patient_medicine pm = new Model.patient_medicine(rs.getString("patientid"),rs.getInt("medicinenum"));
-            list.add(pm);
+            Model.patient_allergy pa = new Model.patient_allergy(rs.getString("patientid"),rs.getString("allergyname"));
+            list.add(pa);
         }
-
+        System.out.println(list);
         ps.close();
         rs.close();
 
@@ -60,18 +60,18 @@ public class patient_medicineDAO {
     }
 
 
-    public ArrayList<Model.patient_medicine> selectAll() throws SQLException {
-        ArrayList<Model.patient_medicine> list = new ArrayList<Model.patient_medicine>();
+    public ArrayList<Model.patient_allergy> selectAll() throws SQLException {
+        ArrayList<Model.patient_allergy> list = new ArrayList<Model.patient_allergy>();
 
         System.out.println(list);
 
-        String sql = "select * from patient_medicine";
+        String sql = "select * from patient_allergy";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Model.patient_medicine pm = new Model.patient_medicine(rs.getString("patientid"),rs.getInt("medicinenum"));
-            list.add(pm);
+            Model.patient_allergy pa = new Model.patient_allergy(rs.getString("patientid"),rs.getString("allergyname"));
+            list.add(pa);
         }
 
         System.out.println(list);

@@ -1,12 +1,9 @@
 package Controller;
 
 import DBH.patientDAO;
-import DBH.personDAO;
 import DBH.therapistDAO;
-import Model.Therapist;
 import Util.FxmlLoader;
 import javafx.animation.TranslateTransition;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,6 +25,8 @@ public class MainController implements Initializable {
 
     @FXML private AnchorPane AnchorMainPane;
     @FXML public BorderPane BorderMainPane;
+
+
     @FXML private Button BtnNursing;
     @FXML private Button BtnPatient;
     @FXML private Button BtnMeals;
@@ -197,6 +196,11 @@ public class MainController implements Initializable {
         }
         BorderMainPane.setCenter(view2);
         drawerAction();
+    }
+
+    public void setCenter (Pane pane)
+    {
+        BorderMainPane.setCenter(pane);
     }
 
 }
