@@ -25,6 +25,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class MedicinePaneController implements Initializable, Util.JavafxPaneHandler {
 
@@ -122,6 +123,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
 
 
+
     @FXML
     void OnClickBtnDetachMed(ActionEvent event) throws SQLException {
         ArrayList<Model.patient_medicine> pmlist = new ArrayList<Model.patient_medicine>();
@@ -141,7 +143,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
 
     @FXML
-    void OnClickBtnAttachMed(ActionEvent event) throws SQLException {
+    void OnClickBtnAttachMed(ActionEvent event)   {
 
         int MedNumForAttach = MedTable.getSelectionModel().getSelectedItem().getMedicineNum();
         String PatientidForAttach = LabelPatientID.getText();
@@ -288,10 +290,13 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
 
     @FXML
-    void OnLoadAllDataClick(ActionEvent event) throws SQLException {
+    void OnLoadAllDataClick(ActionEvent event) throws SQLException, InterruptedException {
         JavafxTableFill();
         MedTable.setItems(Medicines);
         AllergyTable.setItems(allergyOvservableList);
+
+
+        //TimeUnit.SECONDS.sleep(2);
     }
 
 
@@ -327,13 +332,58 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
 
     @FXML
-    void onClickBtnExportAllergyFile(ActionEvent event) {
-
+    void onClickBtnExportAllergyFile(ActionEvent event) throws IOException {
+        Util.FilesHandler fh = new FilesHandler();
+        fh.SaveAllergies();
     }
 
     @FXML
-    void onClickBtnExportAllergyPDF(ActionEvent event) {
+    void onClickBtnExportAllergyPDF(ActionEvent event) throws IOException, DocumentException, SQLException {
+        Document document = new Document();
+        Font font;
+        PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/AllergiesPDF.pdf"));
+        document.open();
+        //Adding the footer to the pdf file, by class created on the utils
+        Util.FooterPageEvent footer = new FooterPageEvent();
+        writer.setPageEvent(footer);
 
+        //creating paragraph
+        Paragraph p1 = new Paragraph();
+        Paragraph pNew5Lines = new Paragraph();
+        for(int i=0 ; i<5;i++)
+            p1.add("\n");
+
+        //Printing Chunk Text on the pdf
+
+        p1.add(" Allergy Name                       MedicineName ");
+        p1.add("\n----------------------------------------------------------------------\n");
+        font = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
+
+        for(String s : Ado.AllergiesPDF())
+        {
+            Chunk chunk = new Chunk(s, font);
+            p1.add(chunk);
+            p1.add("\n");
+        }
+
+
+        //Drawing an image from the resources folder
+        Image img = Image.getInstance("src/main/resources/Images/banner.png");
+        BufferedImage bimg = ImageIO.read(new File("src/main/resources/Images/banner.png"));
+        new Chunk(img, 0, 0, true);
+        //Get Sizes
+        float scaler = ((document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin() - 0) / img.getWidth()) * 90;
+        //setting the scaler on the image for resizing the image by percentage
+        img.scalePercent(scaler);
+        img.setAlignment(Element.ALIGN_CENTER);
+        //creating paragraph and adding the banner with text
+        Paragraph preface = new Paragraph();
+        preface.add(img);
+        document.add(preface);
+        document.add(pNew5Lines);
+        document.add(p1);
+        document.close();
+        writer.close();
     }
 
     @FXML
@@ -359,24 +409,33 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     }
 
     @FXML
-    void OnClickBtnDetachAllergy(ActionEvent event) {
+    void OnClickBtnDetachAllergy(ActionEvent event) throws SQLException {
+
+        String allergyname = AllergyTable.getSelectionModel().getSelectedItem().getName();
+
+
+        PA = paDAO.selectAll();
+
+        for (Model.patient_allergy pa : PA) {
+            if (pa.getAllergyName().equals(allergyname)) {
+                paDAO.removeByAllergyname(pa);
+                LabelUpdateAttach.setText("Detached!");
+            }
+        }
 
     }
     @FXML
     void OnClickBtnAttachAllergy(ActionEvent event) {
-        //TODO
-        int MedNumForAttach = MedTable.getSelectionModel().getSelectedItem().getMedicineNum();
+        String Allergyname = AllergyTable.getSelectionModel().getSelectedItem().getName();
         String PatientidForAttach = LabelPatientID.getText();
-
-        DBH.patient_medicineDAO pmdo = new patient_medicineDAO();
-
+        patient_allergy pm = new patient_allergy(PatientidForAttach,Allergyname);
         try {
-            if (pmdo.insertToPatient_Medicine(PatientidForAttach, MedNumForAttach) == 0)
+            if (paDAO.insertToPatient_allergy(pm) == 0)
                 LabelUpdateAttach.setText("Unsuccessfully");
             else
                 LabelUpdateAttach.setText("Successfully Added");
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Add The Same Medicine \nTwice To The Same Patient", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Attach the same Allergy \nTwice To The Same Patient", ButtonType.OK);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
         }

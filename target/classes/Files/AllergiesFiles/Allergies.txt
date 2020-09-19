@@ -1,0 +1,5 @@
+Allergy Name          MedicineName
+--------------------------------------------------------------------------------------
+
+swelling          |          Optalgen
+asaadasd          |          ogmanten

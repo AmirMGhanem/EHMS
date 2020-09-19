@@ -143,5 +143,32 @@ public class AllergyDAO implements JPQLHandler {
     }
 
 
+    public ArrayList<String> AllergiesPDF() throws SQLException {
+        ArrayList<String> list = new ArrayList<String>();
+        String sql = "select * from allergy";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        String str="";
 
+        ArrayList<Medicine> medlist = new ArrayList<Medicine>();
+        medlist=mdh.selectAll();
+        while (rs.next()) {
+            Allergy a = new Allergy(rs.getString("name"));
+            int mednum = rs.getInt("medicinenum");
+            for(Medicine m : medlist)
+            {
+                if(m.getMedicineNum()==mednum)
+                    a.setMedicines(m);
+            }
+            str= a.getName() + "          |          " + a.getMedicines().getName();
+            list.add(str);
+        }
+
+
+
+        ps.close();
+        rs.close();
+
+        return list;
+    }
 }
