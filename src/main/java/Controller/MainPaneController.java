@@ -2,6 +2,7 @@ package Controller;
 
 import DBH.patientDAO;
 import DBH.therapistDAO;
+import Model.Notification;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,23 +15,39 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
     DBH.therapistDAO tbh=new therapistDAO();
     DBH.patientDAO pbh=new patientDAO();
-    @FXML
-    private TableView<?> TableViewNotifications;
 
+    
+    @FXML
+    private TableView<Notification> TableViewNotifications;
+    @FXML
+    private TableColumn<Notification, Number> ColNum;
+
+    @FXML
+    private TableColumn<Notification,String> ColType;
+
+    @FXML
+    private TableColumn<Notification, String> ColDesc;
+
+    @FXML
+    private TableColumn<Notification,String> ColPatientName;
+
+    @FXML
+    private TableColumn<Notification,String> ColPatientID;
+
+    @FXML
+    private TableColumn<Notification,Date> ColTime;
     @FXML
     private PieChart PieChartRequests;
 
