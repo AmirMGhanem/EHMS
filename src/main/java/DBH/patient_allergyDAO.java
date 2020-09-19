@@ -28,18 +28,7 @@ public class patient_allergyDAO {
         System.out.println(rows+" " +pm.getPatientid() + " " + pm.getAllergyName());
         return rows;
     }
-/*
-    public void removeByMedicineNum(int medicinenum,String patientid) throws SQLException {
-        String sql1 = "DELETE FROM patient_medicine WHERE patient_medicine.medicinenum=? and patient_medicine.patientid=? ";
-        PreparedStatement ps = con.prepareStatement(sql1);
 
-        ps.setInt(1 , medicinenum);
-        ps.setString(2,patientid);
-
-        ps.executeUpdate();
-        ps.close();
-    }
-*/
     public ObservableList<Model.patient_allergy> selectAllObservable() throws SQLException {
         ObservableList list = FXCollections.observableArrayList();
 

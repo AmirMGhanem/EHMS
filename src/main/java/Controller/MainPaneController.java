@@ -141,7 +141,7 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
 
     @FXML
     void OnClickQuarterly(ActionEvent event) {
-        String[] month = {"January","Last-Month","Current"};
+        String[] month = {"January","Current","Last-Month"};
 
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableArrayList(month));

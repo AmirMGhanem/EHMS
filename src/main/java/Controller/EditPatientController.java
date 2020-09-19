@@ -25,9 +25,6 @@ public class EditPatientController implements Initializable,Util.JavafxPaneHandl
     @FXML private ChoiceBox<?> Choice3Digits;
     @FXML private TextField TextFieldStreet;
     @FXML private TextField TextFieldHouseNum;
-    @FXML private TextField TextFieldAddAllergyName;
-    @FXML private ChoiceBox<?> ChoiceMedicine;
-    @FXML private ChoiceBox<?> ChoiceDeleteAllergyName;
     @FXML private Button BtnClear;
     @FXML private Button BtnSave;
     @FXML private ChoiceBox<?> ChoiceNurse;
@@ -52,7 +49,7 @@ public class EditPatientController implements Initializable,Util.JavafxPaneHandl
                 p.setContactNo(ContactNum);
                 Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
                 p.setAddress(address);
-                pbh.Updateherapist(p);
+                pbh.UpdatePatient(p);
 
             }
 

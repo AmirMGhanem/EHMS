@@ -87,7 +87,7 @@
                               <TableView fx:id="AllergyTable" layoutY="71.0" prefHeight="337.0" prefWidth="948.0" style="-fx-border-width: 4px;">
                                  <columns>
                                     <TableColumn fx:id="ColAllergyName" minWidth="0.0" prefWidth="463.9999237060547" text="Allergy" />
-                                    <TableColumn fx:id="ColMedicine" minWidth="0.0" prefWidth="484.0001220703125" text="Medicine" />
+                                    <TableColumn fx:id="ColMedicine" minWidth="0.0" prefWidth="475.19989013671875" text="Medicine" />
                                  </columns>
                               </TableView>
                               <Pane layoutX="5.0" layoutY="5.0" prefHeight="52.0" prefWidth="615.0" style="-fx-background-color: #59b7ff; -fx-border-color: #000000; -fx-background-radius: 14px; -fx-border-radius: 14px; -fx-border-width: 2;">

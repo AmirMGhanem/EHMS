@@ -107,8 +107,8 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
         System.out.println(addressCode);
 
         PDH.removePatientByID(id, addressCode);
-
         PatientTable.getItems().removeAll(PatientTable.getSelectionModel().getSelectedItem());
+
     }
 
 

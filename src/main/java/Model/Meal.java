@@ -1,20 +1,20 @@
 package Model;
 
-import java.util.Date;
+import javafx.scene.control.Button;
 
 public class Meal {
 
     private String name;
     private int weight;
-    private Date time;
+
 
     public Meal() {
     }
 
-    public Meal(String name, int weight, Date time) {
-        this.name = name;
-        this.weight = weight;
-        this.time = time;
+    public Meal(String name, int weight) {
+       setName(name);
+       setWeight(weight);
+
     }
 
     public String getName() {
@@ -33,11 +33,11 @@ public class Meal {
         this.weight = weight;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                '}';
     }
 }
