@@ -1,0 +1,5 @@
+#        Medicine Name        Medicine Type        Medicine Times Per Day      
+--------------------------------------------------------------------------------------------
+
+1      |      Optalgen      |      Liquid      |      Liquid      |      5
+2      |      ogmanten      |      Capsules      |      Capsules      |      2

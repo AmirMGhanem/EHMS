@@ -111,14 +111,15 @@ public class patientDAO {
         return list;
     }
 
-    public void Updateherapist(Patient p) throws SQLException {
+    public void UpdatePatient(Patient p) throws SQLException {
 
 
-        String sql1 = "update person SET name = ?, contactno=?";
+        String sql1 = "update person SET name = ?, contactno=? where id=?";
         PreparedStatement ps = con.prepareStatement(sql1);
 
         ps.setString(1, p.getName());
         ps.setString(2,p.getContactNo());
+        ps.setString(3,p.getID());
         int rows = ps.executeUpdate();
         ps.close();
 

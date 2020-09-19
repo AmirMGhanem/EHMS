@@ -217,7 +217,6 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     //Overrided by implementing JavafxPaneHandler
     @Override
     public void JavafxTableFill() throws SQLException {
-
         ALTHERAPIST=TDBH.selectAll();
         Therapist = TDBH.selectTherapists();
     }

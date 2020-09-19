@@ -1,12 +1,17 @@
-package Model;
 
-import java.util.ArrayList;
+package Model;
 
 public class Allergy {
     private String name;
-    private ArrayList<Medicine> medicines = new ArrayList<Medicine>();
+    private Medicine medicines = new Medicine();
 
+    public Allergy() {
+    }
 
+    public Allergy(String name, Medicine medicines) {
+       setName(name);
+       setMedicines(medicines);
+    }
 
     public Allergy(String name) {
         this.name = name;
@@ -17,10 +22,20 @@ public class Allergy {
     public void setName(String name) {
         this.name = name;
     }
-    public ArrayList<Medicine> getMedicines() {
+    public Medicine getMedicines() {
         return medicines;
     }
-    public void setMedicines(ArrayList<Medicine> medicines) {
+    public void setMedicines(Medicine medicines) {
         this.medicines = medicines;
     }
+
+    @Override
+    public String toString() {
+        return "Allergy{" +
+                "name='" + name + '\'' +
+                ", medicines=" + medicines +
+                '}';
+    }
+
+
 }

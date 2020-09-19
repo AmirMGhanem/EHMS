@@ -22,31 +22,55 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AddPatientController implements Initializable,Util.JavafxPaneHandler {
+public class AddPatientController implements Initializable, Util.JavafxPaneHandler {
 
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
 
 
-
-    @FXML private TextField TextFieldFirstName;
-    @FXML private TextField TextFieldLastName;
-    @FXML private ChoiceBox<String> ChoiceGender;
-    @FXML private DatePicker DatePickerBirthDate;
-    @FXML private TextField TextFieldID;
-    @FXML private TextField TextFieldContactNum;
-    @FXML private TextField TextFieldCity;
-    @FXML private TextField TextFieldStreet;
-    @FXML private TextField TextFieldHouseNum;
-    @FXML private ChoiceBox<?> ChoiceMedicine;
-    @FXML private TextField TextFieldAllergyName;
-    @FXML private TextField TextFieldAddressCode;
-    @FXML private ChoiceBox<?> Choice3DigitsNum;
-    @FXML private Button BtnAdd;
+    @FXML
+    private TextField TextFieldFirstName;
+    @FXML
+    private TextField TextFieldLastName;
+    @FXML
+    private ChoiceBox<String> ChoiceGender;
+    @FXML
+    private DatePicker DatePickerBirthDate;
+    @FXML
+    private TextField TextFieldID;
+    @FXML
+    private TextField TextFieldContactNum;
+    @FXML
+    private TextField TextFieldCity;
+    @FXML
+    private TextField TextFieldStreet;
+    @FXML
+    private TextField TextFieldHouseNum;
+    @FXML
+    private TextField TextFieldAddressCode;
+    @FXML
+    private ChoiceBox<?> Choice3DigitsNum;
+    @FXML
+    private Button BtnAdd;
+    @FXML
+    private Button BtnClear;
 
 
     @FXML
-    void OnClckBtnAdd(ActionEvent event) throws IOException, SQLException {
+    void OnClickBtnClear(ActionEvent event) {
+        TextFieldFirstName.setText("");
+        TextFieldLastName.setText("");
+        TextFieldID.setText("");
+        TextFieldContactNum.setText("");
+        TextFieldCity.setText("");
+        TextFieldStreet.setText("");
+        TextFieldHouseNum.setText("");
+        TextFieldAddressCode.setText("");
+
+    }
+
+    @FXML
+    void OnClickBtnAdd(ActionEvent event) throws IOException, SQLException {
         Patient p = new Patient();
 
         p.setID(TextFieldID.getText());
@@ -55,13 +79,13 @@ public class AddPatientController implements Initializable,Util.JavafxPaneHandle
         String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
         p.setContactNo(ContactNum);
 
-        Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()),TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+        Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
         p.setAddress(address);
 
         java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
         p.setDate(sqlDate);
 
-        System.out.println("TEST "+p.toString());
+        System.out.println("TEST " + p.toString());
 
         DBH.adressDAO ado = new adressDAO();
         DBH.personDAO pdo = new personDAO();

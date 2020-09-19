@@ -2,122 +2,78 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MealsController">
    <children>
-      <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
+      <Pane layoutX="2.0" prefHeight="805.0" prefWidth="1264.0">
          <children>
-            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+            <Pane layoutX="-5.0" layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
                <children>
-                  <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="151.0" text="Meals" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="15.0" layoutY="10.0" prefHeight="37.0" prefWidth="151.0" text="Meals" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Arial Bold Italic" size="32.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <SplitPane dividerPositions="0.17142857142857143" layoutX="112.0" layoutY="159.0" orientation="VERTICAL" prefHeight="179.0" prefWidth="672.0" style="-fx-border-color: #000000; -fx-border-radius: 8px;">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="86.0" prefWidth="668.0" style="-fx-background-color: #59b7ff; -fx-background-radius: 8px;">
-                     <children>
-                        <Label layoutX="22.0" prefHeight="28.0" prefWidth="150.0" text="Search Meals" textFill="WHITE">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0" prefWidth="668.0">
-                     <children>
-                        <Label layoutX="38.0" layoutY="14.0" prefHeight="18.0" prefWidth="71.0" text="Elderly ID :" />
-                        <Label layoutX="226.0" layoutY="14.0" prefHeight="18.0" prefWidth="71.0" text="Meal :" />
-                        <Label layoutX="368.0" layoutY="14.0" prefHeight="18.0" prefWidth="42.0" text="Day:" />
-                        <DatePicker fx:id="DatePicker" layoutX="362.0" layoutY="47.0" />
-                        <Button fx:id="BtnFind" layoutX="515.0" layoutY="92.0" mnemonicParsing="false" onAction="#OnClickFind" prefHeight="35.0" prefWidth="129.0" style="-fx-background-color: #59b7ff;" text="Find" />
-                        <TextField fx:id="TextFieldID" layoutX="14.0" layoutY="47.0" />
-                        <ChoiceBox fx:id="ChoiceMeal" layoutX="187.0" layoutY="47.0" prefWidth="150.0" />
-                        <Button fx:id="BtnClear" layoutX="377.0" layoutY="92.0" mnemonicParsing="false" onAction="#OnClickClear" prefHeight="35.0" prefWidth="129.0" style="-fx-background-color: #59b7ff;" text="Clear" />
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
-            <Pane layoutX="828.0" layoutY="168.0" prefHeight="235.0" prefWidth="216.0">
+            <Pane layoutX="952.0" layoutY="126.0" prefHeight="235.0" prefWidth="194.0">
                <children>
                   <Button fx:id="BtnAddMeal" layoutX="79.0" layoutY="159.0" mnemonicParsing="false" onAction="#OnClickAddMeal" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3bff00;" text="AddMeal" />
-                  <Label layoutX="23.0" layoutY="53.0" prefHeight="18.0" prefWidth="65.0" text="Elderly ID :" />
-                  <Label fx:id="LabelID" layoutX="98.0" layoutY="53.0" prefHeight="18.0" prefWidth="65.0" text="#########" textFill="RED" />
-                  <TextField layoutX="17.0" layoutY="86.0" promptText="Meal Name" />
-                  <TextField layoutX="17.0" layoutY="121.0" promptText="Meal Weight" />
-                  <Label layoutX="41.0" layoutY="-2.0" prefHeight="28.0" prefWidth="104.0" style="-fx-background-color: #59b7ff;" text="Add Meals:">
+                  <TextField fx:id="TextFieldAddMealName" layoutX="17.0" layoutY="86.0" promptText="Meal Name" />
+                  <TextField fx:id="TextFieldAddMealWeight" layoutX="17.0" layoutY="121.0" promptText="Meal Weight" />
+                  <Label layoutX="39.0" layoutY="32.0" prefHeight="28.0" prefWidth="104.0" style="-fx-background-color: #59b7ff;" text="Add Meals:">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
                </children>
             </Pane>
-            <TabPane layoutX="102.0" layoutY="403.0" prefHeight="266.0" prefWidth="689.0" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab text="BreakFast">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView prefHeight="235.0" prefWidth="689.0">
-                                 <columns>
-                                    <TableColumn prefWidth="139.20001220703125" text="Meal" />
-                                    <TableColumn minWidth="0.0" prefWidth="86.40003967285156" text="Weight" />
-                                    <TableColumn minWidth="0.0" prefWidth="124.79998779296875" text="Date" />
-                                    <TableColumn minWidth="0.0" prefWidth="140.79998779296875" text="Time" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
-                  <Tab text="Lunch">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView prefHeight="235.0" prefWidth="689.0">
-                                 <columns>
-                                    <TableColumn prefWidth="139.20001220703125" text="Meal" />
-                                    <TableColumn minWidth="0.0" prefWidth="86.40003967285156" text="Weight" />
-                                    <TableColumn minWidth="0.0" prefWidth="124.79998779296875" text="Date" />
-                                    <TableColumn minWidth="0.0" prefWidth="140.79998779296875" text="Time" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
-                  <Tab text="Dinner">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TableView prefHeight="235.0" prefWidth="689.0">
-                                 <columns>
-                                    <TableColumn prefWidth="139.20001220703125" text="Meal" />
-                                    <TableColumn minWidth="0.0" prefWidth="86.40003967285156" text="Weight" />
-                                    <TableColumn minWidth="0.0" prefWidth="124.79998779296875" text="Date" />
-                                    <TableColumn minWidth="0.0" prefWidth="140.79998779296875" text="Time" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
+            <TableView fx:id="TableMeals" layoutX="102.0" layoutY="387.0" prefHeight="407.0" prefWidth="367.0" style="-fx-border-color: #000000;">
+               <columns>
+                  <TableColumn fx:id="ColMealName" prefWidth="172.00001525878906" text="Meal" />
+                  <TableColumn fx:id="ColWeight" minWidth="0.0" prefWidth="112.0" text="Weight" />
+                 
+               </columns>
+            </TableView>
+            <TableView fx:id="TablePatient" layoutX="696.0" layoutY="387.0" prefHeight="407.0" prefWidth="367.0" style="-fx-border-color: #000000;">
+               <columns>
+                  <TableColumn fx:id="ColPatientid" prefWidth="201.5999755859375" text="Patientid" />
+                  <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="180.00006103515625" text="PatientName" />
+               </columns>
+            </TableView>
+            <ImageView fitHeight="142.0" fitWidth="216.0" layoutX="469.0" layoutY="482.0">
+               <image>
+                  <Image url="@../Images/arrows.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="BtnAttachMeal" layoutX="476.0" layoutY="659.0" mnemonicParsing="false" onAction="#onClickBtnAttachMeal" prefHeight="33.0" prefWidth="216.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Add Meal To Patient" />
+            <Button fx:id="BtnDetachMeal" layoutX="476.0" layoutY="419.0" mnemonicParsing="false" onAction="#onClickBtnDetachMeal" prefHeight="33.0" prefWidth="216.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Remove Meal From Patient" />
+            <ListView fx:id="ListViewMeals" layoutX="242.0" layoutY="157.0" prefHeight="200.0" prefWidth="670.0" />
+            <Pane layoutX="14.0" layoutY="126.0" prefHeight="235.0" prefWidth="194.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="68.0" prefHeight="18.0" prefWidth="71.0" text="Elderly ID :" />
+                  <TextField fx:id="TextFieldID" layoutX="21.0" layoutY="104.0" onAction="#onEnter" />
+                  <Label layoutX="21.0" layoutY="138.0" prefHeight="18.0" prefWidth="71.0" text="Meal :" />
+                  <ChoiceBox fx:id="ChoiceMeal" layoutX="20.0" layoutY="167.0" onAction="#OnSelectMealName" prefWidth="150.0" />
+                  <Label alignment="CENTER" layoutX="40.0" layoutY="3.0" prefHeight="28.0" prefWidth="104.0" style="-fx-background-color: #59b7ff;" text="Search">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="BtnShowAll" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" onAction="#onClickBtnShowAll" prefHeight="29.0" prefWidth="87.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Show All" />
+               </children>
+            </Pane>
+            <Button fx:id="BtnDeleteMeal" layoutX="476.0" layoutY="746.0" mnemonicParsing="false" onAction="#onClickBtnDeleteMeal" prefHeight="33.0" prefWidth="216.0" style="-fx-background-color: #ff1216; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Delete Meal " />
          </children>
       </Pane>
    </children>

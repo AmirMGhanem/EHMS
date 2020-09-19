@@ -1,17 +1,14 @@
 package Util;
 
-import Controller.TherapistPaneController;
 import DBH.patientDAO;
 import DBH.therapistDAO;
+import Model.Allergy;
+import Model.Medicine;
 import Model.Patient;
 import Model.Therapist;
-
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 
 public class FilesHandler {
 
@@ -109,6 +106,53 @@ public class FilesHandler {
             }
             fr.close();
             System.out.println("Test7 Applied");
+        } catch (IOException | SQLException e1) {
+            e1.printStackTrace();
+
+
+        }
+
+
+    }
+
+    public static void SaveMedicines() throws IOException, IOException {
+        FileWriter fr = null;
+        DBH.medicineDAO MDH = new DBH.medicineDAO();
+        ArrayList<Medicine> ALMED = new ArrayList<Medicine>();
+        try {
+            fr = new FileWriter("src/main/resources/Files/MedicinesFiles/Medicines.txt");
+            fr.write("#        Medicine Name        Medicine Type        Medicine Times Per Day      ");
+            fr.write("\n--------------------------------------------------------------------------------------------\n");
+            ALMED = MDH.selectAll();
+            System.out.println(ALMED.size());
+            for (Medicine m : ALMED) {
+
+                fr.write("\n" +m.getMedicineNum() + "      |      " + m.getName() +"      |      "+ m.getType()+"      |      "+m.getType()+"      |      "+m.getTimesPerDay() );
+            }
+            fr.close();
+        } catch (IOException | SQLException e1) {
+            e1.printStackTrace();
+
+
+        }
+
+
+    }
+    public static void SaveAllergies() throws IOException, IOException {
+        FileWriter fr = null;
+        DBH.AllergyDAO ADO = new DBH.AllergyDAO();
+        ArrayList<Allergy> Allergies = new ArrayList<Allergy>();
+        try {
+            fr = new FileWriter("src/main/resources/Files/AllergiesFiles/Allergies.txt");
+            fr.write(" Allergy Name          MedicineName              ");
+            fr.write("\n--------------------------------------------------------------------------------------\n");
+            Allergies = ADO.selectAll();
+            System.out.println(Allergies.size());
+            for (Allergy a : Allergies) {
+
+                fr.write("\n"+ a.getName() + "          |          " + a.getMedicines().getName());
+            }
+            fr.close();
         } catch (IOException | SQLException e1) {
             e1.printStackTrace();
 
