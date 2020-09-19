@@ -31,10 +31,10 @@
                <columns>
                   <TableColumn fx:id="ColNum" prefWidth="91.99999713897705" text="No." />
                   <TableColumn fx:id="ColType" minWidth="0.0" prefWidth="121.60000610351562" text="Request Type" />
-                  <TableColumn fx:id="ColDesc" minWidth="0.0" prefWidth="169.6000518798828" text="Request Description" />
-                  <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="143.199951171875" text="Patient Name" />
-                  <TableColumn fx:id="ColPatientID" minWidth="0.0" prefWidth="126.4000244140625" text="Patient ID" />
-                  <TableColumn fx:id="ColTime" minWidth="0.0" prefWidth="329.0" text="Time" />
+                  <TableColumn fx:id="ColDesc" minWidth="0.0" prefWidth="275.1999816894531" text="Request Description" />
+                  <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="176.800048828125" text="Patient Name" />
+                  <TableColumn fx:id="ColPatientID" minWidth="0.0" prefWidth="183.20001220703125" text="Patient ID" />
+                  <TableColumn fx:id="ColTime" minWidth="0.0" prefWidth="187.20013427734375" text="Time" />
                </columns>
             </TableView>
             <Pane layoutX="1089.0" layoutY="415.0" prefHeight="150.0" prefWidth="159.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;">

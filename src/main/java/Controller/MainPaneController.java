@@ -1,34 +1,42 @@
 package Controller;
 
-import DBH.patientDAO;
-import DBH.therapistDAO;
-import Model.Notification;
-import javafx.beans.binding.Bindings;
+import DBH.*;
+import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
-import javafx.scene.Group;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
-    DBH.therapistDAO tbh=new therapistDAO();
-    DBH.patientDAO pbh=new patientDAO();
 
-    
+
+    //DATABASE HANDLERER DECLERATIONS
+    DBH.therapistDAO tDAO=new therapistDAO();
+    DBH.patientDAO pDAO=new patientDAO();
+    DBH.notificationDAO nDAO = new notificationDAO();
+    DBH.medicineDAO mDAO=new medicineDAO();
+    DBH.AllergyDAO aDAO = new AllergyDAO();
+    //ARRAYLISTS DECLERATIONS
+    private ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
+    private ArrayList<Therapist> therapistArrayList = new ArrayList<Therapist>();
+    private ArrayList<Medicine> medicineArrayList = new ArrayList<Medicine>();
+    private ArrayList<Allergy> allergyArrayList = new ArrayList<Allergy>();
+    private ArrayList<Notification> notificationArrayList = new ArrayList<Notification>();
+    //OBSERVABLE DECLERATIONS
+    ObservableList notificationObservable = FXCollections.observableArrayList();
     @FXML
     private TableView<Notification> TableViewNotifications;
     @FXML
@@ -78,7 +86,6 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
 
     @FXML
     private NumberAxis yAxis;
-
     @FXML
     void OnClickDay(ActionEvent event) {
         CategoryAxis xAxis = new CategoryAxis();
@@ -100,11 +107,7 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
         BarChartNotifications.getData().clear();
         BarChartNotifications.getData().addAll(chart.getData());
 
-
-
-
     }
-
     @FXML
     void OnClickMonthly(ActionEvent event) {
         String[] month = {"1","2","3","4","5",
@@ -155,11 +158,9 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
         BarChartNotifications.getData().clear();
         BarChartNotifications.getData().addAll(chart.getData());
     }
-
     @FXML
     void OnClickQuarterly(ActionEvent event) {
         String[] month = {"January","Current","Last-Month"};
-
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableArrayList(month));
         NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
@@ -201,11 +202,8 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
     public void JavafxChoiceFill() {
 
     }
-
     @Override
     public void JavafxDiagramFill() throws IOException {
-
-
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                 new PieChart.Data("Iphone 5S", 13),
                 new PieChart.Data("Samsung Grand", 25),
@@ -231,14 +229,13 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
         PieChartActive.setLegendSide(Side.RIGHT);
 
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
         try {
-            LabelActiveTherapist.setText(Integer.toString(tbh.getCount()));
-            LabelActivePatient.setText(Integer.toString(pbh.getCount()));
+            LabelActiveTherapist.setText(Integer.toString(tDAO.getCount()));
+            LabelActivePatient.setText(Integer.toString(pDAO.getCount()));
             JavafxDiagramFill();
         } catch (IOException | SQLException e) {
             e.printStackTrace();
