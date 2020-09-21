@@ -7,15 +7,17 @@ import com.mysql.cj.protocol.Resultset;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.Scanner;
 
 public class DatabaseConnector {
 
     private static Connection con = null;
 
-    static
-    {
-        String url="jdbc:mysql://localhost:3306/ehms";
+    static {
+        String url = "jdbc:mysql://localhost:3306/ehms";
         String user = "root";
         String pass = "";
         try {
@@ -33,7 +35,6 @@ public class DatabaseConnector {
     public static Connection getConnection() {
         return con;
     }
-
 
 
 }

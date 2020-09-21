@@ -35,16 +35,15 @@
                </columns>
             </TableView>
             <Button fx:id="BtnPatientFile" layoutX="802.0" layoutY="457.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Export To File" />
-            <Button fx:id="BtnPatientXML" layoutX="802.0" layoutY="491.0" mnemonicParsing="false" onAction="#OnClickPatientXML" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Export To XML" />
+            <Button fx:id="BtnPatientXML" layoutX="802.0" layoutY="491.0" mnemonicParsing="false" onAction="#OnClickPatientXML" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Export To PDF" />
             <Button fx:id="BtnRemovePatient" layoutX="642.0" layoutY="458.0" mnemonicParsing="false" onAction="#OnClickRemovePatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #59b7ff;" text="Remove Patient" />
-            <Button fx:id="BtnLoadPatient" layoutX="428.0" layoutY="477.0" mnemonicParsing="false" onAction="#OnClickLoadPatient" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #3bff3b;" text="Load Patient" />
             <Label layoutX="96.0" layoutY="472.0" text="Choose Patient :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="ChoicePatient" layoutX="244.0" layoutY="477.0" prefWidth="150.0" />
-            <BarChart fx:id="PatientBarChart" layoutX="75.0" layoutY="555.0" prefHeight="214.0" prefWidth="642.0">
+            <ChoiceBox fx:id="ChoicePatient" layoutX="244.0" layoutY="477.0" onAction="#onSelectPatient" prefWidth="150.0" />
+            <BarChart fx:id="PatientBarChart" layoutX="75.0" layoutY="523.0" prefHeight="246.0" prefWidth="533.0">
                <xAxis>
                   <CategoryAxis fx:id="y" side="BOTTOM" />
                </xAxis>
@@ -52,12 +51,12 @@
                   <NumberAxis side="LEFT" fx:id="x" />
                </yAxis>
             </BarChart>
-            <Label layoutX="96.0" layoutY="510.0" text="Patient ID :" textOverrun="CLIP">
+            <Label layoutX="417.0" layoutY="472.0" text="Patient ID :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="LblPatientID" layoutX="209.0" layoutY="511.0" text="#########" textFill="RED" textOverrun="CLIP">
+            <Label fx:id="LblPatientID" layoutX="530.0" layoutY="473.0" text="#########" textFill="RED" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>

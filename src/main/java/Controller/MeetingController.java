@@ -205,8 +205,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickBtnAddMeeting(ActionEvent event) throws SQLException {
 
         Date d = java.sql.Date.valueOf(DatePicker.getValue());
-
-
         Address a = new Address();
         a.setAddresscode(Integer.parseInt(TextFieldAddressCode.getText()));
         a.setCity(TextFieldCity.getText());
@@ -238,31 +236,24 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
             alert.show();
         }
         ManualInit();
-
-
     }
+
 
     @FXML
     void OnClickBtnDetach(ActionEvent event) throws SQLException {
-        int meetingNum= TableMeeting.getSelectionModel().getSelectedItem().getNum();
+        int meetingNum = TableMeeting.getSelectionModel().getSelectedItem().getNum();
         String patientid = LabelPatientID.getText();
-        for(patient_meeting pm : patient_meetingArrayList)
-        {
-            if(pm.getMeetingnum()==meetingNum && pm.getPatientid().equals(patientid)) {
+        for (patient_meeting pm : patient_meetingArrayList) {
+            if (pm.getMeetingnum() == meetingNum && pm.getPatientid().equals(patientid)) {
                 pmdo.removeByMeetingNum(pm);
                 TableMeeting.getItems().remove(TableMeeting.getSelectionModel().getSelectedItem());
                 ManualInit();
             }
         }
-
-
-
-
     }
 
     @FXML
     void OnClickBtnRemove(ActionEvent event) {
-
     }
 
     @FXML
@@ -297,7 +288,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         p00.setStyle("-fx-background-color:  #a7a7a7");
         p15.setStyle("-fx-background-color:  #a7a7a7");
         p45.setStyle("-fx-background-color:  #a7a7a7");
-
     }
 
     @FXML
@@ -311,7 +301,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         p30.setStyle("-fx-background-color:  #a7a7a7");
 
     }
-
 
     @FXML
     void OnClickp10AM(MouseEvent event) {

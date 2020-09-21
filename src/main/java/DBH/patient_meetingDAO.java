@@ -68,6 +68,19 @@ public class patient_meetingDAO {
 
     }
 
+    public int getCount(String id) throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from patient_meeting where patientid=?";
+        PreparedStatement st = con.prepareStatement(query);
+        st.setString(1,id);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
+
+
 
     public int getCount() throws SQLException {
         int numberRow = 0;

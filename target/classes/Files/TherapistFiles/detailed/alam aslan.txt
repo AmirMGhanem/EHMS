@@ -1,3 +1,3 @@
 ID           Name           Address           Gender           Date           ContactNo
  --------------------------------------------------------------------------------------
-123213123123     alam aslan     asdasd , asdasd , 2     Male     2020-11-25     05012313213
+123213123123   alam aslan   asdasd , asdasd , 2   Male   2020-11-25   05012313213

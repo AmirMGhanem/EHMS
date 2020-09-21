@@ -24,19 +24,13 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="BtnLoadData" layoutX="364.0" layoutY="214.0" mnemonicParsing="false" onAction="#OnLoadDataClick" prefHeight="33.0" prefWidth="183.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Load Patient Data" />
-            <ChoiceBox fx:id="ChoicePatient" layoutX="714.0" layoutY="206.0" prefWidth="150.0" />
-            <Label layoutX="576.0" layoutY="201.0" prefHeight="34.0" prefWidth="124.0" text="Choose Patient :" textOverrun="CLIP">
+            <ChoiceBox fx:id="ChoicePatient" layoutX="275.0" layoutY="229.0" prefWidth="150.0" onAction="#onSelectPatient" />
+            <Label layoutX="137.0" layoutY="224.0" prefHeight="34.0" prefWidth="124.0" text="Choose Patient :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <Label layoutX="848.0" layoutY="232.0" text="Patient ID :" textOverrun="CLIP">
-               <font>
-                  <Font name="Guttman Yad" size="17.0" />
-               </font>
-            </Label>
-            <Label fx:id="LabelPatientID" layoutX="971.0" layoutY="232.0" text="#########" textFill="RED" textOverrun="CLIP">
+            <Label fx:id="LabelPatientID" layoutX="447.0" layoutY="224.0" text="#########" textFill="RED" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
@@ -127,8 +121,7 @@
                   <Font name="Arial Bold Italic" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="BtnLoadAllData" layoutX="171.0" layoutY="214.0" mnemonicParsing="false" onAction="#OnLoadAllDataClick" prefHeight="33.0" prefWidth="183.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Load All Data" />
-            <Button fx:id="BtnLoadID" layoutX="876.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnLoadIDClick" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Load" />
+            <Button fx:id="BtnLoadAllData" layoutX="547.0" layoutY="225.0" mnemonicParsing="false" onAction="#OnLoadAllDataClick" prefHeight="33.0" prefWidth="183.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Load All Data" />
          </children>
       </Pane>
    </children>
