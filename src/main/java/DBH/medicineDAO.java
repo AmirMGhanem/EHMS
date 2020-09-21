@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class medicineDAO implements JPQLHandler {
+public class medicineDAO {
 
     static Connection con = DatabaseConnector.getConnection();
 
@@ -138,30 +138,9 @@ public class medicineDAO implements JPQLHandler {
         return list;
     }
 
-    @Override
-    public void SelectQuery() {
 
-    }
 
-    @Override
-    public void InsertQuery() {
 
-    }
-
-    @Override
-    public void RemoveQuery() {
-
-    }
-
-    @Override
-    public int CountQuery() {
-        return 0;
-    }
-
-    @Override
-    public List SelectAllQuery() {
-        return null;
-    }
 
 
 }

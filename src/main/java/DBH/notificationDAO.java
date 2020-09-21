@@ -3,10 +3,7 @@ package DBH;
 import Model.*;
 import Util.DatabaseConnector;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class notificationDAO {
@@ -26,7 +23,7 @@ public class notificationDAO {
         ps.setString(2, n.getRequest().getDescription());
         ps.setString(3,n.getPatient().getID());
         ps.setString(4,n.getPatient().getName());
-        ps.setDate(5,n.getDate());
+        ps.setDate(5, (Date) n.getDate());
 
         int rows = ps.executeUpdate();
 
@@ -58,6 +55,17 @@ public class notificationDAO {
         }
         return n;
 
+    }
+
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from notification";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
     }
 
 }

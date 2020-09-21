@@ -27,4 +27,12 @@ public class Request {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

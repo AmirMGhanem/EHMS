@@ -2,40 +2,57 @@ package Model;
 
 import java.util.Date;
 
-public class Meeting {
 
-    private int meetingID;
-    private String type;
-    private Date time;
+
+
+public class Meeting {
+    private int num;
+    private String name;
     private Address address;
+    private Date date;
+    private String Time;
+
+    public Meeting(int num, String name, Date date) {
+        setNum(num);
+        setName(name);
+        setDate(date);
+
+    }
 
     public Meeting() {
     }
 
-    public Meeting(int meetingID , String type, Date time, Address address) {
-        this.meetingID = meetingID;
-        this.type = type;
-        this.time = time;
-        this.address = address;
-    }
-    public int getMeetingID(){return meetingID;}
+    public Meeting(String name, Address address, Date date) {
+        setName(name);
+        setDate(date);
+        setAddress(address);
 
-    public  void setMeetingID(int meetingID){this.meetingID = meetingID;}
 
-    public String getType() {
-        return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public Meeting(int num, String name, Address address, Date date) {
+        setNum(num);
+        setName(name);
+        setDate(date);
+        setAddress(address);
+
+
     }
 
-    public Date getTime() {
-        return time;
+    public int getNum() {
+        return num;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Address getAddress() {
@@ -46,12 +63,34 @@ public class Meeting {
         this.address = address;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
+    }
+
+    public void setTime(int hours,int minutes) {
+       String str = hours+":"+minutes;
+        Time = str;
+    }
+
     @Override
     public String toString() {
         return "Meeting{" +
-                "type='" + type + '\'' +
-                ", time=" + time +
+                "num=" + num +
+                ", name='" + name + '\'' +
                 ", address=" + address +
+                ", date=" + date +
                 '}';
     }
 }

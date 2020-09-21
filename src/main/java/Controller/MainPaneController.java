@@ -13,6 +13,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
+public class MainPaneController implements Initializable, Util.JavafxPaneHandler {
 
 
     //DATABASE HANDLERER DECLERATIONS
-    DBH.therapistDAO tDAO=new therapistDAO();
-    DBH.patientDAO pDAO=new patientDAO();
+    DBH.therapistDAO tDAO = new therapistDAO();
+    DBH.patientDAO pDAO = new patientDAO();
     DBH.notificationDAO nDAO = new notificationDAO();
-    DBH.medicineDAO mDAO=new medicineDAO();
+    DBH.medicineDAO mDAO = new medicineDAO();
     DBH.AllergyDAO aDAO = new AllergyDAO();
     //ARRAYLISTS DECLERATIONS
     private ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
@@ -37,25 +38,37 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
     private ArrayList<Notification> notificationArrayList = new ArrayList<Notification>();
     //OBSERVABLE DECLERATIONS
     ObservableList notificationObservable = FXCollections.observableArrayList();
+
+    //pieChart.data decleration
+    PieChart.Data highdata;
+    PieChart.Data mediumdata;
+    PieChart.Data lowdata;
+
+    PieChart.Data waterdata;
+    PieChart.Data mealdata;
+    PieChart.Data toiletdata;
+    PieChart.Data emergencydata;
+
+
     @FXML
     private TableView<Notification> TableViewNotifications;
     @FXML
     private TableColumn<Notification, Number> ColNum;
 
     @FXML
-    private TableColumn<Notification,String> ColType;
+    private TableColumn<Notification, String> ColType;
 
     @FXML
     private TableColumn<Notification, String> ColDesc;
 
     @FXML
-    private TableColumn<Notification,String> ColPatientName;
+    private TableColumn<Notification, String> ColPatientName;
 
     @FXML
-    private TableColumn<Notification,String> ColPatientID;
+    private TableColumn<Notification, String> ColPatientID;
 
     @FXML
-    private TableColumn<Notification,Date> ColTime;
+    private TableColumn<Notification, Date> ColTime;
     @FXML
     private PieChart PieChartRequests;
 
@@ -86,6 +99,7 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
 
     @FXML
     private NumberAxis yAxis;
+
     @FXML
     void OnClickDay(ActionEvent event) {
         CategoryAxis xAxis = new CategoryAxis();
@@ -108,14 +122,15 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
         BarChartNotifications.getData().addAll(chart.getData());
 
     }
+
     @FXML
     void OnClickMonthly(ActionEvent event) {
-        String[] month = {"1","2","3","4","5",
-                            "7","8","9","10","11",
-                                "12","13","14","15","16",
-                                    "17","18","19","20","21",
-                                        "22","23","24","25","26",
-                                            "27","28","29","30","31"};
+        String[] month = {"1", "2", "3", "4", "5",
+                "7", "8", "9", "10", "11",
+                "12", "13", "14", "15", "16",
+                "17", "18", "19", "20", "21",
+                "22", "23", "24", "25", "26",
+                "27", "28", "29", "30", "31"};
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableArrayList(month));
         NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
@@ -158,9 +173,10 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
         BarChartNotifications.getData().clear();
         BarChartNotifications.getData().addAll(chart.getData());
     }
+
     @FXML
     void OnClickQuarterly(ActionEvent event) {
-        String[] month = {"January","Current","Last-Month"};
+        String[] month = {"January", "Current", "Last-Month"};
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableArrayList(month));
         NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
@@ -202,33 +218,31 @@ public class MainPaneController implements Initializable,Util.JavafxPaneHandler{
     public void JavafxChoiceFill() {
 
     }
+
+
     @Override
     public void JavafxDiagramFill() throws IOException {
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("Iphone 5S", 13),
-                new PieChart.Data("Samsung Grand", 25),
-                new PieChart.Data("MOTO G", 10),
-                new PieChart.Data("Nokia Lumia", 22));
-
-        ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList(
-                new PieChart.Data("Iphone 5S", 13),
-                new PieChart.Data("Samsung Grand", 25),
-                new PieChart.Data("MOTO G", 10),
-                new PieChart.Data("Nokia Lumia", 22));
-
+        highdata = new PieChart.Data("High Urgency", 1);
+        mediumdata = new PieChart.Data("Medium Urgency", 2);
+        lowdata = new PieChart.Data("Low Urgency", 3);
+        waterdata = new PieChart.Data("Water", 1);
+        mealdata = new PieChart.Data("Meal", 2);
+        toiletdata = new PieChart.Data("Toilet", 3);
+        emergencydata = new PieChart.Data("Emergency", 4);
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(highdata, mediumdata, lowdata);
+        ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList(waterdata, mealdata, toiletdata, emergencydata);
         PieChartRequests.setData(pieChartData);
-       PieChartRequests.setTitle("Requests");
-       PieChartRequests.setLegendVisible(true);
-       PieChartRequests.setLabelsVisible(false);
-      PieChartRequests.setLegendSide(Side.RIGHT);
-
+        PieChartRequests.setTitle("Urgency Level");
+        PieChartRequests.setLegendVisible(true);
+        PieChartRequests.setLabelsVisible(false);
+        PieChartRequests.setLegendSide(Side.RIGHT);
         PieChartActive.setData(pieChartData2);
-        PieChartActive.setTitle("Requests");
+        PieChartActive.setTitle("Requests Types");
         PieChartActive.setLegendVisible(true);
         PieChartActive.setLabelsVisible(false);
         PieChartActive.setLegendSide(Side.RIGHT);
-
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

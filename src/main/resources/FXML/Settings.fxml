@@ -40,7 +40,10 @@
                               <ColorPicker fx:id="ColorPickerTextColor" layoutX="438.0" layoutY="88.0" />
                               <Label layoutX="323.0" layoutY="90.0" prefHeight="21.0" prefWidth="110.0" text="Text Color :" />
                               <Label layoutX="20.0" layoutY="90.0" prefHeight="21.0" prefWidth="110.0" text="Buttons Color:" />
-                              <Label layoutX="323.0" layoutY="35.0" prefHeight="21.0" prefWidth="110.0" text="Font Size :" />
+                              <Label layoutX="323.0" layoutY="35.0" prefHeight="21.0" prefWidth="110.0" text="Font Size :">
+                                 <font>
+                                    <Font name="Bell MT" size="12.0" />
+                                 </font></Label>
                               <Slider fx:id="SliderFontSize" layoutX="454.0" layoutY="37.0" />
                               <Button fx:id="BtnSaveDesign" layoutX="300.0" layoutY="130.0" mnemonicParsing="false" onAction="#OnClickSaveDesign" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" stylesheets="@../Css/css.css" text="Set default" textFill="WHITE" />
                               <ToggleButton fx:id="ToggleBtnDarkMode" layoutX="174.0" layoutY="132.0" mnemonicParsing="false" onAction="#DarkModeTogglePressed" text="On">
@@ -55,27 +58,6 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <TabPane layoutX="45.0" layoutY="415.0" prefHeight="220.0" prefWidth="700.0" style="-fx-border-color: #59b7ff #59b7ff;" tabClosingPolicy="UNAVAILABLE">
-               <tabs>
-                  <Tab text="Database">
-                     <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="48.0" layoutY="79.0" prefHeight="21.0" prefWidth="76.0" text="Username :" />
-                              <Label layoutX="48.0" layoutY="118.0" prefHeight="21.0" prefWidth="110.0" text="Password :" />
-                              <Label layoutX="48.0" layoutY="42.0" prefHeight="21.0" prefWidth="79.0" text="URL :" />
-                              <TextField fx:id="TextFieldDBURL" layoutX="142.0" layoutY="35.0" />
-                              <TextField fx:id="TextFieldUserName" layoutX="144.0" layoutY="74.0" prefHeight="27.0" prefWidth="131.0" />
-                              <TextField fx:id="TextFieldPassword" layoutX="144.0" layoutY="113.0" prefHeight="27.0" prefWidth="131.0" />
-                              <Button fx:id="BtnEstablishConnection" layoutX="438.0" layoutY="111.0" mnemonicParsing="false" onAction="#OnClickEstablishConn" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" stylesheets="@../Css/css.css" text="Establish Connection" textFill="WHITE" />
-                              <Label layoutX="381.0" layoutY="42.0" prefHeight="21.0" prefWidth="80.0" text="Database :" />
-                              <TextField fx:id="TextFieldDataBase" layoutX="467.0" layoutY="37.0" prefHeight="27.0" prefWidth="131.0" />
-                           </children>
-                        </Pane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
             <TabPane layoutX="789.0" layoutY="173.0" prefHeight="289.0" prefWidth="420.0" style="-fx-border-color: #59b7ff #59b7ff;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab text="System">
@@ -87,7 +69,7 @@
                               <Label layoutX="26.0" layoutY="144.0" prefHeight="21.0" prefWidth="64.0" text="Email :" />
                               <Label layoutX="26.0" layoutY="193.0" prefHeight="21.0" prefWidth="79.0" />
                               <ChoiceBox fx:id="ChoiceTimeZone" layoutX="118.0" layoutY="43.0" prefWidth="150.0" />
-                              <DatePicker fx:id="DatePicker" layoutX="118.0" layoutY="90.0" />
+                              <DatePicker fx:id="DatePicker" layoutX="118.0" layoutY="90.0" styleClass="date-picker" />
                               <TextField fx:id="TextFieldEmail" layoutX="116.0" layoutY="139.0" />
                               <Button fx:id="BtnSystemSave" layoutX="258.0" layoutY="196.0" mnemonicParsing="false" onAction="#OnClickSystemSave" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" text="Save " textFill="WHITE" />
                            </children>

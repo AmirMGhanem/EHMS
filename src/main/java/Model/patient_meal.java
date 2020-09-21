@@ -56,6 +56,6 @@ public class patient_meal {
         }
 
 
-        return "PatientID ="+getPatientid()+" MealName ="+getMealName()+" PatientName"+patientname;
+        return "PatientID --> "+getPatientid()+" MealName --> "+getMealName()+" PatientNam  --> "+patientname;
     }
 }

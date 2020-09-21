@@ -1,4 +1,5 @@
 package Controller;
+
 import DBH.AllergyDAO;
 import DBH.patient_allergyDAO;
 import DBH.patient_medicineDAO;
@@ -6,6 +7,8 @@ import Model.*;
 import Util.FilesHandler;
 import Util.FooterPageEvent;
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,9 +17,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Region;
+
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,13 +49,9 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     DBH.AllergyDAO Ado = new AllergyDAO();
 
     private ArrayList<patient_allergy> PA = new ArrayList<patient_allergy>();
-     ObservableList<patient_allergy> paObservablelist= FXCollections.observableArrayList();
-     DBH.patient_allergyDAO paDAO=  new patient_allergyDAO();
+    ObservableList<patient_allergy> paObservablelist = FXCollections.observableArrayList();
+    DBH.patient_allergyDAO paDAO = new patient_allergyDAO();
 
-
-
-    @FXML
-    private Button BtnLoadData;
 
     @FXML
     private ChoiceBox<String> ChoicePatient;
@@ -91,7 +94,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
 
     @FXML
-    private TableColumn<Allergy,String> ColMedicine;
+    private TableColumn<Allergy, String> ColMedicine;
 
     @FXML
     private Button BtnRemoveAllergy;
@@ -122,8 +125,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     private Button BtnLoadID;
 
 
-
-
     @FXML
     void OnClickBtnDetachMed(ActionEvent event) throws SQLException {
         ArrayList<Model.patient_medicine> pmlist = new ArrayList<Model.patient_medicine>();
@@ -133,7 +134,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         pmlist = pmDAO.selectAll();
 
         for (Model.patient_medicine pm : pmlist) {
-            if (pm.getMedicinenum() == mednum) {
+            if (pm.getMedicinenum() == mednum && pm.getPatientid().equals(LabelPatientID.getText())) {
                 pmDAO.removeByMedicineNum(mednum, pm.getPatientid());
                 LabelUpdateAttach.setText("Detached!");
             }
@@ -143,7 +144,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
 
     @FXML
-    void OnClickBtnAttachMed(ActionEvent event)   {
+    void OnClickBtnAttachMed(ActionEvent event) {
 
         int MedNumForAttach = MedTable.getSelectionModel().getSelectedItem().getMedicineNum();
         String PatientidForAttach = LabelPatientID.getText();
@@ -170,14 +171,13 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         fh.SaveMedicines();
 
 
-
     }
 
     @FXML
     void OnClickBtnExportMedPDF(ActionEvent event) throws IOException, DocumentException, SQLException {
         Document document = new Document();
         Font font;
-        PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/MedicinesPDF.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/MedicinesPDF.pdf"));
         document.open();
         //Adding the footer to the pdf file, by class created on the utils
         Util.FooterPageEvent footer = new FooterPageEvent();
@@ -186,7 +186,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         //creating paragraph
         Paragraph p1 = new Paragraph();
         Paragraph pNew5Lines = new Paragraph();
-        for(int i=0 ; i<5;i++)
+        for (int i = 0; i < 5; i++)
             p1.add("\n");
 
         //Printing Chunk Text on the pdf
@@ -195,8 +195,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         p1.add("\n--------------------------------------------------------------------------------------------\n");
         font = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
 
-        for(String s : MDH.MedicinesPDF())
-        {
+        for (String s : MDH.MedicinesPDF()) {
             Chunk chunk = new Chunk(s, font);
             p1.add(chunk);
             p1.add("\n");
@@ -234,56 +233,18 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         for (Model.patient_medicine pm : pmlist) {
             if (pm.getMedicinenum() == mednum) {
                 flag = true;
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
-                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                alert.show();
-
             }
+        }
+
+        if(flag==true)
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
         }
         if (flag == false) {
             MDH.removeMedicineByID(mednum);
             MedTable.getItems().removeAll(MedTable.getSelectionModel().getSelectedItem());
-        }
-
-    }
-
-    @FXML
-    void OnLoadDataClick(ActionEvent event) throws SQLException {
-        ObservableList<patient_medicine> pmlist = FXCollections.observableArrayList();
-        patient_medicineDAO pmDAO = new patient_medicineDAO();
-        pmlist = pmDAO.selectAllObservable();
-        MedTable.getItems().removeAll();
-
-
-        JavafxTableFill();
-        MedTable.getItems().clear();
-        for (patient_medicine pm : pmlist) {
-            if (pm.getPatientid().equals(LabelPatientID.getText())) {
-                for (Medicine m : Medicines) {
-                    if(m.getMedicineNum()==pm.getMedicinenum())
-                        MedTable.getItems().add(m);
-                }
-            }
-        }
-
-        //----------------------------------------------------------------------------- LOAD ALLERGY
-
-        ObservableList<patient_allergy> palist = FXCollections.observableArrayList();
-        palist = paDAO.selectAllObservable();
-        AllergyTable.getItems().removeAll();
-
-        JavafxTableFill();
-        AllergyTable.getItems().clear();
-        for (patient_allergy pa : palist) {
-            if (pa.getPatientid().equals(LabelPatientID.getText())) {
-                for (Allergy a : allergyArrayList) {
-                    if(pa.getAllergyName().equals(a.getName()))
-                    {
-                        System.out.println("EQUAL");
-                        AllergyTable.getItems().add(a);}
-
-                }
-            }
         }
 
     }
@@ -300,19 +261,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     }
 
 
-
-
-
-    @FXML
-    void OnLoadIDClick(ActionEvent event) {
-        for (Patient p : Patients) {
-            if (p.getName().equals(ChoicePatient.getValue().toString())) {
-                LabelPatientID.setText(p.getID());
-                LabelLoadUpdate.setText("Loaded");
-            }
-        }
-    }
-
     private void TableInit() throws SQLException {
         //Table Init
         ColMedNum.setCellValueFactory(new PropertyValueFactory<Medicine, Number>("medicineNum"));
@@ -323,12 +271,11 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         MedTable.setItems(Medicines);
 
 
-        ColAllergyName.setCellValueFactory(new PropertyValueFactory<Allergy,String>("name"));
-        ColMedicine.setCellValueFactory(CellData->new SimpleStringProperty(CellData.getValue().getMedicines().getName()));
+        ColAllergyName.setCellValueFactory(new PropertyValueFactory<Allergy, String>("name"));
+        ColMedicine.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getMedicines().getName()));
         JavafxTableFill();
         AllergyTable.setItems(allergyOvservableList);
     }
-
 
 
     @FXML
@@ -341,7 +288,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     void onClickBtnExportAllergyPDF(ActionEvent event) throws IOException, DocumentException, SQLException {
         Document document = new Document();
         Font font;
-        PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/AllergiesPDF.pdf"));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/AllergiesPDF.pdf"));
         document.open();
         //Adding the footer to the pdf file, by class created on the utils
         Util.FooterPageEvent footer = new FooterPageEvent();
@@ -350,7 +297,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         //creating paragraph
         Paragraph p1 = new Paragraph();
         Paragraph pNew5Lines = new Paragraph();
-        for(int i=0 ; i<5;i++)
+        for (int i = 0; i < 5; i++)
             p1.add("\n");
 
         //Printing Chunk Text on the pdf
@@ -359,8 +306,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         p1.add("\n----------------------------------------------------------------------\n");
         font = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
 
-        for(String s : Ado.AllergiesPDF())
-        {
+        for (String s : Ado.AllergiesPDF()) {
             Chunk chunk = new Chunk(s, font);
             p1.add(chunk);
             p1.add("\n");
@@ -396,11 +342,12 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         for (Model.patient_allergy pa : palist) {
             if (pa.getAllergyName().equals(allergyname)) {
                 flag = true;
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
-                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                alert.show();
-
             }
+        }
+        if (flag == true) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
         }
         if (flag == false) {
             Ado.removeAllergyByName(allergyname);
@@ -417,18 +364,19 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         PA = paDAO.selectAll();
 
         for (Model.patient_allergy pa : PA) {
-            if (pa.getAllergyName().equals(allergyname)) {
+            if (pa.getAllergyName().equals(allergyname) && pa.getPatientid().equals(LabelPatientID.getText())) {
                 paDAO.removeByAllergyname(pa);
                 LabelUpdateAttach.setText("Detached!");
             }
         }
 
     }
+
     @FXML
     void OnClickBtnAttachAllergy(ActionEvent event) {
         String Allergyname = AllergyTable.getSelectionModel().getSelectedItem().getName();
         String PatientidForAttach = LabelPatientID.getText();
-        patient_allergy pm = new patient_allergy(PatientidForAttach,Allergyname);
+        patient_allergy pm = new patient_allergy(PatientidForAttach, Allergyname);
         try {
             if (paDAO.insertToPatient_allergy(pm) == 0)
                 LabelUpdateAttach.setText("Unsuccessfully");
@@ -459,15 +407,13 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     }
 
 
-
     @Override
     public void JavafxTableFill() throws SQLException {
 
         Medicines = MDH.selectMedicines();
         ALMED = MDH.selectAll();
-        allergyOvservableList=Ado.selectAllObservable();
+        allergyOvservableList = Ado.selectAllObservable();
         allergyArrayList = Ado.selectAll();
-
 
 
     }
@@ -488,5 +434,57 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
     }
 
+    @FXML
+    public void onSelectPatient(ActionEvent event) throws SQLException {
 
+        String name ="";
+        for (Patient p : Patients) {
+            if (p.getName().equals(ChoicePatient.getValue())) {
+                LabelPatientID.setText(p.getID());
+                LabelLoadUpdate.setText("Loaded");
+                name=p.getName();
+            }
+        }
+
+        ObservableList<patient_medicine> pmlist = FXCollections.observableArrayList();
+        patient_medicineDAO pmDAO = new patient_medicineDAO();
+        pmlist = pmDAO.selectAllObservable();
+        MedTable.getItems().removeAll();
+
+
+        JavafxTableFill();
+        MedTable.getItems().clear();
+        for (patient_medicine pm : pmlist) {
+            if (pm.getPatientid().equals(LabelPatientID.getText())) {
+                for (Medicine m : Medicines) {
+                    if (m.getMedicineNum() == pm.getMedicinenum())
+                        MedTable.getItems().add(m);
+                }
+            }
+        }
+
+        //----------------------------------------------------------------------------- LOAD ALLERGY
+
+        ObservableList<patient_allergy> palist = FXCollections.observableArrayList();
+        palist = paDAO.selectAllObservable();
+        AllergyTable.getItems().removeAll();
+
+        JavafxTableFill();
+        AllergyTable.getItems().clear();
+        for (patient_allergy pa : palist) {
+            if (pa.getPatientid().equals(LabelPatientID.getText())) {
+                for (Allergy a : allergyArrayList) {
+                    if (pa.getAllergyName().equals(a.getName())) {
+                        System.out.println("EQUAL");
+                        AllergyTable.getItems().add(a);
+                    }
+
+                }
+            }
+        }
+
+        ChoicePatient.getSelectionModel().select(-1);
+        ChoicePatient.setValue(name);
+
+    }
 }

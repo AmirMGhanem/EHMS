@@ -94,14 +94,13 @@ public class MealsController implements Initializable, JavafxPaneHandler {
         m.setName(TextFieldAddMealName.getText());
         m.setWeight(Integer.parseInt(TextFieldAddMealWeight.getText()));
         mDAO.insertMeal(m);
-        mealArrayList=mDAO.selectAll();
+        mealArrayList = mDAO.selectAll();
         TableInit();
         JavafxChoiceFill();
     }
 
     @FXML
     void onClickBtnDeleteMeal(ActionEvent event) throws SQLException {
-
         String name = TableMeals.getSelectionModel().getSelectedItem().getName();
         ArrayList<Model.patient_meal> pmlist = new ArrayList<patient_meal>();
         boolean flag = false;
@@ -122,18 +121,15 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void onClickBtnAttachMeal(ActionEvent event) {
-
-
-     try{
+        try {
             String mealname = TableMeals.getSelectionModel().getSelectedItem().getName();
             String patientid = TablePatient.getSelectionModel().getSelectedItem().getID();
-
-         patient_meal pm = new patient_meal(patientid,mealname);
-         if( pmDAO.insertToPatient_meal(pm)==0)
-             System.out.println("Unsuccesffully");
-         else
-             System.out.println("Successfully attached");
-         ListViewMeals.getItems().add(pm);
+            patient_meal pm = new patient_meal(patientid, mealname);
+            if (pmDAO.insertToPatient_meal(pm) == 0)
+                System.out.println("Unsuccesffully");
+            else
+                System.out.println("Successfully attached");
+            ListViewMeals.getItems().add(pm);
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Add Twice The Same Meal", ButtonType.OK);
@@ -144,31 +140,28 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void onClickBtnDetachMeal(ActionEvent event) throws SQLException {
-
-
-        String str =  ListViewMeals.getSelectionModel().getSelectedItems().toString();
+        String str = ListViewMeals.getSelectionModel().getSelectedItems().toString();
         String[] strline = new String[5];
-        strline=str.split(" ");
+        strline = str.split(" ");
         String id = strline[1].substring(1);
         String name = strline[3].substring(1);
-        patient_meal pm = new patient_meal(id,name);
+        patient_meal pm = new patient_meal(id, name);
         pmDAO.removeByMealName(pm);
         ListViewMeals.getItems().removeAll(ListViewMeals.getSelectionModel().getSelectedItem());
 
 
-
     }
+
     @FXML
     void onEnter(ActionEvent event) throws SQLException {
         ListViewMeals.getItems().clear();
-        String id= TextFieldID.getText();
-        patient_mealArrayList=pmDAO.selectAll();
-        for(patient_meal pm : patient_mealArrayList)
-        {
-            if(pm.getPatientid().equals(id))
+        String id = TextFieldID.getText();
+        patient_mealArrayList = pmDAO.selectAll();
+        for (patient_meal pm : patient_mealArrayList) {
+            if (pm.getPatientid().equals(id))
                 ListViewMeals.getItems().add(pm);
         }
-        if(id.equals(""))
+        if (id.equals(""))
             ListViewInit();
 
     }
@@ -180,14 +173,15 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
         ListViewMeals.getItems().clear();
 
-        patient_mealArrayList=pmDAO.selectAll();
-        for(patient_meal pm : patient_mealArrayList)
-        {
-            if(pm.getMealName().equals(selectedItem))
+        patient_mealArrayList = pmDAO.selectAll();
+        for (patient_meal pm : patient_mealArrayList) {
+            if (pm.getMealName().equals(selectedItem))
                 ListViewMeals.getItems().add(pm);
 
         }
 
+        ChoiceMeal.getSelectionModel().select(-1);
+        ChoiceMeal.setValue(selectedItem);
 
 
     }
@@ -222,9 +216,8 @@ public class MealsController implements Initializable, JavafxPaneHandler {
     }
 
     private void ListViewInit() throws SQLException {
-        patient_mealArrayList=pmDAO.selectAll();
-        for(patient_meal pm : patient_mealArrayList)
-            ListViewMeals.getItems().add(pm);
+        patient_mealArrayList = pmDAO.selectAll();
+        ListViewMeals.getItems().setAll(patient_mealArrayList);
     }
 
 
@@ -250,8 +243,6 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
 
     }
-
-
 
 
     @Override
