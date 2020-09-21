@@ -82,4 +82,15 @@ public class patient_allergyDAO {
         ps.close();
 
     }
+
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from patient_allergy";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
 }

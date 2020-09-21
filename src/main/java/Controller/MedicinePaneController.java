@@ -306,7 +306,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     @FXML
     void OnLoadIDClick(ActionEvent event) {
         for (Patient p : Patients) {
-            if (p.getName().equals(ChoicePatient.getValue().toString())) {
+            if (p.getName().equals(ChoicePatient.getValue())) {
                 LabelPatientID.setText(p.getID());
                 LabelLoadUpdate.setText("Loaded");
             }

@@ -81,5 +81,16 @@ public class patient_medicineDAO {
 
         return list;
     }
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from patient_medicine";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
+
 
 }

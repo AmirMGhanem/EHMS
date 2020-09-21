@@ -101,7 +101,6 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void onClickBtnDeleteMeal(ActionEvent event) throws SQLException {
-
         String name = TableMeals.getSelectionModel().getSelectedItem().getName();
         ArrayList<Model.patient_meal> pmlist = new ArrayList<patient_meal>();
         boolean flag = false;
@@ -122,12 +121,9 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void onClickBtnAttachMeal(ActionEvent event) {
-
-
      try{
-            String mealname = TableMeals.getSelectionModel().getSelectedItem().getName();
-            String patientid = TablePatient.getSelectionModel().getSelectedItem().getID();
-
+         String mealname = TableMeals.getSelectionModel().getSelectedItem().getName();
+         String patientid = TablePatient.getSelectionModel().getSelectedItem().getID();
          patient_meal pm = new patient_meal(patientid,mealname);
          if( pmDAO.insertToPatient_meal(pm)==0)
              System.out.println("Unsuccesffully");

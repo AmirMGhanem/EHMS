@@ -91,8 +91,6 @@ public class patientDAO {
     public ArrayList<Patient> selectAll() throws SQLException {
         ArrayList<Patient> list = new ArrayList<Patient>();
 
-        System.out.println(list);
-
         String sql = "select * from address , person , patient where address.addresscode = person.address and person.id = patient.id";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -103,7 +101,6 @@ public class patientDAO {
             list.add(p);
         }
 
-        System.out.println(list);
 
         ps.close();
         rs.close();

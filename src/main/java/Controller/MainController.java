@@ -32,7 +32,7 @@ public class MainController implements Initializable {
     @FXML private Button BtnMeals;
     @FXML private Button BtnMed;
     @FXML private Button BtnReports;
-    @FXML private Button BtnStaff;
+    @FXML private Button BtnMeeting;
     @FXML private Button BtnConn;
     @FXML private Button BtnSett;
     @FXML private ImageView LogoHome;
@@ -45,6 +45,7 @@ public class MainController implements Initializable {
     @FXML private Button BtnEditNurse;
     @FXML private Button BtnAddPatient;
     @FXML private Button BtnEditPatient;
+    @FXML private Button BtnDashBoard;
 
     @FXML
     void OnMouseClickedSlide(MouseEvent event) {
@@ -63,7 +64,13 @@ public class MainController implements Initializable {
         openNav.setToX(0);
          closeNav = new TranslateTransition(new Duration(350), NavBox);
     }
-
+    @FXML
+    public void OnClickDashboard(ActionEvent event) throws IOException{
+        System.out.println("Dashboard Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("SignInPane");
+        BorderMainPane.setCenter(view);
+    }
 
     @FXML
     void LogoHomeClicked(MouseEvent event) throws IOException {
@@ -71,6 +78,7 @@ public class MainController implements Initializable {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("MainPane");
         BorderMainPane.setCenter(view);
+
 
     }
     @FXML
@@ -141,10 +149,10 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(view);
     }
     @FXML
-    void OnClickStaff(ActionEvent event) throws IOException {
-        System.out.println("staff Clicked");
+    void OnClickMeeting(ActionEvent event) throws IOException {
+        System.out.println("meeting Clicked");
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("staff manager");
+        Pane view = object.getPage("meeting");
         BorderMainPane.setCenter(view);
     }
     @FXML
@@ -202,5 +210,6 @@ public class MainController implements Initializable {
     {
         BorderMainPane.setCenter(pane);
     }
+
 
 }

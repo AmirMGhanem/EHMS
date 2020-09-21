@@ -16,7 +16,10 @@ public class MultipleFxmlHandlingJavaFX extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+
     }
+
+
 
     public static void main(String[] args)
     {

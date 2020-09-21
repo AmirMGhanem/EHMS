@@ -1,7 +1,7 @@
 package Model;
 
-import java.sql.Date;
-import java.sql.Time;
+
+import java.util.Date;
 
 public class Notification {
     private int Num;
@@ -48,5 +48,14 @@ public class Notification {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                ", request=" + request +
+                ", patient=" + patient +
+                ", date=" + date +
+                '}';
     }
 }
