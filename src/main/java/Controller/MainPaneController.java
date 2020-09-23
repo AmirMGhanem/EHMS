@@ -43,6 +43,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     DBH.AllergyDAO aDAO = new AllergyDAO();
     //ARRAYLISTS DECLERATIONS
     private ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
+    private ObservableList patientObservableList = FXCollections.observableArrayList();
     private ArrayList<Therapist> therapistArrayList = new ArrayList<Therapist>();
     private ArrayList<Medicine> medicineArrayList = new ArrayList<Medicine>();
     private ArrayList<Allergy> allergyArrayList = new ArrayList<Allergy>();
@@ -60,6 +61,11 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     PieChart.Data mealdata;
     PieChart.Data toiletdata;
     PieChart.Data emergencydata;
+
+    BarChart.Data patientwaterdata;
+    BarChart.Data patiermealdata;
+    BarChart.Data patienttoiletdata;
+    BarChart.Data patientemergencydata;
 
 
     @FXML
@@ -113,122 +119,77 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     private NumberAxis yAxis;
 
 
+    @FXML
+    private ChoiceBox<String> ChoicePatient;
+
     Thread t;
+
+
+    private void BarChartRefresher() throws SQLException {
+
+        int countpatientwaterdata = 0;
+        int countpatientmealdata = 0;
+        int countpatienttoiletdata = 0;
+        int countpatientemergencydata = 0;
+
+        patientArrayList = pDAO.selectAll();
+        for (Patient p : patientArrayList)
+            if (p.getName().equals(ChoicePatient.getSelectionModel().getSelectedItem()))
+                for (Notification n : notificationArrayList) {
+                    if (n.getPatient().getID().equals(p.getID())) {
+                        if (n.getRequest().returnReq().equals("Water"))
+                            countpatientwaterdata++;
+                        if (n.getRequest().returnReq().equals("Meal"))
+                            countpatientmealdata++;
+                        if (n.getRequest().returnReq().equals("Toilet"))
+                            countpatienttoiletdata++;
+                        if (n.getRequest().returnReq().equals("YOU"))
+                            countpatientemergencydata++;
+                    }
+                }
+        patientwaterdata.setYValue(countpatientwaterdata);
+        patiermealdata.setYValue(countpatientmealdata);
+        patienttoiletdata.setYValue(countpatienttoiletdata);
+        patientemergencydata.setYValue(countpatientemergencydata);
+    }
+
+    @FXML
+    public void onSelectPatient(ActionEvent event) throws SQLException {
+
+        BarChartRefresher();
+    }
+
+
+    public void BarChartInitilizer() {
+        patientwaterdata = new BarChart.Data("Today", 0);
+        patiermealdata = new BarChart.Data("Today", 0);
+        patienttoiletdata = new BarChart.Data("Today", 0);
+        patientemergencydata = new BarChart.Data("Today", 0);
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
+        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
+                new BarChart.Series("Water", FXCollections.observableArrayList(
+                        patientwaterdata
+                )),
+                new BarChart.Series("Meal", FXCollections.observableArrayList(
+                        patiermealdata
+                )),
+                new BarChart.Series("Toilet", FXCollections.observableArrayList(
+                        patienttoiletdata
+                )),
+                new BarChart.Series("Emergency", FXCollections.observableArrayList(
+                        patientemergencydata
+                ))
+        );
+        BarChart chart = new BarChart(xAxis, yAxis, barChartData, 25.0d);
+        BarChartNotifications.getData().clear();
+        BarChartNotifications.getData().addAll(chart.getData());
+    }
 
     public void TerminateThread() {
         if (t.isAlive())
             t.interrupt();
         System.out.println(t.getName() + "- terminated!!");
-    }
-
-
-    @FXML
-    void OnClickDay(ActionEvent event) {
-        CategoryAxis xAxis = new CategoryAxis();
-        //xAxis.setCategories(FXCollections.<String>observableArrayList(month));
-        NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
-        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
-                new BarChart.Series("Medicines", FXCollections.observableArrayList(
-
-                        new BarChart.Data("Today", 3d)
-                )),
-                new BarChart.Series("Allergies", FXCollections.observableArrayList(
-                        new BarChart.Data("Today", 2d)
-                )),
-                new BarChart.Series("Meetings", FXCollections.observableArrayList(
-                        new BarChart.Data("Today", 1d)
-                ))
-        );
-        BarChart chart = new BarChart(xAxis, yAxis, barChartData, 25.0d);
-        BarChartNotifications.getData().clear();
-        BarChartNotifications.getData().addAll(chart.getData());
-
-    }
-
-    @FXML
-    void OnClickMonthly(ActionEvent event) {
-        String[] month = {"1", "2", "3", "4", "5",
-                "7", "8", "9", "10", "11",
-                "12", "13", "14", "15", "16",
-                "17", "18", "19", "20", "21",
-                "22", "23", "24", "25", "26",
-                "27", "28", "29", "30", "31"};
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setCategories(FXCollections.<String>observableArrayList(month));
-        NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
-        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
-                new BarChart.Series("Medicines", FXCollections.observableArrayList(
-
-                        new BarChart.Data(month[1], 3d),
-                        new BarChart.Data(month[4], 2d),
-                        new BarChart.Data(month[5], 1d),
-                        new BarChart.Data(month[8], 4d),
-                        new BarChart.Data(month[10], 1d),
-                        new BarChart.Data(month[18], 0d),
-                        new BarChart.Data(month[20], 0d),
-                        new BarChart.Data(month[28], 2d)
-
-
-                )),
-                new BarChart.Series("Allergies", FXCollections.observableArrayList(
-                        new BarChart.Data(month[3], 1d),
-                        new BarChart.Data(month[7], 2d),
-                        new BarChart.Data(month[9], 4d),
-                        new BarChart.Data(month[14], 3d),
-                        new BarChart.Data(month[19], 1d),
-                        new BarChart.Data(month[21], 1d),
-                        new BarChart.Data(month[24], 2d),
-                        new BarChart.Data(month[27], 5d)
-                )),
-                new BarChart.Series("Meetings", FXCollections.observableArrayList(
-                        new BarChart.Data(month[2], 7d),
-                        new BarChart.Data(month[3], 4d),
-                        new BarChart.Data(month[2], 1d),
-                        new BarChart.Data(month[7], 3d),
-                        new BarChart.Data(month[12], 6d),
-                        new BarChart.Data(month[16], 2d),
-                        new BarChart.Data(month[22], 3d),
-                        new BarChart.Data(month[21], 4d)
-                ))
-        );
-        BarChart chart = new BarChart(xAxis, yAxis, barChartData, 25.0d);
-        BarChartNotifications.getData().clear();
-        BarChartNotifications.getData().addAll(chart.getData());
-    }
-
-    @FXML
-    void OnClickQuarterly(ActionEvent event) {
-        String[] month = {"January", "Current", "Last-Month"};
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setCategories(FXCollections.<String>observableArrayList(month));
-        NumberAxis yAxis = new NumberAxis("Units", 0.0d, 3000.0d, 1000.0d);
-        ObservableList<BarChart.Series> barChartData = FXCollections.observableArrayList(
-                new BarChart.Series("Medicines", FXCollections.observableArrayList(
-
-                        new BarChart.Data(month[0], 5),
-                        new BarChart.Data(month[1], 0d),
-                        new BarChart.Data(month[2], 3d)
-
-
-                )),
-                new BarChart.Series("Allergies", FXCollections.observableArrayList(
-                        new BarChart.Data(month[0], 2d),
-                        new BarChart.Data(month[1], 1d),
-                        new BarChart.Data(month[2], 0d)
-
-
-                )),
-                new BarChart.Series("Meetings", FXCollections.observableArrayList(
-                        new BarChart.Data(month[0], 1d),
-                        new BarChart.Data(month[1], 1d),
-                        new BarChart.Data(month[2], 2d)
-
-
-                ))
-        );
-        BarChart chart = new BarChart(xAxis, yAxis, barChartData, 25.0d);
-        BarChartNotifications.getData().clear();
-        BarChartNotifications.getData().addAll(chart.getData());
     }
 
 
@@ -287,7 +248,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
             if (n.getRequest().returnReq().equals("YOU"))
                 emergencycount++;
 
-            System.out.println(n.getTime());
+
         }
 
 
@@ -311,7 +272,11 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     }
 
     @Override
-    public void JavafxChoiceFill() {
+    public void JavafxChoiceFill() throws SQLException {
+        ChoicePatient.getItems().removeAll();
+        patientArrayList = pDAO.selectAll();
+        for (Patient p : patientArrayList)
+            ChoicePatient.getItems().add(p.getName());
 
     }
 
@@ -336,12 +301,15 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         PieChartActive.setLegendVisible(true);
         PieChartActive.setLabelsVisible(false);
         PieChartActive.setLegendSide(Side.RIGHT);
+        BarChartInitilizer();
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             TableInit();
+            JavafxChoiceFill();
             LabelActiveTherapist.setText(Integer.toString(tDAO.getCount()));
             LabelActivePatient.setText(Integer.toString(pDAO.getCount()));
             JavafxDiagramFill();
@@ -386,6 +354,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
                         System.out.println("Refreshing in one second");
                         // TableInit();
                         manualRefreshingTable();
+                        BarChartRefresher();
                         TimeUnit.SECONDS.sleep(3);
                     } catch (SQLException | InterruptedException e) {
                         e.printStackTrace();
