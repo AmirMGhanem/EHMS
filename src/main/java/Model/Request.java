@@ -28,6 +28,13 @@ public class Request {
         this.description = description;
     }
 
+    public String returnReq(){
+        String[] strline = description.split(" ");
+        int index = strline.length-1;
+
+        return strline[index];
+    }
+
     @Override
     public String toString() {
         return "Request{" +

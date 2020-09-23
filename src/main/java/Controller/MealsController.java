@@ -127,9 +127,9 @@ public class MealsController implements Initializable, JavafxPaneHandler {
             patient_meal pm = new patient_meal(patientid, mealname);
             if (pmDAO.insertToPatient_meal(pm) == 0)
                 System.out.println("Unsuccesffully");
-            else
+            else{
                 System.out.println("Successfully attached");
-            ListViewMeals.getItems().add(pm);
+            ListViewMeals.getItems().add(pm);}
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Add Twice The Same Meal", ButtonType.OK);

@@ -20,12 +20,8 @@ import javafx.scene.layout.Region;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.util.*;
 
-import static java.sql.Date.valueOf;
+import java.util.*;
 
 
 public class MeetingController implements Initializable, JavafxPaneHandler {
@@ -226,10 +222,12 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         int MeetingNumForAttach = TableMeeting.getSelectionModel().getSelectedItem().getNum();
         String PatientidForAttach = LabelPatientID.getText();
         try {
-            if (pmdo.insertToPatient_meeting(PatientidForAttach, MeetingNumForAttach) == 0)
+            if (pmdo.insertToPatient_meeting(PatientidForAttach, MeetingNumForAttach) == 0) {
                 LabelUpdate.setText("Unsuccessfully");
-            else
+            } else {
                 LabelUpdate.setText("Successfully Added");
+                listinit();
+            }
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Meeting Already Added", ButtonType.OK);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
@@ -253,7 +251,14 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     }
 
     @FXML
-    void OnClickBtnRemove(ActionEvent event) {
+    void OnClickBtnRemove(ActionEvent event) throws SQLException {
+        Meeting m = TableMeeting.getSelectionModel().getSelectedItem();
+        TableMeeting.getItems().remove(TableMeeting.getSelectionModel().getSelectedItem());
+        for (patient_meeting pm : patient_meetingArrayList)
+            if (pm.getMeetingnum() == m.getNum())
+                pmdo.removeByMeetingNum(pm);
+        mDAO.removeMeeting(m);
+        listinit();
     }
 
     @FXML
@@ -462,12 +467,24 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     }
 
+
+    public void listinit() throws SQLException {
+        patient_meetingArrayList = pmdo.selectAll();
+        patient_meetingObservable.setAll(patient_meetingArrayList);
+        ListView.getItems().removeAll();
+        ListView.getItems().setAll(patient_meetingObservable);
+
+    }
+
+
     //INIT AND JAVAFX HANDLERER IMPLEMENETATION
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             TableInit();
             JavafxChoiceFill();
+            listinit();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
