@@ -40,7 +40,10 @@
                               <ColorPicker fx:id="ColorPickerTextColor" layoutX="438.0" layoutY="88.0" />
                               <Label layoutX="323.0" layoutY="90.0" prefHeight="21.0" prefWidth="110.0" text="Text Color :" />
                               <Label layoutX="20.0" layoutY="90.0" prefHeight="21.0" prefWidth="110.0" text="Buttons Color:" />
-                              <Label layoutX="323.0" layoutY="35.0" prefHeight="21.0" prefWidth="110.0" text="Font Size :" />
+                              <Label layoutX="323.0" layoutY="35.0" prefHeight="21.0" prefWidth="110.0" text="Font Size :">
+                                 <font>
+                                    <Font name="Bell MT" size="12.0" />
+                                 </font></Label>
                               <Slider fx:id="SliderFontSize" layoutX="454.0" layoutY="37.0" />
                               <Button fx:id="BtnSaveDesign" layoutX="300.0" layoutY="130.0" mnemonicParsing="false" onAction="#OnClickSaveDesign" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" stylesheets="@../Css/css.css" text="Set default" textFill="WHITE" />
                               <ToggleButton fx:id="ToggleBtnDarkMode" layoutX="174.0" layoutY="132.0" mnemonicParsing="false" onAction="#DarkModeTogglePressed" text="On">
@@ -66,7 +69,7 @@
                               <Label layoutX="26.0" layoutY="144.0" prefHeight="21.0" prefWidth="64.0" text="Email :" />
                               <Label layoutX="26.0" layoutY="193.0" prefHeight="21.0" prefWidth="79.0" />
                               <ChoiceBox fx:id="ChoiceTimeZone" layoutX="118.0" layoutY="43.0" prefWidth="150.0" />
-                              <DatePicker fx:id="DatePicker" layoutX="118.0" layoutY="90.0" styleClass="date-picker"/>
+                              <DatePicker fx:id="DatePicker" layoutX="118.0" layoutY="90.0" styleClass="date-picker" />
                               <TextField fx:id="TextFieldEmail" layoutX="116.0" layoutY="139.0" />
                               <Button fx:id="BtnSystemSave" layoutX="258.0" layoutY="196.0" mnemonicParsing="false" onAction="#OnClickSystemSave" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" text="Save " textFill="WHITE" />
                            </children>

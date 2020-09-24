@@ -1,14 +1,17 @@
 package Model;
 
-
 import java.util.Date;
+
 
 public class Notification {
     private int Num;
     private Request request;
     private Patient patient;
     private Date date;
+
+
     public Notification() {
+
     }
 
     public Notification(int num, Request request, Patient patient,Date date) {
@@ -16,6 +19,7 @@ public class Notification {
         setPatient(patient);
         setRequest(request);
         setDate(date);
+
     }
 
     public int getNum() {
@@ -48,11 +52,15 @@ public class Notification {
 
     public void setDate(Date date) {
         this.date = date;
+
     }
+
+
 
     @Override
     public String toString() {
         return "Notification{" +
+                "Num=" + Num +
                 ", request=" + request +
                 ", patient=" + patient +
                 ", date=" + date +

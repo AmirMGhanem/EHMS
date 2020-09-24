@@ -4,7 +4,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -77,9 +77,6 @@
                   </ImageView>
                </children>
             </Pane>
-            <Button fx:id="BtnDay" layoutX="736.0" layoutY="428.0" mnemonicParsing="false" onAction="#OnClickDay" text="Day" />
-            <Button fx:id="BrnMonthly" layoutX="777.0" layoutY="428.0" mnemonicParsing="false" onAction="#OnClickMonthly" text="Monthly" />
-            <Button fx:id="BtnQuarterly" layoutX="842.0" layoutY="428.0" mnemonicParsing="false" onAction="#OnClickQuarterly" text="Quarterly" />
             <BarChart fx:id="BarChartNotifications" layoutX="401.0" layoutY="453.0" prefHeight="341.0" prefWidth="694.0">
                <xAxis>
                   <CategoryAxis side="BOTTOM" fx:id="xAxis" />
@@ -88,6 +85,7 @@
                   <NumberAxis fx:id="yAxis" side="LEFT" />
                </yAxis>
             </BarChart>
+            <ChoiceBox fx:id="ChoicePatient" layoutX="502.0" layoutY="427.0" onAction="#onSelectPatient" prefWidth="150.0" />
          </children>
       </Pane>
    </children>
