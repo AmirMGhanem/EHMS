@@ -144,6 +144,8 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        
         try {
             MedicineArrayList = mbh.selectAll();
             allergyArrayList = Ado.selectAll();
