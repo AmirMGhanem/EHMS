@@ -1,0 +1,80 @@
+.Table{
+-fx-border-color : #000000;
+-fx-border-width : 2px;
+-fx-effect: dropshadow( two-pass-box ,  #59b7ff , 5 , 0.0 , 5 , 3 );
+}
+
+.ListView{
+-fx-border-color : #000000;
+-fx-border-width : 2px;
+-fx-effect: dropshadow( two-pass-box ,  #59b7ff , 5 , 0.0 , 5 , 3 );
+}
+
+.Tab{
+-fx-border-color : #000000;
+-fx-border-width : 0.5;
+}
+
+.label{
+}
+
+.Choice{
+-fx-border-color : #CCF3FF;
+}
+
+.Pane{
+-fx-border-color : #000000;
+-fx-border-width : 2;
+}
+
+.TopPane{
+-fx-background-color : #59b7ff;
+-fx-border-color : #787878;
+-fx-text-fill: #000000;
+-fx-background-radius : 15;
+-fx-border-radius : 15;
+-fx-effect: dropshadow( one-pass-box ,  #000000 , 20 , 0.0 , 3 , 1 );
+}
+
+.DatePicker{
+-fx-background-color : #CCF3FF;
+}
+
+.Button, ToggleButton{
+-fx-background-color : #8D8D8D;
+-fx-border-color : #000000;
+-fx-background-radius : 12;
+-fx-border-radius : 12;
+-fx-effect: dropshadow( one-pass-box ,  #000000 , 20 , 0.0 , 3 , 1 );
+}
+
+.Button:hover,ToggleButton:hover{
+-fx-background-color : #6F9CAA;
+-fx-effect: dropshadow( one-pass-box ,  #8C00FF , 20 , 0.0 , 3 , 1 );
+}
+
+.Button:pressed,ToggleButton:pressed{
+-fx-background-color : #6F9CAA;
+-fx-translate-y : 4px ;
+-fx-effect: dropshadow( one-pass-box ,  #8C00FF , 20 , 0.0 , 3 , 1 );
+}
+
+.RadioButton, CheckBox{
+-fx-background-color : inherited;
+-fx-border-color : inherited;
+-fx-background-radius : 12;
+-fx-border-radius : 12;
+-fx-effect: dropshadow( one-pass-box ,  #000000 , 5 , 0.0 , 1 , 1 );
+-fx-pref-height : 25 ;
+}
+
+.RadioButton:hover , CheckBox:hover{
+-fx-background-color : #6F9CAA;
+-fx-effect: dropshadow( one-pass-box ,  #8C00FF , 20 , 0.0 , 3 , 1 );
+}
+
+.TextField{
+}
+
+.Slider{
+}
