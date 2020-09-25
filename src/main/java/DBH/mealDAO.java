@@ -97,6 +97,20 @@ public class mealDAO implements JPQLHandler {
         ps.executeUpdate();
         ps.close();
     }
+
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from meal";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
+
+
+
     @Override
     public void SelectQuery() {
 

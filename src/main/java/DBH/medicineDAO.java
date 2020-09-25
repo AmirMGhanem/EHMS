@@ -112,12 +112,19 @@ public class medicineDAO {
         return list;
     }
 
-
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from medicine";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
 
     public ArrayList<String> MedicinesPDF() throws SQLException {
         ArrayList<String> list = new ArrayList<String>();
-
-
 
         String sql = "select * from medicine";
         PreparedStatement ps = con.prepareStatement(sql);

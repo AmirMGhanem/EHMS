@@ -83,6 +83,17 @@ public class meetingDAO {
         return list;
     }
 
+    public int getCount() throws SQLException {
+        int numberRow = 0;
+        String query = "select count(*) from meeting";
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            numberRow = rs.getInt("count(*)");
+        }
+        return numberRow;
+    }
+
 
     public Meeting selectLastRow() throws SQLException {
         Meeting m = null;

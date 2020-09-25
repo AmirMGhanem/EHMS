@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -221,6 +222,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
         int size = notificationArrayList.size();
         notificationArrayList = nDAO.selectAll();
+        Collections.reverse(notificationArrayList);
         notificationObservable.setAll(notificationArrayList);
         TableViewNotifications.setItems(notificationObservable);
         int highcount = 0;
