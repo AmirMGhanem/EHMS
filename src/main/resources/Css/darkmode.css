@@ -6,7 +6,13 @@
 }
 
 .chart-legend{
--fx-background-color: #5A5A5A;
+-fx-background-color: #59b7ff;
+-fx-text-fill : #ffffff;
+}
+
+.PieChart{
+-fx-background-color: #5a5a5a;
+-fx-text-fill : #ffffff;
 }
 
 .ListView{
@@ -19,9 +25,13 @@
 -fx-border-radius : 15;
 }
 
+.TabPane{
+-fx-background-color : #5A5A5A;
+}
+
 .Tab{
--fx-background-color : inherited;
--fx-border-color : inherited;
+-fx-background-color : #5A5A5A;;
+-fx-border-color : #FFFFFF;
 -fx-background-radius : 15;
 -fx-border-radius : 15;
 }
@@ -51,10 +61,17 @@
 .Pane{
 -fx-background-color : #5A5A5A;
 -fx-border-color : #FFFFFF;
--fx-effect: dropshadow( one-pass-box ,  #ffffff , 5 , 0.0 , 5 , 3 );
--fx-background-radius : 15;
 -fx-border-radius : 15;
+-fx-border-width :1px;
 }
+.ToolBar{
+-fx-background-color : #5A5A5A;
+-fx-border-color: #ffffff;
+}
+.HBox{
+-fx-effect: dropshadow( one-pass-box ,  #ffffff , 5 , 0.0 , 5 , 3 );
+}
+
 
 .TopPane{
 -fx-background-color : #5A5A5A;
@@ -115,4 +132,16 @@
 }
 
 .ImageView{
+}
+
+
+
+.Separator{
+-fx-background-color : #ffffff;
+}.Separator{
+-fx-background-color : #ffffff;
+}
+
+.VBox{
+-fx-background-color : #5A5A5A;
 }

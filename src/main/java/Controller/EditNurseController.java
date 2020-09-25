@@ -98,23 +98,7 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        FXMLLoader loader = new FXMLLoader();
-
-        try {
-            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
-
-            SettingsController settingsController = loader.getController();
-
-            if (settingsController.getToggleMode()) {
-                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
-                parent.getStylesheets().add(css);
-            } else {
-                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
-                parent.getStylesheets().add(css);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       CssStyler();
     }
 
 
@@ -132,5 +116,24 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
     @Override
     public void JavafxDiagramFill() {
 
+    }
+    private void CssStyler()
+    {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

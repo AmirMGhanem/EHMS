@@ -56,8 +56,8 @@
                   </Label>
                </children>
             </Pane>
-            <PieChart fx:id="PieChartRequests" layoutX="14.0" layoutY="406.0" prefHeight="190.0" prefWidth="358.0" styleClass="chart-legend" />
-            <PieChart fx:id="PieChartActive" layoutX="14.0" layoutY="604.0" prefHeight="190.0" prefWidth="358.0" styleClass="chart-legend" />
+            <PieChart fx:id="PieChartRequests" layoutX="14.0" layoutY="406.0" prefHeight="190.0" prefWidth="358.0" styleClass="PieChart" />
+            <PieChart fx:id="PieChartActive" layoutX="14.0" layoutY="604.0" prefHeight="190.0" prefWidth="358.0" styleClass="PieChart" />
             <Pane layoutX="1088.0" layoutY="621.0" prefHeight="150.0" prefWidth="159.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;" styleClass="Pane">
                <children>
                   <Label layoutX="30.0" layoutY="90.0" prefHeight="21.0" prefWidth="101.0" text="Active Patinet">

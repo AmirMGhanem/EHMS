@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -72,7 +73,9 @@ public class SettingsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        JavafxChoiceFill();
+
+
+            JavafxChoiceFill();
 
         if (flagtoggle == true) {
             SettingPanel.getStylesheets().clear();
@@ -172,6 +175,7 @@ public class SettingsController implements Initializable {
                     flagtoggle = false;
                     String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
                     SettingPanel.getStylesheets().add(css);
+
                 }
             }
         });

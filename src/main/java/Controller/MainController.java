@@ -4,15 +4,21 @@ import DBH.patientDAO;
 import DBH.therapistDAO;
 import Network.ApplicationNetwork;
 import Util.FxmlLoader;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -23,7 +29,12 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Clock;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainController implements Initializable {
@@ -72,7 +83,24 @@ public class MainController implements Initializable {
     private Button BtnExitProject;
     @FXML
     private Button BtnLogout;
+    @FXML
+    private Label LabelClock;
 
+
+    private void clockTicker() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),
+                new EventHandler() {
+                    @Override
+                    public void handle(Event event) {
+                        final Calendar cal = Calendar.getInstance();
+                        LabelClock.setText(sdf.format(cal.getTime()));
+                    }
+                }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
+    }
 
     @FXML
     void onClickBtnLogout() throws IOException {
@@ -86,7 +114,7 @@ public class MainController implements Initializable {
     @FXML
     void onClickBtnExitProject() throws IOException {
 
-        MainPaneController.TerminateThread();
+        //MainPaneController.TerminateThread();
         Platform.exit();
         System.exit(0);
     }
@@ -169,7 +197,6 @@ public class MainController implements Initializable {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("PatientManagementPane");
         BorderMainPane.setCenter(view);
-
     }
 
     @FXML
@@ -247,7 +274,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-
+        clockTicker();
         FxmlLoader object = new FxmlLoader();
         Pane view2 = null;
         try {
@@ -262,6 +289,17 @@ public class MainController implements Initializable {
 
     public void setCenter(Pane pane) {
         BorderMainPane.setCenter(pane);
+    }
+
+
+    public void DarkModeHandle() {
+        String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+        BorderMainPane.getStylesheets().add(css);
+    }
+
+    public void LightModeHandle() {
+        String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+        BorderMainPane.getStylesheets().add(css);
     }
 
 

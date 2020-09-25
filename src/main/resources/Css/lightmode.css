@@ -24,6 +24,10 @@
 -fx-border-width : 0.5;
 }
 
+.TabPane{
+
+}
+
 .label{
 }
 
@@ -33,7 +37,7 @@
 
 .Pane{
 -fx-border-color : #000000;
--fx-border-width : 1;
+-fx-border-width : 0;
 }
 
 .TopPane{
@@ -87,3 +91,11 @@
 
 .Slider{
 }
+
+.VBox{
+
+}
+
+.Separator{
+
+ }

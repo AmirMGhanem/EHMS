@@ -15,9 +15,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MealsController">
    <children>
-      <Pane layoutX="2.0" prefHeight="805.0" prefWidth="1264.0">
+      <Pane fx:id="parent" layoutX="2.0" prefHeight="805.0" prefWidth="1264.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <children>
-            <Pane layoutX="-5.0" layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+            <Pane layoutX="-5.0" layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" styleClass="TopPane">
                <children>
                   <Label alignment="CENTER" layoutX="15.0" layoutY="10.0" prefHeight="37.0" prefWidth="151.0" text="Meals" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -26,11 +26,11 @@
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="952.0" layoutY="126.0" prefHeight="235.0" prefWidth="194.0">
+            <Pane layoutX="952.0" layoutY="126.0" prefHeight="235.0" prefWidth="194.0" styleClass="Pane">
                <children>
-                  <Button fx:id="BtnAddMeal" layoutX="79.0" layoutY="159.0" mnemonicParsing="false" onAction="#OnClickAddMeal" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3bff00;" text="AddMeal" />
-                  <TextField fx:id="TextFieldAddMealName" layoutX="17.0" layoutY="86.0" promptText="Meal Name" />
-                  <TextField fx:id="TextFieldAddMealWeight" layoutX="17.0" layoutY="121.0" promptText="Meal Weight" />
+                  <Button fx:id="BtnAddMeal" layoutX="79.0" layoutY="159.0" mnemonicParsing="false" onAction="#OnClickAddMeal" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: #3bff00;" styleClass="Button" text="AddMeal" />
+                  <TextField fx:id="TextFieldAddMealName" layoutX="17.0" layoutY="86.0" promptText="Meal Name" styleClass="TextField" />
+                  <TextField fx:id="TextFieldAddMealWeight" layoutX="17.0" layoutY="121.0" promptText="Meal Weight" styleClass="TextField" />
                   <Label layoutX="39.0" layoutY="32.0" prefHeight="28.0" prefWidth="104.0" style="-fx-background-color: #59b7ff;" text="Add Meals:">
                      <font>
                         <Font size="19.0" />
@@ -38,17 +38,17 @@
                   </Label>
                </children>
             </Pane>
-            <TableView fx:id="TableMeals" layoutX="102.0" layoutY="387.0" prefHeight="407.0" prefWidth="367.0" style="-fx-border-color: #000000;">
+            <TableView fx:id="TableMeals" layoutX="102.0" layoutY="387.0" prefHeight="407.0" prefWidth="367.0" style="-fx-border-color: #000000;" styleClass="Table">
                <columns>
-                  <TableColumn fx:id="ColMealName" prefWidth="172.00001525878906" text="Meal" />
-                  <TableColumn fx:id="ColWeight" minWidth="0.0" prefWidth="112.0" text="Weight" />
+                  <TableColumn fx:id="ColMealName" prefWidth="172.00001525878906" styleClass="TableCol" text="Meal" />
+                  <TableColumn fx:id="ColWeight" minWidth="0.0" prefWidth="112.0" styleClass="TableCol" text="Weight" />
                  
                </columns>
             </TableView>
-            <TableView fx:id="TablePatient" layoutX="696.0" layoutY="387.0" prefHeight="407.0" prefWidth="367.0" style="-fx-border-color: #000000;">
+            <TableView fx:id="TablePatient" layoutX="696.0" layoutY="387.0" prefHeight="407.0" prefWidth="367.0" style="-fx-border-color: #000000;" styleClass="Table">
                <columns>
-                  <TableColumn fx:id="ColPatientid" prefWidth="201.5999755859375" text="Patientid" />
-                  <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="180.00006103515625" text="PatientName" />
+                  <TableColumn fx:id="ColPatientid" prefWidth="201.5999755859375" styleClass="TableCol" text="Patientid" />
+                  <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="180.00006103515625" styleClass="TableCol" text="PatientName" />
                </columns>
             </TableView>
             <ImageView fitHeight="142.0" fitWidth="216.0" layoutX="469.0" layoutY="482.0">
@@ -56,24 +56,24 @@
                   <Image url="@../Images/arrows.png" />
                </image>
             </ImageView>
-            <Button fx:id="BtnAttachMeal" layoutX="476.0" layoutY="659.0" mnemonicParsing="false" onAction="#onClickBtnAttachMeal" prefHeight="33.0" prefWidth="216.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Add Meal To Patient" />
-            <Button fx:id="BtnDetachMeal" layoutX="476.0" layoutY="419.0" mnemonicParsing="false" onAction="#onClickBtnDetachMeal" prefHeight="33.0" prefWidth="216.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Remove Meal From Patient" />
-            <ListView fx:id="ListViewMeals" layoutX="242.0" layoutY="157.0" prefHeight="200.0" prefWidth="670.0" />
-            <Pane layoutX="14.0" layoutY="126.0" prefHeight="235.0" prefWidth="194.0">
+            <Button fx:id="BtnAttachMeal" layoutX="476.0" layoutY="659.0" mnemonicParsing="false" onAction="#onClickBtnAttachMeal" prefHeight="33.0" prefWidth="216.0" styleClass="Button" text="Add Meal To Patient" />
+            <Button fx:id="BtnDetachMeal" layoutX="476.0" layoutY="419.0" mnemonicParsing="false" onAction="#onClickBtnDetachMeal" prefHeight="33.0" prefWidth="216.0" styleClass="Button" text="Remove Meal From Patient" />
+            <ListView fx:id="ListViewMeals" layoutX="242.0" layoutY="157.0" prefHeight="200.0" prefWidth="670.0" styleClass="ListView" />
+            <Pane layoutX="14.0" layoutY="126.0" prefHeight="235.0" prefWidth="194.0" styleClass="Pane">
                <children>
                   <Label layoutX="21.0" layoutY="68.0" prefHeight="18.0" prefWidth="71.0" text="Elderly ID :" />
-                  <TextField fx:id="TextFieldID" layoutX="21.0" layoutY="104.0" onAction="#onEnter" />
+                  <TextField fx:id="TextFieldID" layoutX="21.0" layoutY="104.0" onAction="#onEnter" styleClass="TextField" />
                   <Label layoutX="21.0" layoutY="138.0" prefHeight="18.0" prefWidth="71.0" text="Meal :" />
-                  <ChoiceBox fx:id="ChoiceMeal" layoutX="20.0" layoutY="167.0" onAction="#OnSelectMealName" prefWidth="150.0" />
+                  <ChoiceBox fx:id="ChoiceMeal" layoutX="20.0" layoutY="167.0" onAction="#OnSelectMealName" prefWidth="150.0" styleClass="Choice" />
                   <Label alignment="CENTER" layoutX="40.0" layoutY="3.0" prefHeight="28.0" prefWidth="104.0" style="-fx-background-color: #59b7ff;" text="Search">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Label>
-                  <Button fx:id="BtnShowAll" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" onAction="#onClickBtnShowAll" prefHeight="29.0" prefWidth="87.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Show All" />
+                  <Button fx:id="BtnShowAll" layoutX="43.0" layoutY="200.0" mnemonicParsing="false" onAction="#onClickBtnShowAll" prefHeight="29.0" prefWidth="87.0" styleClass="Button" text="Show All" />
                </children>
             </Pane>
-            <Button fx:id="BtnDeleteMeal" layoutX="476.0" layoutY="746.0" mnemonicParsing="false" onAction="#onClickBtnDeleteMeal" prefHeight="33.0" prefWidth="216.0" style="-fx-background-color: #ff1216; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Delete Meal " />
+            <Button fx:id="BtnDeleteMeal" layoutX="476.0" layoutY="746.0" mnemonicParsing="false" onAction="#onClickBtnDeleteMeal" prefHeight="33.0" prefWidth="216.0" style="-fx-background-color: #ff1216;" styleClass="Button" text="Delete Meal " />
          </children>
       </Pane>
    </children>

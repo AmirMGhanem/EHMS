@@ -11,6 +11,7 @@ import Util.FilesHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -18,6 +19,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
 
 import javax.swing.*;
@@ -52,6 +54,10 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
     BarChart.Data allergydata;
     BarChart.Data meetingdata;
     BarChart.Data mealdata;
+
+
+    @FXML
+    private Pane parent;
 
     @FXML
     private Button BtnPrint;
@@ -151,6 +157,7 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
             }
     }
 
+
     @FXML
     void OnClickToFile(ActionEvent event) throws IOException {
         Util.FilesHandler fh = new FilesHandler();
@@ -179,6 +186,7 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
             e.printStackTrace();
         }
 
+        CssStyler();
 
     }
 
@@ -251,5 +259,26 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
 
     }
 
+
+    private void CssStyler()
+    {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

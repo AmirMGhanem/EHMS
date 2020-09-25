@@ -15,11 +15,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 
 import javax.imageio.ImageIO;
@@ -52,6 +54,8 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     ObservableList<patient_allergy> paObservablelist = FXCollections.observableArrayList();
     DBH.patient_allergyDAO paDAO = new patient_allergyDAO();
 
+    @FXML
+    private Pane parent;
 
     @FXML
     private ChoiceBox<String> ChoicePatient;
@@ -236,8 +240,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             }
         }
 
-        if(flag==true)
-        {
+        if (flag == true) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();
@@ -395,6 +398,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            CssStyler();
             TableInit();
             JavafxDiagramFill();
             DBH.patientDAO PDH = new DBH.patientDAO();
@@ -437,12 +441,12 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     @FXML
     public void onSelectPatient(ActionEvent event) throws SQLException {
 
-        String name ="";
+        String name = "";
         for (Patient p : Patients) {
             if (p.getName().equals(ChoicePatient.getValue())) {
                 LabelPatientID.setText(p.getID());
                 LabelLoadUpdate.setText("Loaded");
-                name=p.getName();
+                name = p.getName();
             }
         }
 
@@ -486,5 +490,24 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         ChoicePatient.getSelectionModel().select(-1);
         ChoicePatient.setValue(name);
 
+    }
+
+    private void CssStyler() {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

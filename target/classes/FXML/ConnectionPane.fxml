@@ -12,9 +12,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ConnectionController">
    <children>
-      <Pane layoutX="2.0" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
+      <Pane fx:id="parent" layoutX="2.0" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <children>
-            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" styleClass="TopPane">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="269.0" text="Connection" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -38,25 +38,24 @@
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="BtnRegister" layoutX="641.0" layoutY="645.0" mnemonicParsing="false" onAction="#OnClickBtnRegister" text="Register" />
-            <Separator layoutX="64.0" layoutY="326.0" prefHeight="0.0" prefWidth="1091.0" />
-            <TextField fx:id="TextFieldRegisterUser" layoutX="198.0" layoutY="197.0" />
-            <TextField fx:id="TextFieldRegisterPass" layoutX="198.0" layoutY="235.0" />
-            <TextField fx:id="TextFieldRegisterID" layoutX="198.0" layoutY="273.0" />
-            <Button fx:id="BtnCheck" layoutX="585.0" layoutY="645.0" mnemonicParsing="false" onAction="#OnClickBtnCheck" text="Check" />
-            <TabPane layoutX="64.0" layoutY="345.0" prefHeight="220.0" prefWidth="700.0" style="-fx-border-color: #59b7ff #59b7ff;" tabClosingPolicy="UNAVAILABLE">
+            <Button fx:id="BtnRegister" layoutX="641.0" layoutY="645.0" mnemonicParsing="false" onAction="#OnClickBtnRegister" styleClass="Button" text="Register" />
+            <Separator layoutX="64.0" layoutY="326.0" prefHeight="0.0" prefWidth="1091.0" styleClass="Separator" />
+            <TextField fx:id="TextFieldRegisterUser" layoutX="198.0" layoutY="197.0" styleClass="TextField" />
+            <TextField fx:id="TextFieldRegisterPass" layoutX="198.0" layoutY="235.0" styleClass="TextField" />
+            <TextField fx:id="TextFieldRegisterID" layoutX="198.0" layoutY="273.0" styleClass="TextField" />
+            <Button fx:id="BtnCheck" layoutX="585.0" layoutY="645.0" mnemonicParsing="false" onAction="#OnClickBtnCheck" styleClass="Button" text="Check" />
+            <TabPane layoutX="64.0" layoutY="345.0" prefHeight="220.0" prefWidth="700.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab text="Database">
+                  <Tab styleClass="Tab" text="Database">
                      <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
+                        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="Pane">
                            <children>
                               <Label layoutX="48.0" layoutY="79.0" prefHeight="21.0" prefWidth="76.0" text="Username :" />
                               <Label layoutX="48.0" layoutY="113.0" prefHeight="21.0" prefWidth="110.0" text="Password :" />
-                              <TextField fx:id="TextFieldUserName" layoutX="144.0" layoutY="74.0" prefHeight="27.0" prefWidth="131.0" />
-                              <TextField fx:id="TextFieldPassword" layoutX="144.0" layoutY="108.0" prefHeight="27.0" prefWidth="131.0" />
-                              <Button fx:id="BtnEstablishConnection" layoutX="438.0" layoutY="111.0" mnemonicParsing="false" onAction="#OnClickEstablishConn" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-background-radius: 25; -fx-border-radius: 25;" styleClass="Button" stylesheets="@../Css/css.css" text="Establish Connection" textFill="WHITE" />
+                              <TextField fx:id="TextFieldUserName" layoutX="144.0" layoutY="74.0" prefHeight="27.0" prefWidth="131.0" styleClass="TextField" />
+                              <TextField fx:id="TextFieldPassword" layoutX="144.0" layoutY="108.0" prefHeight="27.0" prefWidth="131.0" styleClass="TextField" />
                               <Label layoutX="48.0" layoutY="44.0" prefHeight="21.0" prefWidth="96.0" text="Database  name:" />
-                              <TextField fx:id="TextFieldDataBase" layoutX="144.0" layoutY="39.0" prefHeight="27.0" prefWidth="131.0" />
+                              <TextField fx:id="TextFieldDataBase" layoutX="144.0" layoutY="39.0" prefHeight="27.0" prefWidth="131.0" styleClass="TextField" />
                            </children>
                         </Pane>
                      </content>

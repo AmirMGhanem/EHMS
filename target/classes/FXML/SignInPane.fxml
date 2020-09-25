@@ -14,9 +14,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SignInPaneController">
    <children>
-      <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
+      <Pane fx:id="parent" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <children>
-            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" styleClass="TopPane">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="395.0" text="Login And Admin Panel" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -45,7 +45,7 @@
                   </Label>
                   <TextField fx:id="TextFieldUsername" layoutX="178.0" layoutY="87.0" />
                   <PasswordField fx:id="TextFieldPassword" layoutX="177.0" layoutY="127.0" />
-                  <CheckBox fx:id="CheckBoxIsAdmin" layoutX="177.0" layoutY="162.0" mnemonicParsing="false" text="Check if Yes">
+                  <CheckBox fx:id="CheckBoxIsAdmin" layoutX="177.0" layoutY="162.0" mnemonicParsing="false" styleClass="CheckBox" text="Check if Yes">
                      <font>
                         <Font name="System Bold Italic" size="17.0" />
                      </font>

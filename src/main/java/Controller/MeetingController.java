@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -43,6 +44,8 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     DBH.patient_meetingDAO pmdo = new patient_meetingDAO();
 
 
+
+    @FXML private Pane parent;
     @FXML
     private DatePicker DatePicker;
 
@@ -484,6 +487,7 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
             TableInit();
             JavafxChoiceFill();
             listinit();
+            CssStyler();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -541,5 +545,25 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     @Override
     public void JavafxDiagramFill() throws IOException {
 
+    }
+
+    private void CssStyler() {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
