@@ -91,8 +91,6 @@ public class patientDAO {
     public ArrayList<Patient> selectAll() throws SQLException {
         ArrayList<Patient> list = new ArrayList<Patient>();
 
-        System.out.println(list);
-
         String sql = "select * from address , person , patient where address.addresscode = person.address and person.id = patient.id";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -103,7 +101,6 @@ public class patientDAO {
             list.add(p);
         }
 
-        System.out.println(list);
 
         ps.close();
         rs.close();
@@ -111,14 +108,15 @@ public class patientDAO {
         return list;
     }
 
-    public void Updateherapist(Patient p) throws SQLException {
+    public void UpdatePatient(Patient p) throws SQLException {
 
 
-        String sql1 = "update person SET name = ?, contactno=?";
+        String sql1 = "update person SET name = ?, contactno=? where id=?";
         PreparedStatement ps = con.prepareStatement(sql1);
 
         ps.setString(1, p.getName());
         ps.setString(2,p.getContactNo());
+        ps.setString(3,p.getID());
         int rows = ps.executeUpdate();
         ps.close();
 
@@ -132,6 +130,8 @@ public class patientDAO {
 
         rows = ps.executeUpdate();
         ps.close();
+
+
     }
 
 }

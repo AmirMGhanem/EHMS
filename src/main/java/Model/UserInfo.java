@@ -5,7 +5,7 @@ import java.util.Objects;
 public class UserInfo {
     private String username;
     private String password;
-    private String patientID;
+    private DatabaseConnectingInfo databaseConnectingInfo;
 
     public UserInfo() {
     }
@@ -18,7 +18,7 @@ public class UserInfo {
     public UserInfo(String username, String password, String patientID) {
         this.username = username;
         this.password = password;
-        this.patientID = patientID;
+
     }
 
     public String getUsername() {
@@ -37,21 +37,17 @@ public class UserInfo {
         this.password = password;
     }
 
-    public String getPatientID() {
-        return patientID;
+    public DatabaseConnectingInfo getDatabaseConnectingInfo() {
+        return databaseConnectingInfo;
     }
 
-    public void setPatientID(String patientID) {
-        this.patientID = patientID;
+    public void setDatabaseConnectingInfo(DatabaseConnectingInfo databaseConnectingInfo) {
+        this.databaseConnectingInfo = databaseConnectingInfo;
     }
-
-
-
-
-
-
 
 //-------------Equals And Hash Code-------------------
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,20 +55,20 @@ public class UserInfo {
         UserInfo userInfo = (UserInfo) o;
         return Objects.equals(username, userInfo.username) &&
                 Objects.equals(password, userInfo.password) &&
-                Objects.equals(patientID, userInfo.patientID);
+                Objects.equals(databaseConnectingInfo, userInfo.databaseConnectingInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, patientID);
+        return Objects.hash(username, password, databaseConnectingInfo);
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserInfo{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", patientID='" + patientID + '\'' +
+                ", databaseConnectingInfo=" + databaseConnectingInfo +
                 '}';
     }
 }

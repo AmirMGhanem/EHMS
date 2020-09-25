@@ -6,6 +6,8 @@ import DBH.personDAO;
 import DBH.therapistDAO;
 import Model.Address;
 import Model.Patient;
+import Model.Therapist;
+import Util.MessageAlerter;
 import com.mysql.cj.exceptions.CJConnectionFeatureNotAvailableException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,12 +24,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AddPatientController implements Initializable,Util.JavafxPaneHandler {
+public class AddPatientController implements Initializable, Util.JavafxPaneHandler {
 
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
-
-
 
     @FXML private TextField TextFieldFirstName;
     @FXML private TextField TextFieldLastName;
@@ -38,37 +38,77 @@ public class AddPatientController implements Initializable,Util.JavafxPaneHandle
     @FXML private TextField TextFieldCity;
     @FXML private TextField TextFieldStreet;
     @FXML private TextField TextFieldHouseNum;
-    @FXML private ChoiceBox<?> ChoiceMedicine;
-    @FXML private TextField TextFieldAllergyName;
     @FXML private TextField TextFieldAddressCode;
     @FXML private ChoiceBox<?> Choice3DigitsNum;
     @FXML private Button BtnAdd;
+    @FXML private Button BtnClear;
 
+    MessageAlerter ma = new MessageAlerter();
 
     @FXML
-    void OnClckBtnAdd(ActionEvent event) throws IOException, SQLException {
-        Patient p = new Patient();
+    void OnClickBtnClear(ActionEvent event) {
+        TextFieldFirstName.setText("");
+        TextFieldLastName.setText("");
+        TextFieldID.setText("");
+        TextFieldContactNum.setText("");
+        TextFieldCity.setText("");
+        TextFieldStreet.setText("");
+        TextFieldHouseNum.setText("");
+        TextFieldAddressCode.setText("");
+    }
 
-        p.setID(TextFieldID.getText());
-        p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-        p.setGender(ChoiceGender.getValue().toString());
-        String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
-        p.setContactNo(ContactNum);
+    @FXML
+    void OnClickBtnAdd(ActionEvent event) throws IOException, SQLException {
+        String MessageInformation = "" ;
 
-        Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()),TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-        p.setAddress(address);
+        if((TextFieldID.getLength() == 0) || (TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) ||  (DatePickerBirthDate.getValue() == null) || (Choice3DigitsNum.getValue() == null) || (TextFieldContactNum.getLength() == 0) || (TextFieldAddressCode.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0)  || (TextFieldHouseNum.getLength() == 0)){
+            MessageInformation += "Messing Information : \n" ;
+            if(TextFieldFirstName.getLength() == 0)  MessageInformation +=  "* First Name \n";
+            if(TextFieldLastName.getLength() == 0)  MessageInformation += "* Last Name \n";
+            if(TextFieldID.getLength() == 0) MessageInformation += "* ID \n";
+            if(DatePickerBirthDate.getValue() == null) MessageInformation += "* Birth Date \n";
+            if(Choice3DigitsNum.getValue() == null) MessageInformation += "* 3 Digit Contact Number \n" ;
+            if(TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
+            if(TextFieldAddressCode.getLength() == 0)  MessageInformation += "* Address Code \n";
+            if(TextFieldCity.getLength() == 0)  MessageInformation += "* City \n";
+            if(TextFieldStreet.getLength() == 0)  MessageInformation += "* Street \n";
+            if(TextFieldHouseNum.getLength() == 0)  MessageInformation += "* House Number \n";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        }
 
-        java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
-        p.setDate(sqlDate);
+        else{
+            MessageInformation += "Patient Added Successfully :)" ;
+            Therapist t = new Therapist();
 
-        System.out.println("TEST "+p.toString());
+            Patient p = new Patient();
 
-        DBH.adressDAO ado = new adressDAO();
-        DBH.personDAO pdo = new personDAO();
-        DBH.patientDAO papo = new patientDAO();
-        ado.insertAddress(address);
-        pdo.insertperson(p);
-        papo.insertPatient(p);
+            p.setID(TextFieldID.getText());
+            p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+            p.setGender(ChoiceGender.getValue().toString());
+            String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
+            p.setContactNo(ContactNum);
+
+            Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+            p.setAddress(address);
+
+            java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
+            p.setDate(sqlDate);
+
+            System.out.println("TEST " + p.toString());
+
+            DBH.adressDAO ado = new adressDAO();
+            DBH.personDAO pdo = new personDAO();
+            DBH.patientDAO papo = new patientDAO();
+            ado.insertAddress(address);
+            pdo.insertperson(p);
+            papo.insertPatient(p);
+
+            ma.MessageWithoutHeader("Added", MessageInformation);
+        }
+
+
+
+
     }
 
     //Overrided by implementing Initializable

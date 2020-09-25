@@ -1,8 +1,10 @@
 package Controller;
 
 import DBH.*;
+import Model.Allergy;
 import Model.Medicine;
 import Model.Patient;
+import Util.MessageAlerter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +22,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.String.valueOf;
 
-public class MedicineCRUDController implements Initializable,Util.JavafxPaneHandler {
+public class MedicineCRUDController implements Initializable, Util.JavafxPaneHandler {
 
     @FXML private ChoiceBox<String> ChoiceAddPatientsID;
     @FXML private TextField TextFieldAddName;
@@ -44,102 +46,187 @@ public class MedicineCRUDController implements Initializable,Util.JavafxPaneHand
     @FXML private TextField TextFieldEditNewMedicineNum;
     @FXML private TextField TextFieldRemoveMedicineNum;
     @FXML private ChoiceBox<String> ChoiceRemovePatientID;
+    @FXML private TextField TextFieldAddAllergyName;
+    @FXML private ChoiceBox<?> ChoiceAdddAllergyMedName;
+    @FXML private Button BtnAddAllergy;
+    @FXML private Button BtnEditAllergySubmit;
+    @FXML private ChoiceBox<?> ChoiceEditAllergyName;
+    @FXML private TextField TextFieldNewAllergyName;
+    @FXML private TextField TextFieldEditAllergyMedName;
+    @FXML private TextField TextFieldEditAllergyMedNum;
+    @FXML private ChoiceBox<?> ChoiceNewAllergyMedicine;
 
     DBH.medicineDAO mbh = new DBH.medicineDAO();
+    DBH.AllergyDAO Ado = new AllergyDAO();
+    ObservableList medicineObservableList = FXCollections.observableArrayList();
+    ArrayList<Medicine> MedicineArrayList = new ArrayList<Medicine>();
+    ObservableList allergyOvservableList = FXCollections.observableArrayList();
+    ArrayList<Allergy> allergyArrayList = new ArrayList<Allergy>();
 
-    @FXML public void onEnterE(ActionEvent ae) throws SQLException {
+    MessageAlerter ma = new MessageAlerter();
 
+    @FXML
+    public void onEnterE(ActionEvent ae) throws SQLException {
         ArrayList<Medicine> mlist = new ArrayList<Medicine>();
         int medicineNum = Integer.parseInt(TextFieldEditMedicineNum.getText());
         ObservableList list = FXCollections.observableArrayList();
-
+        ChoiceEditCurrType.getItems().clear();
+        ChoiceEditCurrName.getItems().clear();
+        list.clear();
         mlist = mbh.selectAll();
-
-        for(Medicine m : mlist){
-            if(medicineNum == m.getMedicineNum()) {
+        for (Medicine m : mlist) {
+            if (medicineNum == m.getMedicineNum()) {
                 list.add(m.getName());
                 ChoiceEditCurrType.getItems().add(m.getType());
             }
         }
-
         ChoiceEditCurrName.getItems().addAll(list);
-
-        ChoiceNewEditPatientID.getItems().add(ChoiceEditPatientID.getValue());
         TextFieldEditNewMedicineNum.setText(TextFieldEditMedicineNum.getText());
+        TextFieldEditNewMedicineNum.setEditable(false);
+        TextFieldEditNewMedicineNum.setDisable(true);
     }
-
-
-    @FXML
-    void onEnterR(ActionEvent event) throws SQLException {
-
-        ArrayList<Medicine> mlist = new ArrayList<Medicine>();
-        int medicineNum = Integer.parseInt(TextFieldRemoveMedicineNum.getText());
-        ObservableList list = FXCollections.observableArrayList();
-
-        mlist = mbh.selectAll();
-
-        for(Medicine m : mlist){
-            if(medicineNum == m.getMedicineNum()){
-                ChoiceRemoveName.getItems().add(m.getName());
-            }
-        }
-    }
-
 
     @FXML
     void OnClickBtnAdd(ActionEvent event) throws SQLException {
+        String MessageInformation = "";
 
-        Medicine m = new Medicine();
+        if((TextFieldAddName.getLength() == 0) || (ChoiceAddType.getValue() == null)){
+            MessageInformation += "Missing Information :" ;
+            if(TextFieldAddName.getLength()==0) MessageInformation += "\n * Medicine Name";
+            if(ChoiceAddType.getValue() == null) MessageInformation += "\n * Medicine Type";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        }
+        else{
+            Medicine m = new Medicine();
+            m.setName(TextFieldAddName.getText());
+            m.setType(ChoiceAddType.getValue());
+            mbh.insertMedicine(m);
 
-        m.setMedicineNum(Integer.parseInt(TextFieldMedicineNum.getText()));
-        m.setName(TextFieldAddName.getText());
-        m.setType(ChoiceAddType.getValue());
-        m.setTimesPerDay(AddTimesPerDay.getValue());
-
-        DBH.medicineDAO mdo = new medicineDAO();
-        mdo.insertMedicine(m);
-
-        DBH.patient_medicineDAO pmdo = new patient_medicineDAO();
-
-
-        pmdo.insertToPatient_Medicine(ChoiceAddPatientsID.getValue().toString() , m.getMedicineNum());
-
-        System.out.println(m.toString());
+            MessageInformation += "Medicine Added Successfully :)" ;
+            ma.MessageWithoutHeader("Added", MessageInformation);
+        }
     }
 
     @FXML
     void OnClickBtnEditSubmit(ActionEvent event) throws SQLException {
-        Medicine m = new Medicine();
+        String MessageInformation = "";
 
-        m.setMedicineNum(Integer.parseInt(TextFieldEditMedicineNum.getText()));
-        m.setName(EditNewName.getText());
-        m.setType(ChoiceEditNewType.getValue().toString());
-        m.setTimesPerDay(EditNewTimesPerDay.getValue());
+        if((TextFieldEditMedicineNum.getLength()==0) || (ChoiceEditCurrName.getValue()==null) || (ChoiceEditCurrType.getValue()==null) || (TextFieldEditNewMedicineNum.getLength()==0) || (EditNewName.getLength()==0) || (ChoiceEditNewType.getValue()==null)){
+            MessageInformation += "Missing Information ";
 
-        DBH.medicineDAO mdo = new medicineDAO();
-        mdo.UpdateMedicine(m);
-    }
+            if(TextFieldEditMedicineNum.getLength()==0) MessageInformation += "\n * Medicine Num";
+             if(ChoiceEditCurrName.getValue()==null) MessageInformation += "\n * Medidine Name" ;
+             if(ChoiceEditCurrType.getValue()==null) MessageInformation += "\n * Medicine Type";
+             if(TextFieldEditNewMedicineNum.getLength()==0) MessageInformation += "\n * Medicine New num";
+             if(EditNewName.getLength()==0) MessageInformation += "\n * Medidine New Name" ; ;
+             if(ChoiceEditNewType.getValue()==null) MessageInformation += "\n * Medicine New Type";;
 
-    @FXML
-    void OnClickBtnRemove(ActionEvent event) throws SQLException {
+             ma.ShowErrorMessage("Unexpected Error", "Fail To Add", MessageInformation);
+        }
+        else{
+            Medicine m = new Medicine();
+            m.setMedicineNum(Integer.parseInt(TextFieldEditMedicineNum.getText()));
+            m.setName(EditNewName.getText());
+            m.setType(ChoiceEditNewType.getValue().toString());
+            m.setTimesPerDay(EditNewTimesPerDay.getValue());
+            mbh.UpdateMedicine(m);
 
-        DBH.patient_medicineDAO pmdo = new DBH.patient_medicineDAO();
-        pmdo.removeByMedicineNum(Integer.parseInt(TextFieldRemoveMedicineNum.getText()));
-
-        DBH.medicineDAO mdo = new medicineDAO();
-        mdo.removeMedicineByID(Integer.parseInt(TextFieldRemoveMedicineNum.getText()));
+            MessageInformation += "Medicine Edited Successfullt :)";
+            ma.MessageWithoutHeader("Edited", MessageInformation);
+        }
     }
 
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            MedicineArrayList = mbh.selectAll();
+            allergyArrayList = Ado.selectAll();
             JavafxChoiceFill();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public void initializeManual() throws SQLException {
+        MedicineArrayList = mbh.selectAll();
+        allergyArrayList = Ado.selectAll();
+        medicineObservableList.clear();
+        allergyOvservableList.clear();
+
+        for (Medicine m : MedicineArrayList)
+            medicineObservableList.add(m.getName());
+        for (Allergy a : allergyArrayList)
+            allergyOvservableList.add(a.getName());
+    }
+
+    @FXML
+    private void OnSelectAllergyName(ActionEvent event) throws SQLException {
+        String selectedItem = ChoiceEditAllergyName.getSelectionModel().getSelectedItem().toString();
+        for (Allergy a : allergyArrayList) {
+            if (a.getName().equals(selectedItem)) {
+                TextFieldEditAllergyMedName.setText(a.getMedicines().getName());
+                TextFieldEditAllergyMedNum.setText(Integer.toString(a.getMedicines().getMedicineNum()));
+                TextFieldNewAllergyName.setText(selectedItem);
+            }
+        }
+    }
+
+    @FXML
+    void OnClickBtnAddAllergy(ActionEvent event) throws SQLException {
+        String MessageInformation = "";
+
+        if((TextFieldAddAllergyName.getLength() == 0) || (ChoiceAdddAllergyMedName.getValue() == null)){
+            MessageInformation += "Missing Information :" ;
+            if(TextFieldAddAllergyName.getLength()==0) MessageInformation += "\n * Allergy Name";
+            if(ChoiceAdddAllergyMedName.getValue() == null) MessageInformation += "\n * Medicine Name";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        }
+        else{
+            ArrayList<Medicine> mlist = new ArrayList<Medicine>();
+            mlist = mbh.selectAll();
+            Allergy a = new Allergy();
+            a.setName(TextFieldAddAllergyName.getText());
+            for (Medicine m : mlist)
+                if (m.getName().equals(ChoiceAdddAllergyMedName.getValue()))
+                    a.setMedicines(m);
+
+            Ado.insertAllergy(a);
+            JavafxChoiceFill();
+
+            MessageInformation += "Allergy Added Successfully :)" ;
+            ma.MessageWithoutHeader("Added", MessageInformation);
+        }
+    }
+
+    @FXML
+    void OnClickBtnEditAllergySubmit(ActionEvent event) throws SQLException {
+        String MessageInformation = "";
+
+        if((ChoiceEditAllergyName.getValue()==null) || (TextFieldEditAllergyMedNum.getLength()==0) || (TextFieldEditAllergyMedName.getLength()==0) || (TextFieldNewAllergyName.getLength()==0) || (ChoiceNewAllergyMedicine.getValue()==null)){
+            MessageInformation += "Missing Information ";
+
+            if(ChoiceEditAllergyName.getValue()==null) MessageInformation += "\n * Allergy Name";
+            if(TextFieldEditAllergyMedNum.getLength()==0) MessageInformation += "\n * Medidine Num" ;
+            if(TextFieldEditAllergyMedName.getLength()==0) MessageInformation += "\n * Allergy Name";
+            if(TextFieldNewAllergyName.getLength()==0) MessageInformation += "\n * New Allergy Name";
+            if(ChoiceNewAllergyMedicine.getValue()==null) MessageInformation += "\n * New Medidine Name" ; ;
+
+            ma.ShowErrorMessage("Unexpected Error", "Fail To Add", MessageInformation);
+        }
+        else{
+            Allergy a = new Allergy();
+            a.setName(TextFieldNewAllergyName.getText());
+            for (Medicine m : MedicineArrayList)
+                if (m.getName().equals(ChoiceNewAllergyMedicine.getValue()))
+                    a.setMedicines(m);
+
+            Ado.UpdateAllergy(a, ChoiceEditAllergyName.getValue().toString());
+
+            MessageInformation += "Allergy Edited Successfullt :)";
+            ma.MessageWithoutHeader("Edited", MessageInformation);
+        }
+    }
 
     //Overrided by implementing JavafxPaneHandler
     @Override
@@ -150,33 +237,28 @@ public class MedicineCRUDController implements Initializable,Util.JavafxPaneHand
     @Override
     public void JavafxChoiceFill() throws SQLException {
         ObservableList TypeList = FXCollections.observableArrayList();
+        ChoiceAddType.getItems().clear();
+        ChoiceEditNewType.getItems().clear();
+        ChoiceAdddAllergyMedName.getItems().clear();
+        ChoiceEditAllergyName.getItems().clear();
+        ChoiceNewAllergyMedicine.getItems().clear();
+        TypeList.clear();
 
         String oi = "Ointment";
         String ca = "Capsules";
         String li = "Liquid";
         String po = "Powder";
-
         TypeList.addAll(oi, ca, li, po);
         ChoiceAddType.getItems().addAll(TypeList);
         ChoiceEditNewType.getItems().addAll(TypeList);
+        initializeManual();
+        ChoiceAdddAllergyMedName.getItems().addAll(medicineObservableList);
 
-        ObservableList IDList = FXCollections.observableArrayList();
-        DBH.patientDAO pdao = new DBH.patientDAO();
-        IDList = pdao.selectPatients();
-
-        Patient p = new Patient();
-
-        for(int i=0 ; i<IDList.size() ; i++){
-            p = (Patient) IDList.get(i);
-            ChoiceAddPatientsID.getItems().add(p.getID());
-            ChoiceEditPatientID.getItems().add(p.getID());
-            ChoiceRemovePatientID.getItems().add(p.getID());
-        }
+        ChoiceEditAllergyName.getItems().addAll(allergyOvservableList);
+        ChoiceNewAllergyMedicine.getItems().addAll(medicineObservableList);
     }
-
 
     @Override
     public void JavafxDiagramFill() {
-
     }
 }

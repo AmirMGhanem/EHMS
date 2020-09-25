@@ -10,10 +10,27 @@
 
 #notificationPanel
 {
-
 -fx-background-color : linear-gradient(#ffffff 25%, #ffcac9 50%,#ffffff 75%);
 }
+
+.label{
+
+}
+
+.date-picker{
+-fx-background-color : #000000;
+
+}
+
 .Button{
 	-fx-background-color : inherited;
 }
 
+
+
+.priorityrow{
+    -fx-background-color: brown;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: -fx-selection-bar-text
+}

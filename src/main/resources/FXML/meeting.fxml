@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MeetingController">
+   <children>
+      <Pane layoutX="1.0" layoutY="-1.0" prefHeight="805.0" prefWidth="1264.0">
+         <children>
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+               <children>
+                  <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="345.0" text="Meetings Panel" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold Italic" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <DatePicker fx:id="DatePicker" layoutX="793.0" layoutY="173.0" prefHeight="37.0" prefWidth="360.0" />
+            <Label layoutX="797.0" layoutY="149.0" prefHeight="17.0" prefWidth="191.0" text="Select New Date For Your Meeting" />
+            <Pane layoutX="835.0" layoutY="280.0" prefHeight="111.0" prefWidth="130.0" style="-fx-border-color: #000000; -fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="45.0" layoutY="25.0" prefHeight="27.0" prefWidth="34.0" text="HR" textFill="#00000099">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LabelHR" layoutX="45.0" layoutY="73.0" prefHeight="27.0" prefWidth="34.0" text="##" textFill="#00000099">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="998.0" layoutY="280.0" prefHeight="111.0" prefWidth="130.0" style="-fx-border-color: #000000; -fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="48.0" layoutY="28.0" prefHeight="31.0" prefWidth="48.0" text="MIN" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LabelMin" layoutX="48.0" layoutY="75.0" prefHeight="27.0" prefWidth="34.0" text="##" textFill="#00000099">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p11AM" layoutX="800.0" layoutY="464.0" onMouseClicked="#OnClickp11AM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="12.0" layoutY="11.0" prefHeight="31.0" prefWidth="68.0" text="11AM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p12PM" layoutX="896.0" layoutY="464.0" onMouseClicked="#OnClickp12PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="11.0" layoutY="11.0" prefHeight="31.0" prefWidth="58.0" text="12PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p1PM" layoutX="992.0" layoutY="464.0" onMouseClicked="#OnClickp1PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="1PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p2PM" layoutX="1088.0" layoutY="463.0" onMouseClicked="#OnClickp2PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="2PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p3PM" layoutX="801.0" layoutY="525.0" onMouseClicked="#OnClickp3PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="3PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p4PM" layoutX="897.0" layoutY="525.0" onMouseClicked="#OnClickp4PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="4PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p5PM" layoutX="992.0" layoutY="525.0" onMouseClicked="#OnClickp5PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="5PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p6PM" layoutX="1087.0" layoutY="525.0" onMouseClicked="#OnClickp6PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="6PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p7PM" layoutX="896.0" layoutY="585.0" onMouseClicked="#OnClickp7PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="7PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p8PM" layoutX="992.0" layoutY="585.0" onMouseClicked="#OnClickp8PM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="8PM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p7Am" layoutX="801.0" layoutY="404.0" onMouseClicked="#OnClickp7AM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="7AM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p8AM" layoutX="895.0" layoutY="403.0" onMouseClicked="#OnClickp8AM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="8AM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p9AM" layoutX="991.0" layoutY="403.0" onMouseClicked="#OnClickp9AM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="21.0" layoutY="11.0" prefHeight="31.0" prefWidth="48.0" text="9AM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p10AM" layoutX="1086.0" layoutY="403.0" onMouseClicked="#OnClickp10AM" prefHeight="48.0" prefWidth="87.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label layoutX="9.0" layoutY="11.0" prefHeight="31.0" prefWidth="68.0" text="10AM" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <TableView fx:id="TableMeeting" layoutX="216.0" layoutY="169.0" prefHeight="331.0" prefWidth="555.0">
+              <columns>
+                <TableColumn fx:id="ColNum" prefWidth="53.0" text="#" />
+                <TableColumn fx:id="ColName" prefWidth="97.0" text="Name" />
+                  <TableColumn prefWidth="97.0" text="Address">
+                     <columns>
+                        <TableColumn fx:id="ColCity" prefWidth="75.0" text="City" />
+                        <TableColumn fx:id="ColStreet" prefWidth="75.0" text="Street" />
+                        <TableColumn fx:id="ColHouseNum" prefWidth="75.0" text="HouseNum" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="ColDate" prefWidth="83.0" text="Date" />
+                  <TableColumn fx:id="ColTime" prefWidth="96.0" text="Time" />
+              </columns>
+            </TableView>
+            <Button fx:id="BtnAddMeeting" layoutX="926.0" layoutY="735.0" mnemonicParsing="false" onAction="#OnClickBtnAddMeeting" prefHeight="37.0" prefWidth="130.0" text="Add Meeting" />
+            <Label layoutX="22.0" layoutY="175.0" prefHeight="37.0" prefWidth="87.0" text="Patient">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="ChoicePatient" layoutX="64.0" layoutY="218.0" onAction="#onSelect" prefWidth="150.0" />
+            <Button fx:id="BtnDetach" layoutX="112.0" layoutY="290.0" mnemonicParsing="false" onAction="#OnClickBtnDetach" prefHeight="25.0" prefWidth="102.0" text="Detach" />
+            <Label fx:id="LabelPatientID" layoutX="54.0" layoutY="243.0" prefHeight="37.0" prefWidth="150.0" text="######" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="22.0" />
+               </font>
+            </Label>
+            <Button fx:id="BtnAttach" layoutX="14.0" layoutY="290.0" mnemonicParsing="false" onAction="#OnClickBtnAttach" prefHeight="25.0" prefWidth="102.0" text="Attach" />
+            <ListView fx:id="ListView" layoutX="38.0" layoutY="569.0" prefHeight="224.0" prefWidth="738.0" />
+            <Label layoutX="39.0" layoutY="539.0" prefHeight="25.0" prefWidth="405.0" text="On The Listview below - showing the meeting that attached to the patient" />
+            <Label fx:id="LabelUpdate" layoutX="57.0" layoutY="349.0" prefHeight="37.0" prefWidth="144.0">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="BtnRemove" layoutX="640.0" layoutY="507.0" mnemonicParsing="false" onAction="#OnClickBtnRemove" prefHeight="37.0" prefWidth="130.0" text="Remove" />
+            <TextField fx:id="TextFieldAddressCode" layoutX="828.0" layoutY="638.0" prefHeight="31.0" prefWidth="93.0" promptText="Address Code" />
+            <TextField fx:id="TextFieldCity" layoutX="941.0" layoutY="638.0" prefHeight="31.0" prefWidth="102.0" promptText="City" />
+            <TextField fx:id="TextFieldStreet" layoutX="941.0" layoutY="676.0" prefHeight="31.0" prefWidth="102.0" promptText="Street" />
+            <TextField fx:id="TextFieldHouseNum" layoutX="1061.0" layoutY="638.0" prefHeight="31.0" prefWidth="102.0" promptText="House Num" />
+            <TextField fx:id="TextFieldName" layoutX="790.0" layoutY="231.0" prefHeight="31.0" prefWidth="360.0" promptText="Meeting Name" />
+            <Pane fx:id="p00" layoutX="1132.0" layoutY="274.0" onMouseClicked="#OnClickp00" prefHeight="31.0" prefWidth="93.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label alignment="CENTER" layoutX="23.0" layoutY="3.0" prefHeight="31.0" prefWidth="48.0" text="00" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p15" layoutX="1132.0" layoutY="305.0" onMouseClicked="#OnClickp15" prefHeight="31.0" prefWidth="93.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label alignment="CENTER" layoutX="23.0" layoutY="3.0" prefHeight="31.0" prefWidth="48.0" text="15" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p30" layoutX="1132.0" layoutY="336.0" onMouseClicked="#OnClickp30" prefHeight="31.0" prefWidth="93.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label alignment="CENTER" layoutX="23.0" layoutY="3.0" prefHeight="31.0" prefWidth="48.0" text="30" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane fx:id="p45" layoutX="1132.0" layoutY="367.0" onMouseClicked="#OnClickp45" prefHeight="31.0" prefWidth="93.0" style="-fx-background-color: #a7a7a7;">
+               <children>
+                  <Label alignment="CENTER" layoutX="23.0" layoutY="3.0" prefHeight="31.0" prefWidth="48.0" text="45" textFill="#00000098">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Button fx:id="BtnShowAll" layoutX="502.0" layoutY="508.0" mnemonicParsing="false" onAction="#OnClickBtnShowAll" prefHeight="37.0" prefWidth="130.0" text="Show All Data" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

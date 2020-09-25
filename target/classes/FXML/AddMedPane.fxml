@@ -7,17 +7,17 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicineCRUDController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicineCRUDController">
    <children>
-      <Pane layoutX="2.0" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
+      <Pane layoutX="-24.0" layoutY="14.0" prefHeight="805.0" prefWidth="1264.0">
          <children>
-            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+            <Pane layoutX="19.0" layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="269.0" text="CRUD Medicine" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -28,43 +28,31 @@
             </Pane>
             <TabPane layoutX="41.0" layoutY="137.0" prefHeight="280.0" prefWidth="555.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Add">
+                <Tab text="Add Medicine">
                      <content>
                         <Pane prefHeight="239.0" prefWidth="361.0">
                            <children>
-                              <Label layoutX="33.0" layoutY="15.0" prefHeight="34.0" prefWidth="124.0" text="Patient ID :" textOverrun="CLIP">
+                              <Label layoutX="40.0" layoutY="60.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="ChoiceAddPatientsID" layoutX="160.0" layoutY="17.0" prefHeight="31.0" prefWidth="200.0" />
-                              <Label layoutX="33.0" layoutY="60.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Num :" textOverrun="CLIP">
+                              <TextField fx:id="TextFieldAddName" layoutX="167.0" layoutY="67.0" prefHeight="31.0" prefWidth="200.0" />
+                              <Label layoutX="38.0" layoutY="104.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Type" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="TextFieldMedicineNum" layoutX="160.0" layoutY="62.0" prefHeight="31.0" prefWidth="200.0" />
-                              <Label layoutX="33.0" layoutY="102.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
+                              <ChoiceBox fx:id="ChoiceAddType" layoutX="167.0" layoutY="111.0" prefHeight="31.0" prefWidth="200.0" />
+                              <Label layoutX="38.0" layoutY="152.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="TextFieldAddName" layoutX="160.0" layoutY="109.0" prefHeight="31.0" prefWidth="200.0" />
-                              <Label layoutX="31.0" layoutY="146.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Type" textOverrun="CLIP">
-                                 <font>
-                                    <Font name="Guttman Yad" size="17.0" />
-                                 </font>
-                              </Label>
-                              <ChoiceBox fx:id="ChoiceAddType" layoutX="160.0" layoutY="153.0" prefHeight="31.0" prefWidth="200.0" />
-                              <Label layoutX="31.0" layoutY="194.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
-                                 <font>
-                                    <Font name="Guttman Yad" size="17.0" />
-                                 </font>
-                              </Label>
-                              <Spinner fx:id="AddTimesPerDay" initialValue="5" layoutX="160.0" layoutY="199.0" max="10" min="0" prefHeight="31.0" prefWidth="200.0">
+                              <Spinner fx:id="AddTimesPerDay" initialValue="5" layoutX="167.0" layoutY="157.0" max="10" min="0" prefHeight="31.0" prefWidth="200.0">
                                  <editable>true</editable>
                               </Spinner>
-                              <Button fx:id="BtnAdd" layoutX="424.0" layoutY="109.0" mnemonicParsing="false" onAction="#OnClickBtnAdd" styleClass="Button" text="Add" />
+                              <Button fx:id="BtnAdd" layoutX="400.0" layoutY="199.0" mnemonicParsing="false" onAction="#OnClickBtnAdd" styleClass="Button" text="Add" />
                            </children>
                         </Pane>
                      </content>
@@ -73,62 +61,55 @@
             </TabPane>
             <TabPane layoutX="41.0" layoutY="435.0" prefHeight="320.0" prefWidth="555.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab text="Edit">
+                  <Tab text="Edit Medicine">
                      <content>
                         <Pane prefHeight="239.0" prefWidth="361.0">
                            <children>
-                              <Label layoutX="99.0" layoutY="-1.0" prefHeight="34.0" prefWidth="73.0" text="Current" textOverrun="CLIP">
+                              <Label layoutX="100.0" layoutY="19.0" prefHeight="34.0" prefWidth="73.0" text="Current" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="5.0" layoutY="40.0" prefHeight="34.0" prefWidth="124.0" text="Patient ID :" textOverrun="CLIP">
+                              <Label layoutX="12.0" layoutY="55.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Num :" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="ChoiceEditPatientID" layoutX="140.0" layoutY="42.0" prefWidth="150.0" />
-                              <Label layoutX="5.0" layoutY="74.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Num :" textOverrun="CLIP">
+                              <TextField fx:id="TextFieldEditMedicineNum" layoutX="147.0" layoutY="60.0" onAction="#onEnterE" prefHeight="31.0" prefWidth="150.0" />
+                              <Label layoutX="12.0" layoutY="92.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="TextFieldEditMedicineNum" layoutX="140.0" layoutY="79.0" onAction="#onEnterE" prefHeight="31.0" prefWidth="150.0" />
-                              <Label layoutX="5.0" layoutY="111.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
+                              <ChoiceBox fx:id="ChoiceEditCurrName" layoutX="147.0" layoutY="101.0" prefWidth="150.0" />
+                              <Label layoutX="14.0" layoutY="136.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Type" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="ChoiceEditCurrName" layoutX="140.0" layoutY="120.0" prefWidth="150.0" />
-                              <Label layoutX="5.0" layoutY="155.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Type" textOverrun="CLIP">
+                              <ChoiceBox fx:id="ChoiceEditCurrType" layoutX="147.0" layoutY="141.0" prefWidth="150.0" />
+                              <Label layoutX="12.0" layoutY="181.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="ChoiceEditCurrType" layoutX="140.0" layoutY="160.0" prefWidth="150.0" />
-                              <Label layoutX="5.0" layoutY="200.0" prefHeight="34.0" prefWidth="124.0" text="Times Per Day" textOverrun="CLIP">
-                                 <font>
-                                    <Font name="Guttman Yad" size="17.0" />
-                                 </font>
-                              </Label>
-                              <Spinner fx:id="EditCurrTimesPerDay" layoutX="140.0" layoutY="200.0" prefHeight="31.0" prefWidth="150.0" />
+                              <Spinner fx:id="EditCurrTimesPerDay" layoutX="147.0" layoutY="181.0" prefHeight="31.0" prefWidth="150.0" />
 
                               <Separator layoutX="313.0" layoutY="3.0" orientation="VERTICAL" prefHeight="228.0" prefWidth="7.0" />
-                              <Label layoutX="421.0" layoutY="-1.0" prefHeight="34.0" prefWidth="49.0" text="New" textOverrun="CLIP">
+                              <Label layoutX="421.0" layoutY="19.0" prefHeight="34.0" prefWidth="49.0" text="New" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="ChoiceNewEditPatientID" layoutX="345.0" layoutY="42.0" prefWidth="190.0" />
-                              <TextField fx:id="TextFieldEditNewMedicineNum" editable="false" layoutX="345.0" layoutY="79.0" prefHeight="31.0" prefWidth="190.0" />
+                              <TextField fx:id="TextFieldEditNewMedicineNum" editable="false" layoutX="352.0" layoutY="60.0" prefHeight="31.0" prefWidth="190.0" />
 
-                              <TextField fx:id="EditNewName" layoutX="345.0" layoutY="120.0" prefHeight="31.0" prefWidth="190.0" />
-                              <ChoiceBox fx:id="ChoiceEditNewType" layoutX="345.0" layoutY="160.0" prefHeight="31.0" prefWidth="190.0" />
+                              <TextField fx:id="EditNewName" layoutX="352.0" layoutY="101.0" prefHeight="31.0" prefWidth="190.0" />
+                              <ChoiceBox fx:id="ChoiceEditNewType" layoutX="352.0" layoutY="141.0" prefHeight="31.0" prefWidth="190.0" />
 
-                              <Spinner fx:id="EditNewTimesPerDay" initialValue="5" layoutX="345.0" layoutY="200.0" max="10" min="0" prefWidth="190.0">
+                              <Spinner fx:id="EditNewTimesPerDay" initialValue="5" layoutX="352.0" layoutY="181.0" max="10" min="0" prefWidth="190.0">
                               <editable>true</editable>
                               </Spinner>
-                              <Button fx:id="BtnEditSubmit" layoutX="257.0" layoutY="244.0" mnemonicParsing="false" onAction="#OnClickBtnEditSubmit" styleClass="Button" text="Submit" />
+                              <Button fx:id="BtnEditSubmit" layoutX="288.0" layoutY="242.0" mnemonicParsing="false" onAction="#OnClickBtnEditSubmit" styleClass="Button" text="Submit" />
                            </children>
                         </Pane>
                      </content>
@@ -137,45 +118,80 @@
             </TabPane>
             <TabPane layoutX="650.0" layoutY="137.0" prefHeight="280.0" prefWidth="555.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab text="Remove">
+                  <Tab text="Add Allergy">
                      <content>
                         <Pane prefHeight="239.0" prefWidth="361.0">
                            <children>
-                              <Label layoutX="20.0" layoutY="30.0" prefHeight="34.0" prefWidth="124.0" text="Patient ID :" textOverrun="CLIP">
+                              <Label layoutX="34.0" layoutY="67.0" prefHeight="34.0" prefWidth="104.0" text="Allergy Name" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="ChoiceRemovePatientID" layoutX="160.0" layoutY="30.0" prefWidth="150.0" />
-                              <Label layoutX="14.0" layoutY="99.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Num :" textOverrun="CLIP">
+                              <TextField fx:id="TextFieldAddAllergyName" layoutX="164.0" layoutY="71.0" prefHeight="31.0" prefWidth="190.0" />
+                              <Label layoutX="33.0" layoutY="116.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
                                  <font>
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="TextFieldRemoveMedicineNum" layoutX="160.0" layoutY="100.0" onAction="#onEnterR" prefHeight="31.0" prefWidth="150.0" />
-                              <Label layoutX="20.0" layoutY="170.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
-                                 <font>
-                                    <Font name="Guttman Yad" size="17.0" />
-                                 </font>
-                              </Label>
-                              <ChoiceBox fx:id="ChoiceRemoveName" layoutX="160.0" layoutY="170.0" prefWidth="150.0" />
-                              <Button fx:id="BtnRemove" layoutX="425.0" layoutY="100.0" mnemonicParsing="false" onAction="#OnClickBtnRemove" styleClass="Button" text="Remove" />
-                           </children>
-                        </Pane>
+                              <ChoiceBox fx:id="ChoiceAdddAllergyMedName" layoutX="165.0" layoutY="125.0" prefWidth="150.0" />
+                              <Button fx:id="BtnAddAllergy" layoutX="277.0" layoutY="195.0" mnemonicParsing="false" onAction="#OnClickBtnAddAllergy" styleClass="Button" text="Add" />
+                           </children></Pane>
                      </content>
                   </Tab>
                </tabs>
             </TabPane>
             <TabPane layoutX="650.0" layoutY="435.0" prefHeight="320.0" prefWidth="555.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Changes Log">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <Tab text="Edit Allergy">
+                     <content>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TextArea fx:id="TextArea" disable="true" layoutX="1.0" prefHeight="280.0" prefWidth="555.0" />
+                              <Label layoutX="77.0" layoutY="10.0" prefHeight="34.0" prefWidth="73.0" text="Current" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Separator layoutX="291.0" layoutY="2.0" orientation="VERTICAL" prefHeight="228.0" prefWidth="7.0" />
+                              <Label layoutX="399.0" layoutY="10.0" prefHeight="34.0" prefWidth="49.0" text="New" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="BtnEditAllergySubmit" layoutX="266.0" layoutY="253.0" mnemonicParsing="false" onAction="#OnClickBtnEditAllergySubmit" styleClass="Button" text="Submit" />
+                              <Label layoutX="14.0" layoutY="72.0" prefHeight="34.0" prefWidth="104.0" text="Allergy Name" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="ChoiceEditAllergyName" layoutX="142.0" layoutY="77.0" onAction="#OnSelectAllergyName" prefHeight="25.0" prefWidth="142.0" />
+                              <Label layoutX="298.0" layoutY="73.0" prefHeight="34.0" prefWidth="104.0" text="Allergy Name" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="TextFieldNewAllergyName" layoutX="414.0" layoutY="77.0" prefHeight="31.0" prefWidth="136.0" />
+                              <Label layoutX="11.0" layoutY="173.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Name" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="TextFieldEditAllergyMedName" editable="false" layoutX="143.0" layoutY="175.0" prefHeight="31.0" prefWidth="141.0" />
+                              <Label layoutX="13.0" layoutY="121.0" prefHeight="34.0" prefWidth="124.0" text="Medicine Num :" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="TextFieldEditAllergyMedNum" disable="true" editable="false" layoutX="142.0" layoutY="123.0" prefHeight="31.0" prefWidth="142.0" />
+                              <Label layoutX="295.0" layoutY="175.0" prefHeight="34.0" prefWidth="86.0" text="Medicine" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="115.800048828125" endY="3.0517578125E-5" layoutX="418.0" layoutY="144.0" startX="-97.79998779296875" startY="3.0517578125E-5" stroke="#59b7ff" strokeLineCap="ROUND" strokeWidth="4.0" />
+                              <ChoiceBox fx:id="ChoiceNewAllergyMedicine" layoutX="399.0" layoutY="179.0" prefWidth="150.0" />
                            </children>
-                        </AnchorPane>
-                  </content>
+                        </Pane>
+                     </content>
                 </Tab>
               </tabs>
             </TabPane>

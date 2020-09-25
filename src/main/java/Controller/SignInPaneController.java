@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -87,7 +88,19 @@ public class SignInPaneController implements Initializable {
 
     @FXML
     void PatientFileClick(MouseEvent event) throws IOException, SQLException {
+        PatientPaneController ppc = new PatientPaneController();
+        ObservableList obPatient = FXCollections.observableArrayList();
 
+        DBH.patientDAO pdo = new patientDAO();
+        obPatient = pdo.selectPatients();
+        System.out.println("==========" + obPatient);
+
+        FXMLLoader loader = new FXMLLoader();
+        MainController bpc = (MainController) loader.getController();
+        System.out.println("Patient Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("PatientManagementPane");
+        bpc.BorderMainPane.setCenter(view);
     }
 
     @FXML
@@ -118,7 +131,7 @@ public class SignInPaneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        
+
         ProgressBarLoading.setVisible(false);
         LabelLoading.setVisible(false);
     }

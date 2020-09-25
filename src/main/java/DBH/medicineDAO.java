@@ -1,13 +1,11 @@
 package DBH;
 
-import Model.Address;
+
 import Model.Medicine;
-import Model.Therapist;
 import Util.DatabaseConnector;
 import Util.JPQLHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,20 +13,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class medicineDAO implements JPQLHandler {
+public class medicineDAO {
 
     static Connection con = DatabaseConnector.getConnection();
 
     public int insertMedicine(Medicine m) throws SQLException {
 
-        String sql = "insert into medicine(name, type, timesperday, medicinenum) values(?,?,?,?)";
+        String sql = "insert into medicine(name, type, timesperday ) values(?,?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
-
         ps.setString(1, m.getName());
         ps.setString(2, m.getType());
         ps.setInt(3, m.getTimesPerDay());
-        ps.setInt(4, m.getMedicineNum());
+
 
         int rows = ps.executeUpdate();
 
@@ -40,9 +37,7 @@ public class medicineDAO implements JPQLHandler {
     public ArrayList<Medicine> selectAll() throws SQLException {
         ArrayList<Medicine> list = new ArrayList<Medicine>();
 
-        System.out.println(list);
-
-        String sql = "select * from medicine , patient_medicine where medicine.medicinenum = patient_medicine.medicinenum";
+        String sql = "select * from medicine";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
@@ -51,10 +46,23 @@ public class medicineDAO implements JPQLHandler {
             list.add(m);
         }
 
-        System.out.println(list);
         ps.close();
         rs.close();
         return list;
+    }
+
+    public Medicine selectLastRow() throws SQLException {
+        Medicine m= null;
+        String sql = "SELECT * FROM  medicine ORDER BY  medicinenum DESC LIMIT 1";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+        {
+             m = new Medicine(rs.getInt("medicinenum"),rs.getString("name"),rs.getString("type"),rs.getInt("timesperday"));
+
+        }
+        return m;
+
     }
 
     public void UpdateMedicine(Medicine m) throws SQLException {
@@ -81,29 +89,58 @@ public class medicineDAO implements JPQLHandler {
         ps.close();
     }
 
+    public ObservableList<Medicine> selectMedicines() throws SQLException {
+        ObservableList list = FXCollections.observableArrayList();
+        list.removeAll();
 
-    @Override
-    public void SelectQuery() {
 
+
+        String sql = "select * from medicine";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"), rs.getInt("timesperday"));
+            list.add(m);
+        }
+
+
+
+        ps.close();
+        rs.close();
+
+        return list;
     }
 
-    @Override
-    public void InsertQuery() {
 
+
+    public ArrayList<String> MedicinesPDF() throws SQLException {
+        ArrayList<String> list = new ArrayList<String>();
+
+
+
+        String sql = "select * from medicine";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        String str="";
+        while (rs.next()) {
+
+            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"), rs.getInt("timesperday"));
+            str=m.getMedicineNum() + "  |  " + m.getName() +"  |  "+ m.getType()+"  |  "+m.getType()+"  |  "+m.getTimesPerDay();
+            list.add(str);
+        }
+
+
+
+        ps.close();
+        rs.close();
+
+        return list;
     }
 
-    @Override
-    public void RemoveQuery() {
 
-    }
 
-    @Override
-    public int CountQuery() {
-        return 0;
-    }
 
-    @Override
-    public List SelectAllQuery() {
-        return null;
-    }
+
+
 }

@@ -3,6 +3,7 @@ package Controller;
 import Model.Address;
 import Model.Patient;
 import Model.Therapist;
+import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,9 +26,6 @@ public class EditPatientController implements Initializable,Util.JavafxPaneHandl
     @FXML private ChoiceBox<?> Choice3Digits;
     @FXML private TextField TextFieldStreet;
     @FXML private TextField TextFieldHouseNum;
-    @FXML private TextField TextFieldAddAllergyName;
-    @FXML private ChoiceBox<?> ChoiceMedicine;
-    @FXML private ChoiceBox<?> ChoiceDeleteAllergyName;
     @FXML private Button BtnClear;
     @FXML private Button BtnSave;
     @FXML private ChoiceBox<?> ChoiceNurse;
@@ -36,27 +34,56 @@ public class EditPatientController implements Initializable,Util.JavafxPaneHandl
 
     DBH.patientDAO pbh = new DBH.patientDAO();
     ArrayList<Patient> list = new ArrayList<Patient>();
+    MessageAlerter ma = new MessageAlerter();
 
     @FXML
     void OnClickBtnClear(ActionEvent event) {
+        TextFieldPatientID.setText("");
+        TextFieldFirstName.setText("");
+        TextFieldLastName.setText("");
+        TextFieldContactNum.setText("");
+        TextFieldCity.setText("");
+        TextFieldStreet.setText("");
+        TextFieldHouseNum.setText("");
 
+        String MessageInformation = "All Fields Cleared" ;
+        ma.MessageWithoutHeader("Cleared", MessageInformation);
     }
 
     @FXML
     void OnClickBtnSave(ActionEvent event) throws SQLException {
-        list = pbh.selectAll();
-        for(Patient p : list) {
-            if(p.getID().equals(TextFieldPatientID.getText())) {
-                p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-                String ContactNum = TextFieldContactNum.getText();
-                p.setContactNo(ContactNum);
-                Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-                p.setAddress(address);
-                pbh.Updateherapist(p);
+        String MessageInformation = "" ;
 
-            }
-
+        if(TextFieldPatientID.getLength()==0){
+            MessageInformation += "You Have To Choose Patient To Edit :) \n" ;
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
         }
+        else if((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0)  || (TextFieldContactNum.getLength()==0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0)  || (TextFieldHouseNum.getLength() == 0)){
+            MessageInformation += "Messing Information : \n" ;
+            if(TextFieldFirstName.getLength() == 0)  MessageInformation +=  "* First Name \n";
+            if(TextFieldLastName.getLength() == 0)  MessageInformation += "* Last Name \n";
+            if(TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
+            if(TextFieldCity.getLength() == 0)  MessageInformation += "* City \n";
+            if(TextFieldStreet.getLength() == 0)  MessageInformation += "* Street \n";
+            if(TextFieldHouseNum.getLength() == 0)  MessageInformation += "* House Number \n";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        }
+        else {
+            MessageInformation += "Patient Edited Successfully :)" ;
+            list = pbh.selectAll();
+            for(Patient p : list) {
+                if(p.getID().equals(TextFieldPatientID.getText())) {
+                    p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                    String ContactNum = TextFieldContactNum.getText();
+                    p.setContactNo(ContactNum);
+                    Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                    p.setAddress(address);
+                    pbh.UpdatePatient(p);
+                }
+            }
+            ma.MessageWithoutHeader("Added", MessageInformation);
+        }
+
 
     }
 

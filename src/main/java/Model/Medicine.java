@@ -1,12 +1,12 @@
 package Model;
 
-import javafx.scene.control.SpinnerValueFactory;
+
 
 import java.util.Objects;
 
 public class Medicine {
 
-    private  int medicineNum ;
+    private  int medicineNum;      //AI
     private String name;
     private String type;
     private int timesPerDay;
