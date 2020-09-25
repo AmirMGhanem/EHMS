@@ -1,28 +1,147 @@
-#NavBox {
- -fx-background-color : #ffcac9;
+.TableView{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-border-width : 2px;
+-fx-text-fill: #FFFFFF;
+}
 
+.chart-legend{
+-fx-background-color: #59b7ff;
+-fx-text-fill : #ffffff;
+}
+
+.PieChart{
+-fx-background-color: #5a5a5a;
+-fx-text-fill : #ffffff;
+}
+
+.ListView{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-border-width : 2px;
+-fx-effect: dropshadow( one-pass-box ,  #ffffff , 5 , 0.0 , 5 , 3 );
+-fx-text-fill: #FFFFFF;
+-fx-background-radius : 15;
+-fx-border-radius : 15;
+}
+
+.TabPane{
+-fx-background-color : #5A5A5A;
 }
 
 .Tab{
- -fx-background-color : #ffcac9;
-
-}
-
-#notificationPanel
-{
--fx-background-color : linear-gradient(#ffffff 25%, #ffcac9 50%,#ffffff 75%);
+-fx-background-color : #5A5A5A;;
+-fx-border-color : #FFFFFF;
+-fx-background-radius : 15;
+-fx-border-radius : 15;
 }
 
 .label{
-
+-fx-background-color : #5s5s5s;
+-fx-border-color : inherited;
+-fx-text-fill: #FFFFFF;
 }
 
-.date-picker{
+.Choice{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-text-fill: #000000;
+-fx-border-radius : 8px;
+}
+
+.ParentPane{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-border-width :0px;
+-fx-effect: dropshadow( one-pass-box ,  #ffffff , 5 , 0.0 , 5 , 3 );
+-fx-background-radius : 10;
+-fx-border-radius : 10;
+}
+
+.Pane{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-border-radius : 15;
+-fx-border-width :1px;
+}
+.ToolBar{
+-fx-background-color : #5A5A5A;
+-fx-border-color: #ffffff;
+}
+.HBox{
+-fx-effect: dropshadow( one-pass-box ,  #ffffff , 5 , 0.0 , 5 , 3 );
+}
+
+
+.TopPane{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-text-fill: #FFFFFF;
+-fx-background-radius : 15;
+-fx-border-radius : 15;
+-fx-effect: dropshadow( one-pass-box ,  #ffffff , 15 , 0.0 , 3 , 1 );
+}
+
+.DatePicker{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-text-fill: #FFFFFF;
+}
+
+.Button, ToggleButton{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-background-radius : 12;
+-fx-border-radius : 12;
+-fx-text-fill: #FFFFFF;
+-fx-effect: dropshadow( two-pass-box ,  #ffffff , 20 , 0.0 , 3 , 1 );
+}
+
+.Button:hover,ToggleButton:hover{
 -fx-background-color : #000000;
-
+-fx-effect: dropshadow( one-pass-box ,  #FFFFFF , 20 , 0.0 , 3 , 1 );
 }
 
-.Button{
-	-fx-background-color : inherited;
+.Button:pressed,ToggleButton:pressed{
+-fx-background-color : #000000;
+-fx-translate-y : 4px ;
+-fx-effect: dropshadow( one-pass-box ,  #FFFFFF , 20 , 0.0 , 4 , 2 );
 }
 
+.RadioButton, CheckBox{
+-fx-background-color : inherited;
+-fx-background-radius : 10;
+-fx-text-fill: #FFFFFF;
+-fx-effect: dropshadow( one-pass-box,  #ffffff , 5 , 0.0 , 1 , 0 );
+}
+
+.RadioButton:hover , CheckBox:hover{
+-fx-background-color : #000000;
+-fx-effect: dropshadow( one-pass-box ,  #ffffff , 20 , 0.0 , 3 , 1 );
+}
+
+.TextField{
+-fx-background-color : #5A5A5A;
+-fx-border-color : #FFFFFF;
+-fx-text-fill: #FFFFFF;
+-fx-border-radius : 8px;
+}
+
+.Slider{
+-fx-effect: dropshadow( one-pass-box ,  #ffffff , 10 , 0.0 , 1 , 0 );
+}
+
+.ImageView{
+}
+
+
+
+.Separator{
+-fx-background-color : #ffffff;
+}.Separator{
+-fx-background-color : #ffffff;
+}
+
+.VBox{
+-fx-background-color : #5A5A5A;
+}

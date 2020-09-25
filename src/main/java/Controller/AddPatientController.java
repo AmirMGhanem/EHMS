@@ -11,11 +11,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +29,8 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
 
-
+@FXML
+private Pane parent;
     @FXML
     private TextField TextFieldFirstName;
     @FXML
@@ -98,6 +101,7 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+       CssStyler();
         JavafxChoiceFill();
     }
 
@@ -129,5 +133,24 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
     @Override
     public void JavafxDiagramFill() {
 
+    }
+    private void CssStyler()
+    {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

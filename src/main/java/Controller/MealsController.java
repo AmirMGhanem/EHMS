@@ -11,11 +11,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 
 import java.awt.*;
@@ -39,6 +41,9 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     ObservableList Choicelist = FXCollections.observableArrayList();
 
+
+    @FXML
+    private Pane parent;
     @FXML
     private Button BtnShowAll;
 
@@ -102,10 +107,9 @@ public class MealsController implements Initializable, JavafxPaneHandler {
     @FXML
     void onClickBtnDeleteMeal(ActionEvent event) throws SQLException {
         String name = TableMeals.getSelectionModel().getSelectedItem().getName();
-        ArrayList<Model.patient_meal> pmlist = new ArrayList<patient_meal>();
+        patient_mealArrayList = pmDAO.selectAll();
         boolean flag = false;
-        pmlist = pmDAO.selectAll();
-        for (Model.patient_meal pm : pmlist) {
+        for (Model.patient_meal pm : patient_mealArrayList) {
             if (pm.getMealName().equals(name)) {
                 flag = true;
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
@@ -113,7 +117,7 @@ public class MealsController implements Initializable, JavafxPaneHandler {
                 alert.show();
             }
         }
-        if (flag == false) {
+        if (!flag) {
             mDAO.removeMealByName(name);
             TableMeals.getItems().removeAll(TableMeals.getSelectionModel().getSelectedItem());
         }
@@ -127,9 +131,10 @@ public class MealsController implements Initializable, JavafxPaneHandler {
             patient_meal pm = new patient_meal(patientid, mealname);
             if (pmDAO.insertToPatient_meal(pm) == 0)
                 System.out.println("Unsuccesffully");
-            else{
+            else {
                 System.out.println("Successfully attached");
-            ListViewMeals.getItems().add(pm);}
+                ListViewMeals.getItems().add(pm);
+            }
 
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Add Twice The Same Meal", ButtonType.OK);
@@ -141,10 +146,12 @@ public class MealsController implements Initializable, JavafxPaneHandler {
     @FXML
     void onClickBtnDetachMeal(ActionEvent event) throws SQLException {
         String str = ListViewMeals.getSelectionModel().getSelectedItems().toString();
-        String[] strline = new String[5];
+        String[] strline;
         strline = str.split(" ");
-        String id = strline[1].substring(1);
-        String name = strline[3].substring(1);
+        String id = strline[1];
+        System.out.println(id);
+        String name = strline[3];
+        System.out.println(name);
         patient_meal pm = new patient_meal(id, name);
         pmDAO.removeByMealName(pm);
         ListViewMeals.getItems().removeAll(ListViewMeals.getSelectionModel().getSelectedItem());
@@ -210,6 +217,7 @@ public class MealsController implements Initializable, JavafxPaneHandler {
             TableInit();
             ListViewInit();
             JavafxChoiceFill();
+            CssStyler();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -250,5 +258,24 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     }
 
+    private void CssStyler() {
+        FXMLLoader loader = new FXMLLoader();
 
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

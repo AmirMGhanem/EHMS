@@ -12,15 +12,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ApplicationNetwork extends Thread {
+public  class ApplicationNetwork extends Thread {
 
     DBH.patientDAO pDAO = new patientDAO();
     ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
     DBH.notificationDAO nDAO = new notificationDAO();
     ArrayList<Notification> notificationArrayList = new ArrayList<Notification>();
 
-
     String msg;
+
 
     @Override
     public void run() {
@@ -34,6 +34,7 @@ public class ApplicationNetwork extends Thread {
                 MessageFetcher(msg);
                 input.close();
                 s.close();
+
             }
 
         } catch (IOException | SQLException e) {
@@ -41,8 +42,8 @@ public class ApplicationNetwork extends Thread {
         }
     }
 
-    public void MessageFetcher(String msg) throws SQLException {
 
+    public void MessageFetcher(String msg) throws SQLException {
         //Fetching msg ->> id + request
         String[] splittedMsg = new String[2];
         splittedMsg = msg.split(" -> ");

@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
@@ -17,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -67,7 +69,8 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     BarChart.Data patienttoiletdata;
     BarChart.Data patientemergencydata;
 
-
+    @FXML
+    private Pane parent;
     @FXML
     private TableView<Notification> TableViewNotifications;
     @FXML
@@ -122,7 +125,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     @FXML
     private ChoiceBox<String> ChoicePatient;
 
-    Thread t;
+    static Thread t;
 
 
     private void BarChartRefresher() throws SQLException {
@@ -186,10 +189,17 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         BarChartNotifications.getData().addAll(chart.getData());
     }
 
-    public void TerminateThread() {
-        if (t.isAlive())
-            t.interrupt();
-        System.out.println(t.getName() + "- terminated!!");
+    public static void TerminateThread() {
+        if (t.isAlive()){
+            t.stop();
+            System.out.println(t.getName() + "- terminated!!");
+        }
+    }
+
+    public static void LaunchThread() {
+            t.start();
+            System.out.println(t.getName() + "- Started!!");
+
     }
 
 
@@ -294,6 +304,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         PieChartRequests.setData(pieChartData);
         PieChartRequests.setTitle("Urgency Level");
         PieChartRequests.setLegendVisible(true);
+
         PieChartRequests.setLabelsVisible(false);
         PieChartRequests.setLegendSide(Side.RIGHT);
         PieChartActive.setData(pieChartData2);
@@ -305,9 +316,32 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
     }
 
+    private void CssStyler()
+    {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
+
+        CssStyler();
+
+            try {
             TableInit();
             JavafxChoiceFill();
             LabelActiveTherapist.setText(Integer.toString(tDAO.getCount()));
@@ -346,13 +380,20 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         });
 
 
+        NotificationRefresherThreadCreator();
+        LaunchThread();
+
+    }
+
+
+    private void NotificationRefresherThreadCreator(){
+
         t = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (t.isAlive()) {
                     try {
                         System.out.println("Refreshing in one second");
-                        // TableInit();
                         manualRefreshingTable();
                         BarChartRefresher();
                         TimeUnit.SECONDS.sleep(3);
@@ -362,7 +403,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
                 }
             }
         });
-        t.start();
+        t.setName("Notification Refresher Thread.");
 
     }
 

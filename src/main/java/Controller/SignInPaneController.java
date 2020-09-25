@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SignInPaneController implements Initializable {
 
+    @FXML private Pane parent;
     @FXML
     private Button BtnLogIn;
 
@@ -131,8 +132,28 @@ public class SignInPaneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
+        CssStyler();
         ProgressBarLoading.setVisible(false);
         LabelLoading.setVisible(false);
+    }
+
+    private void CssStyler() {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

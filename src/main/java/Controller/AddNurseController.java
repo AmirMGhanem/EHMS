@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 public class AddNurseController extends TherapistPaneController implements Initializable, Util.JavafxPaneHandler {
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
-    static TherapistPaneController therapistPaneController=null;
+    static TherapistPaneController therapistPaneController = null;
 
     @FXML
     private TextField TextFieldFirstName;
@@ -67,7 +67,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
         t.setGender(ChoiceGender.getValue().toString());
         String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
         t.setContactNo(ContactNum);
-        Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()),TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+        Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
         t.setAddress(address);
 
         java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthdate.getValue());
@@ -76,7 +76,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
         java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
         t.setWorkDateStart(sqlWorkDate);
 
-        System.out.println("Constructor TESTER TOSTRING "+t.toString());
+        System.out.println("Constructor TESTER TOSTRING " + t.toString());
         sendTherapist(t);
 
         DBH.adressDAO ado = new adressDAO();
@@ -100,7 +100,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        JavafxChoiceFill();
+      CssStyler();
     }
 
 
@@ -132,5 +132,26 @@ public class AddNurseController extends TherapistPaneController implements Initi
     @Override
     public void JavafxDiagramFill() {
 
+    }
+
+
+    private void CssStyler()
+    {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

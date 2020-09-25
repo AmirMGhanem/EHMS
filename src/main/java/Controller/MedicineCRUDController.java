@@ -8,12 +8,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +26,9 @@ import static java.lang.String.valueOf;
 
 public class MedicineCRUDController implements Initializable, Util.JavafxPaneHandler {
 
+
+    @FXML
+    private Pane parent;
     @FXML
     private ChoiceBox<String> ChoiceAddPatientsID;
     @FXML
@@ -145,8 +151,10 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        
-        try {
+
+
+            try {
+                CssStyler();
             MedicineArrayList = mbh.selectAll();
             allergyArrayList = Ado.selectAll();
             JavafxChoiceFill();
@@ -254,5 +262,25 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
     @Override
     public void JavafxDiagramFill() {
 
+    }
+
+    private void CssStyler()
+    {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

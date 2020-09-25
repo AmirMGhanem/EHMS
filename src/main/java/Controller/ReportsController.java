@@ -3,17 +3,21 @@ package Controller;
 import Model.Report;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReportsController implements Initializable {
-
+    @FXML
+    private Pane parent;
     @FXML
     private TextField TextFieldID;
 
@@ -75,6 +79,7 @@ public class ReportsController implements Initializable {
     private ImageView ImageViewTherapistExportFile2;
     public ArrayList<Report> ALREPORTS = new ArrayList<Report>();
     ToggleGroup radioGroup;
+
     @FXML
     void OnClickClear(ActionEvent event) {
         CheckBoxMedicine.setSelected(false);
@@ -149,6 +154,7 @@ public class ReportsController implements Initializable {
     void onClickPrint(MouseEvent event) {
 
     }
+
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -156,6 +162,27 @@ public class ReportsController implements Initializable {
         RadioPatient.setToggleGroup(radioGroup);
         RadioStaff.setToggleGroup(radioGroup);
         RadioTherapist.setToggleGroup(radioGroup);
+        CssStyler();
 
+    }
+
+    private void CssStyler() {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

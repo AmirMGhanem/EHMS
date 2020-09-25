@@ -16,17 +16,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SettingsController">
 
 
     <children>
-        <Pane fx:id="SettingPanel" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0" styleClass="Pane">
+        <Pane fx:id="SettingPanel" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0" styleClass="Pane" stylesheets="@../Css/lightmode.css">
             <children>
                 <Pane fx:id="TopPanel" layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" styleClass="TopPane">
                     <children>
@@ -100,11 +98,7 @@
             </TableView>
             <RadioButton layoutX="624.0" layoutY="601.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="RadioButton" text="RadioButton" />
             <ListView layoutX="86.0" layoutY="591.0" prefHeight="159.0" prefWidth="376.0" styleClass="ListView" />
-            <ImageView fitHeight="142.0" fitWidth="216.0" layoutX="508.0" layoutY="640.0" styleClass="ImageView">
-               <image>
-                  <Image url="@../Images/arrows.png" />
-               </image>
-            </ImageView>
+
             <CheckBox layoutX="488.0" layoutY="601.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" styleClass="CheckBox" text="CheckBox" />
             </children>
         </Pane>

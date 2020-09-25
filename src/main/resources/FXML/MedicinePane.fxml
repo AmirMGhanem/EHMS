@@ -13,9 +13,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicinePaneController">
    <children>
-      <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
+      <Pane fx:id="parent" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <children>
-            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" styleClass="TopPane">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="151.0" text="Medicine" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -24,7 +24,7 @@
                   </Label>
                </children>
             </Pane>
-            <ChoiceBox fx:id="ChoicePatient" layoutX="275.0" layoutY="229.0" prefWidth="150.0" onAction="#onSelectPatient" />
+            <ChoiceBox fx:id="ChoicePatient" layoutX="275.0" layoutY="229.0" onAction="#onSelectPatient" prefWidth="150.0" styleClass="Choice" />
             <Label layoutX="137.0" layoutY="224.0" prefHeight="34.0" prefWidth="124.0" text="Choose Patient :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
@@ -35,11 +35,11 @@
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <TabPane layoutX="95.0" layoutY="272.0" prefHeight="436.0" prefWidth="948.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="95.0" layoutY="272.0" prefHeight="436.0" prefWidth="948.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab text="Medicine">
+                  <Tab styleClass="Tab" text="Medicine">
                      <content>
-                        <Pane prefHeight="328.0" prefWidth="815.0">
+                        <Pane prefHeight="328.0" prefWidth="815.0" styleClass="Pane">
                            <children>
                               <TableView fx:id="MedTable" layoutY="71.0" prefHeight="337.0" prefWidth="948.0" style="-fx-border-width: 4px;">
                                  <columns>
@@ -68,15 +68,15 @@
                                     </Button>
                                  </children>
                               </Pane>
-                              <Button fx:id="BtnAttachMed" layoutX="644.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnAttachMed" prefHeight="33.0" prefWidth="141.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Attach To Patient" />
-                              <Button fx:id="BtnDetachMed" layoutX="793.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnDetachMed" prefHeight="33.0" prefWidth="141.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Detach From Patient" />
+                              <Button fx:id="BtnAttachMed" layoutX="644.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnAttachMed" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Attach To Patient" />
+                              <Button fx:id="BtnDetachMed" layoutX="793.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnDetachMed" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Detach From Patient" />
                            </children>
                         </Pane>
                      </content>
                   </Tab>
-                  <Tab text="Allergies">
+                  <Tab styleClass="Tab" text="Allergies">
                      <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
+                        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="Pane">
                            <children>
                               <TableView fx:id="AllergyTable" layoutY="71.0" prefHeight="337.0" prefWidth="948.0" style="-fx-border-width: 4px;">
                                  <columns>
@@ -103,8 +103,8 @@
                                     </Button>
                                  </children>
                               </Pane>
-                              <Button fx:id="BtnAttachAllergy" layoutX="644.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnAttachAllergy" prefHeight="33.0" prefWidth="141.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Attach To Patient" />
-                              <Button fx:id="BtnDetachAllergy" layoutX="793.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnDetachAllergy" prefHeight="33.0" prefWidth="141.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Detach From Patient" />
+                              <Button fx:id="BtnAttachAllergy" layoutX="644.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnAttachAllergy" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Attach To Patient" />
+                              <Button fx:id="BtnDetachAllergy" layoutX="793.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnDetachAllergy" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Detach From Patient" />
                            </children>
                         </Pane>
                      </content>
@@ -121,7 +121,7 @@
                   <Font name="Arial Bold Italic" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="BtnLoadAllData" layoutX="547.0" layoutY="225.0" mnemonicParsing="false" onAction="#OnLoadAllDataClick" prefHeight="33.0" prefWidth="183.0" style="-fx-background-color: aeaeae; -fx-border-color: #59b7ff; -fx-border-width: 2;" text="Load All Data" />
+            <Button fx:id="BtnLoadAllData" layoutX="547.0" layoutY="225.0" mnemonicParsing="false" onAction="#OnLoadAllDataClick" prefHeight="33.0" prefWidth="183.0" styleClass="Button" text="Load All Data" />
          </children>
       </Pane>
    </children>

@@ -10,52 +10,68 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
-public class EditNurseController implements Initializable,Util.JavafxPaneHandler {
+public class EditNurseController implements Initializable, Util.JavafxPaneHandler {
 
     DBH.therapistDAO tbh = new DBH.therapistDAO();
     ArrayList<Therapist> list = new ArrayList<Therapist>();
+    @FXML
+    private Pane parent;
 
-    @FXML private Button BtnClear;
-    @FXML private Button BtnSave;
-    @FXML private TextField TextFieldNurseID;
-    @FXML private TextField TextFieldFirstName;
-    @FXML private TextField TextFieldLastName;
-    @FXML private TextField TextFieldContactNum;
-    @FXML private TextField TextFieldCity;
-    @FXML private TextField TextFieldStreet;
-    @FXML private TextField TextFieldHouseNum;
+    @FXML
+    private Button BtnClear;
+    @FXML
+    private Button BtnSave;
+    @FXML
+    private TextField TextFieldNurseID;
+    @FXML
+    private TextField TextFieldFirstName;
+    @FXML
+    private TextField TextFieldLastName;
+    @FXML
+    private TextField TextFieldContactNum;
+    @FXML
+    private TextField TextFieldCity;
+    @FXML
+    private TextField TextFieldStreet;
+    @FXML
+    private TextField TextFieldHouseNum;
 
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
 
-    @FXML void OnClickClear(ActionEvent event) {
+    @FXML
+    void OnClickClear(ActionEvent event) {
 
     }
 
-    @FXML public void onEnter(ActionEvent ae) throws SQLException {
+    @FXML
+    public void onEnter(ActionEvent ae) throws SQLException {
         String id = TextFieldNurseID.getText();
 
         list = tbh.selectAll();
 
         for (Therapist t : list) {
-            if(t.getID().equals(id)){
+            if (t.getID().equals(id)) {
                 TextFieldFirstName.setText(t.getFirstName());
                 TextFieldLastName.setText(t.getLasttName());
-               TextFieldContactNum.setText(t.getContactNo());
-               TextFieldCity.setText(t.getAddress().getCity());
-               TextFieldStreet.setText(t.getAddress().getStreet());
-              TextFieldHouseNum.setText(Integer.toString(t.getAddress().getHouseNum()));
+                TextFieldContactNum.setText(t.getContactNo());
+                TextFieldCity.setText(t.getAddress().getCity());
+                TextFieldStreet.setText(t.getAddress().getStreet());
+                TextFieldHouseNum.setText(Integer.toString(t.getAddress().getHouseNum()));
             }
 
         }
@@ -65,8 +81,8 @@ public class EditNurseController implements Initializable,Util.JavafxPaneHandler
     void OnClickSave(ActionEvent event) throws SQLException {
 
         list = tbh.selectAll();
-        for(Therapist t : list) {
-            if(t.getID().equals(TextFieldNurseID.getText())) {
+        for (Therapist t : list) {
+            if (t.getID().equals(TextFieldNurseID.getText())) {
                 t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
                 String ContactNum = TextFieldContactNum.getText();
                 t.setContactNo(ContactNum);
@@ -82,6 +98,7 @@ public class EditNurseController implements Initializable,Util.JavafxPaneHandler
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+       CssStyler();
     }
 
 
@@ -99,5 +116,24 @@ public class EditNurseController implements Initializable,Util.JavafxPaneHandler
     @Override
     public void JavafxDiagramFill() {
 
+    }
+    private void CssStyler()
+    {
+        FXMLLoader loader = new FXMLLoader();
+
+        try {
+            loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+
+            SettingsController settingsController = loader.getController();
+            if (settingsController.getToggleMode()) {
+                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            } else {
+                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                parent.getStylesheets().add(css);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
