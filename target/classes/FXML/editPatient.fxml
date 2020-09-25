@@ -11,9 +11,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditPatientController">
    <children>
-      <Pane layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0">
+      <Pane fx:id="parent" layoutX="2.0" layoutY="-11.0" prefHeight="805.0" prefWidth="1264.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <children>
-            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+            <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" styleClass="TopPane">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="200.0" text="Edit Patient " textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -24,22 +24,22 @@
             </Pane>
             <TabPane layoutX="132.0" layoutY="277.0" prefHeight="300.0" prefWidth="1000.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
                <tabs>
-                  <Tab text="Personal Infromation">
+                  <Tab styleClass="Tab" text="Personal Infromation">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-border-color: #59b7ff;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="Pane">
                            <children>
                               <Label layoutX="305.0" layoutY="18.0" prefHeight="26.0" prefWidth="105.0" text="First Name :" />
                               <Label layoutX="305.0" layoutY="63.0" prefHeight="26.0" prefWidth="105.0" text="Last Name :" />
-                              <TextField fx:id="TextFieldFirstName" layoutX="438.0" layoutY="18.0" prefHeight="31.0" prefWidth="221.0" />
-                              <TextField fx:id="TextFieldLastName" layoutX="438.0" layoutY="63.0" prefHeight="31.0" prefWidth="221.0" />
-                              <TextField fx:id="TextFieldCity" layoutX="241.0" layoutY="180.0" prefHeight="31.0" prefWidth="221.0" />
+                              <TextField fx:id="TextFieldFirstName" layoutX="438.0" layoutY="18.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <TextField fx:id="TextFieldLastName" layoutX="438.0" layoutY="63.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <TextField fx:id="TextFieldCity" layoutX="241.0" layoutY="180.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                               <Label layoutX="113.0" layoutY="130.0" prefHeight="26.0" prefWidth="124.0" text="Contact Number :" />
-                              <TextField fx:id="TextFieldContactNum" layoutX="246.0" layoutY="130.0" prefHeight="31.0" prefWidth="219.0" />
+                              <TextField fx:id="TextFieldContactNum" layoutX="246.0" layoutY="130.0" prefHeight="31.0" prefWidth="219.0" styleClass="TextField" />
                               <Label layoutX="544.0" layoutY="130.0" prefHeight="26.0" prefWidth="105.0" text="Street :" />
                               <Label layoutX="544.0" layoutY="171.0" prefHeight="26.0" prefWidth="105.0" text="House Num :" />
                               <Label layoutX="113.0" layoutY="180.0" prefHeight="26.0" prefWidth="105.0" text="City :" />
-                              <TextField fx:id="TextFieldStreet" layoutX="677.0" layoutY="130.0" prefHeight="31.0" prefWidth="221.0" />
-                              <TextField fx:id="TextFieldHouseNum" layoutX="677.0" layoutY="180.0" prefHeight="31.0" prefWidth="221.0" />
+                              <TextField fx:id="TextFieldStreet" layoutX="677.0" layoutY="130.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <TextField fx:id="TextFieldHouseNum" layoutX="677.0" layoutY="180.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -53,7 +53,7 @@
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="TextFieldPatientID" layoutX="577.0" layoutY="171.0" onAction="#onEnter" />
+            <TextField fx:id="TextFieldPatientID" layoutX="577.0" layoutY="171.0" onAction="#onEnter" styleClass="TextField" />
          </children>
       </Pane>
    </children>

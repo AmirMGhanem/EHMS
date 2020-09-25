@@ -102,10 +102,9 @@ public class MealsController implements Initializable, JavafxPaneHandler {
     @FXML
     void onClickBtnDeleteMeal(ActionEvent event) throws SQLException {
         String name = TableMeals.getSelectionModel().getSelectedItem().getName();
-        ArrayList<Model.patient_meal> pmlist = new ArrayList<patient_meal>();
+        patient_mealArrayList = pmDAO.selectAll();
         boolean flag = false;
-        pmlist = pmDAO.selectAll();
-        for (Model.patient_meal pm : pmlist) {
+        for (Model.patient_meal pm : patient_mealArrayList) {
             if (pm.getMealName().equals(name)) {
                 flag = true;
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
@@ -113,7 +112,7 @@ public class MealsController implements Initializable, JavafxPaneHandler {
                 alert.show();
             }
         }
-        if (flag == false) {
+        if (!flag) {
             mDAO.removeMealByName(name);
             TableMeals.getItems().removeAll(TableMeals.getSelectionModel().getSelectedItem());
         }
@@ -141,10 +140,12 @@ public class MealsController implements Initializable, JavafxPaneHandler {
     @FXML
     void onClickBtnDetachMeal(ActionEvent event) throws SQLException {
         String str = ListViewMeals.getSelectionModel().getSelectedItems().toString();
-        String[] strline = new String[5];
+        String[] strline ;
         strline = str.split(" ");
-        String id = strline[1].substring(1);
-        String name = strline[3].substring(1);
+        String id = strline[1];
+        System.out.println(id);
+        String name = strline[3];
+        System.out.println(name);
         patient_meal pm = new patient_meal(id, name);
         pmDAO.removeByMealName(pm);
         ListViewMeals.getItems().removeAll(ListViewMeals.getSelectionModel().getSelectedItem());

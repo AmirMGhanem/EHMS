@@ -2,6 +2,7 @@ package Controller;
 
 import DBH.patientDAO;
 import DBH.therapistDAO;
+import Network.ApplicationNetwork;
 import Util.FxmlLoader;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
@@ -18,6 +19,7 @@ import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -25,6 +27,7 @@ import java.util.ResourceBundle;
 
 
 public class MainController implements Initializable {
+
 
     @FXML
     private AnchorPane AnchorMainPane;
@@ -83,13 +86,11 @@ public class MainController implements Initializable {
     @FXML
     void onClickBtnExitProject() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader();
-        Pane root = loader.load(getClass().getResource("/FXML/MainPane.fxml").openStream());
-        MainPaneController mainPaneController= (MainPaneController)loader.getController();
-        mainPaneController.TerminateThread();
+        MainPaneController.TerminateThread();
         Platform.exit();
-
+        System.exit(0);
     }
+
     @FXML
     void OnMouseClickedSlide(MouseEvent event) {
         if (NavBox.getTranslateX() != 0) {
@@ -100,6 +101,7 @@ public class MainController implements Initializable {
             closeNav.play();
         }
     }
+
     private void drawerAction() {
         openNav = new TranslateTransition(new Duration(350), NavBox);
         openNav.setToX(0);
@@ -243,6 +245,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
         FxmlLoader object = new FxmlLoader();
         Pane view2 = null;
         try {

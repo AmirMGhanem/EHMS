@@ -1,4 +1,5 @@
 package View;
+
 import Network.ApplicationNetwork;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -18,19 +19,19 @@ public class MultipleFxmlHandlingJavaFX extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = load(getClass().getResource("/FXML/Main.fxml"));
-        Scene scene = new Scene(root,1500, 700);
+        Scene scene = new Scene(root, 1500, 700);
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
         Server.start();
 
+
+
     }
 
 
-
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
 }

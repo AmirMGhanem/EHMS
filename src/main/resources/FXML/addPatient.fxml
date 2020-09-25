@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="805.0" prefWidth="1264.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPatientController">
+<Pane fx:id="parent" prefHeight="805.0" prefWidth="1264.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddPatientController">
    <children>
-      <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" style="-fx-background-color: #59b7ff;">
+      <Pane layoutY="47.0" prefHeight="62.0" prefWidth="1248.0" styleClass="TopPane">
          <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="10.0" prefHeight="37.0" prefWidth="200.0" text="Add Patient " textAlignment="CENTER" textFill="WHITE">
                <font>
@@ -25,23 +25,23 @@
       </Pane>
       <TabPane layoutX="132.0" layoutY="222.0" prefHeight="180.0" prefWidth="1000.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab text=" personal Inofrmation">
+            <Tab styleClass="Tab" text=" personal Inofrmation">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="187.0" prefWidth="835.0" style="-fx-border-color: #59b7ff;">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="187.0" prefWidth="835.0" style="-fx-border-color: #59b7ff;" styleClass="Pane">
                      <children>
                         <Label layoutX="86.0" layoutY="18.0" prefHeight="26.0" prefWidth="105.0" text="ID :" />
-                        <TextField fx:id="TextFieldID" layoutX="216.0" layoutY="18.0" prefHeight="31.0" prefWidth="221.0" />
+                        <TextField fx:id="TextFieldID" layoutX="216.0" layoutY="18.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                         <Label layoutX="86.0" layoutY="60.0" prefHeight="26.0" prefWidth="105.0" text=" First Name :" />
-                        <TextField fx:id="TextFieldFirstName" layoutX="216.0" layoutY="60.0" prefHeight="31.0" prefWidth="221.0" />
+                        <TextField fx:id="TextFieldFirstName" layoutX="216.0" layoutY="60.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                         <Label layoutX="86.0" layoutY="105.0" prefHeight="26.0" prefWidth="105.0" text="Last Name :" />
-                        <TextField fx:id="TextFieldLastName" layoutX="216.0" layoutY="105.0" prefHeight="31.0" prefWidth="221.0" />
+                        <TextField fx:id="TextFieldLastName" layoutX="216.0" layoutY="105.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                         <Label layoutX="520.0" layoutY="8.0" prefHeight="26.0" prefWidth="105.0" text="Gender:" />
-                        <ChoiceBox fx:id="ChoiceGender" layoutX="655.0" layoutY="8.0" prefHeight="31.0" prefWidth="221.0" />
+                        <ChoiceBox fx:id="ChoiceGender" layoutX="655.0" layoutY="8.0" prefHeight="31.0" prefWidth="221.0" styleClass="Choice" />
                         <Label layoutX="520.0" layoutY="53.0" prefHeight="26.0" prefWidth="105.0" text="Birth date :" />
                         <DatePicker fx:id="DatePickerBirthDate" layoutX="655.0" layoutY="53.0" prefHeight="31.0" prefWidth="221.0" />
                         <Label layoutX="511.0" layoutY="105.0" prefHeight="26.0" prefWidth="124.0" text="Contact Number :" />
-                        <ChoiceBox fx:id="Choice3DigitsNum" layoutX="655.0" layoutY="104.0" prefHeight="31.0" prefWidth="80.0" />
-                        <TextField fx:id="TextFieldContactNum" layoutX="737.0" layoutY="105.0" prefHeight="31.0" prefWidth="183.0" />
+                        <ChoiceBox fx:id="Choice3DigitsNum" layoutX="655.0" layoutY="104.0" prefHeight="31.0" prefWidth="80.0" styleClass="Choice" />
+                        <TextField fx:id="TextFieldContactNum" layoutX="737.0" layoutY="105.0" prefHeight="31.0" prefWidth="183.0" styleClass="TextField" />
                         <Text fill="RED" layoutX="198.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="9.905853271484375">
                            <font>
                               <Font size="18.0" />
@@ -75,18 +75,18 @@
       </TabPane>
       <TabPane layoutX="132.0" layoutY="417.0" prefHeight="150.0" prefWidth="1000.0" style="-fx-border-color: #59b7ff;" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab text="Contact Inofrmation">
+            <Tab styleClass="Tab" text="Contact Inofrmation">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="848.0" style="-fx-border-color: #59b7ff;">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="135.0" prefWidth="848.0" style="-fx-border-color: #59b7ff;" styleClass="Pane">
                      <children>
                         <Label layoutX="85.0" layoutY="19.0" prefHeight="26.0" prefWidth="105.0" text="address code :" />
-                        <TextField fx:id="TextFieldAddressCode" layoutX="215.0" layoutY="16.0" prefHeight="31.0" prefWidth="221.0" />
+                        <TextField fx:id="TextFieldAddressCode" layoutX="215.0" layoutY="16.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                         <Label layoutX="85.0" layoutY="65.0" prefHeight="26.0" prefWidth="105.0" text="City :" />
-                        <TextField fx:id="TextFieldCity" layoutX="215.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" />
+                        <TextField fx:id="TextFieldCity" layoutX="215.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                         <Label layoutX="520.0" layoutY="16.0" prefHeight="26.0" prefWidth="105.0" text="Street :" />
-                        <TextField fx:id="TextFieldStreet" layoutX="655.0" layoutY="16.0" prefHeight="31.0" prefWidth="221.0" />
+                        <TextField fx:id="TextFieldStreet" layoutX="655.0" layoutY="16.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                         <Label layoutX="520.0" layoutY="65.0" prefHeight="26.0" prefWidth="105.0" text="House Num :" />
-                        <TextField fx:id="TextFieldHouseNum" layoutX="655.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" />
+                        <TextField fx:id="TextFieldHouseNum" layoutX="655.0" layoutY="65.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
                         <Text fill="RED" layoutX="202.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="9.905853271484375">
                            <font>
                               <Font size="18.0" />

@@ -1,6 +1,8 @@
 package Controller;
 
 import Util.CssFile;
+import com.sun.javafx.css.StyleManager;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -148,14 +150,24 @@ public class SettingsController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 if (ToggleBtnDarkMode.isSelected()) {
+                    ToggleBtnDarkMode.setText("On");
                     System.out.println("Toggle On");
                     SettingPanel.getStylesheets().clear();
                     flagtoggle = true;
                     String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
                     SettingPanel.getStylesheets().add(css);
+                    System.out.println(css);
+
+
+                    //---------------------
+
+                    //Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
+                    //StyleManager.getInstance().addUserAgentStylesheet(css);
+
 
                 } else {
                     System.out.println("Toggle Off");
+                    ToggleBtnDarkMode.setText("Off");
                     SettingPanel.getStylesheets().clear();
                     flagtoggle = false;
                     String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
@@ -178,7 +190,7 @@ public class SettingsController implements Initializable {
     }
 
     public void OnSelectFamilyStyle(ActionEvent event) {
-        String font = ChoiceFontFamily.getValue().toString();
+        String font = ChoiceFontFamily.getValue();
         BtnSetDefault.setFont(Font.font(font));
     }
 
@@ -203,6 +215,13 @@ public class SettingsController implements Initializable {
         String TextColor = ColorPickerTextColor.getValue().toString();
         String BorderColor = ColorPickerBorderColor.getValue().toString();
         String FontFamily = ChoiceFontFamily.getValue();
+    }
+
+
+
+    public Boolean getToggleMode() {
+
+        return ToggleBtnDarkMode.isSelected();
     }
 }
 

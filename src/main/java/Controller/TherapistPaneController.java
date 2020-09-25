@@ -9,12 +9,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -43,6 +46,8 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 //Getters and setters and add methods
 
 
+    @FXML
+    public Pane parent;
 
     @FXML
     public TableView<Therapist> NurseTable;
@@ -189,6 +194,29 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        FXMLLoader loader = new FXMLLoader();
+        try {
+           loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
+            SettingsController settingsController= loader.getController();
+
+           if(settingsController.getToggleMode()) {
+               String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+               parent.getStylesheets().add(css);
+           }else
+           {
+               String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+               parent.getStylesheets().add(css);
+           }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
         try {
             TableInit();
         } catch (SQLException e) {
