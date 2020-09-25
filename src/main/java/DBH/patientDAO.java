@@ -88,6 +88,25 @@ public class patientDAO {
     }
 
 
+    public ArrayList<String> PatientPDF() throws SQLException {
+        ArrayList<String> list = new ArrayList<String>();
+        String sql = "select * from address , person , patient where address.addresscode = person.address and person.id = patient.id";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        String str="";
+        while (rs.next()) {
+            Address address = new Address(rs.getInt("addresscode"), rs.getString("city"), rs.getString("street"), rs.getInt("housenum"));
+            Patient p = new Patient(rs.getString("id"), rs.getString("name"), address, rs.getString("gender"), rs.getDate("birthdate"), rs.getString("contactno"),null,null,null,null);
+            str=p.getID()+"  "+p.getName()+"  "+p.getAddress().getCity()+"|"+p.getAddress().getStreet()+"|"+p.getAddress().getHouseNum()+"  "+p.getGender()+"  "+p.getDate()+"  "+p.getContactNo();
+            list.add(str);
+        }
+
+        ps.close();
+        rs.close();
+
+        return list;
+    }
+
     public ArrayList<Patient> selectAll() throws SQLException {
         ArrayList<Patient> list = new ArrayList<Patient>();
 

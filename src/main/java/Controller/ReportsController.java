@@ -6,10 +6,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.printing.PDFPageable;
 
+import javax.print.PrintService;
+import javax.print.PrintServiceLookup;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.desktop.PrintFilesEvent;
+import java.awt.desktop.PrintFilesHandler;
+import java.awt.print.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -80,6 +92,9 @@ public class ReportsController implements Initializable {
     public ArrayList<Report> ALREPORTS = new ArrayList<Report>();
     ToggleGroup radioGroup;
 
+
+    PrinterJob job = PrinterJob.getPrinterJob();
+
     @FXML
     void OnClickClear(ActionEvent event) {
         CheckBoxMedicine.setSelected(false);
@@ -138,6 +153,7 @@ public class ReportsController implements Initializable {
     @FXML
     void TherapistPDFClick(MouseEvent event) {
 
+
     }
 
     @FXML
@@ -146,13 +162,24 @@ public class ReportsController implements Initializable {
     }
 
     @FXML
-    void onClickPDF(MouseEvent event) {
+    void onClickPDF(MouseEvent event) throws PrinterException, IOException {
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File f = chooser.getSelectedFile();
+        String filename = f.getAbsolutePath();
+        System.out.println(filename);
+
+
+
+
+        // Desktop desktop = Desktop.getDesktop();
+        //  desktop.print(new File("src/main/resources/Files/PDF/PatientPDF.pdf"));
 
     }
 
     @FXML
     void onClickPrint(MouseEvent event) {
-
+       
     }
 
     //Overrided by implementing Initializable
