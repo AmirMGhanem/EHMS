@@ -70,6 +70,9 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     BarChart.Data patienttoiletdata;
     BarChart.Data patientemergencydata;
 
+    int size ;
+
+
     @FXML
     private Pane parent;
     @FXML
@@ -220,7 +223,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
     public void manualRefreshingTable() throws SQLException {
 
-        int size = notificationArrayList.size();
+
         notificationArrayList = nDAO.selectAll();
         Collections.reverse(notificationArrayList);
         notificationObservable.setAll(notificationArrayList);
@@ -232,16 +235,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         int mealcount = 0;
         int toiletcount = 0;
         int emergencycount = 0;
-        try {
-            if (size < notificationArrayList.size()) {
-                String path = new File("src/main/resources/Sound/tone.mp3").getAbsolutePath();
-                File f = new File(path);
-                AudioClip me = new AudioClip(f.toURI().toString());
-                me.play();
-            }
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
+
 
         for (Notification n : notificationArrayList) {
 
@@ -273,6 +267,21 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         toiletdata.setPieValue(toiletcount);
         waterdata.setPieValue(watercount);
         emergencydata.setPieValue(emergencycount);
+    }
+
+
+
+    private void MediaPlayerBeep(){
+        try {
+            if (size < notificationArrayList.size()) {
+                String path = new File("src/main/resources/Sound/tone.mp3").getAbsolutePath();
+                File f = new File(path);
+                AudioClip me = new AudioClip(f.toURI().toString());
+                me.play();
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
     }
 
     @Override
@@ -389,14 +398,15 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
 
     private void NotificationRefresherThreadCreator(){
-
         t = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (t.isAlive()) {
                     try {
                         System.out.println("Refreshing in one second");
+                        size= notificationArrayList.size();
                         manualRefreshingTable();
+                        MediaPlayerBeep();
                         BarChartRefresher();
                         TimeUnit.SECONDS.sleep(3);
                     } catch (SQLException | InterruptedException e) {

@@ -27,7 +27,7 @@ public class MessageAlerter {
 
 
 
-    //remove - medicine -- mshotefet
+
 
     public void MessageWithoutHeader(String title, String Content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

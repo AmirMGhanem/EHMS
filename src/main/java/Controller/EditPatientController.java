@@ -3,6 +3,7 @@ package Controller;
 import Model.Address;
 import Model.Patient;
 import Model.Therapist;
+import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,29 +48,57 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
     private Label LblNurseID;
     @FXML
     private TextField TextFieldPatientID;
-
+    MessageAlerter ma = new MessageAlerter();
     DBH.patientDAO pbh = new DBH.patientDAO();
     ArrayList<Patient> list = new ArrayList<Patient>();
 
     @FXML
     void OnClickBtnClear(ActionEvent event) {
+        TextFieldPatientID.setText("");
+        TextFieldFirstName.setText("");
+        TextFieldLastName.setText("");
+        TextFieldContactNum.setText("");
+        TextFieldCity.setText("");
+        TextFieldStreet.setText("");
+        TextFieldHouseNum.setText("");
 
+        String MessageInformation = "All Fields Cleared";
+        ma.MessageWithoutHeader("Cleared", MessageInformation);
     }
 
     @FXML
     void OnClickBtnSave(ActionEvent event) throws SQLException {
-        list = pbh.selectAll();
-        for (Patient p : list) {
-            if (p.getID().equals(TextFieldPatientID.getText())) {
-                p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-                String ContactNum = TextFieldContactNum.getText();
-                p.setContactNo(ContactNum);
-                Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-                p.setAddress(address);
-                pbh.UpdatePatient(p);
 
+        String MessageInformation = "";
+
+        if (TextFieldPatientID.getLength() == 0) {
+            MessageInformation += "You Have To Choose Patient To Edit :) \n";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        } else if ((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (TextFieldContactNum.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
+            MessageInformation += "Messing Information : \n";
+            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
+            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
+            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
+            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
+            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
+            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        } else {
+
+            MessageInformation += "Patient Edited Successfully :)";
+            list = pbh.selectAll();
+            for (Patient p : list) {
+                if (p.getID().equals(TextFieldPatientID.getText())) {
+                    p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                    String ContactNum = TextFieldContactNum.getText();
+                    p.setContactNo(ContactNum);
+                    Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                    p.setAddress(address);
+                    pbh.UpdatePatient(p);
+
+                }
             }
-
+            ma.MessageWithoutHeader("Added", MessageInformation);
         }
 
     }
@@ -78,7 +107,7 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-      CssStyler();
+        CssStyler();
 
     }
 
@@ -116,8 +145,8 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
     public void JavafxDiagramFill() {
 
     }
-    private void CssStyler()
-    {
+
+    private void CssStyler() {
         FXMLLoader loader = new FXMLLoader();
 
         try {

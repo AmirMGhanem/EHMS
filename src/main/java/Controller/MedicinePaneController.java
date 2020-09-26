@@ -6,6 +6,7 @@ import DBH.patient_medicineDAO;
 import Model.*;
 import Util.FilesHandler;
 import Util.FooterPageEvent;
+import Util.MessageAlerter;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
@@ -22,10 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
-
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,7 +32,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
+
 
 public class MedicinePaneController implements Initializable, Util.JavafxPaneHandler {
 
@@ -53,6 +51,8 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     private ArrayList<patient_allergy> PA = new ArrayList<patient_allergy>();
     ObservableList<patient_allergy> paObservablelist = FXCollections.observableArrayList();
     DBH.patient_allergyDAO paDAO = new patient_allergyDAO();
+
+    MessageAlerter ma = new MessageAlerter();
 
     @FXML
     private Pane parent;
@@ -141,9 +141,12 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             if (pm.getMedicinenum() == mednum && pm.getPatientid().equals(LabelPatientID.getText())) {
                 pmDAO.removeByMedicineNum(mednum, pm.getPatientid());
                 LabelUpdateAttach.setText("Detached!");
+                ma.MessageWithoutHeader("Detached", "Medicine Detached From Selected Patient Successfully");
+            }
+            else{
+                ma.MessageWithoutHeader("Unexpected", "This Patient Didn't Have This Medicine");
             }
         }
-
     }
 
 
@@ -161,20 +164,15 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             else
                 LabelUpdateAttach.setText("Successfully Added");
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Add The Same Medicine \nTwice To The Same Patient", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            ma.ShowWarningMessage("Unexpected Error", "Medicine Already Added ", "Cannot Add The Same Medicine Twice To The Same Patient");
         }
-
-
     }
 
     @FXML
     void OnClickBtnExportMedFile(ActionEvent event) throws IOException {
         Util.FilesHandler fh = new FilesHandler();
         fh.SaveMedicines();
-
-
+        ma.MessageWithoutHeader("Exported", "Medicines Exported To File Successfully :)");
     }
 
     @FXML
@@ -224,6 +222,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         document.close();
         writer.close();
 
+        ma.MessageWithoutHeader("Exported", "Medicines Exported To PDF Successfully :)");
     }
 
     @FXML
@@ -235,21 +234,16 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         pmlist = pmDAO.selectAll();
 
         for (Model.patient_medicine pm : pmlist) {
-            if (pm.getMedicinenum() == mednum) {
+            if (pm.getMedicinenum() == mednum)
                 flag = true;
-            }
         }
-
-        if (flag == true) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+        if(flag==true) {
+            ma.ShowWarningMessage("Unexpected Error", "Can't Delete This Medicine", "Please Detach First From All Patients");
         }
         if (flag == false) {
             MDH.removeMedicineByID(mednum);
             MedTable.getItems().removeAll(MedTable.getSelectionModel().getSelectedItem());
         }
-
     }
 
 
@@ -285,6 +279,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     void onClickBtnExportAllergyFile(ActionEvent event) throws IOException {
         Util.FilesHandler fh = new FilesHandler();
         fh.SaveAllergies();
+        ma.MessageWithoutHeader("Exported", "Allergies Exported To File Successfully :)");
     }
 
     @FXML
@@ -333,6 +328,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         document.add(p1);
         document.close();
         writer.close();
+        ma.MessageWithoutHeader("Exported", "Allergies Exported To PDF Successfully :)");
     }
 
     @FXML
@@ -348,9 +344,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             }
         }
         if (flag == true) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            ma.ShowWarningMessage("Unexpected Error", "Can't Delete This Allergy", "Please Detach First From All Patients");
         }
         if (flag == false) {
             Ado.removeAllergyByName(allergyname);
@@ -360,19 +354,19 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
     @FXML
     void OnClickBtnDetachAllergy(ActionEvent event) throws SQLException {
-
         String allergyname = AllergyTable.getSelectionModel().getSelectedItem().getName();
-
-
         PA = paDAO.selectAll();
 
         for (Model.patient_allergy pa : PA) {
             if (pa.getAllergyName().equals(allergyname) && pa.getPatientid().equals(LabelPatientID.getText())) {
                 paDAO.removeByAllergyname(pa);
                 LabelUpdateAttach.setText("Detached!");
+                ma.MessageWithoutHeader("Detached", "Allergy Detached From Selected Patient Successfully");
+            }
+            else{
+                ma.MessageWithoutHeader("Unexpected", "This Patient Didn't Have This Allergy");
             }
         }
-
     }
 
     @FXML
@@ -386,9 +380,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             else
                 LabelUpdateAttach.setText("Successfully Added");
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Attach the same Allergy \nTwice To The Same Patient", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            ma.ShowWarningMessage("Unexpected Error", "Allergy Already Added ", "Cannot Add The Same Allergy Twice To The Same Patient");
         }
     }
 
