@@ -6,6 +6,7 @@ import DBH.personDAO;
 import DBH.therapistDAO;
 import Model.*;
 import Model.Person;
+import Util.MessageAlerter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,34 +58,55 @@ public class AddNurseController extends TherapistPaneController implements Initi
     private TextField TextFieldHouseNum;
     @FXML
     private Button BtnAdd;
+    MessageAlerter ma = new MessageAlerter();
 
     @FXML
     void OnClickAdd(ActionEvent event) throws IOException, SQLException {
-        Therapist t = new Therapist();
+        String MessageInformation = "";
 
-        t.setID(TextFieldID.getText());
-        t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-        t.setGender(ChoiceGender.getValue().toString());
-        String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
-        t.setContactNo(ContactNum);
-        Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-        t.setAddress(address);
+        if ((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (TextFieldID.getLength() == 0) || (DatePickerBirthdate.getValue() == null) || (DatePickerWorkDateStart.getValue() == null) || (Choice3DigitsNum.getValue() == null) || (TextFieldContactNum.getLength() == 0) || (TextFieldAddressCode.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
+            MessageInformation += "Missing Information : \n";
+            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
+            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
+            if (TextFieldID.getLength() == 0) MessageInformation += "* ID \n";
+            if (DatePickerBirthdate.getValue() == null) MessageInformation += "* Birth Date \n";
+            if (DatePickerWorkDateStart.getValue() == null) MessageInformation += "* Work Date Start \n";
+            if (Choice3DigitsNum.getValue() == null) MessageInformation += "* 3 Digit Contact Number \n";
+            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
+            if (TextFieldAddressCode.getLength() == 0) MessageInformation += "* Address Code \n";
+            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
+            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
+            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        } else {
+            MessageInformation += "Nursing Added Successfully :)";
+            Therapist t = new Therapist();
 
-        java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthdate.getValue());
-        t.setDate(sqlDate);
+            t.setID(TextFieldID.getText());
+            t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+            t.setGender(ChoiceGender.getValue().toString());
+            String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
+            t.setContactNo(ContactNum);
+            Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+            t.setAddress(address);
 
-        java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
-        t.setWorkDateStart(sqlWorkDate);
+            java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthdate.getValue());
+            t.setDate(sqlDate);
 
-        System.out.println("Constructor TESTER TOSTRING " + t.toString());
-        sendTherapist(t);
+            java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
+            t.setWorkDateStart(sqlWorkDate);
 
-        DBH.adressDAO ado = new adressDAO();
-        DBH.personDAO pdo = new personDAO();
-        DBH.therapistDAO tpo = new therapistDAO();
-        ado.insertAddress(address);
-        pdo.insertperson(t);
-        tpo.insertherapist(t);
+            System.out.println("Constructor TESTER TOSTRING " + t.toString());
+            sendTherapist(t);
+
+            DBH.adressDAO ado = new adressDAO();
+            DBH.personDAO pdo = new personDAO();
+            DBH.therapistDAO tpo = new therapistDAO();
+            ado.insertAddress(address);
+            pdo.insertperson(t);
+            tpo.insertherapist(t);
+            ma.MessageWithoutHeader("Added", MessageInformation);
+        }
     }
 
 
@@ -100,7 +122,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      CssStyler();
+        CssStyler();
     }
 
 
@@ -135,8 +157,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
     }
 
 
-    private void CssStyler()
-    {
+    private void CssStyler() {
         FXMLLoader loader = new FXMLLoader();
 
         try {

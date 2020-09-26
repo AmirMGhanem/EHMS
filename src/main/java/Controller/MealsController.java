@@ -7,6 +7,7 @@ import DBH.patient_mealDAO;
 import DBH.patient_medicineDAO;
 import Model.*;
 import Util.JavafxPaneHandler;
+import Util.MessageAlerter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,28 +94,49 @@ public class MealsController implements Initializable, JavafxPaneHandler {
     @FXML
     private ChoiceBox<String> ChoiceMeal;
 
+    MessageAlerter ma = new MessageAlerter();
+
+
     @FXML
     void OnClickAddMeal(ActionEvent event) throws SQLException {
-        Meal m = new Meal();
-        m.setName(TextFieldAddMealName.getText());
-        m.setWeight(Integer.parseInt(TextFieldAddMealWeight.getText()));
-        mDAO.insertMeal(m);
-        mealArrayList = mDAO.selectAll();
-        TableInit();
-        JavafxChoiceFill();
+        String MessageInformation = "";
+        if ((TextFieldAddMealName.getLength() == 0) || (TextFieldAddMealWeight.getLength() == 0)) {
+            MessageInformation += "Missing Information :";
+            if (TextFieldAddMealName.getLength() == 0) MessageInformation += "\n * Meal Name";
+            if (TextFieldAddMealWeight.getLength() == 0) MessageInformation += "\n * Meal Weight";
+            ma.ShowErrorMessage("Unexpected Error", "Fail To Add", MessageInformation);
+        } else {
+            Meal m = new Meal();
+            m.setName(TextFieldAddMealName.getText());
+            m.setWeight(Integer.parseInt(TextFieldAddMealWeight.getText()));
+            mDAO.insertMeal(m);
+            mealArrayList = mDAO.selectAll();
+            TableInit();
+            JavafxChoiceFill();
+
+            MessageInformation += "Meal Added Successfully :)";
+            ma.MessageWithoutHeader("Adde Successfully", MessageInformation);
+        }
     }
 
     @FXML
     void onClickBtnDeleteMeal(ActionEvent event) throws SQLException {
-        String name = TableMeals.getSelectionModel().getSelectedItem().getName();
-        patient_mealArrayList = pmDAO.selectAll();
+
+        String name = "";
+
         boolean flag = false;
+        patient_mealArrayList = pmDAO.selectAll();
+
+        try{
+            name = TableMeals.getSelectionModel().getSelectedItem().getName();
+        }catch (Exception e){
+            ma.MessageWithoutHeader("Unexpected Error", "Chose Meal To Delete");
+        }
+
         for (Model.patient_meal pm : patient_mealArrayList) {
             if (pm.getMealName().equals(name)) {
                 flag = true;
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Please Detach First From All Patients", ButtonType.OK);
-                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                alert.show();
+                ma.ShowErrorMessage("Unexpected Error", "Fail To Delete", "Please Detach First From All Patients");
             }
         }
         if (!flag) {
@@ -137,9 +159,7 @@ public class MealsController implements Initializable, JavafxPaneHandler {
             }
 
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Cannot Add Twice The Same Meal", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            ma.ShowErrorMessage("Unexpected Error", "Fail To Add", "Cannot Add Twice The Same Meal");
         }
     }
 

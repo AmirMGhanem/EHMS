@@ -3,6 +3,7 @@ package Controller;
 import DBH.*;
 import Model.*;
 import Util.JavafxPaneHandler;
+import Util.MessageAlerter;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -43,132 +44,52 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     ObservableList patient_meetingObservable = FXCollections.observableArrayList();
     DBH.patient_meetingDAO pmdo = new patient_meetingDAO();
 
-
+    MessageAlerter ma = new MessageAlerter();
 
     @FXML private Pane parent;
-    @FXML
-    private DatePicker DatePicker;
-
-    @FXML
-    private Label LabelHR;
-    @FXML
-    private Button BtnShowAll;
-
-    @FXML
-    private Label LabelMin;
-
-    @FXML
-    private Pane p11AM;
-
-    @FXML
-    private Pane p12PM;
-
-    @FXML
-    private Pane p1PM;
-
-    @FXML
-    private Pane p2PM;
-
-    @FXML
-    private Pane p3PM;
-
-    @FXML
-    private Pane p4PM;
-
-    @FXML
-    private Pane p5PM;
-
-    @FXML
-    private Pane p6PM;
-
-    @FXML
-    private Pane p7PM;
-
-    @FXML
-    private Pane p8PM;
-
-    @FXML
-    private Pane p7Am;
-
-    @FXML
-    private Pane p8AM;
-
-    @FXML
-    private Pane p9AM;
-
-    @FXML
-    private Pane p10AM;
-    @FXML
-    private Pane p00;
-    @FXML
-    private Pane p15;
-    @FXML
-    private Pane p30;
-    @FXML
-    private Pane p45;
-
-    @FXML
-    private TableView<Meeting> TableMeeting;
-
-    @FXML
-    private TableColumn<Meeting, Number> ColNum;
-
-    @FXML
-    private TableColumn<Meeting, String> ColName;
-
-    @FXML
-    private TableColumn<Meeting, String> ColCity;
-
-    @FXML
-    private TableColumn<Meeting, String> ColStreet;
-
-    @FXML
-    private TableColumn<Meeting, Number> ColHouseNum;
-
-    @FXML
-    private TableColumn<Meeting, Date> ColDate;
-
-    @FXML
-    private TableColumn<Meeting, String> ColTime;
-
-    @FXML
-    private Button BtnAddMeeting;
-
-    @FXML
-    private ChoiceBox<String> ChoicePatient;
-
-    @FXML
-    private Button BtnDetach;
-
-    @FXML
-    private Label LabelPatientID;
-
-    @FXML
-    private Button BtnAttach;
-
-    @FXML
-    private ListView<String> ListView;
-
-    @FXML
-    private Label LabelUpdate;
-
-    @FXML
-    private Button BtnRemove;
-
-    @FXML
-    private TextField TextFieldAddressCode;
-
-    @FXML
-    private TextField TextFieldCity;
-
-    @FXML
-    private TextField TextFieldStreet;
-
-    @FXML
-    private TextField TextFieldHouseNum;
-
-    @FXML
-    private TextField TextFieldName;
+    @FXML private DatePicker DatePicker;
+    @FXML private Label LabelHR;
+    @FXML private Button BtnShowAll;
+    @FXML private Label LabelMin;
+    @FXML private Pane p11AM;
+    @FXML private Pane p12PM;
+    @FXML private Pane p1PM;
+    @FXML private Pane p2PM;
+    @FXML private Pane p3PM;
+    @FXML private Pane p4PM;
+    @FXML private Pane p5PM;
+    @FXML private Pane p6PM;
+    @FXML private Pane p7PM;
+    @FXML private Pane p8PM;
+    @FXML private Pane p7Am;
+    @FXML private Pane p8AM;
+    @FXML private Pane p9AM;
+    @FXML private Pane p10AM;
+    @FXML private Pane p00;
+    @FXML private Pane p15;
+    @FXML private Pane p30;
+    @FXML private Pane p45;
+    @FXML private TableView<Meeting> TableMeeting;
+    @FXML private TableColumn<Meeting, Number> ColNum;
+    @FXML private TableColumn<Meeting, String> ColName;
+    @FXML private TableColumn<Meeting, String> ColCity;
+    @FXML private TableColumn<Meeting, String> ColStreet;
+    @FXML private TableColumn<Meeting, Number> ColHouseNum;
+    @FXML private TableColumn<Meeting, Date> ColDate;
+    @FXML private TableColumn<Meeting, String> ColTime;
+    @FXML private Button BtnAddMeeting;
+    @FXML private ChoiceBox<String> ChoicePatient;
+    @FXML private Button BtnDetach;
+    @FXML private Label LabelPatientID;
+    @FXML private Button BtnAttach;
+    @FXML private ListView<String> ListView;
+    @FXML private Label LabelUpdate;
+    @FXML private Button BtnRemove;
+    @FXML private TextField TextFieldAddressCode;
+    @FXML private TextField TextFieldCity;
+    @FXML private TextField TextFieldStreet;
+    @FXML private TextField TextFieldHouseNum;
+    @FXML private TextField TextFieldName;
 
     ArrayList<Pane> paneArrayList = new ArrayList<Pane>();
 
@@ -202,7 +123,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void OnClickBtnAddMeeting(ActionEvent event) throws SQLException {
-
         Date d = java.sql.Date.valueOf(DatePicker.getValue());
         Address a = new Address();
         a.setAddresscode(Integer.parseInt(TextFieldAddressCode.getText()));
@@ -217,6 +137,7 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         m.setTime(Integer.parseInt(LabelHR.getText()), Integer.parseInt(LabelMin.getText()));
         mDAO.insertMeeting(m);
         TableInit();
+        ma.MessageWithoutHeader("Added", "Metting Added Successfully :)");
     }
 
     @FXML
@@ -232,9 +153,7 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
                 listinit();
             }
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Meeting Already Added", ButtonType.OK);
-            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            alert.show();
+            ma.ShowErrorMessage("Unexpected Error", "Fail To Add", "Meeting Already Added");
         }
         ManualInit();
     }

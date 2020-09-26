@@ -6,6 +6,7 @@ import DBH.therapistDAO;
 import Model.Address;
 import Model.Person;
 import Model.Therapist;
+import Util.MessageAlerter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -50,12 +51,21 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
     private TextField TextFieldStreet;
     @FXML
     private TextField TextFieldHouseNum;
-
+    MessageAlerter ma = new MessageAlerter();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
 
     @FXML
     void OnClickClear(ActionEvent event) {
+        TextFieldNurseID.setText("");
+        TextFieldFirstName.setText("");
+        TextFieldLastName.setText("");
+        TextFieldContactNum.setText("");
+        TextFieldCity.setText("");
+        TextFieldStreet.setText("");
+        TextFieldHouseNum.setText("");
 
+        String MessageInformation = "All Fields Cleared";
+        ma.MessageWithoutHeader("Cleared", MessageInformation);
     }
 
     @FXML
@@ -79,18 +89,34 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
 
     @FXML
     void OnClickSave(ActionEvent event) throws SQLException {
+        String MessageInformation = "";
 
-        list = tbh.selectAll();
-        for (Therapist t : list) {
-            if (t.getID().equals(TextFieldNurseID.getText())) {
-                t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-                String ContactNum = TextFieldContactNum.getText();
-                t.setContactNo(ContactNum);
-                Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-                t.setAddress(address);
-                tbh.Updateherapist(t);
+        if (TextFieldNurseID.getLength() == 0) {
+            MessageInformation += "You Have To Choose Nurse To Edit :) \n";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        } else if ((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (TextFieldContactNum.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
+            MessageInformation += "Messing Information : \n";
+            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
+            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
+            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
+            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
+            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
+            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
+            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        } else {
+            MessageInformation += "Nursing Edited Successfully :)";
+            list = tbh.selectAll();
+            for (Therapist t : list) {
+                if (t.getID().equals(TextFieldNurseID.getText())) {
+                    t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                    String ContactNum = TextFieldContactNum.getText();
+                    t.setContactNo(ContactNum);
+                    Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                    t.setAddress(address);
+                    tbh.Updateherapist(t);
+                }
             }
-
+            ma.MessageWithoutHeader("Added", MessageInformation);
         }
     }
 
@@ -98,7 +124,7 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-       CssStyler();
+        CssStyler();
     }
 
 
@@ -117,8 +143,8 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
     public void JavafxDiagramFill() {
 
     }
-    private void CssStyler()
-    {
+
+    private void CssStyler() {
         FXMLLoader loader = new FXMLLoader();
 
         try {

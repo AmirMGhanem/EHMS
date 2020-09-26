@@ -28,70 +28,30 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReportsController implements Initializable {
-    @FXML
-    private Pane parent;
-    @FXML
-    private TextField TextFieldID;
+    @FXML private Pane parent;
+    @FXML private TextField TextFieldID;
+    @FXML private RadioButton RadioTherapist;
+    @FXML private RadioButton RadioPatient;
+    @FXML private RadioButton RadioStaff;
+    @FXML private Button BtnPreview;
+    @FXML private Button BtnClear;
+    @FXML private CheckBox CheckBoxMedicine;
+    @FXML private CheckBox CheckBoxAllergies;
+    @FXML private CheckBox CheckBoxMeals;
+    @FXML private CheckBox CheckBoxRequests;
+    @FXML private CheckBox CheckBoxPresonalInfo;
+    @FXML private CheckBox CheckBoxAddress;
+    @FXML private CheckBox CheckBoxHR;
+    @FXML private CheckBox CheckBoxSchedule;
+    @FXML private Button BtnDeSelectAll;
+    @FXML private Button BtnSelectAll;
+    @FXML private ImageView ImageViewTherapistExportPDF1;
+    @FXML private ImageView ImageViewTherapistExportPDF2;
+    @FXML private ImageView ImageViewTherapistExportFile1;
+    @FXML private ImageView ImageViewTherapistExportFile2;
 
-    @FXML
-    private RadioButton RadioTherapist;
-
-    @FXML
-    private RadioButton RadioPatient;
-
-    @FXML
-    private RadioButton RadioStaff;
-
-    @FXML
-    private Button BtnPreview;
-
-    @FXML
-    private Button BtnClear;
-
-    @FXML
-    private CheckBox CheckBoxMedicine;
-
-    @FXML
-    private CheckBox CheckBoxAllergies;
-
-    @FXML
-    private CheckBox CheckBoxMeals;
-
-    @FXML
-    private CheckBox CheckBoxRequests;
-
-    @FXML
-    private CheckBox CheckBoxPresonalInfo;
-
-    @FXML
-    private CheckBox CheckBoxAddress;
-
-    @FXML
-    private CheckBox CheckBoxHR;
-
-    @FXML
-    private CheckBox CheckBoxSchedule;
-
-    @FXML
-    private Button BtnDeSelectAll;
-
-    @FXML
-    private Button BtnSelectAll;
-
-    @FXML
-    private ImageView ImageViewTherapistExportPDF1;
-
-    @FXML
-    private ImageView ImageViewTherapistExportPDF2;
-
-    @FXML
-    private ImageView ImageViewTherapistExportFile1;
-
-    @FXML
-    private ImageView ImageViewTherapistExportFile2;
     public ArrayList<Report> ALREPORTS = new ArrayList<Report>();
     ToggleGroup radioGroup;
-
 
     PrinterJob job = PrinterJob.getPrinterJob();
 
@@ -169,9 +129,6 @@ public class ReportsController implements Initializable {
         String filename = f.getAbsolutePath();
         System.out.println(filename);
 
-
-
-
         // Desktop desktop = Desktop.getDesktop();
         //  desktop.print(new File("src/main/resources/Files/PDF/PatientPDF.pdf"));
 
@@ -179,7 +136,7 @@ public class ReportsController implements Initializable {
 
     @FXML
     void onClickPrint(MouseEvent event) {
-       
+
     }
 
     //Overrided by implementing Initializable
@@ -190,7 +147,6 @@ public class ReportsController implements Initializable {
         RadioStaff.setToggleGroup(radioGroup);
         RadioTherapist.setToggleGroup(radioGroup);
         CssStyler();
-
     }
 
     private void CssStyler() {
@@ -198,7 +154,6 @@ public class ReportsController implements Initializable {
 
         try {
             loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
-
             SettingsController settingsController = loader.getController();
 
             if (settingsController.getToggleMode()) {

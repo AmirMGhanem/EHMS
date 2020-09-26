@@ -1,7 +1,9 @@
 package Controller;
+
 import Model.*;
 import Util.FilesHandler;
 import Util.FooterPageEvent;
+import Util.MessageAlerter;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -28,62 +29,40 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-
 public class TherapistPaneController implements Initializable, Util.JavafxPaneHandler {
 
     private ArrayList<Therapist> ALTHERAPIST = new ArrayList<Therapist>();
     private ObservableList<Therapist> Therapist = FXCollections.observableArrayList(ALTHERAPIST);
     DBH.therapistDAO TDBH = new DBH.therapistDAO();
 
-
     public ObservableList<Model.Therapist> getTherapist() {
         return Therapist;
     }
-
     public void setTherapist(ObservableList<Model.Therapist> therapist) {
         Therapist = therapist;
     }
 //Getters and setters and add methods
 
+    MessageAlerter ma = new MessageAlerter();
 
-    @FXML
-    public Pane parent;
-
-    @FXML
-    public TableView<Therapist> NurseTable;
-    @FXML
-    public TableColumn<Therapist, String> ColID;
-    @FXML
-    public TableColumn<Therapist, String> ColName;
-    @FXML
-    public TableColumn<Therapist, String> ColAddress;
-    @FXML
-    private TableColumn<Therapist, Number> ColAddressCode;
-    @FXML
-    private TableColumn<Therapist, String> ColAddressCity;
-    @FXML
-    private TableColumn<Therapist,String> ColAddressStreet;
-    @FXML
-    private TableColumn<Therapist,Number> ColAddressHouse;
-    @FXML
-    public TableColumn<Therapist, String> ColGender;
-    @FXML
-    public TableColumn<Person, Date> ColBdate;
-    @FXML
-    public TableColumn<Model.Therapist, Number> ColExperience;
-    @FXML
-    public TableColumn<Therapist,String> ColContactNo;
-    @FXML
-    private Button BtnRemoveNurse;
-    @FXML
-    private Button BtnNurseInvest;
-    @FXML
-    private Button BtnNurseFile;
-    @FXML
-    private Button BtnNurseXML;
-    @FXML
-    private Button BtnSpecNurseFile;
-
+    @FXML public Pane parent;
+    @FXML public TableView<Therapist> NurseTable;
+    @FXML public TableColumn<Therapist, String> ColID;
+    @FXML public TableColumn<Therapist, String> ColName;
+    @FXML public TableColumn<Therapist, String> ColAddress;
+    @FXML private TableColumn<Therapist, Number> ColAddressCode;
+    @FXML private TableColumn<Therapist, String> ColAddressCity;
+    @FXML private TableColumn<Therapist,String> ColAddressStreet;
+    @FXML private TableColumn<Therapist,Number> ColAddressHouse;
+    @FXML public TableColumn<Therapist, String> ColGender;
+    @FXML public TableColumn<Person, Date> ColBdate;
+    @FXML public TableColumn<Model.Therapist, Number> ColExperience;
+    @FXML public TableColumn<Therapist,String> ColContactNo;
+    @FXML private Button BtnRemoveNurse;
+    @FXML private Button BtnNurseInvest;
+    @FXML private Button BtnNurseFile;
+    @FXML private Button BtnNurseXML;
+    @FXML private Button BtnSpecNurseFile;
 
     @FXML
     void OnClickInvestigation(ActionEvent event)  {
@@ -92,39 +71,41 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
     @FXML
     void OnClickRemove(ActionEvent event) throws SQLException {
-
         String id = NurseTable.getSelectionModel().getSelectedItem().getID();
         int addressCode = NurseTable.getSelectionModel().getSelectedItem().getAddress().getAddresscode();
-
         System.out.println(id);
         System.out.println(addressCode);
-
         TDBH.removeTherapistByID(id , addressCode);
-
         NurseTable.getItems().removeAll(NurseTable.getSelectionModel().getSelectedItem());
+
+        ma.MessageWithoutHeader("Removed", "Therapist Removed Successfully :)");
     }
 
     @FXML
     void OnClickSpecToFile(ActionEvent event) {
-
         Util.FilesHandler fh = new FilesHandler();
-        String id = NurseTable.getSelectionModel().getSelectedItem().getID();
+        String id = "";
+        try {
+            id = NurseTable.getSelectionModel().getSelectedItem().getID();
+        }catch(Exception e){
+            ma.MessageWithoutHeader("Unexpected Error", "Chose Specific Therapist");
+        }
         for(Model.Therapist t : ALTHERAPIST)
-            if(t.getID().equals(id))
+            if(t.getID().equals(id)) {
                 fh.SaveSpecificNurse(t);
+                ma.MessageWithoutHeader("Exported", "Specific Therapist Exported To PDF");
+            }
     }
 
     @FXML
     void OnClickToFile(ActionEvent event) throws IOException {
-
         Util.FilesHandler fh = new FilesHandler();
         fh.SaveNurse();
-
+        ma.MessageWithoutHeader("Exported", "Therapists Exported To FILE");
     }
 
     @FXML
     void OnClickToXML(ActionEvent event) throws IOException, DocumentException, URISyntaxException, SQLException {
-
         //Create PDF, Initilaize and Open
         Document document = new Document();
         PdfWriter writer= PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/TherapistsPDF.pdf"));
@@ -152,7 +133,6 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
             p1.add("\n");
         }
 
-
         //Drawing an image from the resources folder
         Image img = Image.getInstance("src/main/resources/Images/banner.png");
         BufferedImage bimg = ImageIO.read(new File("src/main/resources/Images/banner.png"));
@@ -171,14 +151,8 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
         document.close();
         writer.close();
 
-
+        ma.MessageWithoutHeader("Exported", "Therapists Exported To PDF");
     }
-
-
-
-
-
-
 
     public void transferMessage(Therapist t) throws SQLException {
         ALTHERAPIST.add(t);
@@ -191,7 +165,6 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     }
 
     //Overrided by implementing Initializable
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -208,14 +181,9 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
                parent.getStylesheets().add(css);
            }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
 
         try {
             TableInit();

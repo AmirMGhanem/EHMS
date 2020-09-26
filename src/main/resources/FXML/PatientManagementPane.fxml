@@ -25,24 +25,24 @@
                   </Label>
                </children>
             </Pane>
-            <TableView fx:id="PatientTable" layoutX="53.0" layoutY="215.0" prefHeight="224.0" prefWidth="842.0" styleClass="Table">
+            <TableView fx:id="PatientTable" layoutX="74.0" layoutY="151.0" prefHeight="302.0" prefWidth="961.0" styleClass="Table">
                <columns>
-                  <TableColumn fx:id="ColID" prefWidth="140.0" styleClass="TableCol" text="Id" />
-                  <TableColumn fx:id="ColName" prefWidth="140.0" styleClass="TableCol" text="Name" />
-                  <TableColumn fx:id="ColAddress" prefWidth="140.0" styleClass="TableCol" text="Address" />
-                  <TableColumn fx:id="ColGender" minWidth="0.0" prefWidth="140.0" styleClass="TableCol" text="Gender" />
-                  <TableColumn fx:id="ColBdate" prefWidth="140.0" styleClass="TableCol" text="Birth Date" />
+                  <TableColumn fx:id="ColID" prefWidth="199.0" styleClass="TableCol" text="Id" />
+                  <TableColumn fx:id="ColName" prefWidth="151.0" styleClass="TableCol" text="Name" />
+                  <TableColumn fx:id="ColAddress" prefWidth="149.0" styleClass="TableCol" text="Address" />
+                  <TableColumn fx:id="ColGender" minWidth="0.0" prefWidth="201.0" styleClass="TableCol" text="Gender" />
+                  <TableColumn fx:id="ColBdate" minWidth="0.0" prefWidth="215.0" styleClass="TableCol" text="Birth Date" />
                </columns>
             </TableView>
-            <Button fx:id="BtnPatientFile" layoutX="802.0" layoutY="457.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="25.0" prefWidth="150.0" styleClass="Button" text="Export To File" />
-            <Button fx:id="BtnPatientXML" layoutX="802.0" layoutY="491.0" mnemonicParsing="false" onAction="#OnClickPatientXML" prefHeight="25.0" prefWidth="150.0" styleClass="Button" text="Export To PDF" />
-            <Button fx:id="BtnRemovePatient" layoutX="642.0" layoutY="458.0" mnemonicParsing="false" onAction="#OnClickRemovePatient" prefHeight="25.0" prefWidth="150.0" styleClass="Button" text="Remove Patient" />
-            <Label layoutX="96.0" layoutY="472.0" text="Choose Patient :" textOverrun="CLIP">
+            <Button fx:id="BtnPatientFile" layoutX="741.0" layoutY="541.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Export To File" />
+            <Button fx:id="BtnPatientXML" layoutX="739.0" layoutY="628.0" mnemonicParsing="false" onAction="#OnClickPatientXML" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Export To PDF" />
+            <Button fx:id="BtnRemovePatient" layoutX="741.0" layoutY="498.0" mnemonicParsing="false" onAction="#OnClickRemovePatient" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Remove Patient" />
+            <Label layoutX="76.0" layoutY="457.0" text="Choose Patient :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="ChoicePatient" layoutX="244.0" layoutY="477.0" onAction="#onSelectPatient" prefWidth="150.0" styleClass="Choice" />
+            <ChoiceBox fx:id="ChoicePatient" layoutX="224.0" layoutY="462.0" onAction="#onSelectPatient" prefWidth="150.0" styleClass="Choice" />
             <BarChart fx:id="PatientBarChart" layoutX="75.0" layoutY="523.0" prefHeight="246.0" prefWidth="533.0" styleClass="chart-legend">
                <xAxis>
                   <CategoryAxis fx:id="y" side="BOTTOM" />
@@ -51,18 +51,18 @@
                   <NumberAxis side="LEFT" fx:id="x" />
                </yAxis>
             </BarChart>
-            <Label layoutX="417.0" layoutY="472.0" text="Patient ID :" textOverrun="CLIP">
+            <Label layoutX="397.0" layoutY="457.0" text="Patient ID :" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="LblPatientID" layoutX="530.0" layoutY="473.0" text="#########" textFill="RED" textOverrun="CLIP">
+            <Label fx:id="LblPatientID" layoutX="510.0" layoutY="458.0" text="#########" textFill="RED" textOverrun="CLIP">
                <font>
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="BtnPrint" layoutX="642.0" layoutY="494.0" mnemonicParsing="false" onAction="#OnClickPrint" prefHeight="25.0" prefWidth="150.0" styleClass="Button" text="Print Patient Chart" />
-            <Button fx:id="BtnSpecPatientFile" layoutX="968.0" layoutY="457.0" mnemonicParsing="false" onAction="#OnClickSpecToFile" prefHeight="25.0" prefWidth="150.0" styleClass="Button" text="Export Specific" />
+            <Button fx:id="BtnPrint" layoutX="741.0" layoutY="668.0" mnemonicParsing="false" onAction="#OnClickPrint" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Print Patient Chart" />
+            <Button fx:id="BtnSpecPatientFile" layoutX="740.0" layoutY="584.0" mnemonicParsing="false" onAction="#OnClickSpecToFile" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Export Specific" />
          </children>
       </Pane>
    </children>

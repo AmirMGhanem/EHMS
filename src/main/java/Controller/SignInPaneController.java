@@ -28,63 +28,27 @@ import java.util.concurrent.TimeUnit;
 public class SignInPaneController implements Initializable {
 
     @FXML private Pane parent;
-    @FXML
-    private Button BtnLogIn;
-
-    @FXML
-    private TextField TextFieldUsername;
-
-    @FXML
-    private PasswordField TextFieldPassword;
-
-    @FXML
-    private CheckBox CheckBoxIsAdmin;
-
-    @FXML
-    private ImageView ImageViewTherapistPane;
-
-    @FXML
-    private ImageView ImageViewTherapistExportPDF1;
-
-    @FXML
-    private ImageView ImageViewTherapistExportPDF2;
-
-    @FXML
-    private ImageView ImageViewTherapistExportFile1;
-
-    @FXML
-    private ImageView ImageViewTherapistExportFile2;
-
-    @FXML
-    private ImageView ImageViewPatientPane;
-
-    @FXML
-    private ImageView ImageViewPatientExportPDF1;
-
-    @FXML
-    private ImageView ImageViewPatientExportPDF2;
-
-    @FXML
-    private ImageView ImageViewPatientExportFile1;
-
-    @FXML
-    private ImageView ImageViewPatientExportFile2;
-
-    @FXML
-    private ProgressBar ProgressBarLoading;
-
-    @FXML
-    private Label LabelLoading;
-
-
+    @FXML private Button BtnLogIn;
+    @FXML private TextField TextFieldUsername;
+    @FXML private PasswordField TextFieldPassword;
+    @FXML private CheckBox CheckBoxIsAdmin;
+    @FXML private ImageView ImageViewTherapistPane;
+    @FXML private ImageView ImageViewTherapistExportPDF1;
+    @FXML private ImageView ImageViewTherapistExportPDF2;
+    @FXML private ImageView ImageViewTherapistExportFile1;
+    @FXML private ImageView ImageViewTherapistExportFile2;
+    @FXML private ImageView ImageViewPatientPane;
+    @FXML private ImageView ImageViewPatientExportPDF1;
+    @FXML private ImageView ImageViewPatientExportPDF2;
+    @FXML private ImageView ImageViewPatientExportFile1;
+    @FXML private ImageView ImageViewPatientExportFile2;
+    @FXML private ProgressBar ProgressBarLoading;
+    @FXML private Label LabelLoading;
 
     @FXML
     void OnClickLogin(ActionEvent event) throws InterruptedException {
-
     ProgressBarLoading.setVisible(true);
     LabelLoading.setVisible(true);
-
-
     }
 
     @FXML
