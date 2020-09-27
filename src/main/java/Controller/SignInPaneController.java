@@ -33,47 +33,60 @@ import java.util.concurrent.TimeUnit;
 public class SignInPaneController implements Initializable {
 
     ArrayList<UserInfo> users = new ArrayList<UserInfo>();
-    DBH.userInfoDAO uiDAO=new userInfoDAO();
-
-    @FXML private Pane parent;
-    @FXML private Button BtnLogIn;
-    @FXML private TextField TextFieldUsername;
-    @FXML private PasswordField TextFieldPassword;
-    @FXML private ImageView ImageViewTherapistPane;
-    @FXML private ImageView ImageViewTherapistExportPDF1;
-    @FXML private ImageView ImageViewTherapistExportPDF2;
-    @FXML private ImageView ImageViewTherapistExportFile1;
-    @FXML private ImageView ImageViewTherapistExportFile2;
-    @FXML private ImageView ImageViewPatientPane;
-    @FXML private ImageView ImageViewPatientExportPDF1;
-    @FXML private ImageView ImageViewPatientExportPDF2;
-    @FXML private ImageView ImageViewPatientExportFile1;
-    @FXML private ImageView ImageViewPatientExportFile2;
-    @FXML private ProgressBar ProgressBarLoading;
-    @FXML private Label LabelLoading;
+    DBH.userInfoDAO uiDAO = new userInfoDAO();
 
     @FXML
-    void OnClickLogin(ActionEvent event) throws InterruptedException {
-    ProgressBarLoading.setVisible(true);
-    LabelLoading.setVisible(true);
+    private Pane parent;
+    @FXML
+    private Button BtnLogIn;
+    @FXML
+    private TextField TextFieldUsername;
+    @FXML
+    private PasswordField TextFieldPassword;
+    @FXML
+    private ImageView ImageViewTherapistPane;
+    @FXML
+    private ImageView ImageViewTherapistExportPDF1;
+    @FXML
+    private ImageView ImageViewTherapistExportPDF2;
+    @FXML
+    private ImageView ImageViewTherapistExportFile1;
+    @FXML
+    private ImageView ImageViewTherapistExportFile2;
+    @FXML
+    private ImageView ImageViewPatientPane;
+    @FXML
+    private ImageView ImageViewPatientExportPDF1;
+    @FXML
+    private ImageView ImageViewPatientExportPDF2;
+    @FXML
+    private ImageView ImageViewPatientExportFile1;
+    @FXML
+    private ImageView ImageViewPatientExportFile2;
+    @FXML
+    private ProgressBar ProgressBarLoading;
+    @FXML
+    public Label LabelLoading;
+
+
+    @FXML
+    void OnClickLogin(ActionEvent event) throws IOException {
+
+        for(UserInfo ui : users)
+        {
+            if(ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText()))
+            {
+                ProgressBarLoading.setVisible(true);
+                LabelLoading.setVisible(true);
+                LabelLoading.setText(LabelLoading.getText()+ "\n Successfully Logged In ");
+            }
+        }
 
     }
 
     @FXML
     void PatientFileClick(MouseEvent event) throws IOException, SQLException {
-        PatientPaneController ppc = new PatientPaneController();
-        ObservableList obPatient = FXCollections.observableArrayList();
 
-        DBH.patientDAO pdo = new patientDAO();
-        obPatient = pdo.selectPatients();
-        System.out.println("==========" + obPatient);
-
-        FXMLLoader loader = new FXMLLoader();
-        MainController bpc = (MainController) loader.getController();
-        System.out.println("Patient Clicked");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("PatientManagementPane");
-        bpc.BorderMainPane.setCenter(view);
     }
 
     @FXML
@@ -102,16 +115,8 @@ public class SignInPaneController implements Initializable {
     }
 
 
-
-
-
-
-
-
-
-
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)  {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
         try {

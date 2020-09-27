@@ -70,11 +70,8 @@ public class SettingsController implements Initializable {
 
     static boolean flagtoggle = false; //false == light
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
             JavafxChoiceFill();
 
         if (flagtoggle == true) {
@@ -88,7 +85,6 @@ public class SettingsController implements Initializable {
             String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
             SettingPanel.getStylesheets().add(css);
         }
-
         ColorPickerThemeDesgin.setValue(Color.valueOf("#f2f2f2"));
         ColorPickerButtonColor.setValue(Color.valueOf("#787878"));
         ColorPickerTopPaneColor.setValue(Color.valueOf("#59b7ff"));
@@ -161,13 +157,6 @@ public class SettingsController implements Initializable {
                     SettingPanel.getStylesheets().add(css);
                     System.out.println(css);
 
-
-                    //---------------------
-
-                    //Application.setUserAgentStylesheet(Application.STYLESHEET_MODENA);
-                    //StyleManager.getInstance().addUserAgentStylesheet(css);
-
-
                 } else {
                     System.out.println("Toggle Off");
                     ToggleBtnDarkMode.setText("Off");
@@ -181,15 +170,15 @@ public class SettingsController implements Initializable {
         });
     }
 
+
     public void OnSelectBlendMode(ActionEvent event) {
         String blendmode = ChoiceBlendMode.getValue().toString();
         SettingPanel.setBlendMode(BlendMode.valueOf(blendmode));
-        System.out.println(blendmode);
+
     }
 
     public void onSliderChanged(MouseEvent mouseEvent) {
         double slideValue = SliderFontSize.getValue();
-        System.out.println(slideValue);
         BtnSetDefault.setStyle("-fx-font-size: " + slideValue);
     }
 

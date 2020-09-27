@@ -25,7 +25,7 @@
                            <children>
                               <ImageView fx:id="LogoHome" fitHeight="99.0" fitWidth="104.0" layoutX="164.0" layoutY="35.0" onMouseClicked="#LogoHomeClicked" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/LOGO.png" />
+                                    <Image url="@/Images/LOGO.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="228.0" layoutY="79.0" prefHeight="22.0" prefWidth="95.0" rotate="-90.0" text="Notification" textFill="#2879d0">
@@ -35,7 +35,7 @@
                               </Label>
                               <ImageView fx:id="ImageSlide" fitHeight="32.0" fitWidth="38.0" layoutX="259.0" layoutY="3.0" onMouseClicked="#OnMouseClickedSlide" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/slidebutton.png" />
+                                    <Image url="@/Images/slidebutton.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="14.0" layoutY="43.0" prefHeight="41.0" prefWidth="124.0" text="EHMS" textFill="#2879d0">
@@ -51,7 +51,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="54.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/therapist.png" />
+                              <Image url="@/Images/therapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -64,7 +64,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/addTherapist.png" />
+                              <Image url="@/Images/addTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -79,7 +79,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/EditTherapist.png" />
+                              <Image url="@/Images/EditTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -92,7 +92,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="65.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/patient.png" />
+                              <Image url="@/Images/patient.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -108,7 +108,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/addTherapist.png" />
+                              <Image url="@/Images/addTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -121,7 +121,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/EditTherapist.png" />
+                              <Image url="@/Images/EditTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -134,7 +134,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="47.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/meal.png" />
+                              <Image url="@/Images/meal.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -150,7 +150,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/medicine.png" />
+                              <Image url="@/Images/medicine.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -166,7 +166,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/medicineCRUD.png" />
+                              <Image url="@/Images/medicineCRUD.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -179,7 +179,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="46.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/staff.png" />
+                              <Image url="@/Images/staff.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -195,7 +195,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/reports.png" />
+                              <Image url="@/Images/reports.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -208,7 +208,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/connection.png" />
+                              <Image url="@/Images/connection.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -224,7 +224,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/settings.png" />
+                              <Image url="@/Images/settings.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
