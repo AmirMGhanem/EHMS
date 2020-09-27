@@ -32,17 +32,11 @@ import java.util.concurrent.TimeUnit;
 
 public class SignInPaneController implements Initializable {
 
-    ArrayList<UserInfo> users = new ArrayList<UserInfo>();
-    DBH.userInfoDAO uiDAO = new userInfoDAO();
+
 
     @FXML
     private Pane parent;
-    @FXML
-    private Button BtnLogIn;
-    @FXML
-    private TextField TextFieldUsername;
-    @FXML
-    private PasswordField TextFieldPassword;
+
     @FXML
     private ImageView ImageViewTherapistPane;
     @FXML
@@ -63,26 +57,10 @@ public class SignInPaneController implements Initializable {
     private ImageView ImageViewPatientExportFile1;
     @FXML
     private ImageView ImageViewPatientExportFile2;
-    @FXML
-    private ProgressBar ProgressBarLoading;
-    @FXML
-    public Label LabelLoading;
 
 
-    @FXML
-    void OnClickLogin(ActionEvent event) throws IOException {
 
-        for(UserInfo ui : users)
-        {
-            if(ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText()))
-            {
-                ProgressBarLoading.setVisible(true);
-                LabelLoading.setVisible(true);
-                LabelLoading.setText(LabelLoading.getText()+ "\n Successfully Logged In ");
-            }
-        }
 
-    }
 
     @FXML
     void PatientFileClick(MouseEvent event) throws IOException, SQLException {
@@ -119,17 +97,10 @@ public class SignInPaneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
-        try {
-            users = uiDAO.SelectAll();
-            System.out.println(users);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
 
         CssStyler();
-        ProgressBarLoading.setVisible(false);
-        LabelLoading.setVisible(false);
+
     }
 
     private void CssStyler() {

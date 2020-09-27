@@ -3,6 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,6 +18,11 @@
 
 <AnchorPane fx:id="AnchorMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1530.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
+      <ImageView fitHeight="1180.0" fitWidth="1553.0" layoutX="4.0" layoutY="-197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/SpaceBG.png" />
+         </image>
+      </ImageView>
       <BorderPane fx:id="BorderMainPane" layoutX="2.0" prefHeight="801.0" prefWidth="1530.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <left>
             <VBox fx:id="NavBox" alignment="TOP_CENTER" prefHeight="740.0" prefWidth="295.0" style="-fx-background-color: #d6d6d6;" styleClass="VBox" BorderPane.alignment="CENTER">
@@ -277,6 +285,70 @@
                </items>
             </ToolBar>
          </top>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ProgressBar fx:id="ProgressBarLoading" layoutX="346.0" layoutY="611.0" prefHeight="37.0" prefWidth="596.0" progress="0.0" />
+                  <Label fx:id="LabelLoading" alignment="CENTER" layoutX="420.0" layoutY="636.0" prefHeight="101.0" prefWidth="419.0" text="Loading... successfully Logged In " textAlignment="CENTER" textFill="#00dd37">
+                     <font>
+                        <Font name="Arial Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="183.0" fitWidth="163.0" layoutX="548.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/healthEarth.png" />
+                     </image>
+                  </ImageView>
+                  <Pane fx:id="panelLogin" layoutX="349.0" layoutY="152.0" onMouseEntered="#mouseEnterpanelLogin" prefHeight="444.0" prefWidth="596.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-border-width: 5px;">
+                     <children>
+                        <Button fx:id="BtnLogIn" layoutX="297.0" layoutY="265.0" mnemonicParsing="false" onAction="#OnClickLogin" styleClass="Button" text="Log In" />
+                        <Label layoutX="148.0" layoutY="158.0" text="UserName : ">
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="153.0" layoutY="198.0" text="Password :">
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TextFieldUsername" layoutX="260.0" layoutY="158.0" />
+                        <PasswordField fx:id="TextFieldPassword" layoutX="259.0" layoutY="198.0" />
+                        <Label alignment="CENTER" layoutX="77.0" layoutY="54.0" prefHeight="49.0" prefWidth="246.0" text="Login Here ↓" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold Italic" size="33.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="181.0" fitWidth="293.0" layoutX="1014.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/barcodeHint.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="542.0" fitWidth="257.0" layoutX="55.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/png1.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="LabelLoading1" alignment="CENTER" layoutX="912.0" layoutY="337.0" prefHeight="50.0" prefWidth="350.0" text="Having Trouble With Signing In ? " textAlignment="CENTER" textFill="#27432d">
+                     <font>
+                        <Font name="Arial Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LabelLoading11" alignment="CENTER" layoutX="912.0" layoutY="367.0" prefHeight="50.0" prefWidth="350.0" text="Scan The Barcode Below" textAlignment="CENTER" textFill="#27432d">
+                     <font>
+                        <Font name="Arial Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LabelLoading111" alignment="CENTER" layoutX="912.0" layoutY="397.0" prefHeight="50.0" prefWidth="350.0" text="↓↓↓↓↓" textAlignment="CENTER" textFill="#27432d">
+                     <font>
+                        <Font name="Arial Bold Italic" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
