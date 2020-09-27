@@ -2,42 +2,57 @@ package Controller;
 
 import DBH.patientDAO;
 import DBH.therapistDAO;
-import Network.ApplicationNetwork;
+import DBH.userInfoDAO;
+import Model.UserInfo;
 import Util.FxmlLoader;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
+import javafx.concurrent.Service;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Clock;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 
 public class MainController implements Initializable {
+
+    @FXML
+    private Button BtnLogIn;
+    @FXML
+    private TextField TextFieldUsername;
+    @FXML
+    private PasswordField TextFieldPassword;
+    @FXML
+    private ProgressBar ProgressBarLoading;
+    @FXML
+    public Label LabelLoading;
+    ArrayList<UserInfo> users = new ArrayList<UserInfo>();
+    DBH.userInfoDAO uiDAO = new userInfoDAO();
+    //--------------------------------------------
 
 
     @FXML
@@ -55,6 +70,8 @@ public class MainController implements Initializable {
     private Button BtnMed;
     @FXML
     private Button BtnReports;
+    @FXML
+    private Button BtnCrudMed;
     @FXML
     private Button BtnMeeting;
     @FXML
@@ -85,6 +102,68 @@ public class MainController implements Initializable {
     private Button BtnLogout;
     @FXML
     private Label LabelClock;
+    @FXML
+    private Pane panelLogin;
+
+    Node loginpane;
+
+    final javafx.concurrent.Service thread = new javafx.concurrent.Service<Integer>() {
+        @Override
+        public Task createTask() {
+            return new Task<Integer>() {
+                @Override
+                protected Integer call() throws Exception {
+                    int i;
+                    for (i = 0; i < 250; i++) {
+                        updateProgress(i, 250);
+                        Thread.sleep(1);
+
+                    }
+                    return i;
+                }
+            };
+        }
+    };
+
+
+    @FXML
+    void OnClickLogin(ActionEvent event) throws InterruptedException, IOException {
+
+        for (UserInfo ui : users) {
+            if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
+                ProgressBarLoading.setVisible(true);
+                LabelLoading.setVisible(true);
+                ManualSetOpenNav();
+                setEnableAllButtons();
+                ProgressBarLoading.progressProperty().bind(thread.progressProperty());
+                thread.start();
+                thread.workDoneProperty().addListener(new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                        System.out.println(thread.workDoneProperty().get());
+                        if (thread.workDoneProperty().get() > 248.9) {
+                            try {
+                            thread.cancel();
+                                OpenDashBoardManual();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
+
+            }
+        }
+
+    }
+
+    public void OpenDashBoardManual() throws IOException {
+        System.out.println("Dashboard Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("SignInPane");
+        BorderMainPane.setCenter(view);
+    }
 
 
     private void clockTicker() {
@@ -99,15 +178,18 @@ public class MainController implements Initializable {
                 }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-
     }
 
     @FXML
-    void onClickBtnLogout() throws IOException {
-        System.out.println("Dashboard Clicked");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("SignInPane");
-        BorderMainPane.setCenter(view);
+    void onClickBtnLogout() throws InterruptedException {
+        BorderMainPane.setCenter(loginpane);
+        TextFieldUsername.setText("");
+        TextFieldPassword.setText("");
+        setDisableAllButtons();
+        ManualSetCloseNav();
+        thread.reset();
+        ProgressBarLoading.progressProperty().unbind();
+
     }
 
 
@@ -130,10 +212,24 @@ public class MainController implements Initializable {
         }
     }
 
+    private void ManualSetCloseNav() throws InterruptedException {
+        TranslateTransition mancloseNav;
+        mancloseNav = new TranslateTransition(new Duration(666), NavBox);
+        mancloseNav.setToX(-(265));
+        mancloseNav.play();
+    }
+
+    private void ManualSetOpenNav() throws InterruptedException {
+        TranslateTransition manopenNav;
+        manopenNav = new TranslateTransition(new Duration(666), NavBox);
+        manopenNav.setToX(0);
+        manopenNav.play();
+    }
+
     private void drawerAction() {
-        openNav = new TranslateTransition(new Duration(350), NavBox);
+        openNav = new TranslateTransition(new Duration(666), NavBox);
         openNav.setToX(0);
-        closeNav = new TranslateTransition(new Duration(350), NavBox);
+        closeNav = new TranslateTransition(new Duration(666), NavBox);
     }
 
     @FXML
@@ -143,6 +239,7 @@ public class MainController implements Initializable {
         Pane view = object.getPage("MainPane");
         BorderMainPane.setCenter(view);
     }
+
 
     @FXML
     void OnClickConn(ActionEvent event) throws IOException {
@@ -188,11 +285,9 @@ public class MainController implements Initializable {
     void OnClickPatient(ActionEvent event) throws IOException, SQLException {
         PatientPaneController ppc = new PatientPaneController();
         ObservableList obPatient = FXCollections.observableArrayList();
-
         DBH.patientDAO pdo = new patientDAO();
         obPatient = pdo.selectPatients();
         System.out.println("==========" + obPatient);
-
         System.out.println("Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("PatientManagementPane");
@@ -269,21 +364,27 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(view);
     }
 
+    @FXML
+    public void mouseEnterpanelLogin(MouseEvent event) throws InterruptedException {
+        ManualSetOpenNav();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-        clockTicker();
-        FxmlLoader object = new FxmlLoader();
-        Pane view2 = null;
         try {
-            view2 = object.getPage("SignInPane");
-        } catch (IOException e) {
+            loginpane = BorderMainPane.getCenter();
+            setDisableAllButtons();
+            setDisableAllButtons();
+            clockTicker();
+            ManualSetCloseNav();
+            drawerAction();
+            users = uiDAO.SelectAll();
+            System.out.println(users);
+            ProgressBarLoading.setVisible(false);
+            LabelLoading.setVisible(false);
+        } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         }
-        BorderMainPane.setCenter(view2);
-        drawerAction();
 
     }
 
@@ -303,8 +404,10 @@ public class MainController implements Initializable {
     }
 
     public void setDisableAllButtons() {
-
-        System.out.println("Opened Loader");
+        BtnAddNurse.setDisable(true);
+        BtnEditNurse.setDisable(true);
+        BtnAddPatient.setDisable(true);
+        BtnEditPatient.setDisable(true);
         BtnPatient.setDisable(true);
         BtnMeals.setDisable(true);
         BtnMed.setDisable(true);
@@ -314,6 +417,25 @@ public class MainController implements Initializable {
         BtnSett.setDisable(true);
         LogoHome.setDisable(true);
         BtnNursing.setDisable(true);
+        BtnCrudMed.setDisable(true);
+    }
+
+    public void setEnableAllButtons() {
+
+        BtnAddNurse.setDisable(false);
+        BtnEditNurse.setDisable(false);
+        BtnAddPatient.setDisable(false);
+        BtnEditPatient.setDisable(false);
+        BtnPatient.setDisable(false);
+        BtnMeals.setDisable(false);
+        BtnMed.setDisable(false);
+        BtnReports.setDisable(false);
+        BtnMeeting.setDisable(false);
+        BtnConn.setDisable(false);
+        BtnSett.setDisable(false);
+        LogoHome.setDisable(false);
+        BtnNursing.setDisable(false);
+        BtnCrudMed.setDisable(false);
     }
 
 

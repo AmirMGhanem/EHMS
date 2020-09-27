@@ -3,6 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,6 +18,11 @@
 
 <AnchorPane fx:id="AnchorMainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1530.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
+      <ImageView fitHeight="1180.0" fitWidth="1553.0" layoutX="4.0" layoutY="-197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/SpaceBG.png" />
+         </image>
+      </ImageView>
       <BorderPane fx:id="BorderMainPane" layoutX="2.0" prefHeight="801.0" prefWidth="1530.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <left>
             <VBox fx:id="NavBox" alignment="TOP_CENTER" prefHeight="740.0" prefWidth="295.0" style="-fx-background-color: #d6d6d6;" styleClass="VBox" BorderPane.alignment="CENTER">
@@ -25,7 +33,7 @@
                            <children>
                               <ImageView fx:id="LogoHome" fitHeight="99.0" fitWidth="104.0" layoutX="164.0" layoutY="35.0" onMouseClicked="#LogoHomeClicked" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/LOGO.png" />
+                                    <Image url="@/Images/LOGO.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="228.0" layoutY="79.0" prefHeight="22.0" prefWidth="95.0" rotate="-90.0" text="Notification" textFill="#2879d0">
@@ -35,7 +43,7 @@
                               </Label>
                               <ImageView fx:id="ImageSlide" fitHeight="32.0" fitWidth="38.0" layoutX="259.0" layoutY="3.0" onMouseClicked="#OnMouseClickedSlide" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Images/slidebutton.png" />
+                                    <Image url="@/Images/slidebutton.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="14.0" layoutY="43.0" prefHeight="41.0" prefWidth="124.0" text="EHMS" textFill="#2879d0">
@@ -51,7 +59,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="54.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/therapist.png" />
+                              <Image url="@/Images/therapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -64,7 +72,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/addTherapist.png" />
+                              <Image url="@/Images/addTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -79,7 +87,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/EditTherapist.png" />
+                              <Image url="@/Images/EditTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -92,7 +100,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="65.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/patient.png" />
+                              <Image url="@/Images/patient.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -108,7 +116,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/addTherapist.png" />
+                              <Image url="@/Images/addTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -121,7 +129,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/EditTherapist.png" />
+                              <Image url="@/Images/EditTherapist.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -134,7 +142,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="47.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/meal.png" />
+                              <Image url="@/Images/meal.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -150,7 +158,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/medicine.png" />
+                              <Image url="@/Images/medicine.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -166,7 +174,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/medicineCRUD.png" />
+                              <Image url="@/Images/medicineCRUD.png" />
                            </image>
                            <HBox.margin>
                               <Insets left="55.0" right="15.0" />
@@ -179,7 +187,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="46.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/staff.png" />
+                              <Image url="@/Images/staff.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -195,7 +203,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="46.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/reports.png" />
+                              <Image url="@/Images/reports.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -208,7 +216,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/connection.png" />
+                              <Image url="@/Images/connection.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -224,7 +232,7 @@
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Images/settings.png" />
+                              <Image url="@/Images/settings.png" />
                            </image>
                            <HBox.margin>
                               <Insets />
@@ -277,6 +285,70 @@
                </items>
             </ToolBar>
          </top>
+         <center>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ProgressBar fx:id="ProgressBarLoading" layoutX="346.0" layoutY="611.0" prefHeight="37.0" prefWidth="596.0" progress="0.0" />
+                  <Label fx:id="LabelLoading" alignment="CENTER" layoutX="420.0" layoutY="636.0" prefHeight="101.0" prefWidth="419.0" text="Loading... successfully Logged In " textAlignment="CENTER" textFill="#00dd37">
+                     <font>
+                        <Font name="Arial Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="183.0" fitWidth="163.0" layoutX="548.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/healthEarth.png" />
+                     </image>
+                  </ImageView>
+                  <Pane fx:id="panelLogin" layoutX="349.0" layoutY="152.0" onMouseEntered="#mouseEnterpanelLogin" prefHeight="444.0" prefWidth="596.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-border-width: 5px;">
+                     <children>
+                        <Button fx:id="BtnLogIn" layoutX="297.0" layoutY="265.0" mnemonicParsing="false" onAction="#OnClickLogin" styleClass="Button" text="Log In" />
+                        <Label layoutX="148.0" layoutY="158.0" text="UserName : ">
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="153.0" layoutY="198.0" text="Password :">
+                           <font>
+                              <Font name="System Bold Italic" size="17.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="TextFieldUsername" layoutX="260.0" layoutY="158.0" />
+                        <PasswordField fx:id="TextFieldPassword" layoutX="259.0" layoutY="198.0" />
+                        <Label alignment="CENTER" layoutX="77.0" layoutY="54.0" prefHeight="49.0" prefWidth="246.0" text="Login Here ↓" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial Bold Italic" size="33.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="181.0" fitWidth="293.0" layoutX="1014.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/barcodeHint.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="542.0" fitWidth="257.0" layoutX="55.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Images/png1.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="LabelLoading1" alignment="CENTER" layoutX="912.0" layoutY="337.0" prefHeight="50.0" prefWidth="350.0" text="Having Trouble With Signing In ? " textAlignment="CENTER" textFill="#27432d">
+                     <font>
+                        <Font name="Arial Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LabelLoading11" alignment="CENTER" layoutX="912.0" layoutY="367.0" prefHeight="50.0" prefWidth="350.0" text="Scan The Barcode Below" textAlignment="CENTER" textFill="#27432d">
+                     <font>
+                        <Font name="Arial Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="LabelLoading111" alignment="CENTER" layoutX="912.0" layoutY="397.0" prefHeight="50.0" prefWidth="350.0" text="↓↓↓↓↓" textAlignment="CENTER" textFill="#27432d">
+                     <font>
+                        <Font name="Arial Bold Italic" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

@@ -1,10 +1,12 @@
 package Util;
 
 import Model.*;
+import javafx.concurrent.Task;
 
 import javax.swing.*;
 
-public interface Service {
+public interface Service<I extends Number> {
+    Task createTask();
 /*
     //***************************************************************** Files Adding *****************************************************************
     public void addTherapistToFile(Therapist t);                   //Add Therapist To File
