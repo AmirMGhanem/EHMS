@@ -5,28 +5,25 @@ import java.util.Objects;
 public class UserInfo {
     private String username;
     private String password;
-    private DatabaseConnectingInfo databaseConnectingInfo;
 
-    public UserInfo() {
+
+    public UserInfo(String username,String password,int key) {  // Selecting from DB ----  String -> object
+    setUsername(DecryptUser(username,key));
+    setPassword(DecryptPassword(password,key));
     }
 
     public UserInfo(String username, String password) {
-        this.username = username;
-        this.password = password;
+        setUsername(EncryptUser(username));
+        setPassword(EncryptPassword(password));
     }
 
-    public UserInfo(String username, String password, String patientID) {
-        this.username = username;
-        this.password = password;
-
-    }
 
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username=username;
     }
 
     public String getPassword() {
@@ -34,18 +31,59 @@ public class UserInfo {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+       this.password =password;
     }
 
-    public DatabaseConnectingInfo getDatabaseConnectingInfo() {
-        return databaseConnectingInfo;
+    //--------------------------------------------------- Cryptograph ->  (encryption / decryption)  ---------------------------------------------
+
+    private String EncryptUser(String username) {
+        int key = 666;
+        char[] encryptcharArray = username.toCharArray();
+        for (int i = 0; i < encryptcharArray.length; i++)
+            encryptcharArray[i] += key;
+        String encryptedstr = "";
+        for (int i = 0; i < encryptcharArray.length; i++)
+            encryptedstr += encryptcharArray[i];
+
+        return encryptedstr;
     }
 
-    public void setDatabaseConnectingInfo(DatabaseConnectingInfo databaseConnectingInfo) {
-        this.databaseConnectingInfo = databaseConnectingInfo;
+    private String DecryptUser(String encryptedusername, int key) {
+
+        char[] DecryptCharArray = encryptedusername.toCharArray();
+        for (int i = 0; i < DecryptCharArray.length; i++)
+            DecryptCharArray[i] -= key;
+        String Decryptedstr = "";
+        for (int i = 0; i < DecryptCharArray.length; i++)
+            Decryptedstr += DecryptCharArray[i];
+        return Decryptedstr;
     }
 
-//-------------Equals And Hash Code-------------------
+
+    private String EncryptPassword(String password) {
+        int key = 666;
+        char[] encryptcharArray = password.toCharArray();
+        for (int i = 0; i < encryptcharArray.length; i++)
+            encryptcharArray[i] += key;
+        String encryptedstr = "";
+        for (int i = 0; i < encryptcharArray.length; i++)
+            encryptedstr += encryptcharArray[i];
+        return encryptedstr;
+    }
+
+    private String DecryptPassword(String encryptedpassword, int key) {
+
+        char[] DecryptCharArray = encryptedpassword.toCharArray();
+        for (int i = 0; i < DecryptCharArray.length; i++)
+            DecryptCharArray[i] -= key;
+        String Decryptedstr = "";
+        for (int i = 0; i < DecryptCharArray.length; i++)
+            Decryptedstr += DecryptCharArray[i];
+        return Decryptedstr;
+    }
+
+
+//--------------------------------------------------------------Equals And Hash Code----------------------------------------------------
 
 
     @Override
@@ -54,13 +92,13 @@ public class UserInfo {
         if (o == null || getClass() != o.getClass()) return false;
         UserInfo userInfo = (UserInfo) o;
         return Objects.equals(username, userInfo.username) &&
-                Objects.equals(password, userInfo.password) &&
-                Objects.equals(databaseConnectingInfo, userInfo.databaseConnectingInfo);
+                Objects.equals(password, userInfo.password);
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, databaseConnectingInfo);
+        return Objects.hash(username, password);
     }
 
     @Override
@@ -68,7 +106,6 @@ public class UserInfo {
         return "UserInfo{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", databaseConnectingInfo=" + databaseConnectingInfo +
                 '}';
     }
 }

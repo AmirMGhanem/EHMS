@@ -302,5 +302,19 @@ public class MainController implements Initializable {
         BorderMainPane.getStylesheets().add(css);
     }
 
+    public void setDisableAllButtons() {
+
+        System.out.println("Opened Loader");
+        BtnPatient.setDisable(true);
+        BtnMeals.setDisable(true);
+        BtnMed.setDisable(true);
+        BtnReports.setDisable(true);
+        BtnMeeting.setDisable(true);
+        BtnConn.setDisable(true);
+        BtnSett.setDisable(true);
+        LogoHome.setDisable(true);
+        BtnNursing.setDisable(true);
+    }
+
 
 }

@@ -5,6 +5,7 @@ import DBH.patientDAO;
 import Model.Notification;
 import Model.Patient;
 import Model.Request;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public  class ApplicationNetwork extends Thread {
+public class ApplicationNetwork extends Thread {
 
     DBH.patientDAO pDAO = new patientDAO();
     ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
@@ -28,9 +29,10 @@ public  class ApplicationNetwork extends Thread {
             ServerSocket ss = new ServerSocket(6666);
             while (true) {
                 Socket s = ss.accept();
-                System.out.println("A Request Has Been Arrived From Patient ->");
+                System.out.println("A Request Has Been Arrived From ->");
                 DataInputStream input = new DataInputStream(s.getInputStream());
                 msg = input.readUTF();
+                System.out.println(msg);
                 MessageFetcher(msg);
                 input.close();
                 s.close();
@@ -45,44 +47,61 @@ public  class ApplicationNetwork extends Thread {
 
     public void MessageFetcher(String msg) throws SQLException {
         //Fetching msg ->> id + request
-        String[] splittedMsg = new String[2];
+        String[] splittedMsg;
         splittedMsg = msg.split(" -> ");
-        String id = splittedMsg[0];
-        String message = splittedMsg[1];
-        patientArrayList = pDAO.selectAll();
-        Patient patient = null;
-        for (Patient p : patientArrayList) {
-            if (id.equals(p.getID()))
-                patient = p;
-        }
-        if (patient != null) {
-            //creating instance of object
-            Request request = new Request();
-            Notification notification = new Notification();
-            notification.setDate(new Date());
-            notification.setPatient(patient);
-            switch (message) {
-                case "water":
-                    request.setType("Low Urgency");
-                    request.setDescription("Patient-> " + notification.getPatient().getName() + " Needs Water");
-                    break;
-                case "meal":
-                    request.setType("Medium Urgency");
-                    request.setDescription("Patient-> " + notification.getPatient().getName() + " Needs Meal");
-                    break;
-                case "toilet":
-                    request.setType("Medium Urgency");
-                    request.setDescription("Patient-> " + notification.getPatient().getName() + " Needs Toilet");
-                    break;
-                case "emergency":
-                    request.setType("Critical Urgency");
-                    request.setDescription(" Patient-> " + notification.getPatient().getName() + " Needs YOU");
-                    break;
-            }
-            notification.setRequest(request);
-            nDAO.insertNotification(notification);
 
-            System.out.println(notification.toString());
+        if (!splittedMsg[0].equals("T")) {
+
+            String id = splittedMsg[0];
+            String message = splittedMsg[1];
+            patientArrayList = pDAO.selectAll();
+            Patient patient = null;
+            for (Patient p : patientArrayList) {
+                if (id.equals(p.getID()))
+                    patient = p;
+            }
+            if (patient != null) {
+                //creating instance of object
+                Request request = new Request();
+                Notification notification = new Notification();
+                notification.setDate(new Date());
+                notification.setPatient(patient);
+                switch (message) {
+                    case "water":
+                        request.setType("Low Urgency");
+                        request.setDescription("Patient-> " + notification.getPatient().getName() + " Needs Water");
+                        break;
+                    case "meal":
+                        request.setType("Medium Urgency");
+                        request.setDescription("Patient-> " + notification.getPatient().getName() + " Needs Meal");
+                        break;
+                    case "toilet":
+                        request.setType("Medium Urgency");
+                        request.setDescription("Patient-> " + notification.getPatient().getName() + " Needs Toilet");
+                        break;
+                    case "emergency":
+                        request.setType("Critical Urgency");
+                        request.setDescription(" Patient-> " + notification.getPatient().getName() + " Needs YOU");
+                        break;
+                }
+                notification.setIsTreated("false");
+                notification.setRequest(request);
+                nDAO.insertNotification(notification);
+
+                System.out.println(notification.toString());
+            }
+
         }
+
+        if(splittedMsg[0].equals("T"))
+        {
+            String TherapistID = splittedMsg[1];
+            String RequestNumber = splittedMsg[2];
+            System.out.println(TherapistID + " in process with Request Number "+RequestNumber);
+            nDAO.UpdateNotificationToTreated(Integer.parseInt(RequestNumber));
+
+        }
+
+
     }
 }

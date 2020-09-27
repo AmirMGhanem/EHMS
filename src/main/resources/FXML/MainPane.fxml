@@ -27,14 +27,15 @@
                   </Label>
                </children>
             </Pane>
-            <TableView fx:id="TableViewNotifications" layoutX="50.0" layoutY="123.0" prefHeight="280.0" prefWidth="1147.0" styleClass="Table">
+            <TableView fx:id="TableViewNotifications" layoutX="15.0" layoutY="123.0" prefHeight="280.0" prefWidth="1147.0" styleClass="Table">
                <columns>
                   <TableColumn fx:id="ColNum" prefWidth="91.99999713897705" styleClass="TableCol" text="No." />
                   <TableColumn fx:id="ColType" minWidth="0.0" prefWidth="121.60000610351562" styleClass="TableCol" text="Request Type" />
                   <TableColumn fx:id="ColDesc" minWidth="0.0" prefWidth="275.1999816894531" styleClass="TableCol" text="Request Description" />
                   <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="176.800048828125" styleClass="TableCol" text="Patient Name" />
                   <TableColumn fx:id="ColPatientID" minWidth="0.0" prefWidth="183.20001220703125" styleClass="TableCol" text="Patient ID" />
-                  <TableColumn fx:id="ColTime" minWidth="0.0" prefWidth="187.20013427734375" styleClass="TableCol" text="Time" />
+                  <TableColumn fx:id="ColTime" minWidth="0.0" prefWidth="176.0" styleClass="TableCol" text="Date" />
+                  <TableColumn fx:id="ColTreated" minWidth="0.0" prefWidth="114.0" styleClass="TableCol" text="Is Treated?" />
                </columns>
             </TableView>
             <Pane layoutX="1089.0" layoutY="415.0" prefHeight="150.0" prefWidth="159.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;" styleClass="Pane">
@@ -86,6 +87,30 @@
                </yAxis>
             </BarChart>
             <ChoiceBox fx:id="ChoicePatient" layoutX="512.0" layoutY="418.0" onAction="#onSelectPatient" prefWidth="150.0" styleClass="Choice" />
+            <Pane layoutX="1220.0" layoutY="327.0" prefHeight="15.0" prefWidth="17.0" style="-fx-background-color: #70ff4d;" />
+            <Pane layoutX="1220.0" layoutY="264.0" prefHeight="15.0" prefWidth="17.0" style="-fx-background-color: #ff383f;" />
+            <Pane layoutX="1219.0" layoutY="204.0" prefHeight="15.0" prefWidth="17.0" style="-fx-background-color: #f9ff57;" />
+            <Pane layoutX="1219.0" layoutY="144.0" prefHeight="15.0" prefWidth="17.0" style="-fx-background-color: #66a3ff;" />
+            <Label layoutX="1165.0" layoutY="143.0" text="Low">
+               <font>
+                  <Font name="Courier New Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1165.0" layoutY="203.0" text="Medium">
+               <font>
+                  <Font name="Courier New Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1165.0" layoutY="263.0" text="High">
+               <font>
+                  <Font name="Courier New Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="1165.0" layoutY="326.0" text="Treated">
+               <font>
+                  <Font name="Courier New Bold Italic" size="12.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
