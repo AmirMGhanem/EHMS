@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressBar?>
@@ -28,28 +27,18 @@
             <Pane layoutX="53.0" layoutY="324.0" prefHeight="245.0" prefWidth="468.0" style="-fx-background-color: #787878; -fx-border-color: #59b7ff; -fx-border-width: 5px;">
                <children>
                   <Button fx:id="BtnLogIn" layoutX="215.0" layoutY="204.0" mnemonicParsing="false" onAction="#OnClickLogin" styleClass="Button" text="Log In" />
-                  <Label layoutX="66.0" layoutY="87.0" text="UserName : ">
+                  <Label layoutX="66.0" layoutY="97.0" text="UserName : ">
                      <font>
                         <Font name="System Bold Italic" size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="71.0" layoutY="127.0" text="Password :">
+                  <Label layoutX="71.0" layoutY="137.0" text="Password :">
                      <font>
                         <Font name="System Bold Italic" size="17.0" />
                      </font>
                   </Label>
-                  <Label layoutX="78.0" layoutY="158.0" text="Admin :">
-                     <font>
-                        <Font name="System Bold Italic" size="17.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="TextFieldUsername" layoutX="178.0" layoutY="87.0" />
-                  <PasswordField fx:id="TextFieldPassword" layoutX="177.0" layoutY="127.0" />
-                  <CheckBox fx:id="CheckBoxIsAdmin" layoutX="177.0" layoutY="162.0" mnemonicParsing="false" styleClass="CheckBox" text="Check if Yes">
-                     <font>
-                        <Font name="System Bold Italic" size="17.0" />
-                     </font>
-                  </CheckBox>
+                  <TextField fx:id="TextFieldUsername" layoutX="178.0" layoutY="97.0" />
+                  <PasswordField fx:id="TextFieldPassword" layoutX="177.0" layoutY="137.0" />
                   <Label alignment="CENTER" layoutX="8.0" layoutY="14.0" prefHeight="37.0" prefWidth="191.0" text="Admin ?" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Bold Italic" size="32.0" />

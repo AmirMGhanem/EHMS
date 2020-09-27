@@ -8,18 +8,19 @@ public class Notification {
     private Request request;
     private Patient patient;
     private Date date;
+    private String isTreated;
 
 
     public Notification() {
 
     }
 
-    public Notification(int num, Request request, Patient patient,Date date) {
+    public Notification(int num, Request request, Patient patient,Date date,String isTreated) {
         setNum(num);
         setPatient(patient);
         setRequest(request);
         setDate(date);
-
+        setIsTreated(isTreated);
     }
 
     public int getNum() {
@@ -55,7 +56,13 @@ public class Notification {
 
     }
 
+    public String getIsTreated() {
+        return isTreated;
+    }
 
+    public void setIsTreated(String isTreated) {
+        this.isTreated = isTreated;
+    }
 
     @Override
     public String toString() {

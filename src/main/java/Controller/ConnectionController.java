@@ -1,5 +1,8 @@
 package Controller;
 
+import DBH.userInfoDAO;
+import Model.UserInfo;
+import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,13 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ConnectionController implements Initializable {
 
+    DBH.userInfoDAO uiDAo= new userInfoDAO();
+    MessageAlerter ma = new MessageAlerter();
 
     @FXML
     private Pane parent;
@@ -27,36 +33,16 @@ public class ConnectionController implements Initializable {
     @FXML
     private TextField TextFieldRegisterPass;
 
-    @FXML
-    private TextField TextFieldRegisterID;
+
 
     @FXML
-    private Button BtnCheck;
+    void OnClickBtnRegister(ActionEvent event) throws SQLException {
 
-    @FXML
-    private TextField TextFieldUserName;
+        UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(),TextFieldRegisterPass.getText());
 
-    @FXML
-    private TextField TextFieldPassword;
+        uiDAo.inserUser(ui);
 
-    @FXML
-    private Button BtnEstablishConnection;
 
-    @FXML
-    private TextField TextFieldDataBase;
-
-    @FXML
-    void OnClickBtnCheck(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnClickBtnRegister(ActionEvent event) {
-
-    }
-
-    @FXML
-    void OnClickEstablishConn(ActionEvent event) {
 
     }
 

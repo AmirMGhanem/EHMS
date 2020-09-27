@@ -1,6 +1,8 @@
 package Controller;
 
 import DBH.patientDAO;
+import DBH.userInfoDAO;
+import Model.UserInfo;
 import Util.FxmlLoader;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,18 +22,23 @@ import javafx.scene.layout.Pane;
 import org.jboss.jandex.Main;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 public class SignInPaneController implements Initializable {
 
+    ArrayList<UserInfo> users = new ArrayList<UserInfo>();
+    DBH.userInfoDAO uiDAO=new userInfoDAO();
+
     @FXML private Pane parent;
     @FXML private Button BtnLogIn;
     @FXML private TextField TextFieldUsername;
     @FXML private PasswordField TextFieldPassword;
-    @FXML private CheckBox CheckBoxIsAdmin;
     @FXML private ImageView ImageViewTherapistPane;
     @FXML private ImageView ImageViewTherapistExportPDF1;
     @FXML private ImageView ImageViewTherapistExportPDF2;
@@ -49,6 +56,7 @@ public class SignInPaneController implements Initializable {
     void OnClickLogin(ActionEvent event) throws InterruptedException {
     ProgressBarLoading.setVisible(true);
     LabelLoading.setVisible(true);
+
     }
 
     @FXML
@@ -93,8 +101,26 @@ public class SignInPaneController implements Initializable {
 
     }
 
+
+
+
+
+
+
+
+
+
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle)  {
+
+
+        try {
+            users = uiDAO.SelectAll();
+            System.out.println(users);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         CssStyler();
         ProgressBarLoading.setVisible(false);

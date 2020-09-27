@@ -14,13 +14,14 @@ public class notificationDAO {
 
 
     public int insertNotification(Notification n) throws SQLException {
-        String sql = "insert into notification(request_type, request_desc,patient_id,patient_name,date) values(?,?,?,?,?)";
+        String sql = "insert into notification(request_type, request_desc,patient_id,patient_name,date,istreated) values(?,?,?,?,?,?)";
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, n.getRequest().getType());
         ps.setString(2, n.getRequest().getDescription());
         ps.setString(3, n.getPatient().getID());
         ps.setString(4, n.getPatient().getName());
         ps.setDate(5, new java.sql.Date(n.getDate().getTime()));
+        ps.setString(6,n.getIsTreated());
 
         int rows = ps.executeUpdate();
 
@@ -37,8 +38,6 @@ public class notificationDAO {
         ResultSet rs = ps.executeQuery();
         patientArrayList = pDAO.selectAll();
         while(rs.next()) {
-
-
             Request r = new Request(rs.getString("request_type"), rs.getString("request_desc"));
             Notification n = new Notification();
             n.setNum(rs.getInt("num"));
@@ -48,6 +47,7 @@ public class notificationDAO {
             }
             n.setRequest(r);
             n.setDate(rs.getDate("date"));
+            n.setIsTreated(rs.getString("istreated"));
             list.add(n);
         }
         ps.close();
@@ -73,8 +73,7 @@ public class notificationDAO {
             }
             n.setRequest(r);
             n.setDate(rs.getDate("date"));
-
-
+            n.setIsTreated(rs.getString("istreated"));
         }
         return n;
 
@@ -90,5 +89,17 @@ public class notificationDAO {
         }
         return numberRow;
     }
+
+
+
+    public void UpdateNotificationToTreated(int num) throws SQLException {
+        String sql1 = "update notification SET istreated = ? where num = ?";
+        PreparedStatement ps = con.prepareStatement(sql1);
+        ps.setString(1, "true");
+        ps.setInt(2,num);
+        int rows = ps.executeUpdate();
+        ps.close();
+    }
+
 
 }

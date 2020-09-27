@@ -70,7 +70,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     BarChart.Data patienttoiletdata;
     BarChart.Data patientemergencydata;
 
-    int size ;
+    int size;
 
 
     @FXML
@@ -94,6 +94,10 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
     @FXML
     private TableColumn<Notification, Date> ColTime;
+
+    @FXML
+    private TableColumn<Notification, String> ColTreated;
+
     @FXML
     private PieChart PieChartRequests;
 
@@ -194,15 +198,15 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     }
 
     public static void TerminateThread() {
-        if (t.isAlive()){
+        if (t.isAlive()) {
             t.stop();
             System.out.println(t.getName() + "- terminated!!");
         }
     }
 
     public static void LaunchThread() {
-            t.start();
-            System.out.println(t.getName() + "- Started!!");
+        t.start();
+        System.out.println(t.getName() + "- Started!!");
 
     }
 
@@ -214,6 +218,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         ColPatientID.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getPatient().getID()));
         ColPatientName.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getPatient().getName()));
         ColTime.setCellValueFactory(new PropertyValueFactory<Notification, Date>("date"));
+        ColTreated.setCellValueFactory(new PropertyValueFactory<Notification, String>("isTreated"));
 
         //add your data to the table here.
         JavafxTableFill();
@@ -270,8 +275,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     }
 
 
-
-    private void MediaPlayerBeep(){
+    private void MediaPlayerBeep() {
         try {
             if (size < notificationArrayList.size()) {
                 String path = new File("src/main/resources/Sound/tone.mp3").getAbsolutePath();
@@ -327,8 +331,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
     }
 
-    private void CssStyler()
-    {
+    private void CssStyler() {
         FXMLLoader loader = new FXMLLoader();
 
         try {
@@ -352,7 +355,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
         CssStyler();
 
-            try {
+        try {
             TableInit();
             JavafxChoiceFill();
             LabelActiveTherapist.setText(Integer.toString(tDAO.getCount()));
@@ -364,19 +367,39 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         ColNum.setSortType(TableColumn.SortType.ASCENDING);
         TableViewNotifications.getSortOrder().add(ColNum);
         TableViewNotifications.sort();
-
+        ColTreated.setCellFactory(column -> {
+            return new TableCell<Notification, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    TableRow currentRow = getTableRow();
+                    if (item == null || empty)
+                        setText(null);
+                    else {
+                        setText(item);
+                        String istreated = item;
+                        if (istreated.equals("true")) {
+                            currentRow.setStyle("-fx-background-color : #70ff4d;");
+                            setStyle("-fx-text-fill : #ffffff;");
+                        }
+                    }
+                }
+            };
+        });
         ColType.setCellFactory(column -> {
             return new TableCell<Notification, String>() {
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
+                    TableRow currentRow = getTableRow();
                     if (item == null || empty) {
                         setText(null);
+                        currentRow.setStyle("-fx-background-color : #inherited");
                     } else {
                         setText(item);
                         // Style by Urgency Level
                         String urgency = item;
-                        TableRow currentRow = getTableRow();
+
                         if (urgency.equals("Low Urgency")) {
                             currentRow.setStyle("-fx-background-color: #66a3ff;");
                         } else if (urgency.equals("Medium Urgency"))
@@ -384,7 +407,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
                         else if (urgency.equals("Critical Urgency"))
                             currentRow.setStyle("-fx-background-color: #ff383f;");
                         else
-                            currentRow.setStyle("-fx-background-color : inherited");
+                            currentRow.setStyle("-fx-background-color : #000000");
                     }
                 }
             };
@@ -397,14 +420,14 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     }
 
 
-    private void NotificationRefresherThreadCreator(){
+    private void NotificationRefresherThreadCreator() {
         t = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (t.isAlive()) {
                     try {
                         System.out.println("Refreshing in one second");
-                        size= notificationArrayList.size();
+                        size = notificationArrayList.size();
                         manualRefreshingTable();
                         MediaPlayerBeep();
                         BarChartRefresher();
