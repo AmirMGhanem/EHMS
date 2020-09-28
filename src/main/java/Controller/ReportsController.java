@@ -11,15 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.printing.PDFPageable;
 
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.desktop.PrintFilesEvent;
-import java.awt.desktop.PrintFilesHandler;
 import java.awt.print.*;
 import java.io.File;
 import java.io.IOException;
@@ -28,27 +21,43 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReportsController implements Initializable {
-    @FXML private Pane parent;
-    @FXML private TextField TextFieldID;
-    @FXML private RadioButton RadioTherapist;
-    @FXML private RadioButton RadioPatient;
-    @FXML private RadioButton RadioStaff;
-    @FXML private Button BtnPreview;
-    @FXML private Button BtnClear;
-    @FXML private CheckBox CheckBoxMedicine;
-    @FXML private CheckBox CheckBoxAllergies;
-    @FXML private CheckBox CheckBoxMeals;
-    @FXML private CheckBox CheckBoxRequests;
-    @FXML private CheckBox CheckBoxPresonalInfo;
-    @FXML private CheckBox CheckBoxAddress;
-    @FXML private CheckBox CheckBoxHR;
-    @FXML private CheckBox CheckBoxSchedule;
-    @FXML private Button BtnDeSelectAll;
-    @FXML private Button BtnSelectAll;
-    @FXML private ImageView ImageViewTherapistExportPDF1;
-    @FXML private ImageView ImageViewTherapistExportPDF2;
-    @FXML private ImageView ImageViewTherapistExportFile1;
-    @FXML private ImageView ImageViewTherapistExportFile2;
+    @FXML
+    private Pane parent;
+    @FXML
+    private TextField TextFieldID;
+    @FXML
+    private RadioButton RadioTherapist;
+    @FXML
+    private RadioButton RadioPatient;
+    @FXML
+    private Button BtnPreview;
+    @FXML
+    private Button BtnClear;
+    @FXML
+    private CheckBox CheckBoxMedicine;
+    @FXML
+    private CheckBox CheckBoxAllergies;
+    @FXML
+    private CheckBox CheckBoxMeals;
+    @FXML
+    private CheckBox CheckBoxRequests;
+    @FXML
+    private CheckBox CheckBoxPresonalInfo;
+    @FXML
+    private CheckBox CheckBoxAddress;
+    @FXML
+    private Button BtnDeSelectAll;
+    @FXML
+    private Button BtnSelectAll;
+
+    @FXML
+    private ImageView ImageViewTherapistExportPDF1;
+    @FXML
+    private ImageView ImageViewTherapistExportPDF2;
+    @FXML
+    private ImageView ImageViewTherapistExportFile1;
+    @FXML
+    private ImageView ImageViewTherapistExportFile2;
 
     public ArrayList<Report> ALREPORTS = new ArrayList<Report>();
     ToggleGroup radioGroup;
@@ -57,16 +66,18 @@ public class ReportsController implements Initializable {
 
     @FXML
     void OnClickClear(ActionEvent event) {
+        CheckBoxMedicine.setDisable(false);
+        CheckBoxAllergies.setDisable(false);
+        CheckBoxMeals.setDisable(false);
+        CheckBoxRequests.setDisable(false);
+
         CheckBoxMedicine.setSelected(false);
         CheckBoxAllergies.setSelected(false);
         CheckBoxMeals.setSelected(false);
         CheckBoxRequests.setSelected(false);
         CheckBoxPresonalInfo.setSelected(false);
         CheckBoxAddress.setSelected(false);
-        CheckBoxHR.setSelected(false);
-        CheckBoxSchedule.setSelected(false);
         RadioTherapist.setSelected(false);
-        RadioStaff.setSelected(false);
         RadioPatient.setSelected(false);
         TextFieldID.setText("");
     }
@@ -79,8 +90,7 @@ public class ReportsController implements Initializable {
         CheckBoxRequests.setSelected(false);
         CheckBoxPresonalInfo.setSelected(false);
         CheckBoxAddress.setSelected(false);
-        CheckBoxHR.setSelected(false);
-        CheckBoxSchedule.setSelected(false);
+
     }
 
     @FXML
@@ -88,20 +98,42 @@ public class ReportsController implements Initializable {
 
         RadioButton selectedRadioButton = (RadioButton) radioGroup.getSelectedToggle();
         String toogleGroupValue = selectedRadioButton.getText();
-        if (CheckBoxMedicine.isSelected())
-            TextFieldID.setText(toogleGroupValue);
+
     }
+
 
     @FXML
     void OnClickSelectAll(ActionEvent event) {
-        CheckBoxMedicine.setSelected(true);
-        CheckBoxAllergies.setSelected(true);
-        CheckBoxMeals.setSelected(true);
-        CheckBoxRequests.setSelected(true);
-        CheckBoxPresonalInfo.setSelected(true);
-        CheckBoxAddress.setSelected(true);
-        CheckBoxHR.setSelected(true);
-        CheckBoxSchedule.setSelected(true);
+        RadioButton selectedRadioButton = (RadioButton) radioGroup.getSelectedToggle();
+        if (selectedRadioButton.getText().equals("Therapist")) {
+            CheckBoxPresonalInfo.setSelected(true);
+            CheckBoxAddress.setSelected(true);
+            CheckBoxMedicine.setDisable(true);
+            CheckBoxAllergies.setDisable(true);
+            CheckBoxMeals.setDisable(true);
+            CheckBoxRequests.setDisable(true);
+        } else if (selectedRadioButton.getText().equals("Patient")) {
+            CheckBoxPresonalInfo.setSelected(true);
+            CheckBoxAddress.setSelected(true);
+            CheckBoxMedicine.setDisable(false);
+            CheckBoxAllergies.setDisable(false);
+            CheckBoxMeals.setDisable(false);
+            CheckBoxRequests.setDisable(false);
+
+            CheckBoxMedicine.setSelected(true);
+            CheckBoxAllergies.setSelected(true);
+            CheckBoxMeals.setSelected(true);
+            CheckBoxRequests.setSelected(true);
+
+        } else {
+            CheckBoxPresonalInfo.setSelected(true);
+            CheckBoxAddress.setSelected(true);
+            CheckBoxMedicine.setSelected(true);
+            CheckBoxAllergies.setSelected(true);
+            CheckBoxMeals.setSelected(true);
+            CheckBoxRequests.setSelected(true);
+        }
+
     }
 
 
@@ -129,8 +161,6 @@ public class ReportsController implements Initializable {
         String filename = f.getAbsolutePath();
         System.out.println(filename);
 
-        // Desktop desktop = Desktop.getDesktop();
-        //  desktop.print(new File("src/main/resources/Files/PDF/PatientPDF.pdf"));
 
     }
 
@@ -139,12 +169,12 @@ public class ReportsController implements Initializable {
 
     }
 
+
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         radioGroup = new ToggleGroup();
         RadioPatient.setToggleGroup(radioGroup);
-        RadioStaff.setToggleGroup(radioGroup);
         RadioTherapist.setToggleGroup(radioGroup);
         CssStyler();
     }
@@ -166,5 +196,24 @@ public class ReportsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void onSelectTherapistRadio(ActionEvent event) {
+
+        CheckBoxMedicine.setDisable(true);
+        CheckBoxAllergies.setDisable(true);
+        CheckBoxMeals.setDisable(true);
+        CheckBoxRequests.setDisable(true);
+
+    }
+
+    @FXML
+    public void onSelectPatientRadio(ActionEvent event) {
+        CheckBoxMedicine.setDisable(false);
+        CheckBoxAllergies.setDisable(false);
+        CheckBoxMeals.setDisable(false);
+        CheckBoxRequests.setDisable(false);
+
     }
 }

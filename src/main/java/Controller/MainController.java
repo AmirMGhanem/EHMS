@@ -5,7 +5,6 @@ import DBH.therapistDAO;
 import DBH.userInfoDAO;
 import Model.UserInfo;
 import Util.FxmlLoader;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,7 +15,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.concurrent.Service;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -129,20 +127,19 @@ public class MainController implements Initializable {
     @FXML
     void OnClickLogin(ActionEvent event) throws InterruptedException, IOException {
 
-        for (UserInfo ui : users) {
-            if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
-                ProgressBarLoading.setVisible(true);
-                LabelLoading.setVisible(true);
-                ManualSetOpenNav();
-                setEnableAllButtons();
-                ProgressBarLoading.progressProperty().bind(thread.progressProperty());
-                thread.start();
-                thread.workDoneProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                        System.out.println(thread.workDoneProperty().get());
-                        if (thread.workDoneProperty().get() > 248.9) {
-                            try {
+                                for (UserInfo ui : users) {
+                                    if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
+                                        ProgressBarLoading.setVisible(true);
+                                        LabelLoading.setVisible(true);
+                                        ManualSetOpenNav();
+                                        setEnableAllButtons();
+                                        ProgressBarLoading.progressProperty().bind(thread.progressProperty());
+                                        thread.start();
+                                        thread.workDoneProperty().addListener(new ChangeListener<Number>() {
+                                            @Override
+                                            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                                                if (thread.workDoneProperty().get() > 248.9) {
+                                                    try {
                             thread.cancel();
                                 OpenDashBoardManual();
                             } catch (IOException e) {
@@ -156,6 +153,13 @@ public class MainController implements Initializable {
             }
         }
 
+    }
+
+    public void OnClickEHMS(MouseEvent event)throws IOException{
+        System.out.println("Dashboard Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("SignInPane");
+        BorderMainPane.setCenter(view);
     }
 
     public void OpenDashBoardManual() throws IOException {

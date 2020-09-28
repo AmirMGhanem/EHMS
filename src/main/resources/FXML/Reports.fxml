@@ -31,25 +31,22 @@
                </font>
             </Label>
             <TextField fx:id="TextFieldID" layoutX="107.0" layoutY="187.0" styleClass="TextField" />
-            <Group layoutX="71.0" layoutY="226.0">
+            <Group layoutX="50.0" layoutY="223.0" >
                <children>
-                  <RadioButton fx:id="RadioTherapist" mnemonicParsing="false" styleClass="RadioButton" text="Therapist" />
-                  <RadioButton fx:id="RadioPatient" layoutY="24.0" mnemonicParsing="false" styleClass="RadioButton" text="Patient" />
-                  <RadioButton fx:id="RadioStaff" layoutY="48.0" mnemonicParsing="false" styleClass="RadioButton" text="Staff" />
+                  <RadioButton  fx:id="RadioTherapist" layoutX="24.0" layoutY="14.0" mnemonicParsing="false" styleClass="RadioButton" text="Therapist" onAction="#onSelectTherapistRadio" />
+                  <RadioButton fx:id="RadioPatient" layoutX="24.0" layoutY="38.0" mnemonicParsing="false" styleClass="RadioButton" text="Patient" onAction="#onSelectPatientRadio" />
                </children>
             </Group>
             <Button fx:id="BtnPreview" layoutX="212.0" layoutY="300.0" mnemonicParsing="false" onAction="#OnClickPreview" prefHeight="33.0" prefWidth="128.0" styleClass="Button" text="Preview " />
             <Button fx:id="BtnClear" layoutX="73.0" layoutY="300.0" mnemonicParsing="false" onAction="#OnClickClear" prefHeight="33.0" prefWidth="128.0" styleClass="Button" text="Clear" />
-            <CheckBox fx:id="CheckBoxMedicine" layoutX="629.0" layoutY="203.0" mnemonicParsing="false" styleClass="CheckBox" text="Medicines" />
-            <CheckBox fx:id="CheckBoxAllergies" layoutX="629.0" layoutY="228.0" mnemonicParsing="false" styleClass="CheckBox" text="Allergies" />
-            <CheckBox fx:id="CheckBoxMeals" layoutX="629.0" layoutY="253.0" mnemonicParsing="false" styleClass="CheckBox" text="Meals" />
-            <CheckBox fx:id="CheckBoxRequests" layoutX="629.0" layoutY="278.0" mnemonicParsing="false" styleClass="CheckBox" text="Last Requests" />
-            <CheckBox fx:id="CheckBoxPresonalInfo" layoutX="508.0" layoutY="203.0" mnemonicParsing="false" styleClass="CheckBox" text="Personal info" />
-            <CheckBox fx:id="CheckBoxAddress" layoutX="508.0" layoutY="228.0" mnemonicParsing="false" styleClass="CheckBox" text="Address" />
-            <CheckBox fx:id="CheckBoxHR" layoutX="508.0" layoutY="253.0" mnemonicParsing="false" styleClass="CheckBox" text="HR" />
-            <CheckBox fx:id="CheckBoxSchedule" layoutX="508.0" layoutY="278.0" mnemonicParsing="false" styleClass="CheckBox" text="Schedule" />
-            <Button fx:id="BtnDeSelectAll" layoutX="773.0" layoutY="251.0" mnemonicParsing="false" onAction="#OnClickDeSelectAll" prefHeight="33.0" prefWidth="128.0" styleClass="Button" text="Deselect All" />
-            <Button fx:id="BtnSelectAll" layoutX="773.0" layoutY="210.0" mnemonicParsing="false" onAction="#OnClickSelectAll" prefHeight="33.0" prefWidth="128.0" styleClass="Button" text="Select All" />
+            <CheckBox fx:id="CheckBoxMedicine" layoutX="530.0" layoutY="252.0" mnemonicParsing="false" styleClass="CheckBox" text="Medicines" />
+            <CheckBox fx:id="CheckBoxAllergies" layoutX="530.0" layoutY="277.0" mnemonicParsing="false" styleClass="CheckBox" text="Allergies" />
+            <CheckBox fx:id="CheckBoxMeals" layoutX="650.0" layoutY="249.0" mnemonicParsing="false" styleClass="CheckBox" text="Meals" />
+            <CheckBox fx:id="CheckBoxRequests" layoutX="650.0" layoutY="274.0" mnemonicParsing="false" styleClass="CheckBox" text="Requests" />
+            <CheckBox fx:id="CheckBoxPresonalInfo" layoutX="531.0" layoutY="226.0" mnemonicParsing="false" styleClass="CheckBox" text="Personal info" />
+            <CheckBox fx:id="CheckBoxAddress" layoutX="650.0" layoutY="224.0" mnemonicParsing="false" styleClass="CheckBox" text="Address" />
+            <Button fx:id="BtnDeSelectAll" layoutX="745.0" layoutY="270.0" mnemonicParsing="false" onAction="#OnClickDeSelectAll" prefHeight="33.0" prefWidth="128.0" styleClass="Button" text="Deselect All" />
+            <Button fx:id="BtnSelectAll" layoutX="745.0" layoutY="220.0" mnemonicParsing="false" onAction="#OnClickSelectAll" prefHeight="33.0" prefWidth="128.0" styleClass="Button" text="Select All" />
             <Pane layoutX="130.0" layoutY="449.0" onMouseClicked="#onClickPDF" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #000000; -fx-background-color: #59b7ff;">
                <children>
                   <ImageView fx:id="ImageViewTherapistExportPDF1" fitHeight="106.0" fitWidth="84.0" layoutX="42.0" layoutY="44.0" onMouseClicked="#TherapistPDFClick" pickOnBounds="true" preserveRatio="true">
