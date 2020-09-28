@@ -1,6 +1,13 @@
 package Controller;
 
+import DBH.patientDAO;
+import DBH.therapistDAO;
+import Model.Patient;
 import Model.Report;
+import Model.Therapist;
+import Util.MessageAlerter;
+import Util.PdfExporter;
+import com.itextpdf.text.DocumentException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +24,7 @@ import java.awt.print.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -59,7 +67,10 @@ public class ReportsController implements Initializable {
     @FXML
     private ImageView ImageViewTherapistExportFile2;
 
-    public ArrayList<Report> ALREPORTS = new ArrayList<Report>();
+    PdfExporter pdfExporter = new PdfExporter();
+    MessageAlerter messageAlerter = new MessageAlerter();
+
+
     ToggleGroup radioGroup;
 
     PrinterJob job = PrinterJob.getPrinterJob();
@@ -143,8 +154,7 @@ public class ReportsController implements Initializable {
     }
 
     @FXML
-    void TherapistPDFClick(MouseEvent event) {
-
+    void TherapistPDFClick(MouseEvent event) throws DocumentException, SQLException, IOException {
 
     }
 
@@ -154,12 +164,27 @@ public class ReportsController implements Initializable {
     }
 
     @FXML
-    void onClickPDF(MouseEvent event) throws PrinterException, IOException {
+    void onClickPDF(MouseEvent event) throws PrinterException, IOException, SQLException, DocumentException {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File f = chooser.getSelectedFile();
         String filename = f.getAbsolutePath();
         System.out.println(filename);
+
+
+
+
+        RadioButton selectedRadioButton = (RadioButton) radioGroup.getSelectedToggle();
+        if (TextFieldID.getText().equals("")) {
+            if (selectedRadioButton.getText().equals("Therapist")) {
+                pdfExporter.SaveTherapistPDF();
+                messageAlerter.MessageWithoutHeader("Exporting to pdf", "Pdf File Has Been Generated Successfully");
+            } else if (selectedRadioButton.getText().equals("Patient")) {
+                pdfExporter.SavePatientPDF();
+                messageAlerter.MessageWithoutHeader("Exporting to pdf", "Pdf File Has Been Generated Successfully");
+            } else
+                messageAlerter.ShowErrorMessage("Error", "Can not export file", "* please choose radio to export PDF file");
+        }
 
 
     }
@@ -173,6 +198,7 @@ public class ReportsController implements Initializable {
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         radioGroup = new ToggleGroup();
         RadioPatient.setToggleGroup(radioGroup);
         RadioTherapist.setToggleGroup(radioGroup);

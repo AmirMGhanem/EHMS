@@ -137,64 +137,22 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
         }
     }
 
+
+
     @FXML
     void OnClickPatientXML(ActionEvent event) throws IOException, SQLException, InterruptedException, DocumentException {
         if (ChoicePatient.getValue().equals("ALL")) {
             pdfExporter.Snapshotter(PatientBarChart.getLayoutX(), PatientBarChart.getLayoutY(), PatientBarChart.getWidth(), PatientBarChart.getHeight());
             ma.MessageWithoutHeader("Exported", "Patients Exported To PDF");
-
+            pdfExporter.SavePatientPDF();
             //----------------------------------------PDF CREATE ↓↓↓↓↓------------------------------
-
-            //Create PDF, Initilaize and Open
-            Document document = new Document();
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("src/main/resources/Files/PDF/PatientPDF.pdf"));
-            document.open();
-            //Adding the footer to the pdf file, by class created on the utils
-            Util.FooterPageEvent footer = new FooterPageEvent();
-            writer.setPageEvent(footer);
-            //creating paragraph
-            Paragraph p1 = new Paragraph();
-            Paragraph pNew5Lines = new Paragraph();
-            for (int i = 0; i < 5; i++)
-                pNew5Lines.add("\n");
-            //Printing Chunk Text on the pdf
-            Font font;
-            p1.add("ID        Name        Address        Gender         Date        ContactNo");
-            p1.add("\n-------------------------------------------------------------------------------\n");
-            font = FontFactory.getFont(FontFactory.COURIER, 10, BaseColor.BLACK);
-            for (String s : PDH.PatientPDF()) {
-                Chunk chunk = new Chunk(s, font);
-                p1.add(chunk);
-                p1.add("\n");
-            }
-            //Drawing an image from the resources folder
-            com.itextpdf.text.Image img = Image.getInstance("src/main/resources/Images/banner.png");
-            com.itextpdf.text.Image chartimage = Image.getInstance("src/main/resources/Images/Temp.png");
-            Paragraph ScreenShotParagraph = new Paragraph();
-            ScreenShotParagraph.add(chartimage);
-            new Chunk(img, 0, 0, true);
-            //Get Sizes
-            float scaler = ((document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin() - 0) / img.getWidth()) * 90;
-            float chartscaler = ((document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin() - 0) / chartimage.getWidth()) * 90;
-            //setting the scaler on the image for resizing the image by percentage
-            img.scalePercent(scaler);
-            img.setAlignment(Element.ALIGN_CENTER);
-            chartimage.scalePercent((chartscaler));
-            chartimage.setAlignment(Element.ALIGN_CENTER);
-            //creating paragraph and adding the banner with text
-            Paragraph preface = new Paragraph();
-            preface.add(img);
-            document.add(preface);
-            document.add(pNew5Lines);
-            document.add(p1);
-            document.add(pNew5Lines);
-            document.add(new Paragraph("The Following Chart Diagram Shows Meetings , Medicines , Allergies , Meals Count. \n "));
-            document.add(ScreenShotParagraph);
-            document.close();
-            writer.close();
         } else
             System.out.println("Barchart Not Screenshotted , please choose all before exporting");
     }
+
+
+
+
 
     @FXML
     void OnClickPrint(ActionEvent event) {

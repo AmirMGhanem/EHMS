@@ -55,8 +55,17 @@ public class MainController implements Initializable {
 
     @FXML
     private AnchorPane AnchorMainPane;
+
+    public AnchorPane getAnchorMainPane() {
+        return AnchorMainPane;
+    }
+
+    public void setAnchorMainPane(AnchorPane anchorMainPane) {
+        AnchorMainPane = anchorMainPane;
+    }
+
     @FXML
-    public BorderPane BorderMainPane;
+    private BorderPane BorderMainPane;
 
     @FXML
     private Button BtnNursing;
@@ -66,8 +75,6 @@ public class MainController implements Initializable {
     private Button BtnMeals;
     @FXML
     private Button BtnMed;
-    @FXML
-    private Button BtnReports;
     @FXML
     private Button BtnCrudMed;
     @FXML
@@ -298,13 +305,7 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(view);
     }
 
-    @FXML
-    void OnClickReports(ActionEvent event) throws IOException {
-        System.out.println("Reports Clicked");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("Reports");
-        BorderMainPane.setCenter(view);
-    }
+
 
     @FXML
     void OnClickSettings(ActionEvent event) throws IOException {
@@ -415,7 +416,6 @@ public class MainController implements Initializable {
         BtnPatient.setDisable(true);
         BtnMeals.setDisable(true);
         BtnMed.setDisable(true);
-        BtnReports.setDisable(true);
         BtnMeeting.setDisable(true);
         BtnConn.setDisable(true);
         BtnSett.setDisable(true);
@@ -433,7 +433,6 @@ public class MainController implements Initializable {
         BtnPatient.setDisable(false);
         BtnMeals.setDisable(false);
         BtnMed.setDisable(false);
-        BtnReports.setDisable(false);
         BtnMeeting.setDisable(false);
         BtnConn.setDisable(false);
         BtnSett.setDisable(false);

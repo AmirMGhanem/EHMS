@@ -1,105 +1,32 @@
 package Controller;
 
-import DBH.patientDAO;
-import DBH.userInfoDAO;
-import Model.UserInfo;
-import Util.FxmlLoader;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import org.jboss.jandex.Main;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
+import java.net.URI;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 public class SignInPaneController implements Initializable {
-
-
-
     @FXML
     private Pane parent;
+    @FXML
+    private Pane TherapistApp;
+    @FXML
+    private Pane PatientApp;
 
     @FXML
-    private ImageView ImageViewTherapistPane;
-    @FXML
-    private ImageView ImageViewTherapistExportPDF1;
-    @FXML
-    private ImageView ImageViewTherapistExportPDF2;
-    @FXML
-    private ImageView ImageViewTherapistExportFile1;
-    @FXML
-    private ImageView ImageViewTherapistExportFile2;
-    @FXML
-    private ImageView ImageViewPatientPane;
-    @FXML
-    private ImageView ImageViewPatientExportPDF1;
-    @FXML
-    private ImageView ImageViewPatientExportPDF2;
-    @FXML
-    private ImageView ImageViewPatientExportFile1;
-    @FXML
-    private ImageView ImageViewPatientExportFile2;
-
-
-
-
-
-    @FXML
-    void PatientFileClick(MouseEvent event) throws IOException, SQLException {
-
+    void onClickPatientApp(MouseEvent event) throws IOException {
+        java.awt.Desktop.getDesktop().browse(URI.create("https://api.pcloud.com/getpubzip?code=kZa4bJXZnyL73ICKaCuG2sNMq3TyeQMAnQzk"));
     }
 
     @FXML
-    void PatientPDFClick(MouseEvent event) {
+    void onClickTherapistApp(MouseEvent event) throws IOException {
+        java.awt.Desktop.getDesktop().browse(URI.create("https://api.pcloud.com/getpubzip?code=kZDQbJXZfY0AKjjBdIHHI0Y8T6ERSSxVrljk"));
 
-    }
-
-    @FXML
-    void PatientPaneClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void TherapistFileClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void TherapistPDFClick(MouseEvent event) {
-
-    }
-
-    @FXML
-    void TherapistPaneClick(MouseEvent event) {
-
-    }
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
-
-        CssStyler();
 
     }
 
@@ -121,5 +48,12 @@ public class SignInPaneController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        CssStyler();
+
+
     }
 }
