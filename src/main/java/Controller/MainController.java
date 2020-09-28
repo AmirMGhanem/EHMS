@@ -79,8 +79,7 @@ public class MainController implements Initializable {
     private Button BtnCrudMed;
     @FXML
     private Button BtnMeeting;
-    @FXML
-    private Button BtnConn;
+
     @FXML
     private Button BtnSett;
     @FXML
@@ -251,16 +250,6 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(view);
     }
 
-
-    @FXML
-    void OnClickConn(ActionEvent event) throws IOException {
-
-        System.out.println("Connection Clicked");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("ConnectionPane");
-        BorderMainPane.setCenter(view);
-    }
-
     @FXML
     void OnClickMeals(ActionEvent event) throws IOException {
         System.out.println("Meals Clicked");
@@ -417,7 +406,6 @@ public class MainController implements Initializable {
         BtnMeals.setDisable(true);
         BtnMed.setDisable(true);
         BtnMeeting.setDisable(true);
-        BtnConn.setDisable(true);
         BtnSett.setDisable(true);
         LogoHome.setDisable(true);
         BtnNursing.setDisable(true);
@@ -434,7 +422,6 @@ public class MainController implements Initializable {
         BtnMeals.setDisable(false);
         BtnMed.setDisable(false);
         BtnMeeting.setDisable(false);
-        BtnConn.setDisable(false);
         BtnSett.setDisable(false);
         LogoHome.setDisable(false);
         BtnNursing.setDisable(false);

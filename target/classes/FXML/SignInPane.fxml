@@ -64,12 +64,12 @@
                   <Font name="System Bold Italic" size="28.0" />
                </font>
             </Label>
-            <ImageView fitHeight="446.0" fitWidth="395.0" layoutX="317.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="429.0" fitWidth="449.0" layoutX="300.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/insights.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="239.0" layoutY="301.0" prefHeight="37.0" prefWidth="475.0" text="░▒▓█►─═ Elderly Health Care Managment ═─◄█▓▒░" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="131.0" layoutY="304.0" prefHeight="37.0" prefWidth="475.0" text="░▒▓█►─═ Elderly Health Care Managment ═─◄█▓▒░" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold Italic" size="17.0" />
                </font>
@@ -82,7 +82,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" layoutX="238.0" layoutY="333.0" prefHeight="37.0" prefWidth="475.0" text="░▒▓█►─═ Features ↓↓↓↓ ═─◄█▓▒░" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutX="130.0" layoutY="336.0" prefHeight="37.0" prefWidth="475.0" text="░▒▓█►─═ Features ↓↓↓↓ ═─◄█▓▒░" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold Italic" size="17.0" />
                </font>
@@ -95,12 +95,12 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <ImageView fitHeight="183.0" fitWidth="246.0" layoutX="32.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="183.0" fitWidth="246.0" layoutX="32.0" layoutY="596.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/inloader.gif" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="18.0" layoutY="446.0" prefHeight="48.0" prefWidth="395.0" text="&lt;&lt;-- Use The Navigation Bar On The Left Side" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutY="515.0" prefHeight="48.0" prefWidth="395.0" text="&lt;&lt;-- Use The Navigation Bar On The Left Side" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold Italic" size="17.0" />
                </font>
@@ -113,7 +113,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label alignment="CENTER" layoutX="7.0" layoutY="368.0" prefHeight="59.0" prefWidth="310.0" text="Getting Started :" textAlignment="CENTER">
+            <Label alignment="CENTER" layoutY="470.0" prefHeight="59.0" prefWidth="310.0" text="Getting Started :" textAlignment="CENTER">
                <font>
                   <Font name="Arial Bold Italic" size="34.0" />
                </font>

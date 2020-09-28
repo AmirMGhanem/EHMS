@@ -468,21 +468,25 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     private void CssStyler() {
         FXMLLoader loader = new FXMLLoader();
-
         try {
             loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
-
             SettingsController settingsController = loader.getController();
-
-            if (settingsController.getToggleMode()) {
-                String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+            parent.getStylesheets().removeAll();
+            if (settingsController.isCustomeDesignFlag()) {
+                String css = this.getClass().getResource("/Css/UserCustomDesign.css").toExternalForm();
                 parent.getStylesheets().add(css);
             } else {
-                String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
-                parent.getStylesheets().add(css);
+                if (settingsController.getToggleMode()) {
+                    String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
+                    parent.getStylesheets().add(css);
+                } else if (!settingsController.getToggleMode()) {
+                    String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
+                    parent.getStylesheets().add(css);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }

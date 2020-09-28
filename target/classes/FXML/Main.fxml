@@ -199,22 +199,6 @@
                         <Insets top="3.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="TOP_RIGHT" prefHeight="47.0" prefWidth="379.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;" styleClass="HBox">
-                     <children>
-                        <ImageView cache="true" depthTest="DISABLE" fitHeight="44.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/Images/connection.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ImageView>
-                        <Button fx:id="BtnConn" mnemonicParsing="false" onAction="#OnClickConn" prefHeight="47.0" prefWidth="201.0" style="-fx-background-color: inherited;" text="Connection" textAlignment="CENTER" />
-                     </children>
-                     <VBox.margin>
-                        <Insets top="3.0" />
-                     </VBox.margin>
-                  </HBox>
                   <HBox alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="379.0" style="-fx-background-color: #59b7ff; -fx-border-color: #ffffff;" styleClass="HBox">
                      <children>
                         <ImageView cache="true" depthTest="DISABLE" fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
