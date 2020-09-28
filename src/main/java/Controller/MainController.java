@@ -5,7 +5,6 @@ import DBH.therapistDAO;
 import DBH.userInfoDAO;
 import Model.UserInfo;
 import Util.FxmlLoader;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,7 +15,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.concurrent.Service;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -57,8 +55,17 @@ public class MainController implements Initializable {
 
     @FXML
     private AnchorPane AnchorMainPane;
+
+    public AnchorPane getAnchorMainPane() {
+        return AnchorMainPane;
+    }
+
+    public void setAnchorMainPane(AnchorPane anchorMainPane) {
+        AnchorMainPane = anchorMainPane;
+    }
+
     @FXML
-    public BorderPane BorderMainPane;
+    private BorderPane BorderMainPane;
 
     @FXML
     private Button BtnNursing;
@@ -69,13 +76,10 @@ public class MainController implements Initializable {
     @FXML
     private Button BtnMed;
     @FXML
-    private Button BtnReports;
-    @FXML
     private Button BtnCrudMed;
     @FXML
     private Button BtnMeeting;
-    @FXML
-    private Button BtnConn;
+
     @FXML
     private Button BtnSett;
     @FXML
@@ -129,20 +133,19 @@ public class MainController implements Initializable {
     @FXML
     void OnClickLogin(ActionEvent event) throws InterruptedException, IOException {
 
-        for (UserInfo ui : users) {
-            if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
-                ProgressBarLoading.setVisible(true);
-                LabelLoading.setVisible(true);
-                ManualSetOpenNav();
-                setEnableAllButtons();
-                ProgressBarLoading.progressProperty().bind(thread.progressProperty());
-                thread.start();
-                thread.workDoneProperty().addListener(new ChangeListener<Number>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                        System.out.println(thread.workDoneProperty().get());
-                        if (thread.workDoneProperty().get() > 248.9) {
-                            try {
+                                for (UserInfo ui : users) {
+                                    if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
+                                        ProgressBarLoading.setVisible(true);
+                                        LabelLoading.setVisible(true);
+                                        ManualSetOpenNav();
+                                        setEnableAllButtons();
+                                        ProgressBarLoading.progressProperty().bind(thread.progressProperty());
+                                        thread.start();
+                                        thread.workDoneProperty().addListener(new ChangeListener<Number>() {
+                                            @Override
+                                            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                                                if (thread.workDoneProperty().get() > 248.9) {
+                                                    try {
                             thread.cancel();
                                 OpenDashBoardManual();
                             } catch (IOException e) {
@@ -156,6 +159,13 @@ public class MainController implements Initializable {
             }
         }
 
+    }
+
+    public void OnClickEHMS(MouseEvent event)throws IOException{
+        System.out.println("Dashboard Clicked");
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("SignInPane");
+        BorderMainPane.setCenter(view);
     }
 
     public void OpenDashBoardManual() throws IOException {
@@ -240,16 +250,6 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(view);
     }
 
-
-    @FXML
-    void OnClickConn(ActionEvent event) throws IOException {
-
-        System.out.println("Connection Clicked");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("ConnectionPane");
-        BorderMainPane.setCenter(view);
-    }
-
     @FXML
     void OnClickMeals(ActionEvent event) throws IOException {
         System.out.println("Meals Clicked");
@@ -294,13 +294,7 @@ public class MainController implements Initializable {
         BorderMainPane.setCenter(view);
     }
 
-    @FXML
-    void OnClickReports(ActionEvent event) throws IOException {
-        System.out.println("Reports Clicked");
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPage("Reports");
-        BorderMainPane.setCenter(view);
-    }
+
 
     @FXML
     void OnClickSettings(ActionEvent event) throws IOException {
@@ -411,9 +405,7 @@ public class MainController implements Initializable {
         BtnPatient.setDisable(true);
         BtnMeals.setDisable(true);
         BtnMed.setDisable(true);
-        BtnReports.setDisable(true);
         BtnMeeting.setDisable(true);
-        BtnConn.setDisable(true);
         BtnSett.setDisable(true);
         LogoHome.setDisable(true);
         BtnNursing.setDisable(true);
@@ -429,9 +421,7 @@ public class MainController implements Initializable {
         BtnPatient.setDisable(false);
         BtnMeals.setDisable(false);
         BtnMed.setDisable(false);
-        BtnReports.setDisable(false);
         BtnMeeting.setDisable(false);
-        BtnConn.setDisable(false);
         BtnSett.setDisable(false);
         LogoHome.setDisable(false);
         BtnNursing.setDisable(false);

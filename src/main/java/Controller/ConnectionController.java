@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 public class ConnectionController implements Initializable {
 
     DBH.userInfoDAO uiDAo= new userInfoDAO();
-    MessageAlerter ma = new MessageAlerter();
+
 
     @FXML
     private Pane parent;
@@ -37,13 +37,8 @@ public class ConnectionController implements Initializable {
 
     @FXML
     void OnClickBtnRegister(ActionEvent event) throws SQLException {
-
         UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(),TextFieldRegisterPass.getText());
-
         uiDAo.inserUser(ui);
-
-
-
     }
 
     @Override
@@ -56,9 +51,7 @@ public class ConnectionController implements Initializable {
 
         try {
             loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
-
             SettingsController settingsController = loader.getController();
-
             if (settingsController.getToggleMode()) {
                 String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
                 parent.getStylesheets().add(css);

@@ -3,12 +3,11 @@ package Util;
 import java.io.*;
 
 public class CssFile {
-    public void CreateFile(String url, String design) throws IOException {
-        File userFile = new File(url);
-        FileWriter fw = new FileWriter(url);
+
+    public void CreateFile(String url, String design) {
 
         try {
-            userFile.createNewFile();
+            FileWriter fw = new FileWriter(url);
             fw.write(design);
             fw.close();
         } catch (IOException e) {

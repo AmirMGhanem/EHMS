@@ -1,8 +1,12 @@
 package Controller;
 
+import DBH.userInfoDAO;
+import Model.UserInfo;
 import Util.CssFile;
+import Util.MessageAlerter;
 import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,62 +22,91 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
 
     ObservableList BlendModelist = FXCollections.observableArrayList();
     ObservableList Fontlist = FXCollections.observableArrayList();
+    DBH.userInfoDAO uiDAo = new userInfoDAO();
+    @FXML
+    private Pane SettingPanel;
+    @FXML
+    private Pane TopPanel;
+    @FXML
+    private TabPane TablPaneThemeDesign;
+    @FXML
+    private ColorPicker ColorPickerThemeDesgin;
+    @FXML
+    private ColorPicker ColorPickerButtonColor;
+    @FXML
+    private ColorPicker ColorPickerTopPaneColor;
+    @FXML
+    private Slider SliderFontSize;
+    @FXML
+    private ColorPicker ColorPickerTextColor;
+    @FXML
+    private ColorPicker ColorPickerBorderColor;
+    @FXML
+    private ChoiceBox<String> ChoiceBlendMode;
+    @FXML
+    private ToggleButton ToggleBtnDarkMode;
+    @FXML
+    private ToggleGroup Off;
+    @FXML
+    private Button BtnSetDefault;
+    @FXML
+    private Button BtnSetCustom;
+    @FXML
+    private TabPane TabPaneSystem;
+    @FXML
+    private ChoiceBox<?> ChoiceTimeZone;
+    @FXML
+    private DatePicker DatePicker;
+    @FXML
+    private ChoiceBox<String> ChoiceFontFamily;
+    @FXML
+    private TextField TextFieldEmail;
+    @FXML
+    private Button BtnRegister;
 
-    @FXML private Pane SettingPanel;
-    @FXML private Pane TopPanel;
-    @FXML private TabPane TablPaneThemeDesign;
-    @FXML private ColorPicker ColorPickerThemeDesgin;
-    @FXML private ColorPicker ColorPickerButtonColor;
-    @FXML private ColorPicker ColorPickerTopPaneColor;
-    @FXML private Slider SliderFontSize;
-    @FXML private ColorPicker ColorPickerTextColor;
-    @FXML private ColorPicker ColorPickerBorderColor;
-    @FXML private ChoiceBox<String> ChoiceBlendMode;
-    @FXML private ToggleButton ToggleBtnDarkMode;
-    @FXML private ToggleGroup Off;
-    @FXML private Button BtnSetDefault;
-    @FXML private TabPane TabPaneSystem;
-    @FXML private ChoiceBox<?> ChoiceTimeZone;
-    @FXML private DatePicker DatePicker;
-    @FXML private ChoiceBox<String> ChoiceFontFamily;
-    @FXML private TextField TextFieldEmail;
-    @FXML private Button BtnSystemSave;
+    @FXML
+    private TextField TextFieldRegisterUser;
+
+    @FXML
+    private TextField TextFieldRegisterPass;
+    MessageAlerter messageAlerter = new MessageAlerter();
+    static boolean CustomeDesignFlag=false;
+
+    public boolean isCustomeDesignFlag() {
+        return CustomeDesignFlag;
+    }
+
+    public void setCustomeDesignFlag(boolean customeDesignFlag) {
+        CustomeDesignFlag = customeDesignFlag;
+    }
+
+    @FXML
+    void OnClickBtnRegister(ActionEvent event) throws SQLException {
+        UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(), TextFieldRegisterPass.getText());
+        uiDAo.inserUser(ui);
+    }
 
     @FXML
     void DarkModeTogglePressed(ActionEvent event) {
-
     }
 
-    @FXML
-    void OnClickSystemSave(ActionEvent event) {
-
-    }
-
-    public void JavafxChoiceFill() {
-        BlendModelist.addAll("SRC_OVER", "SRC_ATOP", "ADD", "MULTIPLY", "SCREEN", "OVERLAY", "DARKEN", "LIGHTEN", "COLOR_DODGE", "COLOR_BURN", "HARD_LIGHT", "SOFT_LIGHT", "DIFFERENCE", "EXCLUSION", "RED", "GREEN", "BLUE");
-        ChoiceBlendMode.getItems().addAll(BlendModelist);
-        ChoiceBlendMode.setValue("SRC_OVER");
-
-        Fontlist.addAll("System", "Aharoni", "Arial", "Traditional Arabic", "Viner Hand ITC");
-        ChoiceFontFamily.getItems().addAll(Fontlist);
-        ChoiceFontFamily.setValue("System");
-    }
 
     static boolean flagtoggle = false; //false == light
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-            JavafxChoiceFill();
-
         if (flagtoggle == true) {
             SettingPanel.getStylesheets().clear();
             ToggleBtnDarkMode.setSelected(true);
@@ -171,11 +204,7 @@ public class SettingsController implements Initializable {
     }
 
 
-    public void OnSelectBlendMode(ActionEvent event) {
-        String blendmode = ChoiceBlendMode.getValue().toString();
-        SettingPanel.setBlendMode(BlendMode.valueOf(blendmode));
 
-    }
 
     public void onSliderChanged(MouseEvent mouseEvent) {
         double slideValue = SliderFontSize.getValue();
@@ -188,28 +217,52 @@ public class SettingsController implements Initializable {
     }
 
     @FXML
+    void OnClickBtnSetCustom(ActionEvent event) {
+        setCustomeDesignFlag(true);
+        messageAlerter.MessageWithoutHeader("Design Armed To Project","Css File [Css/UserCustomDesign.css] \n" +
+                "has been Armed to the project, " +
+                "to disarm please press disarm");
+    }
+
+    @FXML
     void OnClickDefault(ActionEvent event) throws IOException {
-        System.out.println("Set Default Clicked");
-        flagtoggle = false ;
-        SettingPanel.getStylesheets().clear();
-        String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
-        SettingPanel.getStylesheets().add(css);
+        setCustomeDesignFlag(false);
+        messageAlerter.MessageWithoutHeader("Design disarmed from Project","Css File [Css/UserCustomDesign.css] \n" +
+                "has been disarmed \n" +
+                "you are using the default [Css/lightmode.css] style");
     }
 
     public void OnClickSave(ActionEvent event) throws IOException, URISyntaxException {
         CssFile cssfile = new CssFile();
-        String url =("src/main/resources/Css/userDesign.css");
-
-        String PaneColor = ColorPickerThemeDesgin.getValue().toString();
-        String ButtonColor = ColorPickerButtonColor.getValue().toString();
-        String TopPaneColor = ColorPickerTopPaneColor.getValue().toString();
-        String blendmode = ChoiceBlendMode.getValue().toString();
+        String url = ("src/main/resources/Css/userDesign.css");
+        //------------------------------------------
+        String cTheme = String.valueOf(ColorPickerThemeDesgin.getValue());
+        String ThemeStyle = ("-fx-background-color: #" + cTheme.charAt(2) + cTheme.charAt(3) + cTheme.charAt(4) + cTheme.charAt(5) + cTheme.charAt(6) + cTheme.charAt(7));
+        //------------------------------------------
+        String cButton = String.valueOf(ColorPickerButtonColor.getValue());
+        String ButtonStyle = ("-fx-background-color: #" + cButton.charAt(2) + cButton.charAt(3) + cButton.charAt(4) + cButton.charAt(5) + cButton.charAt(6) + cButton.charAt(7));
+        //------------------------------------------
+        String cTop = String.valueOf(ColorPickerTopPaneColor.getValue());
+        String TopPaneStyle = ("-fx-background-color: #" + cTop.charAt(2) + cTop.charAt(3) + cTop.charAt(4) + cTop.charAt(5) + cTop.charAt(6) + cTop.charAt(7));
+        //-----------------------------------------
         Double FontSize = SliderFontSize.getValue();
-        String TextColor = ColorPickerTextColor.getValue().toString();
-        String BorderColor = ColorPickerBorderColor.getValue().toString();
-        String FontFamily = ChoiceFontFamily.getValue();
-    }
+        String FontSizeStyle = ("-fx-font-size: " + FontSize);
+        //------------------------------------------
+        String cTextColor = String.valueOf(ColorPickerTextColor.getValue());
+        String textColorStyle = "-fx-text-fill: #" + cTextColor.charAt(2) + cTextColor.charAt(3) + cTextColor.charAt(4) + cTextColor.charAt(5) + cTextColor.charAt(6) + cTextColor.charAt(7);
+        //------------------------------------------
+        String str = ".Panel{\n" + ThemeStyle + ";\n" + FontSizeStyle + ";\n" + textColorStyle + ";\n}";
+        str = str + "\n.Button{\n" +
+                ButtonStyle + ";\n" +
+                textColorStyle + ";\n}";
+        str = str + "\n.ParentPane{\n" + ThemeStyle + ";\n" + FontSizeStyle + ";\n" + textColorStyle + "\n}";
+        str = str +"\n.TopPane{\n"+TopPaneStyle+";\n}";
+        str = str + "\n.Label{\n"+textColorStyle+";\n}";
+        cssfile.CreateFile("src/main/resources/Css/UserCustomDesign.css", str);
 
+        messageAlerter.MessageWithoutHeader("Style Saved", "The System need to restart \nin order to set your last custom design.");
+
+    }
 
 
     public Boolean getToggleMode() {
@@ -218,92 +271,3 @@ public class SettingsController implements Initializable {
     }
 }
 
-
-
-
-/*
-
-String PaneColor = ColorPickerThemeDesgin.getValue().toString();
-        String ButtonColor = ColorPickerButtonColor.getValue().toString();
-        String TopPaneColor = ColorPickerTopPaneColor.getValue().toString();
-        String blendmode = ChoiceBlendMode.getValue().toString();
-        Double FontSize = SliderFontSize.getValue();
-        String TextColor = ColorPickerTextColor.getValue().toString();
-        String BorderColor = ColorPickerBorderColor.getValue().toString();
-        String FontFamily = ChoiceFontFamily.getValue();
-
-
-        CssFile cssfile = new CssFile();
-        String url =("src/main/resources/Css/userDesign.css");
-
-        if(PaneColor != null && ButtonColor != null && TopPaneColor != null && TextColor != null && BorderColor != null)
-        {
-            String PaneCss = ".Pane{" +
-                    "\n-fx-background-color : #" + PaneColor.charAt(2) + PaneColor.charAt(3) + PaneColor.charAt(4) + PaneColor.charAt(5) + PaneColor.charAt(6) + PaneColor.charAt(7) + ";" +
-                    "\n-fx-border-color : #" + BorderColor.charAt(2) + BorderColor.charAt(3) + BorderColor.charAt(4) + BorderColor.charAt(5) + BorderColor.charAt(6) + BorderColor.charAt(7) + ";" +
-                    "\n-fx-blend-mode : #" + blendmode + ";" +
-                    "\n}";
-            String TopPaneCss = "\n\n.TopPane{" +
-                    "\n-fx-background-color : #" + TopPaneColor.charAt(2) + TopPaneColor.charAt(3) + TopPaneColor.charAt(4) + TopPaneColor.charAt(5) + TopPaneColor.charAt(6) + TopPaneColor.charAt(7) + ";" +
-                    "\n-fx-border-color : #" + BorderColor.charAt(2) + BorderColor.charAt(3) + BorderColor.charAt(4) + BorderColor.charAt(5) + BorderColor.charAt(6) + BorderColor.charAt(7) + ";" +
-                    "\n}";
-            String ButtonCss = "\n\n.Button{" +
-                    "\n-fx-background-color : #" + ButtonColor.charAt(2) + ButtonColor.charAt(3) + ButtonColor.charAt(4) + ButtonColor.charAt(5) + ButtonColor.charAt(6) + ButtonColor.charAt(7) + ";" +
-                    "\n-fx-border-color : #" + BorderColor.charAt(2) + BorderColor.charAt(3) + BorderColor.charAt(4) + BorderColor.charAt(5) + BorderColor.charAt(6) + BorderColor.charAt(7) + ";" +
-                    "\n-fx-font-size : " + FontSize + ";" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n-fx-text-fill : " + TextColor.charAt(2) + TextColor.charAt(3) + TextColor.charAt(4) + TextColor.charAt(5) + TextColor.charAt(6) + TextColor.charAt(7) + ";" +
-                    "\n}";
-            String ChoiceCss = "\n\n.Choice{" +
-                    "\n-fx-border-color : #" + BorderColor.charAt(2) + BorderColor.charAt(3) + BorderColor.charAt(4) + BorderColor.charAt(5) + BorderColor.charAt(6) + BorderColor.charAt(7) + ";" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n-fx-text-fill : " + TextColor.charAt(2) + TextColor.charAt(3) + TextColor.charAt(4) + TextColor.charAt(5) + TextColor.charAt(6) + TextColor.charAt(7) + ";" +
-                    "\n}";
-            String TextFieldCss = "\n\n.TextField{" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n-fx-text-fill : " + TextColor.charAt(2) + TextColor.charAt(3) + TextColor.charAt(4) + TextColor.charAt(5) + TextColor.charAt(6) + TextColor.charAt(7) + ";" +
-                    "\n}";
-            String LabelCss = "\n\n.Label{" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n-fx-text-fill : " + TextColor.charAt(2) + TextColor.charAt(3) + TextColor.charAt(4) + TextColor.charAt(5) + TextColor.charAt(6) + TextColor.charAt(7) + ";" +
-                    "\n}";
-            String DatePickerCss = "\n\n.DatePicker{" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n-fx-text-fill : " + TextColor.charAt(2) + TextColor.charAt(3) + TextColor.charAt(4) + TextColor.charAt(5) + TextColor.charAt(6) + TextColor.charAt(7) + ";" +
-                    "\n}";
-            String SliderCss = "\n\n.Slider{" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n-fx-text-fill : " + TextColor.charAt(2) + TextColor.charAt(3) + TextColor.charAt(4) + TextColor.charAt(5) + TextColor.charAt(6) + TextColor.charAt(7) + ";" +
-                    "\n}";
-
-            String userDesign = PaneCss + TopPaneCss + ButtonCss + ChoiceCss + TextFieldCss + LabelCss + DatePickerCss + SliderCss;
-            cssfile.CreateFile(url, userDesign);
-        }
-
-
-        if(PaneColor == null || ButtonColor == null || TopPaneColor == null || TextColor == null || BorderColor == null)
-        {
-            String ButtonCss = "\n\n.Button{" +
-                    "\n-fx-font-size : " + FontSize + ";" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n}";
-            String LabelCss = "\n\n.Label{" +
-                    "\n-fx-font-size : " + FontSize + ";" +
-                    "\n-fx-font-family : " + FontFamily + ";" +
-                    "\n}";
-        }
-
-
- */
-
-        /*
-        String TopPaneCss;
-
-        String ButtonCss = ".Button{" +
-                "-fx-background-color : " + ButtonColor.charAt(2) + ButtonColor.charAt(3) + ButtonColor.charAt(4) + ButtonColor.charAt(5) + ButtonColor.charAt(6) + ButtonColor.charAt(7) + ";" +
-                "-fx-border-color : " + BorderColor.charAt(2) + BorderColor.charAt(3) + BorderColor.charAt(4) + BorderColor.charAt(5) + BorderColor.charAt(6) + BorderColor.charAt(7) + ";" +
-                "-fx-font-size : " + FontSize + ";" +
-                "-fx-text-fill : " + TextColor.charAt(2) + TextColor.charAt(3) + TextColor.charAt(4) + TextColor.charAt(5) + TextColor.charAt(6) + TextColor.charAt(7) + ";" +
-                "-fx-font-family : " + FontFamily + ";" +
-                "}";
-        */
