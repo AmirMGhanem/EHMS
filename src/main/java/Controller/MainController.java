@@ -5,6 +5,9 @@ import DBH.therapistDAO;
 import DBH.userInfoDAO;
 import Model.UserInfo;
 import Util.FxmlLoader;
+import Util.MessageAlerter;
+import Util.PdfExporter;
+import View.MultipleFxmlHandlingJavaFX;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,20 +23,34 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 
 public class MainController implements Initializable {
@@ -51,7 +68,7 @@ public class MainController implements Initializable {
     ArrayList<UserInfo> users = new ArrayList<UserInfo>();
     DBH.userInfoDAO uiDAO = new userInfoDAO();
     //--------------------------------------------
-
+    MessageAlerter messageAlerter = new MessageAlerter();
 
     @FXML
     private AnchorPane AnchorMainPane;
@@ -108,6 +125,13 @@ public class MainController implements Initializable {
     private Label LabelClock;
     @FXML
     private Pane panelLogin;
+    @FXML
+    private MenuItem BtnScreenshot;
+
+    @FXML
+    private Label LabelDashboard;
+
+
 
     Node loginpane;
 
@@ -133,20 +157,20 @@ public class MainController implements Initializable {
     @FXML
     void OnClickLogin(ActionEvent event) throws InterruptedException, IOException {
 
-                                for (UserInfo ui : users) {
-                                    if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
-                                        ProgressBarLoading.setVisible(true);
-                                        LabelLoading.setVisible(true);
-                                        ManualSetOpenNav();
-                                        setEnableAllButtons();
-                                        ProgressBarLoading.progressProperty().bind(thread.progressProperty());
-                                        thread.start();
-                                        thread.workDoneProperty().addListener(new ChangeListener<Number>() {
-                                            @Override
-                                            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                                                if (thread.workDoneProperty().get() > 248.9) {
-                                                    try {
-                            thread.cancel();
+        for (UserInfo ui : users) {
+            if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
+                ProgressBarLoading.setVisible(true);
+                LabelLoading.setVisible(true);
+                ManualSetOpenNav();
+                setEnableAllButtons();
+                ProgressBarLoading.progressProperty().bind(thread.progressProperty());
+                thread.start();
+                thread.workDoneProperty().addListener(new ChangeListener<Number>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                        if (thread.workDoneProperty().get() > 248.9) {
+                            try {
+                                thread.cancel();
                                 OpenDashBoardManual();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -161,7 +185,7 @@ public class MainController implements Initializable {
 
     }
 
-    public void OnClickEHMS(MouseEvent event)throws IOException{
+    public void OnClickEHMS(MouseEvent event) throws IOException {
         System.out.println("Dashboard Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("SignInPane");
@@ -295,7 +319,6 @@ public class MainController implements Initializable {
     }
 
 
-
     @FXML
     void OnClickSettings(ActionEvent event) throws IOException {
 
@@ -410,6 +433,7 @@ public class MainController implements Initializable {
         LogoHome.setDisable(true);
         BtnNursing.setDisable(true);
         BtnCrudMed.setDisable(true);
+        LabelDashboard.setDisable(true);
     }
 
     public void setEnableAllButtons() {
@@ -426,6 +450,67 @@ public class MainController implements Initializable {
         LogoHome.setDisable(false);
         BtnNursing.setDisable(false);
         BtnCrudMed.setDisable(false);
+        LabelDashboard.setDisable(false);
+    }
+
+    @FXML
+    public void onClickRefreshDatabase(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void onClickBtnScreenshot(ActionEvent event) throws IOException, AWTException {
+
+
+        MenuItem menuItem = (MenuItem) event.getTarget();
+        ContextMenu cm = menuItem.getParentPopup();
+        Scene scene = cm.getScene();
+        Window window = scene.getWindow();
+        PdfExporter pdfExporter = new PdfExporter();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(window);
+
+        if (selectedDirectory != null) {
+            pdfExporter.ScreenShot(selectedDirectory.getAbsolutePath());
+            System.out.println(selectedDirectory.getAbsolutePath());
+        } else {
+            messageAlerter.ShowErrorMessage("ERROR!!!", "Directory Path is null", "***Please Choose A Directory in order\n to save the Project Screenshot");
+        }
+
+    }
+
+    @FXML
+    public void onClickRestartProject(ActionEvent event) {
+
+
+
+    }
+
+    @FXML
+    public void onClickBtnEditDatabaseInfo(ActionEvent event) throws IOException {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("DatabaseInformation");
+        Stage stage = new Stage();
+        stage.setTitle("Db info Window");
+        stage.setScene(new Scene(view, 737, 445));
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+    }
+
+    @FXML
+    public void onClickBtnAbout(ActionEvent event) throws IOException {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("about");
+        Stage stage = new Stage();
+        stage.setTitle("About Window");
+        stage.setScene(new Scene(view, 820, 470));
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
+    }
+
+    @FXML
+    public void onClickBtnimportcss(ActionEvent event) {
+
     }
 
 

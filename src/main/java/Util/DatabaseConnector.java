@@ -13,13 +13,14 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class DatabaseConnector {
-
+    private static String port= "3306";
+    private static String name = "ehms";
+    private static String user = "root";
+    private static String pass = "";
+    private static String url = "jdbc:mysql://localhost:"+port+"/"+name;
     private static Connection con = null;
 
     static {
-        String url = "jdbc:mysql://localhost:3306/ehms";
-        String user = "root";
-        String pass = "";
         try {
             con = DriverManager.getConnection(url, user, pass);
             System.out.println("Connected successfully");
@@ -31,6 +32,45 @@ public class DatabaseConnector {
 
     }
 
+    public static String getUrl() {
+        return url;
+    }
+
+    public static void setUrl(String url) {
+        DatabaseConnector.url = url;
+    }
+
+    public static String getUser() {
+        return user;
+    }
+
+    public static void setUser(String user) {
+        DatabaseConnector.user = user;
+    }
+
+    public static String getPass() {
+        return pass;
+    }
+
+    public static void setPass(String pass) {
+        DatabaseConnector.pass = pass;
+    }
+
+    public static String getPort() {
+        return port;
+    }
+
+    public static void setPort(String port) {
+        DatabaseConnector.port = port;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static void setName(String name) {
+        DatabaseConnector.name = name;
+    }
 
     public static Connection getConnection() {
         return con;

@@ -1,20 +1,20 @@
 .Panel{
--fx-background-color: #ffff00;
--fx-font-size: 10.0;
--fx-text-fill: #00ffff;
+-fx-background-color: #ff0000;
+-fx-font-size: 14.223529310787425;
+-fx-text-fill: #008080;
 }
 .Button{
--fx-background-color: #ff0000;
--fx-text-fill: #00ffff;
+-fx-background-color: #ff00ff;
+-fx-text-fill: #008080;
 }
 .ParentPane{
--fx-background-color: #ffff00;
--fx-font-size: 10.0;
--fx-text-fill: #00ffff
+-fx-background-color: #ff0000;
+-fx-font-size: 14.223529310787425;
+-fx-text-fill: #008080
 }
 .TopPane{
--fx-background-color: #000080;
+-fx-background-color: #00ff00;
 }
 .Label{
--fx-text-fill: #00ffff;
+-fx-text-fill: #008080;
 }

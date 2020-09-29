@@ -139,6 +139,7 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             Medicine m = new Medicine();
             m.setName(TextFieldAddName.getText());
             m.setType(ChoiceAddType.getValue());
+            m.setTimesPerDay(AddTimesPerDay.getValue());
             mbh.insertMedicine(m);
 
             MessageInformation += "Medicine Added Successfully :)" ;
