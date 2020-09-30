@@ -17,15 +17,31 @@ public class MultipleFxmlHandlingJavaFX extends Application {
         return Server;
     }
 
+    private static Stage primaryStage;
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public static void setPrimaryStage(Stage primaryStage) {
+        MultipleFxmlHandlingJavaFX.primaryStage = primaryStage;
+    }
+
+
+    public static void restartStage(){
+       primaryStage.close();
+    }
+
+
     @Override
     public void start(Stage stage) throws Exception {
-
+        setPrimaryStage(stage);
         Parent root = load(getClass().getResource("/FXML/splash.fxml"));
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setScene(scene);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.show();
 
-        stage.show();
         Server.start();
 
 

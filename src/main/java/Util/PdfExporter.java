@@ -1,11 +1,13 @@
 package Util;
 
-import Model.Therapist;
+
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.stage.Screen;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.Rectangle;
@@ -14,9 +16,22 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 
 
 public class PdfExporter {
+
+    public void ScreenShot(String url) throws AWTException, IOException {
+        Date d = new Date();
+        Robot robot = new Robot();
+        Rectangle rectangle = new Rectangle((int)Screen.getPrimary().getBounds().getMinX(),(int)Screen.getPrimary().getBounds().getMinY(),(int)Screen.getPrimary().getBounds().getWidth(),(int)Screen.getPrimary().getBounds().getHeight());
+        BufferedImage image = robot.createScreenCapture(rectangle);
+        javafx.scene.image.Image myImage = SwingFXUtils.toFXImage(image, null);
+        File file = new File(url+"/screen"+d.getTime()+".png");
+        System.out.println(file);
+        ImageIO.write(image, "png", file);
+        System.out.println("Image Saved");
+    }
 
     public void Snapshotter(double x,double y, double width, double height) {
         try {

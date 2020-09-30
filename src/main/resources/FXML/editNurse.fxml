@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -20,30 +22,62 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="BtnClear" layoutX="502.0" layoutY="580.0" mnemonicParsing="false" onAction="#OnClickClear" prefHeight="35.0" prefWidth="100.0" styleClass="Button" text="CLEAR" textFill="WHITE" />
-            <Button fx:id="BtnSave" layoutX="685.0" layoutY="581.0" mnemonicParsing="false" onAction="#OnClickSave" prefHeight="33.0" prefWidth="105.0" styleClass="Button" text="SAVE" textFill="WHITE" />
-            <Label layoutX="456.0" layoutY="151.0" text="Nurse ID :" textOverrun="CLIP">
+            <Label layoutX="468.0" layoutY="201.0" text="Nurse ID :" textOverrun="CLIP">
                <font>
-                  <Font name="Guttman Yad" size="17.0" />
+                  <Font name="Arial" size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="TextFieldNurseID" layoutX="592.0" layoutY="153.0" onAction="#onEnter" styleClass="TextField" />
-            <Pane layoutX="176.0" layoutY="238.0" prefHeight="300.0" prefWidth="1000.0" styleClass="Pane">
-               <children>
-                  <Label layoutX="292.0" layoutY="25.0" prefHeight="26.0" prefWidth="105.0" text="First Name :" />
-                  <Label layoutX="292.0" layoutY="80.0" prefHeight="26.0" prefWidth="105.0" text="Last Name :" />
-                  <TextField fx:id="TextFieldFirstName" layoutX="425.0" layoutY="25.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
-                  <TextField fx:id="TextFieldLastName" layoutX="425.0" layoutY="80.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
-                  <Label layoutX="99.0" layoutY="158.0" prefHeight="26.0" prefWidth="124.0" text="Contact Number :" />
-                  <TextField fx:id="TextFieldContactNum" layoutX="222.0" layoutY="159.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
-                  <Label layoutX="524.0" layoutY="153.0" prefHeight="26.0" prefWidth="105.0" text="Street :" />
-                  <Label layoutX="524.0" layoutY="220.0" prefHeight="26.0" prefWidth="105.0" text="House Num :" />
-                  <Label layoutX="99.0" layoutY="218.0" prefHeight="26.0" prefWidth="105.0" text="City :" />
-                  <TextField fx:id="TextFieldCity" layoutX="219.0" layoutY="220.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
-                  <TextField fx:id="TextFieldStreet" layoutX="654.0" layoutY="153.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
-                  <TextField fx:id="TextFieldHouseNum" layoutX="654.0" layoutY="220.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
-               </children>
-            </Pane>
+            <TextField fx:id="TextFieldNurseID" layoutX="604.0" layoutY="203.0" onAction="#onEnter" styleClass="TextField" />
+            <TabPane layoutX="124.0" layoutY="271.0" prefHeight="365.0" prefWidth="972.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab styleClass="Tab" text="Nurse Information">
+                     <content>
+                        <Pane prefHeight="301.0" prefWidth="1398.0" styleClass="Pane">
+                           <children>
+                              <Label layoutX="292.0" layoutY="25.0" prefHeight="26.0" prefWidth="105.0" text="First Name :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="292.0" layoutY="80.0" prefHeight="26.0" prefWidth="105.0" text="Last Name :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="TextFieldFirstName" layoutX="425.0" layoutY="25.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <TextField fx:id="TextFieldLastName" layoutX="425.0" layoutY="80.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <Label layoutX="99.0" layoutY="158.0" prefHeight="26.0" prefWidth="124.0" text="Contact Number :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="TextFieldContactNum" layoutX="222.0" layoutY="159.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <Label layoutX="524.0" layoutY="153.0" prefHeight="26.0" prefWidth="105.0" text="Street :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="524.0" layoutY="220.0" prefHeight="26.0" prefWidth="105.0" text="House Num :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="99.0" layoutY="218.0" prefHeight="26.0" prefWidth="105.0" text="City :">
+                                 <font>
+                                    <Font name="System Bold Italic" size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="TextFieldCity" layoutX="219.0" layoutY="220.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <TextField fx:id="TextFieldStreet" layoutX="654.0" layoutY="153.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <TextField fx:id="TextFieldHouseNum" layoutX="654.0" layoutY="220.0" prefHeight="31.0" prefWidth="221.0" styleClass="TextField" />
+                              <Button fx:id="BtnClear" layoutX="646.0" layoutY="287.0" mnemonicParsing="false" onAction="#OnClickClear" prefHeight="35.0" prefWidth="100.0" styleClass="Button" text="CLEAR" textFill="WHITE" />
+                              <Button fx:id="BtnSave" layoutX="829.0" layoutY="288.0" mnemonicParsing="false" onAction="#OnClickSave" prefHeight="33.0" prefWidth="105.0" styleClass="Button" text="SAVE" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </Pane>
    </children>

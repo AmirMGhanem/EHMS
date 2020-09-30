@@ -3,8 +3,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
@@ -46,7 +50,7 @@
                                     <Image url="@/Images/slidebutton.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="14.0" layoutY="43.0" onMouseClicked="#OnClickEHMS" prefHeight="41.0" prefWidth="124.0" text="EHMS" textFill="#2879d0">
+                              <Label fx:id="LabelDashboard" layoutX="14.0" layoutY="43.0" onMouseClicked="#OnClickEHMS" prefHeight="41.0" prefWidth="124.0" text="EHMS" textFill="#2879d0">
                                  <font>
                                     <Font name="David Bold" size="35.0" />
                                  </font>
@@ -233,26 +237,61 @@
             </VBox>
          </left>
          <top>
-            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="45.0" prefWidth="536.0" styleClass="ToolBar" BorderPane.alignment="CENTER">
+            <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="36.0" prefWidth="1530.0" styleClass="ToolBar" BorderPane.alignment="CENTER">
                <items>
-                  <Label fx:id="LabelClock" prefHeight="35.0" prefWidth="118.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets left="25.0" />
-                     </padding>
-                  </Label>
-                  <Button fx:id="BtnExitProject" mnemonicParsing="false" onAction="#onClickBtnExitProject" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: red; -fx-border-color: black;" text="Exit ">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="BtnLogout" mnemonicParsing="false" onAction="#onClickBtnLogout" prefHeight="26.0" prefWidth="95.0" style="-fx-border-color: black;" text="Logout">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Button>
+                  <Pane prefHeight="16.0" prefWidth="1507.0">
+                     <children>
+                        <Label fx:id="LabelClock" layoutX="18.0" layoutY="-1.0" prefHeight="35.0" prefWidth="118.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="25.0" />
+                           </padding>
+                        </Label>
+                        <Button fx:id="BtnLogout" layoutX="143.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickBtnLogout" prefHeight="28.0" prefWidth="105.0" style="-fx-border-color: black;" text="Logout">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                        <MenuBar layoutX="1387.0" layoutY="2.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="132.0">
+                          <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                              <items>
+                                    <MenuItem fx:id="BtnScreenshot" mnemonicParsing="false" onAction="#onClickBtnScreenshot" text="ScreenShot" />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                    <MenuItem fx:id="BtnEditDatabaseInfo" mnemonicParsing="false" onAction="#onClickBtnEditDatabaseInfo" text="Database Connector (JDBC information) " />
+                                    <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem fx:id="BtnExitProjectMenu" mnemonicParsing="false" onAction="#onClickBtnExitProject" text="Close Project" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                              <items>
+                                    <MenuItem fx:id="BtnExportCss" mnemonicParsing="false" onAction="#onClickBtnExportCss" text="Export Stylesheet(.css)" />
+                                <MenuItem fx:id="Btnimportcss" mnemonicParsing="false" onAction="#onClickBtnimportcss" text="import stylesheet(.css)" />
+                                    <Menu mnemonicParsing="false" text="View stylesheets">
+                                      <items>
+                                        <MenuItem fx:id="darkmode" mnemonicParsing="false" text="darkmode.css" onAction="#onclickdark" />
+                                          <MenuItem fx:id="lightmode" mnemonicParsing="false" text="lightmode.css" onAction="#onclicklight"/>
+                                          <MenuItem fx:id="customdesign" mnemonicParsing="false" text="customdesign.css" onAction="#onclickcustom"/>
+                                      </items>
+                                    </Menu>
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                              <items>
+                                <MenuItem fx:id="BtnAbout" mnemonicParsing="false" onAction="#onClickBtnAbout" text="About" />
+                              </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                        <Button fx:id="BtnExitProject" layoutX="255.0" layoutY="1.0" mnemonicParsing="false" onAction="#onClickBtnExitProject" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: red; -fx-border-color: black;" text="Exit ">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
                </items>
             </ToolBar>
          </top>

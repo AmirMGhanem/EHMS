@@ -19,12 +19,12 @@ public class medicineDAO {
 
     public int insertMedicine(Medicine m) throws SQLException {
 
-        String sql = "insert into medicine(name, type, timesperday ) values(?,?,?)";
+        String sql = "insert into medicine(name, type ) values(?,?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ps.setString(1, m.getName());
         ps.setString(2, m.getType());
-        ps.setInt(3, m.getTimesPerDay());
+
 
 
         int rows = ps.executeUpdate();
@@ -42,7 +42,7 @@ public class medicineDAO {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"), rs.getInt("timesperday"));
+            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"));
             list.add(m);
         }
 
@@ -58,7 +58,7 @@ public class medicineDAO {
         ResultSet rs = ps.executeQuery();
         if(rs.next())
         {
-             m = new Medicine(rs.getInt("medicinenum"),rs.getString("name"),rs.getString("type"),rs.getInt("timesperday"));
+             m = new Medicine(rs.getInt("medicinenum"),rs.getString("name"),rs.getString("type"));
 
         }
         return m;
@@ -67,13 +67,12 @@ public class medicineDAO {
 
     public void UpdateMedicine(Medicine m) throws SQLException {
 
-        String sql1 = "update medicine SET name = ?, type=?, timesperday=? where medicinenum=?";
+        String sql1 = "update medicine SET name = ?, type=? where medicinenum=?";
         PreparedStatement ps = con.prepareStatement(sql1);
 
         ps.setString(1, m.getName());
         ps.setString(2, m.getType());
-        ps.setInt(3, m.getTimesPerDay());
-        ps.setInt(4, m.getMedicineNum());
+        ps.setInt(3, m.getMedicineNum());
 
         int rows = ps.executeUpdate();
         ps.close();
@@ -100,7 +99,7 @@ public class medicineDAO {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"), rs.getInt("timesperday"));
+            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"));
             list.add(m);
         }
 
@@ -132,8 +131,8 @@ public class medicineDAO {
         String str="";
         while (rs.next()) {
 
-            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"), rs.getInt("timesperday"));
-            str=m.getMedicineNum() + "  |  " + m.getName() +"  |  "+ m.getType()+"  |  "+m.getType()+"  |  "+m.getTimesPerDay();
+            Medicine m = new Medicine(rs.getInt("medicinenum"), rs.getString("name"), rs.getString("type"));
+            str=m.getMedicineNum() + "  |  " + m.getName() +"  |  "+ m.getType()+"  |  "+m.getType();
             list.add(str);
         }
 
