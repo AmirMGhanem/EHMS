@@ -50,7 +50,7 @@
                                     <Image url="@/Images/slidebutton.png" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="LabelDashboard"  layoutX="14.0" layoutY="43.0" onMouseClicked="#OnClickEHMS" prefHeight="41.0" prefWidth="124.0" text="EHMS" textFill="#2879d0">
+                              <Label fx:id="LabelDashboard" layoutX="14.0" layoutY="43.0" onMouseClicked="#OnClickEHMS" prefHeight="41.0" prefWidth="124.0" text="EHMS" textFill="#2879d0">
                                  <font>
                                     <Font name="David Bold" size="35.0" />
                                  </font>
@@ -260,20 +260,20 @@
                               <items>
                                     <MenuItem fx:id="BtnScreenshot" mnemonicParsing="false" onAction="#onClickBtnScreenshot" text="ScreenShot" />
                                     <SeparatorMenuItem mnemonicParsing="false" />
-                                    <MenuItem fx:id="BtnRefreshDatabase" mnemonicParsing="false" onAction="#onClickRefreshDatabase" text="Refresh Database" />
-                                    <MenuItem fx:id="BtnEditDatabaseInfo" mnemonicParsing="false" onAction="#onClickBtnEditDatabaseInfo" text="Edit Database Connector (JDBC perrsistance) " />
+                                    <MenuItem fx:id="BtnEditDatabaseInfo" mnemonicParsing="false" onAction="#onClickBtnEditDatabaseInfo" text="Database Connector (JDBC information) " />
                                     <SeparatorMenuItem mnemonicParsing="false" />
-                                    <MenuItem fx:id="BtnRestart" mnemonicParsing="false" onAction="#onClickRestartProject" text="Restart" />
                                 <MenuItem fx:id="BtnExitProjectMenu" mnemonicParsing="false" onAction="#onClickBtnExitProject" text="Close Project" />
                               </items>
                             </Menu>
                             <Menu mnemonicParsing="false" text="Edit">
                               <items>
+                                    <MenuItem fx:id="BtnExportCss" mnemonicParsing="false" onAction="#onClickBtnExportCss" text="Export Stylesheet(.css)" />
                                 <MenuItem fx:id="Btnimportcss" mnemonicParsing="false" onAction="#onClickBtnimportcss" text="import stylesheet(.css)" />
                                     <Menu mnemonicParsing="false" text="View stylesheets">
                                       <items>
-                                        <MenuItem mnemonicParsing="false" text="darkmode.css" />
-                                          <MenuItem mnemonicParsing="false" text="lightmode.css" />
+                                        <MenuItem fx:id="darkmode" mnemonicParsing="false" text="darkmode.css" onAction="#onclickdark" />
+                                          <MenuItem fx:id="lightmode" mnemonicParsing="false" text="lightmode.css" onAction="#onclicklight"/>
+                                          <MenuItem fx:id="customdesign" mnemonicParsing="false" text="customdesign.css" onAction="#onclickcustom"/>
                                       </items>
                                     </Menu>
                               </items>

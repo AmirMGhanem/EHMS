@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2020 at 11:45 AM
+-- Generation Time: Sep 29, 2020 at 11:37 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -40,7 +40,10 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`addresscode`, `city`, `street`, `housenum`) VALUES
-(2, 'dfssdf', 'dscfsd', 22);
+(2, 'maghar', 'maarvit', 666),
+(11, 'maghar', 'maarvit', 666),
+(213, 'maghar', 'maarvit', 666),
+(12213, 'maghar', 'maarvit', 666);
 
 -- --------------------------------------------------------
 
@@ -52,6 +55,13 @@ CREATE TABLE `allergy` (
   `name` varchar(255) NOT NULL,
   `medicinenum` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `allergy`
+--
+
+INSERT INTO `allergy` (`name`, `medicinenum`) VALUES
+('sweating', 6);
 
 -- --------------------------------------------------------
 
@@ -82,7 +92,7 @@ CREATE TABLE `meal` (
 --
 
 INSERT INTO `meal` (`name`, `weight`) VALUES
-('bbb', 234);
+('rice', 500);
 
 -- --------------------------------------------------------
 
@@ -93,9 +103,16 @@ INSERT INTO `meal` (`name`, `weight`) VALUES
 CREATE TABLE `medicine` (
   `medicinenum` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `timesperday` int(11) NOT NULL
+  `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `medicine`
+--
+
+INSERT INTO `medicine` (`medicinenum`, `name`, `type`) VALUES
+(5, 'optalgen', 'Liquid'),
+(6, 'ogmanten', 'Powder');
 
 -- --------------------------------------------------------
 
@@ -123,37 +140,26 @@ CREATE TABLE `notification` (
   `request_desc` varchar(255) NOT NULL,
   `patient_id` varchar(255) NOT NULL,
   `patient_name` varchar(255) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `istreated` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `notification`
 --
 
-INSERT INTO `notification` (`num`, `request_type`, `request_desc`, `patient_id`, `patient_name`, `date`) VALUES
-(1, 'Low Urgency', 'Patient-> sdasdadsa dsadsadas Needs Water', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(2, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Meal', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(3, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Meal', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(4, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Meal', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(5, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(6, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(7, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(8, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(9, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(10, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(11, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(12, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(13, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(14, 'Critical Urgency', ' Patient-> sdasdadsa dsadsadas Needs YOU', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(15, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(16, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(17, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(18, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(19, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(20, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(21, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(22, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23'),
-(23, 'Medium Urgency', 'Patient-> sdasdadsa dsadsadas Needs Toilet', '123412341', 'sdasdadsa dsadsadas', '2020-09-23');
+INSERT INTO `notification` (`num`, `request_type`, `request_desc`, `patient_id`, `patient_name`, `date`, `istreated`) VALUES
+(1, 'Low Urgency', 'Patient-> Amir ghanem Needs Water', '313258030', 'Amir ghanem', '2020-09-29', 'true'),
+(2, 'Critical Urgency', ' Patient-> Amir ghanem Needs YOU', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
+(3, 'Critical Urgency', ' Patient-> Amir ghanem Needs YOU', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
+(4, 'Medium Urgency', 'Patient-> Amir ghanem Needs Meal', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
+(5, 'Medium Urgency', 'Patient-> Amir ghanem Needs Meal', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
+(6, 'Medium Urgency', 'Patient-> Amir ghanem Needs Meal', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
+(7, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
+(8, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
+(9, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'true'),
+(10, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'true'),
+(11, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'true');
 
 -- --------------------------------------------------------
 
@@ -170,7 +176,8 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`) VALUES
-('123412341');
+('123412341'),
+('313258030');
 
 -- --------------------------------------------------------
 
@@ -199,7 +206,7 @@ CREATE TABLE `patient_meal` (
 --
 
 INSERT INTO `patient_meal` (`patientid`, `mealname`) VALUES
-('123412341', 'bbb');
+('123412341', 'rice');
 
 -- --------------------------------------------------------
 
@@ -209,7 +216,9 @@ INSERT INTO `patient_meal` (`patientid`, `mealname`) VALUES
 
 CREATE TABLE `patient_medicine` (
   `patientid` varchar(255) NOT NULL,
-  `medicinenum` int(11) NOT NULL
+  `medicinenum` int(11) NOT NULL,
+  `timesperday` int(11) NOT NULL,
+  `duration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -243,7 +252,31 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `name`, `address`, `gender`, `birthdate`, `contactno`) VALUES
-('123412341', 'sdasdadsa dsadsadas', 2, 'Male', '2020-09-09', '05221321321213');
+('123412341', 'sdasdadsa dsadsadas', 2, 'Male', '2020-09-09', '05221321321213'),
+('2131231', 'amir ghanem', 12213, 'Male', '2020-09-01', '0503907901'),
+('313258030', 'Amir ghanem', 11, 'Male', '2011-09-08', '052123123123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblusers`
+--
+
+CREATE TABLE `tblusers` (
+  `username` varchar(25) NOT NULL,
+  `password` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tblusers`
+--
+
+INSERT INTO `tblusers` (`username`, `password`) VALUES
+('˻˾̇̃̈', '˻˾̇̃̈'),
+('˻̇̃̌', '˻̇̃̌'),
+('˻̆˻̇', '˻̆˻̇'),
+('˻˻˻', '˻˻˻'),
+('̉̍̈˻̎', '̉̍̈˻̎');
 
 -- --------------------------------------------------------
 
@@ -256,6 +289,13 @@ CREATE TABLE `therapist` (
   `dateworkstart` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `therapist`
+--
+
+INSERT INTO `therapist` (`id`, `dateworkstart`) VALUES
+('2131231', '2020-09-01');
+
 -- --------------------------------------------------------
 
 --
@@ -265,18 +305,6 @@ CREATE TABLE `therapist` (
 CREATE TABLE `therapist_schedule` (
   `therapistid` varchar(255) NOT NULL,
   `schedid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `userinfo`
---
-
-CREATE TABLE `userinfo` (
-  `username` varchar(255) NOT NULL,
-  `pass` varchar(255) NOT NULL,
-  `patientid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -394,13 +422,6 @@ ALTER TABLE `therapist_schedule`
   ADD KEY `schedid` (`schedid`);
 
 --
--- Indexes for table `userinfo`
---
-ALTER TABLE `userinfo`
-  ADD PRIMARY KEY (`username`),
-  ADD KEY `patientid` (`patientid`);
-
---
 -- Indexes for table `workschedule`
 --
 ALTER TABLE `workschedule`
@@ -420,19 +441,19 @@ ALTER TABLE `channell`
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `medicinenum` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `medicinenum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `meeting`
 --
 ALTER TABLE `meeting`
-  MODIFY `num` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `num` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `workschedule`
@@ -509,12 +530,6 @@ ALTER TABLE `therapist`
 ALTER TABLE `therapist_schedule`
   ADD CONSTRAINT `therapist_schedule_ibfk_1` FOREIGN KEY (`therapistid`) REFERENCES `therapist` (`id`),
   ADD CONSTRAINT `therapist_schedule_ibfk_2` FOREIGN KEY (`schedid`) REFERENCES `workschedule` (`schedid`);
-
---
--- Constraints for table `userinfo`
---
-ALTER TABLE `userinfo`
-  ADD CONSTRAINT `userinfo_ibfk_1` FOREIGN KEY (`patientid`) REFERENCES `patient` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

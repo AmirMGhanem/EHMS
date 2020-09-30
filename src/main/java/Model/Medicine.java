@@ -2,23 +2,20 @@ package Model;
 
 
 
-import java.util.Objects;
-
 public class Medicine {
 
     private  int medicineNum;      //AI
     private String name;
     private String type;
-    private int timesPerDay;
+
 
     public Medicine() {
     }
 
-    public Medicine(int medicineNum, String name, String type, int timesPerDay) {
-        this.medicineNum = medicineNum;
-        this.name = name;
-        this.type = type;
-        this.timesPerDay = timesPerDay;
+    public Medicine(int medicineNum, String name, String type) {
+      setMedicineNum(medicineNum);
+      setName(name);
+      setType(type);
     }
 
     public String getName() {
@@ -37,13 +34,7 @@ public class Medicine {
         this.type = type;
     }
 
-    public int getTimesPerDay(){
-        return timesPerDay;
-    }
 
-    public void setTimesPerDay(int timesPerDay) {
-        this.timesPerDay = timesPerDay;
-    }
 
     public int getMedicineNum() {
         return medicineNum;
@@ -53,18 +44,13 @@ public class Medicine {
         this.medicineNum = medicineNum;
     }
 //-------------Equals And Hash Code ----------------------
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Medicine medicine = (Medicine) o;
-        return timesPerDay == medicine.timesPerDay &&
-                Objects.equals(name, medicine.name) &&
-                Objects.equals(type, medicine.type);
-    }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name, type, timesPerDay);
+    public String toString() {
+        return "Medicine{" +
+                "medicineNum=" + medicineNum +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

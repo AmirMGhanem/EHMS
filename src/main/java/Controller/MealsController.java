@@ -193,8 +193,11 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     }
 
+
+
     @FXML
     private void OnSelectMealName(ActionEvent event) throws SQLException {
+
 
         String selectedItem = ChoiceMeal.getSelectionModel().getSelectedItem();
 

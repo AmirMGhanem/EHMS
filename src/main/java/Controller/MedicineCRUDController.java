@@ -37,21 +37,15 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
     @FXML
     private ChoiceBox<String> ChoiceAddType;
     @FXML
-    private Spinner<Integer> AddTimesPerDay;
-    @FXML
     private Button BtnAdd;
     @FXML
     private ChoiceBox<String> ChoiceEditCurrName;
-    @FXML
-    private Spinner<Integer> EditCurrTimesPerDay;
     @FXML
     private TextField EditNewName;
     @FXML
     private ChoiceBox<String> ChoiceEditCurrType;
     @FXML
     private ChoiceBox<?> ChoiceEditNewType;
-    @FXML
-    private Spinner<Integer> EditNewTimesPerDay;
     @FXML
     private Button BtnEditSubmit;
     @FXML
@@ -139,7 +133,6 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             Medicine m = new Medicine();
             m.setName(TextFieldAddName.getText());
             m.setType(ChoiceAddType.getValue());
-            m.setTimesPerDay(AddTimesPerDay.getValue());
             mbh.insertMedicine(m);
 
             MessageInformation += "Medicine Added Successfully :)" ;
@@ -168,7 +161,7 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             m.setMedicineNum(Integer.parseInt(TextFieldEditMedicineNum.getText()));
             m.setName(EditNewName.getText());
             m.setType(ChoiceEditNewType.getValue().toString());
-            m.setTimesPerDay(EditNewTimesPerDay.getValue());
+
             mbh.UpdateMedicine(m);
 
             MessageInformation += "Medicine Edited Successfullt :)";

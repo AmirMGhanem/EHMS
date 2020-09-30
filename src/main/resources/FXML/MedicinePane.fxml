@@ -7,6 +7,8 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -24,52 +26,65 @@
                   </Label>
                </children>
             </Pane>
-            <ChoiceBox fx:id="ChoicePatient" layoutX="275.0" layoutY="229.0" onAction="#onSelectPatient" prefWidth="150.0" styleClass="Choice" />
-            <Label layoutX="137.0" layoutY="224.0" prefHeight="34.0" prefWidth="124.0" text="Choose Patient :" textOverrun="CLIP">
-               <font>
-                  <Font name="Guttman Yad" size="17.0" />
-               </font>
-            </Label>
-            <Label fx:id="LabelPatientID" layoutX="447.0" layoutY="224.0" text="#########" textFill="RED" textOverrun="CLIP">
-               <font>
-                  <Font name="Guttman Yad" size="17.0" />
-               </font>
-            </Label>
-            <TabPane layoutX="95.0" layoutY="272.0" prefHeight="436.0" prefWidth="948.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="35.0" layoutY="226.0" prefHeight="564.0" prefWidth="1154.0" styleClass="TabPane" tabClosingPolicy="UNAVAILABLE">
                <tabs>
                   <Tab styleClass="Tab" text="Medicine">
                      <content>
                         <Pane prefHeight="328.0" prefWidth="815.0" styleClass="Pane">
                            <children>
-                              <TableView fx:id="MedTable" layoutY="71.0" prefHeight="337.0" prefWidth="948.0" style="-fx-border-width: 4px;">
+                              <TableView fx:id="MedTable" layoutY="1.0" prefHeight="502.0" prefWidth="441.0" style="-fx-border-width: 4px;">
                                  <columns>
                                     <TableColumn fx:id="ColMedNum" prefWidth="76.79998016357422" text="#" />
-                                    <TableColumn fx:id="ColMedName" prefWidth="209.5999755859375" text="Medicine Name" />
-                                    <TableColumn fx:id="ColMedType" prefWidth="196.00003051757812" text="Medicine Type" />
-                                    <TableColumn fx:id="ColMedTimes" minWidth="0.0" prefWidth="196.79998779296875" text="Times Per Day" />
+                                    <TableColumn fx:id="ColMedName" prefWidth="174.39999389648438" text="Medicine Name" />
+                                    <TableColumn fx:id="ColMedType" prefWidth="185.5999755859375" text="Medicine Type" />
                                  </columns>
                               </TableView>
-                              <Pane layoutX="5.0" layoutY="5.0" prefHeight="52.0" prefWidth="615.0" style="-fx-background-color: #59b7ff; -fx-border-color: #000000; -fx-background-radius: 14px; -fx-border-radius: 14px; -fx-border-width: 2;">
+                              <Pane layoutX="445.0" layoutY="87.0" prefHeight="394.0" prefWidth="164.0" style="-fx-background-color: #59b7ff; -fx-border-color: #000000; -fx-background-radius: 14px; -fx-border-radius: 14px; -fx-border-width: 2;">
                                  <children>
-                                    <Button fx:id="BtnRemoveMed" layoutX="19.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnClickBtnRemoveMed" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #525252; -fx-border-color: #ffffff; -fx-border-radius: 8px; -fx-background-radius: 8px;" text="Remove Medicine" textFill="#0095ff">
+                                    <Button fx:id="BtnRemoveMed" layoutX="7.0" layoutY="348.0" mnemonicParsing="false" onAction="#OnClickBtnRemoveMed" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #525252; -fx-border-color: #ffffff; -fx-border-radius: 8px; -fx-background-radius: 8px;" text="Remove Medicine" textFill="#0095ff">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="BtnExportMedPDF" layoutX="236.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnClickBtnExportMedPDF" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #525252; -fx-border-color: #ffffff; -fx-border-radius: 8px; -fx-background-radius: 8px;" text="Export To PDF" textFill="#0095ff">
+                                    <Button fx:id="BtnExportMedPDF" layoutX="7.0" layoutY="301.0" mnemonicParsing="false" onAction="#OnClickBtnExportMedPDF" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #525252; -fx-border-color: #ffffff; -fx-border-radius: 8px; -fx-background-radius: 8px;" text="Export To PDF" textFill="#0095ff">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="BtnExportMedFile" layoutX="452.0" layoutY="10.0" mnemonicParsing="false" onAction="#OnClickBtnExportMedFile" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #525252; -fx-border-color: #ffffff; -fx-border-radius: 8px; -fx-background-radius: 8px;" text="Export To File" textFill="#0095ff">
+                                    <Button fx:id="BtnExportMedFile" layoutX="7.0" layoutY="253.0" mnemonicParsing="false" onAction="#OnClickBtnExportMedFile" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #525252; -fx-border-color: #ffffff; -fx-border-radius: 8px; -fx-background-radius: 8px;" text="Export To File" textFill="#0095ff">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
+                                    <Button fx:id="BtnAttachMed" layoutX="6.0" layoutY="140.0" mnemonicParsing="false" onAction="#OnClickBtnAttachMed" prefHeight="33.0" prefWidth="150.0" styleClass="Button" text="Attach To Patient" />
+                                    <Button fx:id="BtnDetachMed" layoutX="6.0" layoutY="199.0" mnemonicParsing="false" onAction="#OnClickBtnDetachMed" prefHeight="33.0" prefWidth="150.0" styleClass="Button" text="Detach From Patient" />
+                                    <Button fx:id="BtnLoadID" layoutX="6.0" layoutY="83.0" mnemonicParsing="false" onAction="#OnClickBtnLoadID" prefHeight="33.0" prefWidth="150.0" styleClass="Button" text="Load Patient" />
+                                    <Label fx:id="LabelPatientID" layoutX="64.0" layoutY="27.0" text="#########" textFill="RED" textOverrun="CLIP">
+                                       <font>
+                                          <Font name="Guttman Yad" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="37.0" fitWidth="46.0" layoutX="7.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@/Images/id.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </Pane>
-                              <Button fx:id="BtnAttachMed" layoutX="644.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnAttachMed" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Attach To Patient" />
-                              <Button fx:id="BtnDetachMed" layoutX="793.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnDetachMed" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Detach From Patient" />
+                              <TableView fx:id="TablePatientMedicines" layoutX="617.0" layoutY="2.0" prefHeight="499.0" prefWidth="534.0">
+                                <columns>
+                                  <TableColumn fx:id="ColID" prefWidth="109.5999755859375" text="Patient ID" />
+                                    <TableColumn fx:id="ColMedNO" prefWidth="84.0" text="Medicine #" />
+                                    <TableColumn fx:id="colTimesPerDay" prefWidth="83.199951171875" text="Times A Day" />
+                                    <TableColumn fx:id="ColDuration" prefWidth="113.5999755859375" text="Cycle duration" />
+                                </columns>
+                              </TableView>
+                              <ChoiceBox fx:id="ChoicePatient" layoutX="460.0" layoutY="50.0" onAction="#onSelectPatient" prefHeight="27.0" prefWidth="130.0" styleClass="Choice" />
+                              <Label layoutX="469.0" layoutY="12.0" prefHeight="34.0" prefWidth="124.0" text="Choose Patient :" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </content>
@@ -103,8 +118,21 @@
                                     </Button>
                                  </children>
                               </Pane>
-                              <Button fx:id="BtnAttachAllergy" layoutX="644.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnAttachAllergy" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Attach To Patient" />
-                              <Button fx:id="BtnDetachAllergy" layoutX="793.0" layoutY="17.0" mnemonicParsing="false" onAction="#OnClickBtnDetachAllergy" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Detach From Patient" />
+                              <Button fx:id="BtnAttachAllergy" layoutX="954.0" layoutY="163.0" mnemonicParsing="false" onAction="#OnClickBtnAttachAllergy" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Attach To Patient" />
+                              <Button fx:id="BtnDetachAllergy" layoutX="953.0" layoutY="213.0" mnemonicParsing="false" onAction="#OnClickBtnDetachAllergy" prefHeight="33.0" prefWidth="141.0" styleClass="Button" text="Detach From Patient" />
+                              <ChoiceBox fx:id="ChoicePatientAllergy" layoutX="826.0" layoutY="19.0" onAction="#onSelectPatientAllergy" prefHeight="27.0" prefWidth="130.0" styleClass="Choice" />
+                              <Label fx:id="LabelPatientIDAllergy" layoutX="970.0" layoutY="13.0" text="#########" textFill="RED" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="700.0" layoutY="14.0" prefHeight="34.0" prefWidth="124.0" text="Choose Patient :" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Guttman Yad" size="17.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="BtnLoadAll" layoutX="952.0" layoutY="111.0" mnemonicParsing="false" onAction="#OnClickBtnLoadAll" prefHeight="33.0" prefWidth="142.0" styleClass="Button" text="Load All Allergies" />
+                              <Button fx:id="BtnLoadIDAllergy" layoutX="952.0" layoutY="66.0" mnemonicParsing="false" onAction="#OnClickBtnLoadIDAllergy" prefHeight="33.0" prefWidth="142.0" styleClass="Button" text="Load IO" />
                            </children>
                         </Pane>
                      </content>
@@ -121,7 +149,15 @@
                   <Font name="Arial Bold Italic" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="BtnLoadAllData" layoutX="547.0" layoutY="225.0" mnemonicParsing="false" onAction="#OnLoadAllDataClick" prefHeight="33.0" prefWidth="183.0" styleClass="Button" text="Load All Data" />
+            <Pane layoutX="38.0" layoutY="124.0" prefHeight="99.0" prefWidth="26.0" style="-fx-background-color: #5a5a5a;" stylesheets="@../Css/lightmode.css">
+               <children>
+                  <Label layoutX="-38.0" layoutY="29.0" prefHeight="20.0" prefWidth="102.0" rotate="-90.0" text="Instructions *">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>

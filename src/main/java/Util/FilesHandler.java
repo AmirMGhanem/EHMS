@@ -121,13 +121,13 @@ public class FilesHandler {
         ArrayList<Medicine> ALMED = new ArrayList<Medicine>();
         try {
             fr = new FileWriter("src/main/resources/Files/MedicinesFiles/Medicines.txt");
-            fr.write("#        Medicine Name        Medicine Type        Medicine Times Per Day      ");
+            fr.write("#        Medicine Name        Medicine Type        ");
             fr.write("\n--------------------------------------------------------------------------------------------\n");
             ALMED = MDH.selectAll();
             System.out.println(ALMED.size());
             for (Medicine m : ALMED) {
 
-                fr.write("\n" +m.getMedicineNum() + "      |      " + m.getName() +"      |      "+ m.getType()+"      |      "+m.getType()+"      |      "+m.getTimesPerDay() );
+                fr.write("\n" +m.getMedicineNum() + "      |      " + m.getName() +"      |      "+ m.getType()+"      |      "+m.getType());
             }
             fr.close();
         } catch (IOException | SQLException e1) {

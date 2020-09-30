@@ -2,6 +2,7 @@ package Controller;
 
 import Util.DatabaseConnector;
 import Util.MessageAlerter;
+import Util.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -59,30 +60,18 @@ public class DatabaseInformationController implements Initializable {
 
     @FXML
     void onClickBtnChooseDir(ActionEvent event) throws IOException {
+        Service s = new Service();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(null);
         File source = new File("ehms.sql");
         File dest = new File(selectedDirectory.getPath() + "/ehmsCopy.sql");
         if (selectedDirectory != null) {
-            copyFileUsingChannel(source, dest);
+            s.copyFileUsingChannel(source, dest);
         } else {
             messageAlerter.ShowErrorMessage("ERROR!!!", "Directory Path is null", "***Please Choose A Directory in order\n to save the SQL Template ");
         }
     }
 
-
-    private static void copyFileUsingChannel(File source, File dest) throws IOException {
-        FileChannel sourceChannel = null;
-        FileChannel destChannel = null;
-        try {
-            sourceChannel = new FileInputStream(source).getChannel();
-            destChannel = new FileOutputStream(dest).getChannel();
-            destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
-        } finally {
-            sourceChannel.close();
-            destChannel.close();
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

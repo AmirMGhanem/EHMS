@@ -7,6 +7,7 @@ import Model.UserInfo;
 import Util.FxmlLoader;
 import Util.MessageAlerter;
 import Util.PdfExporter;
+import Util.Service;
 import View.MultipleFxmlHandlingJavaFX;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -33,14 +34,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 import javafx.stage.Window;
 import javafx.util.Duration;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -54,6 +55,7 @@ import java.util.Stack;
 
 
 public class MainController implements Initializable {
+
 
     @FXML
     private Button BtnLogIn;
@@ -127,10 +129,18 @@ public class MainController implements Initializable {
     private Pane panelLogin;
     @FXML
     private MenuItem BtnScreenshot;
+    @FXML
+    private MenuItem BtnExportCss;
+
+    @FXML
+    private MenuItem lightmode;
+    @FXML
+    private MenuItem darkmode;
+    @FXML
+    private MenuItem customdesign;
 
     @FXML
     private Label LabelDashboard;
-
 
 
     Node loginpane;
@@ -483,7 +493,6 @@ public class MainController implements Initializable {
     public void onClickRestartProject(ActionEvent event) {
 
 
-
     }
 
     @FXML
@@ -509,9 +518,57 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void onClickBtnimportcss(ActionEvent event) {
+    public void onClickBtnExportCss(ActionEvent event) throws IOException {
+        Service s = new Service();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(null);
+        File source = new File("src/main/resources/Css/lightmode.css");
+        File dest = new File(selectedDirectory.getPath() + "/UserCustomDesign.css");
+        if (selectedDirectory != null) {
+            s.copyFileUsingChannel(source, dest);
+        } else {
+            messageAlerter.ShowErrorMessage("ERROR!!!", "Directory Path is null", "***Please Choose A Directory in order\n to save the LightMode css Template ");
+        }
 
     }
 
 
+    @FXML
+    public void onClickBtnimportcss(ActionEvent event) throws IOException {
+        Service s = new Service();
+        MenuItem menuItem = (MenuItem) event.getTarget();
+        ContextMenu cm = menuItem.getParentPopup();
+        Scene scene = cm.getScene();
+        Window window = scene.getWindow();
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("CSS Files", "*.css"));
+        File selectedFile = fc.showOpenDialog(window);
+        fc.setInitialFileName("UserCustomDesign.css");
+        File dest = new File("src/main/resources/Css/UserCustomDesign.css");
+        s.copyFileUsingChannel(selectedFile, dest);
+
+        //messageAlerter.ShowErrorMessage("File Not Found", "Please Choose A File", "Please Choose a file \n (*.css) in order to import")
+
+    }
+
+    @FXML
+    public void onclickdark(ActionEvent event) throws IOException {
+        Desktop desktop=Desktop.getDesktop();
+        File f = new File("src/main/resources/Css/darkmode.css");
+        desktop.open(f);
+    }
+
+    @FXML
+    public void onclicklight(ActionEvent event) throws IOException {
+        Desktop desktop=Desktop.getDesktop();
+        File f = new File("src/main/resources/Css/lightmode.css");
+        desktop.open(f);
+    }
+
+    @FXML
+    public void onclickcustom(ActionEvent event) throws IOException {
+        Desktop desktop=Desktop.getDesktop();
+        File f = new File("src/main/resources/Css/UserCustomDesign.css");
+        desktop.open(f);
+    }
 }
