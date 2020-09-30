@@ -8,7 +8,6 @@ import Util.FxmlLoader;
 import Util.MessageAlerter;
 import Util.PdfExporter;
 import Util.Service;
-import View.MultipleFxmlHandlingJavaFX;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -37,26 +36,19 @@ import javafx.event.ActionEvent;
 import javafx.stage.*;
 import javafx.stage.Window;
 import javafx.util.Duration;
-
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import java.util.Stack;
+
 
 
 public class MainController implements Initializable {
-
-
     @FXML
     private Button BtnLogIn;
     @FXML
@@ -71,21 +63,16 @@ public class MainController implements Initializable {
     DBH.userInfoDAO uiDAO = new userInfoDAO();
     //--------------------------------------------
     MessageAlerter messageAlerter = new MessageAlerter();
-
     @FXML
     private AnchorPane AnchorMainPane;
-
     public AnchorPane getAnchorMainPane() {
         return AnchorMainPane;
     }
-
     public void setAnchorMainPane(AnchorPane anchorMainPane) {
         AnchorMainPane = anchorMainPane;
     }
-
     @FXML
     private BorderPane BorderMainPane;
-
     @FXML
     private Button BtnNursing;
     @FXML
@@ -98,7 +85,6 @@ public class MainController implements Initializable {
     private Button BtnCrudMed;
     @FXML
     private Button BtnMeeting;
-
     @FXML
     private Button BtnSett;
     @FXML
@@ -131,14 +117,12 @@ public class MainController implements Initializable {
     private MenuItem BtnScreenshot;
     @FXML
     private MenuItem BtnExportCss;
-
     @FXML
     private MenuItem lightmode;
     @FXML
     private MenuItem darkmode;
     @FXML
     private MenuItem customdesign;
-
     @FXML
     private Label LabelDashboard;
 
@@ -155,7 +139,6 @@ public class MainController implements Initializable {
                     for (i = 0; i < 250; i++) {
                         updateProgress(i, 250);
                         Thread.sleep(1);
-
                     }
                     return i;
                 }
@@ -166,7 +149,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickLogin(ActionEvent event) throws InterruptedException, IOException {
-
         for (UserInfo ui : users) {
             if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
                 ProgressBarLoading.setVisible(true);
@@ -239,7 +221,6 @@ public class MainController implements Initializable {
 
     @FXML
     void onClickBtnExitProject() throws IOException {
-
         //MainPaneController.TerminateThread();
         Platform.exit();
         System.exit(0);
@@ -302,13 +283,10 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickNursing(ActionEvent event) throws IOException, SQLException {
-
         TherapistPaneController tpc = new TherapistPaneController();
         ObservableList obTherapist = FXCollections.observableArrayList();
-
         DBH.therapistDAO tdo = new therapistDAO();
         obTherapist = tdo.selectTherapists();
-
         System.out.println("Nursing Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("TherapistPane");
@@ -331,7 +309,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickSettings(ActionEvent event) throws IOException {
-
         System.out.println("Settings Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Settings");
@@ -356,7 +333,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickAddPatient(ActionEvent event) throws IOException {
-
         System.out.println("Add Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("addPatient");
@@ -365,7 +341,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickCrudMed(ActionEvent event) throws IOException {
-
         System.out.println("CRUD Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("AddMedPane");
@@ -384,7 +359,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickEditPatient(ActionEvent event) throws IOException {
-
         System.out.println("Add Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("editPatient");
@@ -412,23 +386,12 @@ public class MainController implements Initializable {
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     public void setCenter(Pane pane) {
         BorderMainPane.setCenter(pane);
     }
 
-
-    public void DarkModeHandle() {
-        String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
-        BorderMainPane.getStylesheets().add(css);
-    }
-
-    public void LightModeHandle() {
-        String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
-        BorderMainPane.getStylesheets().add(css);
-    }
 
     public void setDisableAllButtons() {
         BtnAddNurse.setDisable(true);
@@ -464,11 +427,6 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void onClickRefreshDatabase(ActionEvent event) {
-
-    }
-
-    @FXML
     public void onClickBtnScreenshot(ActionEvent event) throws IOException, AWTException {
 
 
@@ -486,12 +444,6 @@ public class MainController implements Initializable {
         } else {
             messageAlerter.ShowErrorMessage("ERROR!!!", "Directory Path is null", "***Please Choose A Directory in order\n to save the Project Screenshot");
         }
-
-    }
-
-    @FXML
-    public void onClickRestartProject(ActionEvent event) {
-
 
     }
 
@@ -529,9 +481,7 @@ public class MainController implements Initializable {
         } else {
             messageAlerter.ShowErrorMessage("ERROR!!!", "Directory Path is null", "***Please Choose A Directory in order\n to save the LightMode css Template ");
         }
-
     }
-
 
     @FXML
     public void onClickBtnimportcss(ActionEvent event) throws IOException {

@@ -122,6 +122,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        JavafxChoiceFill();
         CssStyler();
     }
 
@@ -134,20 +135,17 @@ public class AddNurseController extends TherapistPaneController implements Initi
 
     @Override
     public void JavafxChoiceFill() {
-        GenderList.removeAll();
         String a = "Male";
         String b = "Female";
         ChoiceGender.setValue("Choose Gender");
-        GenderList.addAll(a, b);
-        ChoiceGender.getItems().addAll(GenderList);
-
+        GenderList.setAll(a, b);
+        ChoiceGender.setItems(GenderList);
         //3 Digits Num
-        ThreeDigitsList.removeAll();
         String _050 = "050";
         String _052 = "052";
         String _054 = "054";
-        ThreeDigitsList.addAll(_050, _052, _054);
-        Choice3DigitsNum.getItems().addAll(ThreeDigitsList);
+        ThreeDigitsList.setAll(_050, _052, _054);
+        Choice3DigitsNum.setItems(ThreeDigitsList);
 
     }
 

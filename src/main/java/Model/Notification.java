@@ -9,6 +9,9 @@ public class Notification {
     private Patient patient;
     private Date date;
     private String isTreated;
+    private Therapist therapist;
+
+
 
 
     public Notification() {
@@ -53,7 +56,14 @@ public class Notification {
 
     public void setDate(Date date) {
         this.date = date;
+    }
 
+    public Therapist getTherapist() {
+        return therapist;
+    }
+
+    public void setTherapist(Therapist therapist) {
+        this.therapist = therapist;
     }
 
     public String getIsTreated() {
