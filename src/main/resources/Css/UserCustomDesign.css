@@ -1,5 +1,5 @@
 .Table{
--fx-border-color : #fffff;
+-fx-border-color : #000000;
 -fx-border-width : 2px;
 -fx-effect: dropshadow( two-pass-box ,  #59b7ff , 5 , 0.0 , 5 , 3 );
 }
