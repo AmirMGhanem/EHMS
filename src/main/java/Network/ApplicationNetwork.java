@@ -2,9 +2,11 @@ package Network;
 
 import DBH.notificationDAO;
 import DBH.patientDAO;
+import DBH.therapistDAO;
 import Model.Notification;
 import Model.Patient;
 import Model.Request;
+import Model.Therapist;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -19,6 +21,8 @@ public class ApplicationNetwork extends Thread {
     ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
     DBH.notificationDAO nDAO = new notificationDAO();
     ArrayList<Notification> notificationArrayList = new ArrayList<Notification>();
+    ArrayList<Therapist> therapistarraylist = new ArrayList<Therapist>();
+    DBH.therapistDAO tdao = new therapistDAO();
 
     String msg;
 
@@ -46,6 +50,7 @@ public class ApplicationNetwork extends Thread {
 
 
     public void MessageFetcher(String msg) throws SQLException {
+        therapistarraylist=tdao.selectAll();
         //Fetching msg ->> id + request
         String[] splittedMsg;
         splittedMsg = msg.split(" -> ");
@@ -84,21 +89,26 @@ public class ApplicationNetwork extends Thread {
                         request.setDescription(" Patient-> " + notification.getPatient().getName() + " Needs YOU");
                         break;
                 }
+                Therapist t = new Therapist();
                 notification.setIsTreated("false");
                 notification.setRequest(request);
+                notification.setTherapist(t);
                 nDAO.insertNotification(notification);
 
                 System.out.println(notification.toString());
             }
-
         }
 
-        if(splittedMsg[0].equals("T"))
-        {
+        if (splittedMsg[0].equals("T")) {
             String TherapistID = splittedMsg[1];
             String RequestNumber = splittedMsg[2];
-            System.out.println(TherapistID + " in process with Request Number "+RequestNumber);
-            nDAO.UpdateNotificationToTreated(Integer.parseInt(RequestNumber));
+            System.out.println(TherapistID + " in process with Request Number " + RequestNumber);
+
+            for (Therapist t : therapistarraylist) {
+                if (TherapistID.equals(t.getID()))
+                    nDAO.UpdateNotificationToTreated(Integer.parseInt(RequestNumber), t);
+            }
+
 
         }
 

@@ -97,7 +97,12 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
     @FXML
     private TableColumn<Notification, String> ColTreated;
+    @FXML
 
+    private TableColumn<Notification, String> ColTherapistID;
+    @FXML
+
+    private TableColumn<Notification, String> ColTherapistName;
     @FXML
     private PieChart PieChartRequests;
 
@@ -219,7 +224,8 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         ColPatientName.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getPatient().getName()));
         ColTime.setCellValueFactory(new PropertyValueFactory<Notification, Date>("date"));
         ColTreated.setCellValueFactory(new PropertyValueFactory<Notification, String>("isTreated"));
-
+        ColTherapistID.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getTherapist().getID()));
+        ColTherapistName.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getTherapist().getName()));
         //add your data to the table here.
         JavafxTableFill();
         TableViewNotifications.setItems(notificationObservable);

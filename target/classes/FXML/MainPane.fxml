@@ -29,13 +29,15 @@
             </Pane>
             <TableView fx:id="TableViewNotifications" layoutX="15.0" layoutY="123.0" prefHeight="280.0" prefWidth="1147.0" styleClass="Table">
                <columns>
-                  <TableColumn fx:id="ColNum" prefWidth="91.99999713897705" styleClass="TableCol" text="No." />
-                  <TableColumn fx:id="ColType" minWidth="0.0" prefWidth="121.60000610351562" styleClass="TableCol" text="Request Type" />
-                  <TableColumn fx:id="ColDesc" minWidth="0.0" prefWidth="275.1999816894531" styleClass="TableCol" text="Request Description" />
-                  <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="176.800048828125" styleClass="TableCol" text="Patient Name" />
-                  <TableColumn fx:id="ColPatientID" minWidth="0.0" prefWidth="183.20001220703125" styleClass="TableCol" text="Patient ID" />
-                  <TableColumn fx:id="ColTime" minWidth="0.0" prefWidth="176.0" styleClass="TableCol" text="Date" />
-                  <TableColumn fx:id="ColTreated" minWidth="0.0" prefWidth="114.0" styleClass="TableCol" text="Is Treated?" />
+                  <TableColumn fx:id="ColNum" prefWidth="75.0" styleClass="TableCol" text="No." />
+                  <TableColumn fx:id="ColType" minWidth="0.0" prefWidth="102.0" styleClass="TableCol" text="Request Type" />
+                  <TableColumn fx:id="ColDesc" minWidth="0.0" prefWidth="209.0" styleClass="TableCol" text="Request Description" />
+                  <TableColumn fx:id="ColPatientName" minWidth="0.0" prefWidth="128.0" styleClass="TableCol" text="Patient Name" />
+                  <TableColumn fx:id="ColPatientID" minWidth="0.0" prefWidth="158.0" styleClass="TableCol" text="Patient ID" />
+                  <TableColumn fx:id="ColTime" minWidth="0.0" prefWidth="101.0" styleClass="TableCol" text="Date" />
+                  <TableColumn fx:id="ColTreated" minWidth="0.0" prefWidth="132.0" styleClass="TableCol" text="Is Treated?" />
+                  <TableColumn fx:id="ColTherapistID" minWidth="0.0" prefWidth="130.0" styleClass="TableCol" text="Therapist ID" />
+                  <TableColumn fx:id="ColTherapistName" minWidth="0.0" prefWidth="104.0" styleClass="TableCol" text="Therapist Name" />
                </columns>
             </TableView>
             <Pane layoutX="1089.0" layoutY="415.0" prefHeight="150.0" prefWidth="159.0" style="-fx-border-color: #59b7ff; -fx-border-width: 4px; -fx-border-radius: 80;" styleClass="Pane">

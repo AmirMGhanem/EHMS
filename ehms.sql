@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2020 at 11:37 PM
+-- Generation Time: Oct 01, 2020 at 04:02 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -42,7 +42,9 @@ CREATE TABLE `address` (
 INSERT INTO `address` (`addresscode`, `city`, `street`, `housenum`) VALUES
 (2, 'maghar', 'maarvit', 666),
 (11, 'maghar', 'maarvit', 666),
+(111, 'asdasd', 'asasd', 11),
 (213, 'maghar', 'maarvit', 666),
+(222, 'saddsadsa', 'sadadsds', 22),
 (12213, 'maghar', 'maarvit', 666);
 
 -- --------------------------------------------------------
@@ -55,13 +57,6 @@ CREATE TABLE `allergy` (
   `name` varchar(255) NOT NULL,
   `medicinenum` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `allergy`
---
-
-INSERT INTO `allergy` (`name`, `medicinenum`) VALUES
-('sweating', 6);
 
 -- --------------------------------------------------------
 
@@ -87,13 +82,6 @@ CREATE TABLE `meal` (
   `weight` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `meal`
---
-
-INSERT INTO `meal` (`name`, `weight`) VALUES
-('rice', 500);
-
 -- --------------------------------------------------------
 
 --
@@ -105,14 +93,6 @@ CREATE TABLE `medicine` (
   `name` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `medicine`
---
-
-INSERT INTO `medicine` (`medicinenum`, `name`, `type`) VALUES
-(5, 'optalgen', 'Liquid'),
-(6, 'ogmanten', 'Powder');
 
 -- --------------------------------------------------------
 
@@ -141,6 +121,7 @@ CREATE TABLE `notification` (
   `patient_id` varchar(255) NOT NULL,
   `patient_name` varchar(255) NOT NULL,
   `date` date NOT NULL,
+  `therapist` varchar(255) NOT NULL,
   `istreated` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -148,18 +129,12 @@ CREATE TABLE `notification` (
 -- Dumping data for table `notification`
 --
 
-INSERT INTO `notification` (`num`, `request_type`, `request_desc`, `patient_id`, `patient_name`, `date`, `istreated`) VALUES
-(1, 'Low Urgency', 'Patient-> Amir ghanem Needs Water', '313258030', 'Amir ghanem', '2020-09-29', 'true'),
-(2, 'Critical Urgency', ' Patient-> Amir ghanem Needs YOU', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
-(3, 'Critical Urgency', ' Patient-> Amir ghanem Needs YOU', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
-(4, 'Medium Urgency', 'Patient-> Amir ghanem Needs Meal', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
-(5, 'Medium Urgency', 'Patient-> Amir ghanem Needs Meal', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
-(6, 'Medium Urgency', 'Patient-> Amir ghanem Needs Meal', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
-(7, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
-(8, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'false'),
-(9, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'true'),
-(10, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'true'),
-(11, 'Medium Urgency', 'Patient-> Amir ghanem Needs Toilet', '313258030', 'Amir ghanem', '2020-09-29', 'true');
+INSERT INTO `notification` (`num`, `request_type`, `request_desc`, `patient_id`, `patient_name`, `date`, `therapist`, `istreated`) VALUES
+(1, 'Low Urgency', 'Patient-> test testt Needs Water', '123123', 'test testt', '2020-10-01', '', 'false'),
+(2, 'Critical Urgency', ' Patient-> test testt Needs YOU', '123123', 'test testt', '2020-10-01', '', 'false'),
+(3, 'Medium Urgency', 'Patient-> test testt Needs Meal', '123123', 'test testt', '2020-10-01', '', 'false'),
+(4, 'Low Urgency', 'Patient-> test testt Needs Water', '123123', 'test testt', '2020-10-01', '', 'false'),
+(5, 'Medium Urgency', 'Patient-> test testt Needs Toilet', '123123', 'test testt', '2020-10-01', '', 'false');
 
 -- --------------------------------------------------------
 
@@ -176,8 +151,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`id`) VALUES
-('123412341'),
-('313258030');
+('123123');
 
 -- --------------------------------------------------------
 
@@ -200,13 +174,6 @@ CREATE TABLE `patient_meal` (
   `patientid` varchar(255) NOT NULL,
   `mealname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `patient_meal`
---
-
-INSERT INTO `patient_meal` (`patientid`, `mealname`) VALUES
-('123412341', 'rice');
 
 -- --------------------------------------------------------
 
@@ -252,9 +219,8 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `name`, `address`, `gender`, `birthdate`, `contactno`) VALUES
-('123412341', 'sdasdadsa dsadsadas', 2, 'Male', '2020-09-09', '05221321321213'),
-('2131231', 'amir ghanem', 12213, 'Male', '2020-09-01', '0503907901'),
-('313258030', 'Amir ghanem', 11, 'Male', '2011-09-08', '052123123123');
+('123123', 'test testt', 222, 'Male', '2020-10-06', '052123213123'),
+('313258030', 'amir wayne', 111, 'Male', '2020-10-06', '0521231231231');
 
 -- --------------------------------------------------------
 
@@ -276,7 +242,8 @@ INSERT INTO `tblusers` (`username`, `password`) VALUES
 ('˻̇̃̌', '˻̇̃̌'),
 ('˻̆˻̇', '˻̆˻̇'),
 ('˻˻˻', '˻˻˻'),
-('̉̍̈˻̎', '̉̍̈˻̎');
+('̉̍̈˻̎', '̉̍̈˻̎'),
+('˻˾̇̄̃̈ˋˌˍ', '˻̍˾');
 
 -- --------------------------------------------------------
 
@@ -294,7 +261,7 @@ CREATE TABLE `therapist` (
 --
 
 INSERT INTO `therapist` (`id`, `dateworkstart`) VALUES
-('2131231', '2020-09-01');
+('313258030', '2020-10-02');
 
 -- --------------------------------------------------------
 
@@ -441,7 +408,7 @@ ALTER TABLE `channell`
 -- AUTO_INCREMENT for table `medicine`
 --
 ALTER TABLE `medicine`
-  MODIFY `medicinenum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `medicinenum` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `meeting`
@@ -453,7 +420,7 @@ ALTER TABLE `meeting`
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `workschedule`
