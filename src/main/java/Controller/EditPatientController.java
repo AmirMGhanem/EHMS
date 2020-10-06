@@ -2,7 +2,7 @@ package Controller;
 
 import Model.Address;
 import Model.Patient;
-import Util.InputsValidations;
+import Util.IValidations;
 import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,22 +20,36 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class EditPatientController implements Initializable, Util.JavafxPaneHandler {
+public class EditPatientController implements Initializable, Util.JavafxPaneHandler, IValidations {
 
-    @FXML private Pane parent;
-    @FXML private TextField TextFieldFirstName;
-    @FXML private TextField TextFieldLastName;
-    @FXML private TextField TextFieldCity;
-    @FXML private TextField TextFieldContactNum;
-    @FXML private ChoiceBox<?> Choice3Digits;
-    @FXML private TextField TextFieldStreet;
-    @FXML private TextField TextFieldHouseNum;
-    @FXML private Button BtnClear;
-    @FXML private Button BtnSave;
-    @FXML private ChoiceBox<?> ChoiceNurse;
-    @FXML private Label LblNurseID;
-    @FXML private TextField TextFieldPatientID;
-    @FXML private ChoiceBox<String> ChoicePatientName;
+    @FXML
+    private Pane parent;
+    @FXML
+    private TextField TextFieldFirstName;
+    @FXML
+    private TextField TextFieldLastName;
+    @FXML
+    private TextField TextFieldCity;
+    @FXML
+    private TextField TextFieldContactNum;
+    @FXML
+    private ChoiceBox<?> Choice3Digits;
+    @FXML
+    private TextField TextFieldStreet;
+    @FXML
+    private TextField TextFieldHouseNum;
+    @FXML
+    private Button BtnClear;
+    @FXML
+    private Button BtnSave;
+    @FXML
+    private ChoiceBox<?> ChoiceNurse;
+    @FXML
+    private Label LblNurseID;
+    @FXML
+    private TextField TextFieldPatientID;
+    @FXML
+    private ChoiceBox<String> ChoicePatientName;
 
     MessageAlerter ma = new MessageAlerter();
     DBH.patientDAO pbh = new DBH.patientDAO();
@@ -56,44 +70,24 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
 
     @FXML
     void OnClickBtnSave(ActionEvent event) throws SQLException {
-        Util.InputsValidations iv = new InputsValidations();
-        String MessageInformation = "";
-
-        if (TextFieldPatientID.getLength() == 0) {
-            MessageInformation += "You Have To Choose Patient To Edit :) \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
-        } else if ((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (TextFieldContactNum.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
-            MessageInformation += "Messing Information : \n";
-            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
-            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
-            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
-            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
-            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
-            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
-        } else {
-            boolean isValid = iv.isPatientEditInputsValid(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFieldContactNum.getText(), TextFieldCity.getText(), TextFieldStreet.getText(), TextFieldHouseNum.getText());
-
-            if(isValid==true){
-                MessageInformation += "Patient Edited Successfully :)";
-                list = pbh.selectAll();
-                for (Patient p : list) {
-                    if (p.getID().equals(TextFieldPatientID.getText())) {
-                        p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-                        String ContactNum = TextFieldContactNum.getText();
-                        p.setContactNo(ContactNum);
-                        Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-                        p.setAddress(address);
-                        pbh.UpdatePatient(p);
-                    }
+        if (!(nameValidation(TextFieldFirstName.getText()) && nameValidation(TextFieldLastName.getText()) && numValidation(TextFieldContactNum.getText(), 10)))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+        else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
+        else {
+            list = pbh.selectAll();
+            for (Patient p : list) {
+                if (p.getID().equals(TextFieldPatientID.getText())) {
+                    p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                    String ContactNum = TextFieldContactNum.getText();
+                    p.setContactNo(ContactNum);
+                    Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                    p.setAddress(address);
+                    pbh.UpdatePatient(p);
                 }
-                ma.MessageWithoutHeader("Added", MessageInformation);
-                ChoicePatientName.getItems().clear();
-                JavafxChoiceFill();
             }
-            else{
-                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
-            }
+            ChoicePatientName.getItems().clear();
+            JavafxChoiceFill();
         }
     }
 
@@ -140,11 +134,11 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
     }
 
     @Override
-    public void JavafxDiagramFill () {
+    public void JavafxDiagramFill() {
 
     }
 
-    private void CssStyler () {
+    private void CssStyler() {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());

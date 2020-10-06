@@ -3,27 +3,21 @@ package Controller;
 import DBH.userInfoDAO;
 import Model.UserInfo;
 import Util.CssFile;
-import Util.InputsValidations;
+import Util.IValidations;
 import Util.MessageAlerter;
-import com.sun.javafx.css.StyleManager;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -31,39 +25,61 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class SettingsController implements Initializable {
+public class SettingsController implements Initializable, IValidations {
 
     ObservableList BlendModelist = FXCollections.observableArrayList();
     ObservableList Fontlist = FXCollections.observableArrayList();
     DBH.userInfoDAO uiDAo = new userInfoDAO();
 
     MessageAlerter ma = new MessageAlerter();
-    Util.InputsValidations iv = new InputsValidations();
 
-    @FXML private Pane SettingPanel;
-    @FXML private Pane TopPanel;
-    @FXML private TabPane TablPaneThemeDesign;
-    @FXML private ColorPicker ColorPickerThemeDesgin;
-    @FXML private ColorPicker ColorPickerButtonColor;
-    @FXML private ColorPicker ColorPickerTopPaneColor;
-    @FXML private Slider SliderFontSize;
-    @FXML private ColorPicker ColorPickerTextColor;
-    @FXML private ColorPicker ColorPickerBorderColor;
-    @FXML private ChoiceBox<String> ChoiceBlendMode;
-    @FXML private ToggleButton ToggleBtnDarkMode;
-    @FXML private ToggleGroup Off;
-    @FXML private Button BtnSetDefault;
-    @FXML private Button BtnSetCustom;
-    @FXML private TabPane TabPaneSystem;
-    @FXML private ChoiceBox<?> ChoiceTimeZone;
-    @FXML private DatePicker DatePicker;
-    @FXML private ChoiceBox<String> ChoiceFontFamily;
-    @FXML private TextField TextFieldEmail;
-    @FXML private Button BtnRegister;
-    @FXML private TextField TextFieldRegisterUser;
-    @FXML private TextField TextFieldRegisterPass;
 
-    static boolean CustomeDesignFlag=false;
+    @FXML
+    private Pane SettingPanel;
+    @FXML
+    private Pane TopPanel;
+    @FXML
+    private TabPane TablPaneThemeDesign;
+    @FXML
+    private ColorPicker ColorPickerThemeDesgin;
+    @FXML
+    private ColorPicker ColorPickerButtonColor;
+    @FXML
+    private ColorPicker ColorPickerTopPaneColor;
+    @FXML
+    private Slider SliderFontSize;
+    @FXML
+    private ColorPicker ColorPickerTextColor;
+    @FXML
+    private ColorPicker ColorPickerBorderColor;
+    @FXML
+    private ChoiceBox<String> ChoiceBlendMode;
+    @FXML
+    private ToggleButton ToggleBtnDarkMode;
+    @FXML
+    private ToggleGroup Off;
+    @FXML
+    private Button BtnSetDefault;
+    @FXML
+    private Button BtnSetCustom;
+    @FXML
+    private TabPane TabPaneSystem;
+    @FXML
+    private ChoiceBox<?> ChoiceTimeZone;
+    @FXML
+    private DatePicker DatePicker;
+    @FXML
+    private ChoiceBox<String> ChoiceFontFamily;
+    @FXML
+    private TextField TextFieldEmail;
+    @FXML
+    private Button BtnRegister;
+    @FXML
+    private TextField TextFieldRegisterUser;
+    @FXML
+    private TextField TextFieldRegisterPass;
+
+    static boolean CustomeDesignFlag = false;
 
     public boolean isCustomeDesignFlag() {
         return CustomeDesignFlag;
@@ -75,24 +91,14 @@ public class SettingsController implements Initializable {
 
     @FXML
     void OnClickBtnRegister(ActionEvent event) throws SQLException {
-        String MessageInformation = "";
-        if ((TextFieldRegisterUser.getLength() == 0) || (TextFieldRegisterPass.getLength() == 0)) {
-            MessageInformation += "Missing Information : \n";
-            if (TextFieldRegisterUser.getLength() == 0) MessageInformation += "* UserName \n";
-            if (TextFieldRegisterPass.getLength() == 0) MessageInformation += "* Password \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        if (!(nameValidation(TextFieldRegisterUser.getText())) && nameValidation(TextFieldRegisterPass.getText()))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Registering Information You \n Inserted Contains Text Only");
+        else {
+            UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(), TextFieldRegisterPass.getText());
+            uiDAo.inserUser(ui);
+            ma.MessageWithoutHeader("Successfully", "Registered Successfully");
         }
-        else{
-            boolean isValid = iv.isUserAddingInputsValid(TextFieldRegisterUser.getText(), TextFieldRegisterPass.getText());
 
-            if(isValid==true){
-                UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(), TextFieldRegisterPass.getText());
-                uiDAo.inserUser(ui);
-            }
-            else{
-                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
-            }
-        }
     }
 
     @FXML
@@ -209,7 +215,7 @@ public class SettingsController implements Initializable {
     @FXML
     void OnClickBtnSetCustom(ActionEvent event) {
         setCustomeDesignFlag(true);
-        ma.MessageWithoutHeader("Design Armed To Project","Css File [Css/UserCustomDesign.css] \n" +
+        ma.MessageWithoutHeader("Design Armed To Project", "Css File [Css/UserCustomDesign.css] \n" +
                 "has been Armed to the project, " +
                 "to disarm please press disarm");
     }
@@ -217,7 +223,7 @@ public class SettingsController implements Initializable {
     @FXML
     void OnClickDefault(ActionEvent event) throws IOException {
         setCustomeDesignFlag(false);
-        ma.MessageWithoutHeader("Design disarmed from Project","Css File [Css/UserCustomDesign.css] \n" +
+        ma.MessageWithoutHeader("Design disarmed from Project", "Css File [Css/UserCustomDesign.css] \n" +
                 "has been disarmed \n" +
                 "you are using the default [Css/lightmode.css] style");
     }
@@ -246,8 +252,8 @@ public class SettingsController implements Initializable {
                 ButtonStyle + ";\n" +
                 textColorStyle + ";\n}";
         str = str + "\n.ParentPane{\n" + ThemeStyle + ";\n" + FontSizeStyle + ";\n" + textColorStyle + "\n}";
-        str = str +"\n.TopPane{\n"+TopPaneStyle+";\n}";
-        str = str + "\n.Label{\n"+textColorStyle+";\n}";
+        str = str + "\n.TopPane{\n" + TopPaneStyle + ";\n}";
+        str = str + "\n.Label{\n" + textColorStyle + ";\n}";
         cssfile.CreateFile("src/main/resources/Css/UserCustomDesign.css", str);
 
         ma.MessageWithoutHeader("Style Saved", "The System need to restart \nin order to set your last custom design.");

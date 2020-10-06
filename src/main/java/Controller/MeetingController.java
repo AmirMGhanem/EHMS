@@ -2,7 +2,7 @@ package Controller;
 
 import DBH.*;
 import Model.*;
-import Util.InputsValidations;
+import Util.IValidations;
 import Util.JavafxPaneHandler;
 import Util.MessageAlerter;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -17,12 +17,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.*;
 
-public class MeetingController implements Initializable, JavafxPaneHandler {
+public class MeetingController implements Initializable, JavafxPaneHandler, IValidations {
 
     DBH.adressDAO aDAO = new adressDAO();
 
@@ -40,53 +41,97 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     MessageAlerter ma = new MessageAlerter();
 
-    @FXML private Pane parent;
-    @FXML private DatePicker DatePicker;
-    @FXML private Label LabelHR;
-    @FXML private Button BtnShowAll;
-    @FXML private Label LabelMin;
-    @FXML private Pane p11AM;
-    @FXML private Pane p12PM;
-    @FXML private Pane p1PM;
-    @FXML private Pane p2PM;
-    @FXML private Pane p3PM;
-    @FXML private Pane p4PM;
-    @FXML private Pane p5PM;
-    @FXML private Pane p6PM;
-    @FXML private Pane p7PM;
-    @FXML private Pane p8PM;
-    @FXML private Pane p7Am;
-    @FXML private Pane p8AM;
-    @FXML private Pane p9AM;
-    @FXML private Pane p10AM;
-    @FXML private Pane p00;
-    @FXML private Pane p15;
-    @FXML private Pane p30;
-    @FXML private Pane p45;
-    @FXML private TableView<Meeting> TableMeeting;
-    @FXML private TableColumn<Meeting, Number> ColNum;
-    @FXML private TableColumn<Meeting, String> ColName;
-    @FXML private TableColumn<Meeting, String> ColCity;
-    @FXML private TableColumn<Meeting, String> ColStreet;
-    @FXML private TableColumn<Meeting, Number> ColHouseNum;
-    @FXML private TableColumn<Meeting, Date> ColDate;
-    @FXML private TableColumn<Meeting, String> ColTime;
-    @FXML private Button BtnAddMeeting;
-    @FXML private ChoiceBox<String> ChoicePatient;
-    @FXML private Button BtnDetach;
-    @FXML private Label LabelPatientID;
-    @FXML private Button BtnAttach;
-    @FXML private ListView<String> ListView;
-    @FXML private Label LabelUpdate;
-    @FXML private Button BtnRemove;
-    @FXML private TextField TextFieldAddressCode;
-    @FXML private TextField TextFieldCity;
-    @FXML private TextField TextFieldStreet;
-    @FXML private TextField TextFieldHouseNum;
-    @FXML private TextField TextFieldName;
+    @FXML
+    private Pane parent;
+    @FXML
+    private DatePicker DatePicker;
+    @FXML
+    private Label LabelHR;
+    @FXML
+    private Button BtnShowAll;
+    @FXML
+    private Label LabelMin;
+    @FXML
+    private Pane p11AM;
+    @FXML
+    private Pane p12PM;
+    @FXML
+    private Pane p1PM;
+    @FXML
+    private Pane p2PM;
+    @FXML
+    private Pane p3PM;
+    @FXML
+    private Pane p4PM;
+    @FXML
+    private Pane p5PM;
+    @FXML
+    private Pane p6PM;
+    @FXML
+    private Pane p7PM;
+    @FXML
+    private Pane p8PM;
+    @FXML
+    private Pane p7Am;
+    @FXML
+    private Pane p8AM;
+    @FXML
+    private Pane p9AM;
+    @FXML
+    private Pane p10AM;
+    @FXML
+    private Pane p00;
+    @FXML
+    private Pane p15;
+    @FXML
+    private Pane p30;
+    @FXML
+    private Pane p45;
+    @FXML
+    private TableView<Meeting> TableMeeting;
+    @FXML
+    private TableColumn<Meeting, Number> ColNum;
+    @FXML
+    private TableColumn<Meeting, String> ColName;
+    @FXML
+    private TableColumn<Meeting, String> ColCity;
+    @FXML
+    private TableColumn<Meeting, String> ColStreet;
+    @FXML
+    private TableColumn<Meeting, Number> ColHouseNum;
+    @FXML
+    private TableColumn<Meeting, Date> ColDate;
+    @FXML
+    private TableColumn<Meeting, String> ColTime;
+    @FXML
+    private Button BtnAddMeeting;
+    @FXML
+    private ChoiceBox<String> ChoicePatient;
+    @FXML
+    private Button BtnDetach;
+    @FXML
+    private Label LabelPatientID;
+    @FXML
+    private Button BtnAttach;
+    @FXML
+    private ListView<String> ListView;
+    @FXML
+    private Label LabelUpdate;
+    @FXML
+    private Button BtnRemove;
+    @FXML
+    private TextField TextFieldAddressCode;
+    @FXML
+    private TextField TextFieldCity;
+    @FXML
+    private TextField TextFieldStreet;
+    @FXML
+    private TextField TextFieldHouseNum;
+    @FXML
+    private TextField TextFieldName;
 
     ArrayList<Pane> paneArrayList = new ArrayList<Pane>();
-    Util.InputsValidations iv = new InputsValidations();
+
 
     @FXML
     void onSelect(ActionEvent event) {
@@ -113,43 +158,31 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void OnClickBtnAddMeeting(ActionEvent event) throws SQLException {
-        String MessageInformation = "";
-        String time = LabelHR.getText() + LabelMin.getText();
-        if ((TextFieldName.getLength() == 0) || (TextFieldAddressCode.getLength() == 0) || (TextFieldCity.getLength() == 0) || (DatePicker.getValue()==null) || (TextFieldHouseNum.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (time.length()==0)) {
-            MessageInformation += "Missing Information : \n";
-            if (TextFieldName.getLength() == 0) MessageInformation += "* Name \n";
-            if (DatePicker.getValue() == null) MessageInformation += "* Meeting Date \n";;
-            if (TextFieldAddressCode.getLength() == 0) MessageInformation += "* Address Code \n";
-            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
-            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
-            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
-            if (LabelHR.getText() == "##") MessageInformation += "* Meeting Hour Time \n";
-            if (LabelMin.getText() == "##") MessageInformation += "* Meeting Min Time \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+
+        if (!(nameValidation(TextFieldName.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+        else if (!(numValidation(LabelHR.getText()))&&numValidation(LabelMin.getText()))
+            ma.ShowWarningMessage("Error", "You Didn't chhosed time", "Please Select The Desired Time");
+        else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
+        else {
+            Date d = java.sql.Date.valueOf(DatePicker.getValue());
+            Address a = new Address();
+            a.setAddresscode(Integer.parseInt(TextFieldAddressCode.getText()));
+            a.setCity(TextFieldCity.getText());
+            a.setStreet(TextFieldStreet.getText());
+            a.setHouseNum(Integer.parseInt(TextFieldHouseNum.getText()));
+            aDAO.insertAddress(a);
+            Meeting m = new Meeting();
+            m.setName(TextFieldName.getText());
+            m.setAddress(a);
+            m.setDate(d);
+            m.setTime(Integer.parseInt(LabelHR.getText()), Integer.parseInt(LabelMin.getText()));
+            mDAO.insertMeeting(m);
+            TableInit();
+            ma.MessageWithoutHeader("Added", "Metting Added Successfully :)");
         }
-        else{
-            boolean isVal = iv.isMeetingAddingInputsValid(TextFieldName.getText(), TextFieldAddressCode.getText(), TextFieldCity.getText(), TextFieldStreet.getText(), TextFieldHouseNum.getText(), java.sql.Date.valueOf(DatePicker.getValue()));
-                if(isVal==true){
-                Date d = java.sql.Date.valueOf(DatePicker.getValue());
-                Address a = new Address();
-                a.setAddresscode(Integer.parseInt(TextFieldAddressCode.getText()));
-                a.setCity(TextFieldCity.getText());
-                a.setStreet(TextFieldStreet.getText());
-                a.setHouseNum(Integer.parseInt(TextFieldHouseNum.getText()));
-                aDAO.insertAddress(a);
-                Meeting m = new Meeting();
-                m.setName(TextFieldName.getText());
-                m.setAddress(a);
-                m.setDate(d);
-                m.setTime(Integer.parseInt(LabelHR.getText()), Integer.parseInt(LabelMin.getText()));
-                mDAO.insertMeeting(m);
-                TableInit();
-                ma.MessageWithoutHeader("Added", "Metting Added Successfully :)");
-            }
-            else{
-                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
-            }
-        }
+
     }
 
     @FXML

@@ -4,9 +4,8 @@ package Controller;
 import DBH.mealDAO;
 import DBH.patientDAO;
 import DBH.patient_mealDAO;
-import DBH.patient_medicineDAO;
 import Model.*;
-import Util.InputsValidations;
+import Util.IValidations;
 import Util.JavafxPaneHandler;
 import Util.MessageAlerter;
 import javafx.collections.FXCollections;
@@ -20,16 +19,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MealsController implements Initializable, JavafxPaneHandler {
+public class MealsController implements Initializable, JavafxPaneHandler, IValidations {
 
     DBH.patientDAO pDAO = new patientDAO();
     private ArrayList<Patient> patientArrayList = new ArrayList<Patient>();
@@ -43,51 +40,56 @@ public class MealsController implements Initializable, JavafxPaneHandler {
 
     MessageAlerter ma = new MessageAlerter();
 
-    @FXML private Pane parent;
-    @FXML private Button BtnShowAll;
-    @FXML private Button BtnAddMeal;
-    @FXML private Button BtnDeleteMeal;
-    @FXML private TextField TextFieldAddMealName;
-    @FXML private TextField TextFieldAddMealWeight;
-    @FXML private TableView<Meal> TableMeals;
-    @FXML private TableColumn<Meal, String> ColMealName;
-    @FXML private TableColumn<Meal, Number> ColWeight;
-    @FXML private TableView<Patient> TablePatient;
-    @FXML private TableColumn<Patient, String> ColPatientid;
-    @FXML private TableColumn<Patient, String> ColPatientName;
-    @FXML private Button BtnAttachMeal;
-    @FXML private Button BtnDetachMeal;
-    @FXML private ListView<patient_meal> ListViewMeals;
-    @FXML private TextField TextFieldID;
-    @FXML private ChoiceBox<String> ChoiceMeal;
+    @FXML
+    private Pane parent;
+    @FXML
+    private Button BtnShowAll;
+    @FXML
+    private Button BtnAddMeal;
+    @FXML
+    private Button BtnDeleteMeal;
+    @FXML
+    private TextField TextFieldAddMealName;
+    @FXML
+    private TextField TextFieldAddMealWeight;
+    @FXML
+    private TableView<Meal> TableMeals;
+    @FXML
+    private TableColumn<Meal, String> ColMealName;
+    @FXML
+    private TableColumn<Meal, Number> ColWeight;
+    @FXML
+    private TableView<Patient> TablePatient;
+    @FXML
+    private TableColumn<Patient, String> ColPatientid;
+    @FXML
+    private TableColumn<Patient, String> ColPatientName;
+    @FXML
+    private Button BtnAttachMeal;
+    @FXML
+    private Button BtnDetachMeal;
+    @FXML
+    private ListView<patient_meal> ListViewMeals;
+    @FXML
+    private TextField TextFieldID;
+    @FXML
+    private ChoiceBox<String> ChoiceMeal;
 
     @FXML
     void OnClickAddMeal(ActionEvent event) throws SQLException {
-        String MessageInformation = "";
-        Util.InputsValidations iv = new InputsValidations();
-
-        if ((TextFieldAddMealName.getLength() == 0) || (TextFieldAddMealWeight.getLength() == 0)) {
-            MessageInformation += "Missing Information :";
-            if (TextFieldAddMealName.getLength() == 0) MessageInformation += "\n * Meal Name";
-            if (TextFieldAddMealWeight.getLength() == 0) MessageInformation += "\n * Meal Weight";
-            ma.ShowErrorMessage("Unexpected Error", "Fail To Add", MessageInformation);
-        }
+        if (!(nameValidation(TextFieldAddMealName.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+       else if (!(numValidation(TextFieldAddMealWeight.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Weight You \n Inserted Contains DIGITS Only");
         else {
-            boolean isValid = iv.isMealAddInputsValid(TextFieldAddMealName.getText(), TextFieldAddMealWeight.getText());
-
-            if(isValid==true){
-                Meal m = new Meal();
-                m.setName(TextFieldAddMealName.getText());
-                m.setWeight(Integer.parseInt(TextFieldAddMealWeight.getText()));
-                mDAO.insertMeal(m);
-                mealArrayList = mDAO.selectAll();
-                TableInit();
-                JavafxChoiceFill();
-                ma.MessageWithoutHeader("Adde Successfully", "Meal Added Successfully :)");
-            }
-            else{
-                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
-            }
+            Meal m = new Meal();
+            m.setName(TextFieldAddMealName.getText());
+            m.setWeight(Integer.parseInt(TextFieldAddMealWeight.getText()));
+            mDAO.insertMeal(m);
+            mealArrayList = mDAO.selectAll();
+            TableInit();
+            JavafxChoiceFill();
+            ma.MessageWithoutHeader("Adde Successfully", "Meal Added Successfully :)");
         }
     }
 
@@ -97,9 +99,9 @@ public class MealsController implements Initializable, JavafxPaneHandler {
         boolean flag = false;
         patient_mealArrayList = pmDAO.selectAll();
 
-        try{
+        try {
             name = TableMeals.getSelectionModel().getSelectedItem().getName();
-        }catch (Exception e){
+        } catch (Exception e) {
             ma.MessageWithoutHeader("Unexpected Error", "Chose Meal To Delete");
         }
 

@@ -3,7 +3,7 @@ package Controller;
 import DBH.therapistDAO;
 import Model.Address;
 import Model.Therapist;
-import Util.InputsValidations;
+import Util.IValidations;
 import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,28 +13,40 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class EditNurseController implements Initializable, Util.JavafxPaneHandler {
+public class EditNurseController implements Initializable, Util.JavafxPaneHandler, IValidations {
 
     DBH.therapistDAO tbh = new DBH.therapistDAO();
     ArrayList<Therapist> list = new ArrayList<Therapist>();
-
-    @FXML private Pane parent;
-    @FXML private Button BtnClear;
-    @FXML private Button BtnSave;
-    @FXML private TextField TextFieldNurseID;
-    @FXML private TextField TextFieldFirstName;
-    @FXML private TextField TextFieldLastName;
-    @FXML private TextField TextFieldContactNum;
-    @FXML private TextField TextFieldCity;
-    @FXML private TextField TextFieldStreet;
-    @FXML private TextField TextFieldHouseNum;
-    @FXML private ChoiceBox<String> ChoiceNurseEdit;
+    MessageAlerter messageAlerter = new MessageAlerter();
+    @FXML
+    private Pane parent;
+    @FXML
+    private Button BtnClear;
+    @FXML
+    private Button BtnSaSave;
+    @FXML
+    private TextField TextFieldNurseID;
+    @FXML
+    private TextField TextFieldFirstName;
+    @FXML
+    private TextField TextFieldLastName;
+    @FXML
+    private TextField TextFieldContactNum;
+    @FXML
+    private TextField TextFieldCity;
+    @FXML
+    private TextField TextFieldStreet;
+    @FXML
+    private TextField TextFieldHouseNum;
+    @FXML
+    private ChoiceBox<String> ChoiceNurseEdit;
 
     MessageAlerter ma = new MessageAlerter();
     ArrayList<Therapist> Therapists = new ArrayList<Therapist>();
@@ -74,48 +86,29 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
 
     @FXML
     void OnClickSave(ActionEvent event) throws SQLException {
-        Util.InputsValidations iv = new InputsValidations();
-        String MessageInformation = "";
 
-        if (TextFieldNurseID.getLength() == 0) {
-            MessageInformation += "You Have To Choose Nurse To Edit :) \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
-        }
-        else if ((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (TextFieldContactNum.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
-            MessageInformation += "Messing Information : \n";
-            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
-            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
-            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
-            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
-            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
-            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
-        }
+        list = tbh.selectAll();
+
+        if (!(nameValidation(TextFieldFirstName.getText()) && nameValidation(TextFieldLastName.getText()) && numValidation(TextFieldContactNum.getText(), 10)))
+            messageAlerter.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+        else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText())))
+            messageAlerter.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
         else {
-            boolean isValid = iv.isNurseEditInputsValid(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFieldContactNum.getText(), TextFieldCity.getText(), TextFieldStreet.getText(), TextFieldHouseNum.getText());
-
-            if(isValid==true) {
-                MessageInformation += "Nursing Edited Successfully :)";
-                list = tbh.selectAll();
-                for (Therapist t : list) {
-                    if (t.getID().equals(TextFieldNurseID.getText())) {
-                        t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-                        String ContactNum = TextFieldContactNum.getText();
-                        t.setContactNo(ContactNum);
-                        Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-                        t.setAddress(address);
-                        tbh.Updateherapist(t);
-                    }
+            for (Therapist t : list) {
+                if (t.getID().equals(TextFieldNurseID.getText())) {
+                    t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                    String ContactNum = TextFieldContactNum.getText();
+                    t.setContactNo(ContactNum);
+                    Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                    t.setAddress(address);
+                    tbh.Updateherapist(t);
                 }
-                ma.MessageWithoutHeader("Added", MessageInformation);
-                ChoiceNurseEdit.getItems().clear();
-                JavafxChoiceFill();
             }
-            else{
-                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
-            }
+            ChoiceNurseEdit.getItems().clear();
+            JavafxChoiceFill();
         }
     }
+
 
     //Overrided by implementing Initializable
     @Override
@@ -155,7 +148,7 @@ public class EditNurseController implements Initializable, Util.JavafxPaneHandle
     @Override
     public void JavafxChoiceFill() throws SQLException {
         Therapists = tdao.selectAll();
-        for(int i=0 ; i<Therapists.size(); i++){
+        for (int i = 0; i < Therapists.size(); i++) {
             ChoiceNurseEdit.getItems().add(Therapists.get(i).getName());
         }
     }

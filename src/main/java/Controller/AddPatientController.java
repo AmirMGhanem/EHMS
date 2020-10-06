@@ -3,13 +3,11 @@ package Controller;
 import DBH.adressDAO;
 import DBH.patientDAO;
 import DBH.personDAO;
-import DBH.therapistDAO;
 import Model.Address;
 import Model.Patient;
 import Model.Person;
-import Util.InputsValidations;
+import Util.IValidations;
 import Util.MessageAlerter;
-import com.mysql.cj.exceptions.CJConnectionFeatureNotAvailableException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,10 +23,12 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
-public class AddPatientController implements Initializable, Util.JavafxPaneHandler {
+public class AddPatientController implements Initializable, Util.JavafxPaneHandler, IValidations {
 
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
@@ -83,62 +83,44 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
 
     @FXML
     void OnClickBtnAdd(ActionEvent event) throws IOException, SQLException {
-        Util.InputsValidations iv = new InputsValidations();
-        String MessageInformation = "";
-        persons = pdo.selectAll();
-        boolean isExist = false ;
-
-        if ((TextFieldID.getLength() == 0) || (TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (DatePickerBirthDate.getValue() == null) || (Choice3DigitsNum.getValue() == null) || (TextFieldContactNum.getLength() == 0) || (TextFieldAddressCode.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
-            MessageInformation += "Messing Information : \n";
-            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
-            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
-            if (TextFieldID.getLength() == 0) MessageInformation += "* ID \n";
-            if (DatePickerBirthDate.getValue() == null) MessageInformation += "* Birth Date \n";
-            if (Choice3DigitsNum.getValue() == null) MessageInformation += "* 3 Digit Contact Number \n";
-            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
-            if (TextFieldAddressCode.getLength() == 0) MessageInformation += "* Address Code \n";
-            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
-            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
-            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        Date curr = new Date();
+        boolean isExist = false;
+        if (!(numValidation(TextFieldID.getText(), 9))) {
+            ma.ShowErrorMessage("Error", "ID is incorrect!!", "Please Use The 0-9 NUM PAD IF YOU WANT TO ADD -.-");
+        } else if (!(nameValidation(TextFieldFirstName.getText())) && nameValidation(TextFieldLastName.getText()) && numValidation(TextFieldContactNum.getText(), 7)) {
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+        } else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText()))) {
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
+        } else if (DatePickerBirthDate.getValue().getYear() < curr.getYear()) {
+            ma.ShowErrorMessage("Warning", "You Are Younger Than Now", "Please Make Sure Of The Date You Picked \n  must be yesterday- ");
         } else {
-            boolean isValid = iv.isPatientAddingInputsValid(TextFieldID.getText(), TextFieldFirstName.getText(), TextFieldLastName.getText(), java.sql.Date.valueOf(DatePickerBirthDate.getValue()), TextFieldContactNum.getText(), TextFieldAddressCode.getText(), TextFieldCity.getText(), TextFieldStreet.getText(), TextFieldHouseNum.getText());
+            Patient p = new Patient();
+            p.setID(TextFieldID.getText());
+            p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+            p.setGender(ChoiceGender.getValue().toString());
+            String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
+            p.setContactNo(ContactNum);
 
-            if (isValid == true) {
-                Patient p = new Patient();
+            Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+            p.setAddress(address);
 
-                p.setID(TextFieldID.getText());
-                p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-                p.setGender(ChoiceGender.getValue().toString());
-                String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
-                p.setContactNo(ContactNum);
+            java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
+            p.setDate(sqlDate);
 
-                Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-                p.setAddress(address);
+            System.out.println("TEST " + p.toString());
 
-                java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
-                p.setDate(sqlDate);
-
-                System.out.println("TEST " + p.toString());
-
-                for(Person pe : persons){
-                    if(p.getID().equals(pe.getID()))
-                        isExist = true;
-                }
-
-                if(isExist==false){
-                    ado.insertAddress(address);
-                    pdo.insertperson(p);
-                    pado.insertPatient(p);
-                    ma.MessageWithoutHeader("Added", MessageInformation);
-                }
-                else
-                    ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
-
-            } else {
-                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            for (Person pe : persons) {
+                if (p.getID().equals(pe.getID()))
+                    isExist = true;
             }
+            if (!isExist) {
+                ado.insertAddress(address);
+                pdo.insertperson(p);
+                pado.insertPatient(p);
+            } else
+                ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
         }
+
     }
 
     //Overrided by implementing Initializable
