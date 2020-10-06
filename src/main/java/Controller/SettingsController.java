@@ -3,26 +3,21 @@ package Controller;
 import DBH.userInfoDAO;
 import Model.UserInfo;
 import Util.CssFile;
+import Util.IValidations;
 import Util.MessageAlerter;
-import com.sun.javafx.css.StyleManager;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -30,11 +25,15 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class SettingsController implements Initializable {
+public class SettingsController implements Initializable, IValidations {
 
     ObservableList BlendModelist = FXCollections.observableArrayList();
     ObservableList Fontlist = FXCollections.observableArrayList();
     DBH.userInfoDAO uiDAo = new userInfoDAO();
+
+    MessageAlerter ma = new MessageAlerter();
+
+
     @FXML
     private Pane SettingPanel;
     @FXML
@@ -75,14 +74,12 @@ public class SettingsController implements Initializable {
     private TextField TextFieldEmail;
     @FXML
     private Button BtnRegister;
-
     @FXML
     private TextField TextFieldRegisterUser;
-
     @FXML
     private TextField TextFieldRegisterPass;
-    MessageAlerter messageAlerter = new MessageAlerter();
-    static boolean CustomeDesignFlag=false;
+
+    static boolean CustomeDesignFlag = false;
 
     public boolean isCustomeDesignFlag() {
         return CustomeDesignFlag;
@@ -94,14 +91,19 @@ public class SettingsController implements Initializable {
 
     @FXML
     void OnClickBtnRegister(ActionEvent event) throws SQLException {
-        UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(), TextFieldRegisterPass.getText());
-        uiDAo.inserUser(ui);
+        if (!(nameValidation(TextFieldRegisterUser.getText())) && nameValidation(TextFieldRegisterPass.getText()))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Registering Information You \n Inserted Contains Text Only");
+        else {
+            UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(), TextFieldRegisterPass.getText());
+            uiDAo.inserUser(ui);
+            ma.MessageWithoutHeader("Successfully", "Registered Successfully");
+        }
+
     }
 
     @FXML
     void DarkModeTogglePressed(ActionEvent event) {
     }
-
 
     static boolean flagtoggle = false; //false == light
 
@@ -160,7 +162,6 @@ public class SettingsController implements Initializable {
                 String c = String.valueOf(ColorPickerTextColor.getValue());
                 String textColor = "-fx-text-fill: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7);
                 //or txtSearch.setStyle("-fx-text-fill: #BA55D3;");
-
                 BtnSetDefault.setStyle(textColor);
                 System.out.println(textColor);
             }
@@ -189,7 +190,6 @@ public class SettingsController implements Initializable {
                     String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
                     SettingPanel.getStylesheets().add(css);
                     System.out.println(css);
-
                 } else {
                     System.out.println("Toggle Off");
                     ToggleBtnDarkMode.setText("Off");
@@ -197,14 +197,10 @@ public class SettingsController implements Initializable {
                     flagtoggle = false;
                     String css = this.getClass().getResource("/Css/lightmode.css").toExternalForm();
                     SettingPanel.getStylesheets().add(css);
-
                 }
             }
         });
     }
-
-
-
 
     public void onSliderChanged(MouseEvent mouseEvent) {
         double slideValue = SliderFontSize.getValue();
@@ -219,7 +215,7 @@ public class SettingsController implements Initializable {
     @FXML
     void OnClickBtnSetCustom(ActionEvent event) {
         setCustomeDesignFlag(true);
-        messageAlerter.MessageWithoutHeader("Design Armed To Project","Css File [Css/UserCustomDesign.css] \n" +
+        ma.MessageWithoutHeader("Design Armed To Project", "Css File [Css/UserCustomDesign.css] \n" +
                 "has been Armed to the project, " +
                 "to disarm please press disarm");
     }
@@ -227,7 +223,7 @@ public class SettingsController implements Initializable {
     @FXML
     void OnClickDefault(ActionEvent event) throws IOException {
         setCustomeDesignFlag(false);
-        messageAlerter.MessageWithoutHeader("Design disarmed from Project","Css File [Css/UserCustomDesign.css] \n" +
+        ma.MessageWithoutHeader("Design disarmed from Project", "Css File [Css/UserCustomDesign.css] \n" +
                 "has been disarmed \n" +
                 "you are using the default [Css/lightmode.css] style");
     }
@@ -256,18 +252,14 @@ public class SettingsController implements Initializable {
                 ButtonStyle + ";\n" +
                 textColorStyle + ";\n}";
         str = str + "\n.ParentPane{\n" + ThemeStyle + ";\n" + FontSizeStyle + ";\n" + textColorStyle + "\n}";
-        str = str +"\n.TopPane{\n"+TopPaneStyle+";\n}";
-        str = str + "\n.Label{\n"+textColorStyle+";\n}";
+        str = str + "\n.TopPane{\n" + TopPaneStyle + ";\n}";
+        str = str + "\n.Label{\n" + textColorStyle + ";\n}";
         cssfile.CreateFile("src/main/resources/Css/UserCustomDesign.css", str);
 
-        messageAlerter.MessageWithoutHeader("Style Saved", "The System need to restart \nin order to set your last custom design.");
-
+        ma.MessageWithoutHeader("Style Saved", "The System need to restart \nin order to set your last custom design.");
     }
 
-
     public Boolean getToggleMode() {
-
         return ToggleBtnDarkMode.isSelected();
     }
 }
-

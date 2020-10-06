@@ -2,10 +2,10 @@ package Controller;
 
 import DBH.*;
 import Model.*;
+import Util.IValidations;
 import Util.JavafxPaneHandler;
 import Util.MessageAlerter;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,19 +17,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-
 import java.util.*;
 
+public class MeetingController implements Initializable, JavafxPaneHandler, IValidations {
 
-public class MeetingController implements Initializable, JavafxPaneHandler {
-
-    ArrayList<Address> addressArrayList = new ArrayList<Address>();
-    ObservableList addressObservable = FXCollections.observableArrayList();
     DBH.adressDAO aDAO = new adressDAO();
 
     ArrayList<Meeting> meetingArrayList = new ArrayList<Meeting>();
@@ -46,50 +41,94 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     MessageAlerter ma = new MessageAlerter();
 
-    @FXML private Pane parent;
-    @FXML private DatePicker DatePicker;
-    @FXML private Label LabelHR;
-    @FXML private Button BtnShowAll;
-    @FXML private Label LabelMin;
-    @FXML private Pane p11AM;
-    @FXML private Pane p12PM;
-    @FXML private Pane p1PM;
-    @FXML private Pane p2PM;
-    @FXML private Pane p3PM;
-    @FXML private Pane p4PM;
-    @FXML private Pane p5PM;
-    @FXML private Pane p6PM;
-    @FXML private Pane p7PM;
-    @FXML private Pane p8PM;
-    @FXML private Pane p7Am;
-    @FXML private Pane p8AM;
-    @FXML private Pane p9AM;
-    @FXML private Pane p10AM;
-    @FXML private Pane p00;
-    @FXML private Pane p15;
-    @FXML private Pane p30;
-    @FXML private Pane p45;
-    @FXML private TableView<Meeting> TableMeeting;
-    @FXML private TableColumn<Meeting, Number> ColNum;
-    @FXML private TableColumn<Meeting, String> ColName;
-    @FXML private TableColumn<Meeting, String> ColCity;
-    @FXML private TableColumn<Meeting, String> ColStreet;
-    @FXML private TableColumn<Meeting, Number> ColHouseNum;
-    @FXML private TableColumn<Meeting, Date> ColDate;
-    @FXML private TableColumn<Meeting, String> ColTime;
-    @FXML private Button BtnAddMeeting;
-    @FXML private ChoiceBox<String> ChoicePatient;
-    @FXML private Button BtnDetach;
-    @FXML private Label LabelPatientID;
-    @FXML private Button BtnAttach;
-    @FXML private ListView<String> ListView;
-    @FXML private Label LabelUpdate;
-    @FXML private Button BtnRemove;
-    @FXML private TextField TextFieldAddressCode;
-    @FXML private TextField TextFieldCity;
-    @FXML private TextField TextFieldStreet;
-    @FXML private TextField TextFieldHouseNum;
-    @FXML private TextField TextFieldName;
+    @FXML
+    private Pane parent;
+    @FXML
+    private DatePicker DatePicker;
+    @FXML
+    private Label LabelHR;
+    @FXML
+    private Button BtnShowAll;
+    @FXML
+    private Label LabelMin;
+    @FXML
+    private Pane p11AM;
+    @FXML
+    private Pane p12PM;
+    @FXML
+    private Pane p1PM;
+    @FXML
+    private Pane p2PM;
+    @FXML
+    private Pane p3PM;
+    @FXML
+    private Pane p4PM;
+    @FXML
+    private Pane p5PM;
+    @FXML
+    private Pane p6PM;
+    @FXML
+    private Pane p7PM;
+    @FXML
+    private Pane p8PM;
+    @FXML
+    private Pane p7Am;
+    @FXML
+    private Pane p8AM;
+    @FXML
+    private Pane p9AM;
+    @FXML
+    private Pane p10AM;
+    @FXML
+    private Pane p00;
+    @FXML
+    private Pane p15;
+    @FXML
+    private Pane p30;
+    @FXML
+    private Pane p45;
+    @FXML
+    private TableView<Meeting> TableMeeting;
+    @FXML
+    private TableColumn<Meeting, Number> ColNum;
+    @FXML
+    private TableColumn<Meeting, String> ColName;
+    @FXML
+    private TableColumn<Meeting, String> ColCity;
+    @FXML
+    private TableColumn<Meeting, String> ColStreet;
+    @FXML
+    private TableColumn<Meeting, Number> ColHouseNum;
+    @FXML
+    private TableColumn<Meeting, Date> ColDate;
+    @FXML
+    private TableColumn<Meeting, String> ColTime;
+    @FXML
+    private Button BtnAddMeeting;
+    @FXML
+    private ChoiceBox<String> ChoicePatient;
+    @FXML
+    private Button BtnDetach;
+    @FXML
+    private Label LabelPatientID;
+    @FXML
+    private Button BtnAttach;
+    @FXML
+    private ListView<String> ListView;
+    @FXML
+    private Label LabelUpdate;
+    @FXML
+    private Button BtnRemove;
+    @FXML
+    private TextField TextFieldAddressCode;
+    @FXML
+    private TextField TextFieldCity;
+    @FXML
+    private TextField TextFieldStreet;
+    @FXML
+    private TextField TextFieldHouseNum;
+    @FXML
+    private TextField TextFieldName;
 
     ArrayList<Pane> paneArrayList = new ArrayList<Pane>();
 
@@ -110,39 +149,44 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
                         meetingObservable.add(m);
             }
         }
-
-
     }
 
     @FXML
     void OnClickBtnShowAll(ActionEvent event) throws SQLException {
         TableInit();
-
     }
-
 
     @FXML
     void OnClickBtnAddMeeting(ActionEvent event) throws SQLException {
-        Date d = java.sql.Date.valueOf(DatePicker.getValue());
-        Address a = new Address();
-        a.setAddresscode(Integer.parseInt(TextFieldAddressCode.getText()));
-        a.setCity(TextFieldCity.getText());
-        a.setStreet(TextFieldStreet.getText());
-        a.setHouseNum(Integer.parseInt(TextFieldHouseNum.getText()));
-        aDAO.insertAddress(a);
-        Meeting m = new Meeting();
-        m.setName(TextFieldName.getText());
-        m.setAddress(a);
-        m.setDate(d);
-        m.setTime(Integer.parseInt(LabelHR.getText()), Integer.parseInt(LabelMin.getText()));
-        mDAO.insertMeeting(m);
-        TableInit();
-        ma.MessageWithoutHeader("Added", "Metting Added Successfully :)");
+
+        if (!(nameValidation(TextFieldName.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+        else if (!(numValidation(LabelHR.getText()))&&numValidation(LabelMin.getText()))
+            ma.ShowWarningMessage("Error", "You Didn't chhosed time", "Please Select The Desired Time");
+        else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
+        else {
+            Date d = java.sql.Date.valueOf(DatePicker.getValue());
+            Address a = new Address();
+            a.setAddresscode(Integer.parseInt(TextFieldAddressCode.getText()));
+            a.setCity(TextFieldCity.getText());
+            a.setStreet(TextFieldStreet.getText());
+            a.setHouseNum(Integer.parseInt(TextFieldHouseNum.getText()));
+            aDAO.insertAddress(a);
+            Meeting m = new Meeting();
+            m.setName(TextFieldName.getText());
+            m.setAddress(a);
+            m.setDate(d);
+            m.setTime(Integer.parseInt(LabelHR.getText()), Integer.parseInt(LabelMin.getText()));
+            mDAO.insertMeeting(m);
+            TableInit();
+            ma.MessageWithoutHeader("Added", "Metting Added Successfully :)");
+        }
+
     }
 
     @FXML
     void OnClickBtnAttach(ActionEvent event) {
-
         int MeetingNumForAttach = TableMeeting.getSelectionModel().getSelectedItem().getNum();
         String PatientidForAttach = LabelPatientID.getText();
         try {
@@ -157,7 +201,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         }
         ManualInit();
     }
-
 
     @FXML
     void OnClickBtnDetach(ActionEvent event) throws SQLException {
@@ -185,31 +228,24 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void OnClickp00(MouseEvent event) {
-
         p00.setStyle("-fx-background-color:  #ff6565");
         LabelMin.setText("00");
-
         p15.setStyle("-fx-background-color:  #a7a7a7");
         p30.setStyle("-fx-background-color:  #a7a7a7");
         p45.setStyle("-fx-background-color:  #a7a7a7");
-
     }
 
     @FXML
     void OnClickp15(MouseEvent event) {
-
         p15.setStyle("-fx-background-color:  #ff6565");
         LabelMin.setText("15");
-
         p00.setStyle("-fx-background-color:  #a7a7a7");
         p30.setStyle("-fx-background-color:  #a7a7a7");
         p45.setStyle("-fx-background-color:  #a7a7a7");
-
     }
 
     @FXML
     void OnClickp30(MouseEvent event) {
-
         p30.setStyle("-fx-background-color:  #ff6565");
         LabelMin.setText("30");
         p00.setStyle("-fx-background-color:  #a7a7a7");
@@ -219,33 +255,26 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
 
     @FXML
     void OnClickp45(MouseEvent event) {
-
         p45.setStyle("-fx-background-color:  #ff6565");
         LabelMin.setText("45");
-
         p00.setStyle("-fx-background-color:  #a7a7a7");
         p15.setStyle("-fx-background-color:  #a7a7a7");
         p30.setStyle("-fx-background-color:  #a7a7a7");
-
     }
 
     @FXML
     void OnClickp10AM(MouseEvent event) {
-
         p10AM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("10");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p10AM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
-
     }
 
     @FXML
     void OnClickp11AM(MouseEvent event) {
         p11AM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("11");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p11AM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -255,7 +284,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp12PM(MouseEvent event) {
         p12PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("12");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p12PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -265,7 +293,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp1PM(MouseEvent event) {
         p1PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("13");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p1PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -275,7 +302,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp2PM(MouseEvent event) {
         p2PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("14");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p2PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -285,7 +311,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp3PM(MouseEvent event) {
         p3PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("15");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p3PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -295,7 +320,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp4PM(MouseEvent event) {
         p4PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("16");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p4PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -305,7 +329,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp5PM(MouseEvent event) {
         p5PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("17");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p5PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -315,7 +338,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp6PM(MouseEvent event) {
         p6PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("18");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p6PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -325,7 +347,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp7AM(MouseEvent event) {
         p7Am.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("7");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p7Am))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -335,7 +356,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp7PM(MouseEvent event) {
         p7PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("19");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p7PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -345,7 +365,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp8AM(MouseEvent event) {
         p8AM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("8");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p8AM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -355,7 +374,6 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp8PM(MouseEvent event) {
         p8PM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("20");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p8PM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
@@ -365,16 +383,12 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     void OnClickp9AM(MouseEvent event) {
         p9AM.setStyle("-fx-background-color:  #59b7ff");
         LabelHR.setText("9");
-
         for (Pane p : paneArrayList)
             if (!p.equals(p9AM))
                 p.setStyle("-fx-background-color:  #a7a7a7");
     }
 
-
     public void TableInit() throws SQLException {
-
-
         ColCity.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getAddress().getCity()));
         ColStreet.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getAddress().getStreet()));
         ColHouseNum.setCellValueFactory(CellData -> new SimpleIntegerProperty(CellData.getValue().getAddress().getHouseNum()));
@@ -385,19 +399,14 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         //add your data to the table here.
         JavafxTableFill();
         TableMeeting.setItems(meetingObservable);
-
-
     }
-
 
     public void listinit() throws SQLException {
         patient_meetingArrayList = pmdo.selectAll();
         patient_meetingObservable.setAll(patient_meetingArrayList);
         ListView.getItems().removeAll();
         ListView.getItems().setAll(patient_meetingObservable);
-
     }
-
 
     //INIT AND JAVAFX HANDLERER IMPLEMENETATION
     @Override
@@ -407,12 +416,10 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
             JavafxChoiceFill();
             listinit();
             CssStyler();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         LabelMin.setText("00");
-
         paneArrayList.add(p1PM);
         paneArrayList.add(p2PM);
         paneArrayList.add(p3PM);
@@ -427,10 +434,7 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         paneArrayList.add(p11AM);
         paneArrayList.add(p7Am);
         paneArrayList.add(p8AM);
-
-
         ManualInit();
-
     }
 
     private void ManualInit() {
@@ -446,19 +450,15 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
     public void JavafxTableFill() throws SQLException {
         meetingArrayList = mDAO.selectAll();
         meetingObservable.setAll(meetingArrayList);
-
     }
 
     @Override
     public void JavafxChoiceFill() throws SQLException {
-
         patientArrayList = pDAO.selectAll();
         for (Patient p : patientArrayList)
             patientObservable.addAll(p.getName());
         ChoicePatient.getItems().clear();
         ChoicePatient.getItems().addAll(patientObservable);
-
-
     }
 
     @Override
@@ -487,6 +487,5 @@ public class MeetingController implements Initializable, JavafxPaneHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

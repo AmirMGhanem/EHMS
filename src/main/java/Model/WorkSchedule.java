@@ -4,53 +4,56 @@ import java.sql.Date;
 import java.util.Objects;
 
 public class WorkSchedule {
-    Date Workday;
-    int Hours;
+    Therapist therapist;
+    String Day;
+    int Shift;
+    
 
     public WorkSchedule() {
     }
 
-    public WorkSchedule(Date workday, int hours) {
-        Workday = workday;
-        Hours = hours;
+    public WorkSchedule(Therapist t, String day, int shift) {
+        setTherapist(t);
+        setDay(day);
+        setShift(shift);
     }
 
-    public Date getWorkday() {
-
-        return Workday;
+    public WorkSchedule(String day, int shift) {
+        setDay(day);
+        setShift(shift);
     }
 
-    public void setWorkday(Date workday) {
-        Workday = workday;
+
+    public Therapist getTherapist() {
+        return therapist;
     }
 
-    public int getHours() {
-        return Hours;
+    public void setTherapist(Therapist therapist) {
+        this.therapist = therapist;
     }
 
-    public void setHours(int hours) {
-        Hours = hours;
+    public String getDay() {
+        return Day;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WorkSchedule that = (WorkSchedule) o;
-        return Hours == that.Hours &&
-                Objects.equals(Workday, that.Workday);
+    public void setDay(String day) {
+        Day = day;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(Workday, Hours);
+    public int getShift() {
+        return Shift;
+    }
+
+    public void setShift(int shift) {
+        Shift = shift;
     }
 
     @Override
     public String toString() {
         return "WorkSchedule{" +
-                "Workday=" + Workday +
-                ", Hours=" + Hours +
+                "therapist=" + therapist.getID() +
+                ", Day='" + Day + '\'' +
+                ", Shift=" + Shift +
                 '}';
     }
 }

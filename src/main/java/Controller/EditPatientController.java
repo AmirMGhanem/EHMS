@@ -2,7 +2,7 @@ package Controller;
 
 import Model.Address;
 import Model.Patient;
-import Model.Therapist;
+import Util.IValidations;
 import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class EditPatientController implements Initializable, Util.JavafxPaneHandler {
+public class EditPatientController implements Initializable, Util.JavafxPaneHandler, IValidations {
 
     @FXML
     private Pane parent;
@@ -48,6 +48,9 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
     private Label LblNurseID;
     @FXML
     private TextField TextFieldPatientID;
+    @FXML
+    private ChoiceBox<String> ChoicePatientName;
+
     MessageAlerter ma = new MessageAlerter();
     DBH.patientDAO pbh = new DBH.patientDAO();
     ArrayList<Patient> list = new ArrayList<Patient>();
@@ -61,31 +64,17 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
         TextFieldCity.setText("");
         TextFieldStreet.setText("");
         TextFieldHouseNum.setText("");
-
         String MessageInformation = "All Fields Cleared";
         ma.MessageWithoutHeader("Cleared", MessageInformation);
     }
 
     @FXML
     void OnClickBtnSave(ActionEvent event) throws SQLException {
-
-        String MessageInformation = "";
-
-        if (TextFieldPatientID.getLength() == 0) {
-            MessageInformation += "You Have To Choose Patient To Edit :) \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
-        } else if ((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (TextFieldContactNum.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
-            MessageInformation += "Messing Information : \n";
-            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
-            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
-            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
-            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
-            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
-            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
-        } else {
-
-            MessageInformation += "Patient Edited Successfully :)";
+        if (!(nameValidation(TextFieldFirstName.getText()) && nameValidation(TextFieldLastName.getText()) && numValidation(TextFieldContactNum.getText(), 10)))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+        else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText())))
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
+        else {
             list = pbh.selectAll();
             for (Patient p : list) {
                 if (p.getID().equals(TextFieldPatientID.getText())) {
@@ -95,26 +84,27 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
                     Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
                     p.setAddress(address);
                     pbh.UpdatePatient(p);
-
                 }
             }
-            ma.MessageWithoutHeader("Added", MessageInformation);
+            ChoicePatientName.getItems().clear();
+            JavafxChoiceFill();
         }
-
     }
 
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        try {
+            JavafxChoiceFill();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         CssStyler();
-
     }
 
     @FXML
     public void onEnter(ActionEvent ae) throws SQLException {
         String id = TextFieldPatientID.getText();
-
         list = pbh.selectAll();
 
         for (Patient p : list) {
@@ -126,7 +116,6 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
                 TextFieldStreet.setText(p.getAddress().getStreet());
                 TextFieldHouseNum.setText(Integer.toString(p.getAddress().getHouseNum()));
             }
-
         }
     }
 
@@ -137,8 +126,11 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
     }
 
     @Override
-    public void JavafxChoiceFill() {
-
+    public void JavafxChoiceFill() throws SQLException {
+        list = pbh.selectAll();
+        for (int i = 0; i < list.size(); i++) {
+            ChoicePatientName.getItems().add(list.get(i).getName());
+        }
     }
 
     @Override
@@ -167,6 +159,22 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void onSelectPatient(ActionEvent event) throws SQLException {
+        String name = ChoicePatientName.getValue();
+        list = pbh.selectAll();
+
+        for (Patient p : list) {
+            if (p.getName().equals(name)) {
+                TextFieldPatientID.setText(p.getID());
+                TextFieldFirstName.setText(p.getFirstName());
+                TextFieldLastName.setText(p.getLasttName());
+                TextFieldContactNum.setText(p.getContactNo());
+                TextFieldCity.setText(p.getAddress().getCity());
+                TextFieldStreet.setText(p.getAddress().getStreet());
+                TextFieldHouseNum.setText(Integer.toString(p.getAddress().getHouseNum()));
+            }
+        }
     }
 }

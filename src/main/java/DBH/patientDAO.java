@@ -25,9 +25,7 @@ public class patientDAO {
         ps.setString(1, p.getID());
 
         int rows = ps.executeUpdate();
-
         ps.close();
-
         return rows;
     }
 
@@ -41,7 +39,6 @@ public class patientDAO {
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
-
         while (rs.next()) {
             Address address = new Address(rs.getInt("addresscode"), rs.getString("city"), rs.getString("street"), rs.getInt("housenum"));
             Patient p = new Patient(rs.getString("id"), rs.getString("name"), address, rs.getString("gender"), rs.getDate("birthdate"), rs.getString("contactno"),null,null,null,null);
@@ -52,7 +49,6 @@ public class patientDAO {
 
         ps.close();
         rs.close();
-
         return list;
     }
 

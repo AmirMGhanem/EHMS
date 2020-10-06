@@ -170,8 +170,6 @@ public class MainController implements Initializable {
                         }
                     }
                 });
-
-
             }
         }
 
@@ -215,7 +213,6 @@ public class MainController implements Initializable {
         ManualSetCloseNav();
         thread.reset();
         ProgressBarLoading.progressProperty().unbind();
-
     }
 
 
@@ -283,10 +280,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickNursing(ActionEvent event) throws IOException, SQLException {
-        TherapistPaneController tpc = new TherapistPaneController();
-        ObservableList obTherapist = FXCollections.observableArrayList();
-        DBH.therapistDAO tdo = new therapistDAO();
-        obTherapist = tdo.selectTherapists();
         System.out.println("Nursing Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("TherapistPane");
@@ -295,11 +288,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickPatient(ActionEvent event) throws IOException, SQLException {
-        PatientPaneController ppc = new PatientPaneController();
-        ObservableList obPatient = FXCollections.observableArrayList();
-        DBH.patientDAO pdo = new patientDAO();
-        obPatient = pdo.selectPatients();
-        System.out.println("==========" + obPatient);
         System.out.println("Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("PatientManagementPane");

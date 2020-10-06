@@ -67,11 +67,11 @@ public class therapistDAO {
         String sql = "select * from address , person , therapist where address.addresscode = person.address and person.id = therapist.id";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
-        String str="";
+        String str = "";
         while (rs.next()) {
             Address address = new Address(rs.getInt("addresscode"), rs.getString("city"), rs.getString("street"), rs.getInt("housenum"));
             Therapist t = new Therapist(rs.getString("id"), rs.getString("name"), address, rs.getString("gender"), rs.getDate("birthdate"), rs.getString("contactno"), rs.getDate("dateworkstart"), null);
-            str=t.getID()+"  "+t.getName()+"  "+t.getAddress().getCity()+"|"+t.getAddress().getStreet()+"|"+t.getAddress().getHouseNum()+"  "+t.getGender()+"  "+t.getDate()+"  "+t.getContactNo();
+            str = t.getID() + "  " + t.getName() + "  " + t.getAddress().getCity() + "|" + t.getAddress().getStreet() + "|" + t.getAddress().getHouseNum() + "  " + t.getGender() + "  " + t.getDate() + "  " + t.getContactNo();
             list.add(str);
         }
 
@@ -119,38 +119,35 @@ public class therapistDAO {
         return list;
     }
 
-    public void removeTherapistByID(String id , int addressCode) throws SQLException{
+    public void removeTherapistByID(String id, int addressCode) throws SQLException {
         String sql1 = "DELETE FROM therapist WHERE therapist.id=? ";
         PreparedStatement ps = con.prepareStatement(sql1);
-        ps.setString(1 , id);
+        ps.setString(1, id);
         ps.executeUpdate();
         ps.close();
 
         String sql2 = "DELETE FROM person WHERE person.id=?";
         ps = con.prepareStatement(sql2);
-        ps.setString(1 , id);
+        ps.setString(1, id);
         ps.executeUpdate();
         ps.close();
 
         String sql3 = "DELETE FROM address where address.addresscode = ? ";
         ps = con.prepareStatement(sql3);
-        ps.setInt(1 , addressCode);
+        ps.setInt(1, addressCode);
         ps.executeUpdate();
         ps.close();
     }
 
     public void Updateherapist(Therapist t) throws SQLException {
-
-
         String sql1 = "update person SET name = ?, contactno=? where id = ?";
         PreparedStatement ps = con.prepareStatement(sql1);
 
         ps.setString(1, t.getName());
-        ps.setString(2,t.getContactNo());
-        ps.setString(3,t.getID());
+        ps.setString(2, t.getContactNo());
+        ps.setString(3, t.getID());
         int rows = ps.executeUpdate();
         ps.close();
-
 
         String sql2 = "update address SET city = ? , street=? , housenum=?";
         ps = con.prepareStatement(sql2);
@@ -161,13 +158,6 @@ public class therapistDAO {
 
         rows = ps.executeUpdate();
         ps.close();
-
-
     }
 
-    /*
-    DELETE FROM therapist WHERE therapist.id=208913236 ;
-DELETE FROM person WHERE person.id=208913236 ;
-DELETE from address where address.addresscode = 1 ;
-     */
 }

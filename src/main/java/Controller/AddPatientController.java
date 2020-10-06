@@ -3,11 +3,11 @@ package Controller;
 import DBH.adressDAO;
 import DBH.patientDAO;
 import DBH.personDAO;
-import DBH.therapistDAO;
 import Model.Address;
 import Model.Patient;
+import Model.Person;
+import Util.IValidations;
 import Util.MessageAlerter;
-import com.mysql.cj.exceptions.CJConnectionFeatureNotAvailableException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,12 +23,22 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
-public class AddPatientController implements Initializable, Util.JavafxPaneHandler {
+public class AddPatientController implements Initializable, Util.JavafxPaneHandler, IValidations {
 
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
+    MessageAlerter ma = new MessageAlerter();
+
+    DBH.adressDAO ado = new adressDAO();
+    DBH.personDAO pdo = new personDAO();
+    DBH.patientDAO pado = new patientDAO();
+
+    ArrayList<Person> persons = new ArrayList<Person>();
 
     @FXML
     private Pane parent;
@@ -59,8 +69,6 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
     @FXML
     private Button BtnClear;
 
-    MessageAlerter ma = new MessageAlerter();
-
     @FXML
     void OnClickBtnClear(ActionEvent event) {
         TextFieldFirstName.setText("");
@@ -71,30 +79,22 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
         TextFieldStreet.setText("");
         TextFieldHouseNum.setText("");
         TextFieldAddressCode.setText("");
-
     }
 
     @FXML
     void OnClickBtnAdd(ActionEvent event) throws IOException, SQLException {
-        String MessageInformation = "";
-
-        if ((TextFieldID.getLength() == 0) || (TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (DatePickerBirthDate.getValue() == null) || (Choice3DigitsNum.getValue() == null) || (TextFieldContactNum.getLength() == 0) || (TextFieldAddressCode.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
-            MessageInformation += "Messing Information : \n";
-            if (TextFieldFirstName.getLength() == 0) MessageInformation += "* First Name \n";
-            if (TextFieldLastName.getLength() == 0) MessageInformation += "* Last Name \n";
-            if (TextFieldID.getLength() == 0) MessageInformation += "* ID \n";
-            if (DatePickerBirthDate.getValue() == null) MessageInformation += "* Birth Date \n";
-            if (Choice3DigitsNum.getValue() == null) MessageInformation += "* 3 Digit Contact Number \n";
-            if (TextFieldContactNum.getLength() == 0) MessageInformation += "* Contact Number \n";
-            if (TextFieldAddressCode.getLength() == 0) MessageInformation += "* Address Code \n";
-            if (TextFieldCity.getLength() == 0) MessageInformation += "* City \n";
-            if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
-            if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
-            ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
+        Date curr = new Date();
+        boolean isExist = false;
+        if (!(numValidation(TextFieldID.getText(), 9))) {
+            ma.ShowErrorMessage("Error", "ID is incorrect!!", "Please Use The 0-9 NUM PAD IF YOU WANT TO ADD -.-");
+        } else if (!(nameValidation(TextFieldFirstName.getText())) && nameValidation(TextFieldLastName.getText()) && numValidation(TextFieldContactNum.getText(), 7)) {
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
+        } else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText()))) {
+            ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
+        } else if (DatePickerBirthDate.getValue().getYear() < curr.getYear()) {
+            ma.ShowErrorMessage("Warning", "You Are Younger Than Now", "Please Make Sure Of The Date You Picked \n  must be yesterday- ");
         } else {
-
             Patient p = new Patient();
-
             p.setID(TextFieldID.getText());
             p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
             p.setGender(ChoiceGender.getValue().toString());
@@ -109,14 +109,18 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
 
             System.out.println("TEST " + p.toString());
 
-            DBH.adressDAO ado = new adressDAO();
-            DBH.personDAO pdo = new personDAO();
-            DBH.patientDAO papo = new patientDAO();
-            ado.insertAddress(address);
-            pdo.insertperson(p);
-            papo.insertPatient(p);
-            ma.MessageWithoutHeader("Added", MessageInformation);
+            for (Person pe : persons) {
+                if (p.getID().equals(pe.getID()))
+                    isExist = true;
+            }
+            if (!isExist) {
+                ado.insertAddress(address);
+                pdo.insertperson(p);
+                pado.insertPatient(p);
+            } else
+                ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
         }
+
     }
 
     //Overrided by implementing Initializable
@@ -125,7 +129,6 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
         CssStyler();
         JavafxChoiceFill();
     }
-
 
     //Overrided by implementing JavafxPaneHandler
     @Override

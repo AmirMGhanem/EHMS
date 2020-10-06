@@ -1,3 +1,47 @@
 ID           Name           Address           Gender           Date           ContactNo
  --------------------------------------------------------------------------------------
-2131231     amiraaaaaa ghanem     maghar , maarvit , 666     Male     2020-09-01     0503907901
+123456789     asds sad     dasds , sadsad , 111     Male     2012-10-11     0528884455
+208913236     alam aslan     maghar , albas97 , 1548     Male     2020-09-28     0502208594
+313258030     amir wayne     maghar , albas97 , 1548     Male     2020-10-06     0521231231231
+ --------------------------------------------------------------------------------------
+
+
+
+
+
+
+                      WorkingSchedule                                         Sunday
+ 1 shift -->amir wayne,  alam aslan,  
+ 2 shift -->
+ 3 shift -->asds sad,  
+ -------------------------------------------------------------------------------------- 
+                                        Monday
+ 1 shift -->alam aslan,  
+ 2 shift -->amir wayne,  
+ 3 shift -->asds sad,  
+ --------------------------------------------------------------------------------------  
+                                       Tuesday
+ 1 shift -->alam aslan,  
+ 2 shift -->
+ 3 shift -->amir wayne,  asds sad,  
+ -------------------------------------------------------------------------------------- 
+                                        Wednesday
+ 1 shift -->amir wayne,  alam aslan,  
+ 2 shift -->
+ 3 shift -->asds sad,  
+ -------------------------------------------------------------------------------------- 
+                                        Thursday
+ 1 shift -->alam aslan,  
+ 2 shift -->amir wayne,  
+ 3 shift -->asds sad,  
+ -------------------------------------------------------------------------------------- 
+                                        Friday
+ 1 shift -->alam aslan,  
+ 2 shift -->
+ 3 shift -->amir wayne,  asds sad,  
+ --------------------------------------------------------------------------------------
+                                         Saturday
+ 1 shift -->amir wayne,  alam aslan,  
+ 2 shift -->
+ 3 shift -->asds sad,  
+ --------------------------------------------------------------------------------------

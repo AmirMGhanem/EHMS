@@ -7,13 +7,14 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicinePaneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1267.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MedicinePaneController">
    <children>
       <Pane fx:id="parent" layoutY="-5.0" prefHeight="805.0" prefWidth="1264.0" styleClass="ParentPane" stylesheets="@../Css/lightmode.css">
          <children>
@@ -32,7 +33,7 @@
                      <content>
                         <Pane prefHeight="328.0" prefWidth="815.0" styleClass="Pane">
                            <children>
-                              <TableView fx:id="MedTable" layoutY="1.0" prefHeight="502.0" prefWidth="441.0" style="-fx-border-width: 4px;">
+                              <TableView fx:id="MedTable" layoutY="57.0" prefHeight="446.0" prefWidth="441.0" style="-fx-border-width: 4px;">
                                  <columns>
                                     <TableColumn fx:id="ColMedNum" prefWidth="76.79998016357422" text="#" />
                                     <TableColumn fx:id="ColMedName" prefWidth="174.39999389648438" text="Medicine Name" />
@@ -85,6 +86,8 @@
                                     <Font name="Guttman Yad" size="17.0" />
                                  </font>
                               </Label>
+                              <TextField fx:id="TextFieldSearchMedByNum" layoutX="5.0" layoutY="15.0" onAction="#onEnterSearchMedByNumber" promptText="Search By Num #" styleClass="TextField" />
+                              <ChoiceBox fx:id="ChoiceSearchMedByName" layoutX="245.0" layoutY="15.0" onAction="#onSelectMedicine" prefHeight="31.0" prefWidth="172.0" styleClass="Choice" />
                            </children>
                         </Pane>
                      </content>

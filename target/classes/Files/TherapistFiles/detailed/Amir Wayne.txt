@@ -1,7 +1,15 @@
 ID           Name           Address           Gender           Date           ContactNo
  --------------------------------------------------------------------------------------
-000000000   Amir Wayne   haifa , downtown , 34   Male   1995-11-11   0503907901
+313258030   amir wayne   maghar , albas97 , 1548   Male   2020-10-06   0521231231231
 
 
 
-sched
+--------------------------------------------WorkSchedule----------------------------------------------------
+
+Sunday------1
+Monday------2
+Tuesday------3
+Wednesday------1
+Thursday------2
+Friday------3
+Saturday------1
