@@ -6,6 +6,8 @@ import DBH.personDAO;
 import DBH.therapistDAO;
 import Model.Address;
 import Model.Patient;
+import Model.Person;
+import Util.InputsValidations;
 import Util.MessageAlerter;
 import com.mysql.cj.exceptions.CJConnectionFeatureNotAvailableException;
 import javafx.collections.FXCollections;
@@ -23,12 +25,20 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddPatientController implements Initializable, Util.JavafxPaneHandler {
 
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
+    MessageAlerter ma = new MessageAlerter();
+
+    DBH.adressDAO ado = new adressDAO();
+    DBH.personDAO pdo = new personDAO();
+    DBH.patientDAO pado = new patientDAO();
+
+    ArrayList<Person> persons = new ArrayList<Person>();
 
     @FXML
     private Pane parent;
@@ -59,8 +69,6 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
     @FXML
     private Button BtnClear;
 
-    MessageAlerter ma = new MessageAlerter();
-
     @FXML
     void OnClickBtnClear(ActionEvent event) {
         TextFieldFirstName.setText("");
@@ -71,12 +79,14 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
         TextFieldStreet.setText("");
         TextFieldHouseNum.setText("");
         TextFieldAddressCode.setText("");
-
     }
 
     @FXML
     void OnClickBtnAdd(ActionEvent event) throws IOException, SQLException {
+        Util.InputsValidations iv = new InputsValidations();
         String MessageInformation = "";
+        persons = pdo.selectAll();
+        boolean isExist = false ;
 
         if ((TextFieldID.getLength() == 0) || (TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (DatePickerBirthDate.getValue() == null) || (Choice3DigitsNum.getValue() == null) || (TextFieldContactNum.getLength() == 0) || (TextFieldAddressCode.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
             MessageInformation += "Messing Information : \n";
@@ -92,30 +102,42 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
             if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
             ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
         } else {
+            boolean isValid = iv.isPatientAddingInputsValid(TextFieldID.getText(), TextFieldFirstName.getText(), TextFieldLastName.getText(), java.sql.Date.valueOf(DatePickerBirthDate.getValue()), TextFieldContactNum.getText(), TextFieldAddressCode.getText(), TextFieldCity.getText(), TextFieldStreet.getText(), TextFieldHouseNum.getText());
 
-            Patient p = new Patient();
+            if (isValid == true) {
+                Patient p = new Patient();
 
-            p.setID(TextFieldID.getText());
-            p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-            p.setGender(ChoiceGender.getValue().toString());
-            String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
-            p.setContactNo(ContactNum);
+                p.setID(TextFieldID.getText());
+                p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                p.setGender(ChoiceGender.getValue().toString());
+                String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
+                p.setContactNo(ContactNum);
 
-            Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-            p.setAddress(address);
+                Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                p.setAddress(address);
 
-            java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
-            p.setDate(sqlDate);
+                java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
+                p.setDate(sqlDate);
 
-            System.out.println("TEST " + p.toString());
+                System.out.println("TEST " + p.toString());
 
-            DBH.adressDAO ado = new adressDAO();
-            DBH.personDAO pdo = new personDAO();
-            DBH.patientDAO papo = new patientDAO();
-            ado.insertAddress(address);
-            pdo.insertperson(p);
-            papo.insertPatient(p);
-            ma.MessageWithoutHeader("Added", MessageInformation);
+                for(Person pe : persons){
+                    if(p.getID().equals(pe.getID()))
+                        isExist = true;
+                }
+
+                if(isExist==false){
+                    ado.insertAddress(address);
+                    pdo.insertperson(p);
+                    pado.insertPatient(p);
+                    ma.MessageWithoutHeader("Added", MessageInformation);
+                }
+                else
+                    ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
+
+            } else {
+                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            }
         }
     }
 
@@ -125,7 +147,6 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
         CssStyler();
         JavafxChoiceFill();
     }
-
 
     //Overrided by implementing JavafxPaneHandler
     @Override

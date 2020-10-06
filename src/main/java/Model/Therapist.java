@@ -7,13 +7,13 @@ import java.util.Date;
 
 public class Therapist extends Person{
    private Date WorkDateStart;
-   private ArrayList<Date> workSchedule;
+   private ArrayList<WorkSchedule> workSchedule;
    private Calendar cal = Calendar.getInstance();
 
     public Therapist() {
     }
 
-    public Therapist(String id, String name, Address address, String gender, Date date, String contactNo, Date WorkDateStart, ArrayList<Date> workSchedule) {
+    public Therapist(String id, String name, Address address, String gender, Date date, String contactNo, Date WorkDateStart, ArrayList<WorkSchedule> workSchedule) {
         super(id, name, address, gender, date, contactNo);
         this.WorkDateStart = WorkDateStart;
         this.workSchedule = workSchedule;
@@ -27,11 +27,11 @@ public class Therapist extends Person{
         this.WorkDateStart = WorkDateStart;
     }
 
-    public ArrayList<Date> getWorkSchedule() {
+    public ArrayList<WorkSchedule> getWorkSchedule() {
         return workSchedule;
     }
 
-    public void setWorkSchedule(ArrayList<Date> workSchedule) {
+    public void setWorkSchedule(ArrayList<WorkSchedule> workSchedule) {
         this.workSchedule = workSchedule;
     }
 
@@ -51,6 +51,5 @@ public class Therapist extends Person{
         Integer.parseInt(simpleDateformat.format(date1));
 
         return Integer.parseInt(simpleDateformat.format(date2))- Integer.parseInt(simpleDateformat.format(date1));
-
     }
 }

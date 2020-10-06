@@ -105,7 +105,8 @@ public class ApplicationNetwork extends Thread {
             System.out.println(TherapistID + " in process with Request Number " + RequestNumber);
 
             for (Therapist t : therapistarraylist) {
-                if (TherapistID.equals(t.getID()))
+                if (TherapistID.equals(t.getID())
+                )
                     nDAO.UpdateNotificationToTreated(Integer.parseInt(RequestNumber), t);
             }
 

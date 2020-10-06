@@ -1,10 +1,7 @@
 package Controller;
 
 import Model.*;
-import Util.FilesHandler;
-import Util.FooterPageEvent;
-import Util.MessageAlerter;
-import Util.PdfExporter;
+import Util.*;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -14,12 +11,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -87,8 +87,16 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     private Button BtnSpecNurseFile;
 
     @FXML
-    void OnClickInvestigation(ActionEvent event) {
-
+    void OnClickInvestigation(ActionEvent event) throws IOException {
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPage("WorkingSchedule");
+        Stage stage = new Stage();
+        stage.setTitle("Therapist Working Schedule Window");
+        stage.setScene(new Scene(view, 1254, 800));
+        //stage.setX(297);
+        //stage.setY(35);
+        // stage.initStyle(StageStyle.UNDECORATED);
+        stage.show();
     }
 
     @FXML
@@ -127,10 +135,30 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     }
 
     @FXML
-    void OnClickToXML(ActionEvent event) throws IOException, DocumentException, URISyntaxException, SQLException {
+    void OnClickToPDF(ActionEvent event) throws IOException, DocumentException, URISyntaxException, SQLException {
 
         pdfExporter.SaveTherapistPDF();
         ma.MessageWithoutHeader("Exported", "Therapists Exported To PDF");
+    }
+
+    @FXML
+    void OnClickBtnPdfWithSched(ActionEvent event) throws IOException, DocumentException {
+        try {
+            pdfExporter.SaveTherapistPDF();
+            TableExporter tableExporter = new TableExporter();
+            tableExporter.TableExport();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Button btn = (Button) event.getTarget();
+        Parent p =  btn.getParent();
+        Scene scene =  p.getScene();
+        Window window = scene.getWindow();
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        File selectedDirectory = directoryChooser.showDialog(window);
+        if (selectedDirectory != null) {
+            pdfExporter.PdfConcatenate(selectedDirectory.getAbsolutePath());
+        }
     }
 
     public void transferMessage(Therapist t) throws SQLException {

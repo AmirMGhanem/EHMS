@@ -3,7 +3,7 @@ package Controller;
 import DBH.*;
 import Model.Allergy;
 import Model.Medicine;
-import Model.Patient;
+import Util.InputsValidations;
 import Util.MessageAlerter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,76 +16,43 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static java.lang.String.valueOf;
-
 public class MedicineCRUDController implements Initializable, Util.JavafxPaneHandler {
 
-
-    @FXML
-    private Pane parent;
-    @FXML
-    private ChoiceBox<String> ChoiceAddPatientsID;
-    @FXML
-    private TextField TextFieldAddName;
-    @FXML
-    private ChoiceBox<String> ChoiceAddType;
-    @FXML
-    private Button BtnAdd;
-    @FXML
-    private ChoiceBox<String> ChoiceEditCurrName;
-    @FXML
-    private TextField EditNewName;
-    @FXML
-    private ChoiceBox<String> ChoiceEditCurrType;
-    @FXML
-    private ChoiceBox<?> ChoiceEditNewType;
-    @FXML
-    private Button BtnEditSubmit;
-    @FXML
-    private ChoiceBox<String> ChoiceRemoveName;
-    @FXML
-    private Button BtnRemove;
-    @FXML
-    private TextArea TextArea;
-    @FXML
-    private TextField TextFieldMedicineNum;
-    @FXML
-    private TextField TextFieldEditMedicineNum;
-    @FXML
-    private ChoiceBox<String> ChoiceEditPatientID;
-    @FXML
-    private ChoiceBox<String> ChoiceNewEditPatientID;
-    @FXML
-    private TextField TextFieldEditNewMedicineNum;
-    @FXML
-    private TextField TextFieldRemoveMedicineNum;
-    @FXML
-    private ChoiceBox<String> ChoiceRemovePatientID;
-    @FXML
-    private TextField TextFieldAddAllergyName;
-    @FXML
-    private ChoiceBox<?> ChoiceAdddAllergyMedName;
-    @FXML
-    private Button BtnAddAllergy;
-    @FXML
-    private Button BtnEditAllergySubmit;
-    @FXML
-    private ChoiceBox<?> ChoiceEditAllergyName;
-    @FXML
-    private TextField TextFieldNewAllergyName;
-    @FXML
-    private TextField TextFieldEditAllergyMedName;
-    @FXML
-    private TextField TextFieldEditAllergyMedNum;
-    @FXML
-    private ChoiceBox<?> ChoiceNewAllergyMedicine;
+    @FXML private Pane parent;
+    @FXML private ChoiceBox<String> ChoiceAddPatientsID;
+    @FXML private TextField TextFieldAddName;
+    @FXML private ChoiceBox<String> ChoiceAddType;
+    @FXML private Button BtnAdd;
+    @FXML private ChoiceBox<String> ChoiceEditCurrName;
+    @FXML private TextField EditNewName;
+    @FXML private ChoiceBox<String> ChoiceEditCurrType;
+    @FXML private ChoiceBox<?> ChoiceEditNewType;
+    @FXML private Button BtnEditSubmit;
+    @FXML private ChoiceBox<String> ChoiceRemoveName;
+    @FXML private Button BtnRemove;
+    @FXML private TextArea TextArea;
+    @FXML private TextField TextFieldMedicineNum;
+    @FXML private TextField TextFieldEditMedicineNum;
+    @FXML private ChoiceBox<String> ChoiceEditPatientID;
+    @FXML private ChoiceBox<String> ChoiceNewEditPatientID;
+    @FXML private TextField TextFieldEditNewMedicineNum;
+    @FXML private TextField TextFieldRemoveMedicineNum;
+    @FXML private ChoiceBox<String> ChoiceRemovePatientID;
+    @FXML private TextField TextFieldAddAllergyName;
+    @FXML private ChoiceBox<?> ChoiceAdddAllergyMedName;
+    @FXML private Button BtnAddAllergy;
+    @FXML private Button BtnEditAllergySubmit;
+    @FXML private ChoiceBox<?> ChoiceEditAllergyName;
+    @FXML private TextField TextFieldNewAllergyName;
+    @FXML private TextField TextFieldEditAllergyMedName;
+    @FXML private TextField TextFieldEditAllergyMedNum;
+    @FXML private ChoiceBox<?> ChoiceNewAllergyMedicine;
 
     DBH.medicineDAO mbh = new DBH.medicineDAO();
     DBH.AllergyDAO Ado = new AllergyDAO();
@@ -95,10 +62,10 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
     ArrayList<Allergy> allergyArrayList = new ArrayList<Allergy>();
 
     MessageAlerter ma = new MessageAlerter();
+    Util.InputsValidations iv = new InputsValidations();
 
     @FXML
     public void onEnterE(ActionEvent ae) throws SQLException {
-
         ArrayList<Medicine> mlist = new ArrayList<Medicine>();
         int medicineNum = Integer.parseInt(TextFieldEditMedicineNum.getText());
         ObservableList list = FXCollections.observableArrayList();
@@ -130,13 +97,17 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
         }
         else{
-            Medicine m = new Medicine();
-            m.setName(TextFieldAddName.getText());
-            m.setType(ChoiceAddType.getValue());
-            mbh.insertMedicine(m);
-
-            MessageInformation += "Medicine Added Successfully :)" ;
-            ma.MessageWithoutHeader("Added", MessageInformation);
+            boolean isValid = iv.isAddMedInputsValid(TextFieldAddName.getText());
+            if(isValid==true){
+                Medicine m = new Medicine();
+                m.setName(TextFieldAddName.getText());
+                m.setType(ChoiceAddType.getValue());
+                mbh.insertMedicine(m);
+                ma.MessageWithoutHeader("Added", "Medicine Added Successfully :)");
+            }
+            else{
+                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            }
         }
     }
 
@@ -153,30 +124,29 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             if(TextFieldEditNewMedicineNum.getLength()==0) MessageInformation += "\n * Medicine New num";
             if(EditNewName.getLength()==0) MessageInformation += "\n * Medidine New Name" ; ;
             if(ChoiceEditNewType.getValue()==null) MessageInformation += "\n * Medicine New Type";;
-
             ma.ShowErrorMessage("Unexpected Error", "Fail To Add", MessageInformation);
         }
         else{
-            Medicine m = new Medicine();
-            m.setMedicineNum(Integer.parseInt(TextFieldEditMedicineNum.getText()));
-            m.setName(EditNewName.getText());
-            m.setType(ChoiceEditNewType.getValue().toString());
+            boolean isValid = iv.isEditMedInputsValid(TextFieldEditMedicineNum.getText(),EditNewName.getText());
 
-            mbh.UpdateMedicine(m);
-
-            MessageInformation += "Medicine Edited Successfullt :)";
-            ma.MessageWithoutHeader("Edited", MessageInformation);
+            if(isValid==true){
+                Medicine m = new Medicine();
+                m.setMedicineNum(Integer.parseInt(TextFieldEditMedicineNum.getText()));
+                m.setName(EditNewName.getText());
+                m.setType(ChoiceEditNewType.getValue().toString());
+                mbh.UpdateMedicine(m);
+                ma.MessageWithoutHeader("Edited", "Medicine Edited Successfullt :)");
+            }
+            else{
+                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            }
         }
     }
-
 
 
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
             try {
                 CssStyler();
             MedicineArrayList = mbh.selectAll();
@@ -192,19 +162,14 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
         allergyArrayList = Ado.selectAll();
         medicineObservableList.clear();
         allergyOvservableList.clear();
-
-        for (Medicine m : MedicineArrayList) {
+        for (Medicine m : MedicineArrayList)
             medicineObservableList.add(m.getName());
-        }
-        for (Allergy a : allergyArrayList) {
+        for (Allergy a : allergyArrayList)
             allergyOvservableList.add(a.getName());
-        }
     }
-
 
     @FXML
     private void OnSelectAllergyName(ActionEvent event) throws SQLException {
-
         String selectedItem = ChoiceEditAllergyName.getSelectionModel().getSelectedItem().toString();
 
         for (Allergy a : allergyArrayList) {
@@ -214,8 +179,6 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
                 TextFieldNewAllergyName.setText(selectedItem);
             }
         }
-
-
     }
 
     @FXML
@@ -229,19 +192,23 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
         }
         else{
-            ArrayList<Medicine> mlist = new ArrayList<Medicine>();
-            mlist = mbh.selectAll();
-            Allergy a = new Allergy();
-            a.setName(TextFieldAddAllergyName.getText());
-            for (Medicine m : mlist)
-                if (m.getName().equals(ChoiceAdddAllergyMedName.getValue()))
-                    a.setMedicines(m);
+            boolean isValid = iv.isAddAllergyInputsValid(TextFieldAddAllergyName.getText());
 
-            Ado.insertAllergy(a);
-            JavafxChoiceFill();
-
-            MessageInformation += "Allergy Added Successfully :)" ;
-            ma.MessageWithoutHeader("Added", MessageInformation);
+            if(isValid==true){
+                ArrayList<Medicine> mlist = new ArrayList<Medicine>();
+                mlist = mbh.selectAll();
+                Allergy a = new Allergy();
+                a.setName(TextFieldAddAllergyName.getText());
+                for (Medicine m : mlist)
+                    if (m.getName().equals(ChoiceAdddAllergyMedName.getValue()))
+                        a.setMedicines(m);
+                Ado.insertAllergy(a);
+                JavafxChoiceFill();
+                ma.MessageWithoutHeader("Added", "Allergy Added Successfully :)");
+            }
+            else{
+                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            }
         }
     }
 
@@ -257,23 +224,25 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             if(TextFieldEditAllergyMedName.getLength()==0) MessageInformation += "\n * Allergy Name";
             if(TextFieldNewAllergyName.getLength()==0) MessageInformation += "\n * New Allergy Name";
             if(ChoiceNewAllergyMedicine.getValue()==null) MessageInformation += "\n * New Medidine Name" ; ;
-
             ma.ShowErrorMessage("Unexpected Error", "Fail To Add", MessageInformation);
         }
         else{
-            Allergy a = new Allergy();
-            a.setName(TextFieldNewAllergyName.getText());
-            for (Medicine m : MedicineArrayList)
-                if (m.getName().equals(ChoiceNewAllergyMedicine.getValue()))
-                    a.setMedicines(m);
+            boolean isValid = iv.isEditAllergyInputsValid(TextFieldEditAllergyMedName.getText(), TextFieldNewAllergyName.getText());
 
-            Ado.UpdateAllergy(a, ChoiceEditAllergyName.getValue().toString());
-
-            MessageInformation += "Allergy Edited Successfullt :)";
-            ma.MessageWithoutHeader("Edited", MessageInformation);
+            if(isValid==true){
+                Allergy a = new Allergy();
+                a.setName(TextFieldNewAllergyName.getText());
+                for (Medicine m : MedicineArrayList)
+                    if (m.getName().equals(ChoiceNewAllergyMedicine.getValue()))
+                        a.setMedicines(m);
+                Ado.UpdateAllergy(a, ChoiceEditAllergyName.getValue().toString());
+                ma.MessageWithoutHeader("Edited", "Allergy Edited Successfullt :)");
+            }
+            else{
+                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            }
         }
     }
-
 
     //Overrided by implementing JavafxPaneHandler
     @Override
@@ -283,7 +252,6 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
 
     @Override
     public void JavafxChoiceFill() throws SQLException {
-
         ObservableList TypeList = FXCollections.observableArrayList();
 
         ChoiceAddType.getItems().clear();
@@ -292,7 +260,6 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
         ChoiceEditAllergyName.getItems().clear();
         ChoiceNewAllergyMedicine.getItems().clear();
         TypeList.clear();
-
         String oi = "Ointment";
         String ca = "Capsules";
         String li = "Liquid";
@@ -302,13 +269,9 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
         ChoiceEditNewType.getItems().addAll(TypeList);
         initializeManual();
         ChoiceAdddAllergyMedName.getItems().addAll(medicineObservableList);
-
         ChoiceEditAllergyName.getItems().addAll(allergyOvservableList);
         ChoiceNewAllergyMedicine.getItems().addAll(medicineObservableList);
-
-
     }
-
 
     @Override
     public void JavafxDiagramFill() {
@@ -336,6 +299,5 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

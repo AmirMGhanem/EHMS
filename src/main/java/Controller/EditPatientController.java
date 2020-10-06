@@ -2,7 +2,7 @@ package Controller;
 
 import Model.Address;
 import Model.Patient;
-import Model.Therapist;
+import Util.InputsValidations;
 import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,32 +22,21 @@ import java.util.ResourceBundle;
 
 public class EditPatientController implements Initializable, Util.JavafxPaneHandler {
 
-    @FXML
-    private Pane parent;
-    @FXML
-    private TextField TextFieldFirstName;
-    @FXML
-    private TextField TextFieldLastName;
-    @FXML
-    private TextField TextFieldCity;
-    @FXML
-    private TextField TextFieldContactNum;
-    @FXML
-    private ChoiceBox<?> Choice3Digits;
-    @FXML
-    private TextField TextFieldStreet;
-    @FXML
-    private TextField TextFieldHouseNum;
-    @FXML
-    private Button BtnClear;
-    @FXML
-    private Button BtnSave;
-    @FXML
-    private ChoiceBox<?> ChoiceNurse;
-    @FXML
-    private Label LblNurseID;
-    @FXML
-    private TextField TextFieldPatientID;
+    @FXML private Pane parent;
+    @FXML private TextField TextFieldFirstName;
+    @FXML private TextField TextFieldLastName;
+    @FXML private TextField TextFieldCity;
+    @FXML private TextField TextFieldContactNum;
+    @FXML private ChoiceBox<?> Choice3Digits;
+    @FXML private TextField TextFieldStreet;
+    @FXML private TextField TextFieldHouseNum;
+    @FXML private Button BtnClear;
+    @FXML private Button BtnSave;
+    @FXML private ChoiceBox<?> ChoiceNurse;
+    @FXML private Label LblNurseID;
+    @FXML private TextField TextFieldPatientID;
+    @FXML private ChoiceBox<String> ChoicePatientName;
+
     MessageAlerter ma = new MessageAlerter();
     DBH.patientDAO pbh = new DBH.patientDAO();
     ArrayList<Patient> list = new ArrayList<Patient>();
@@ -61,14 +50,13 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
         TextFieldCity.setText("");
         TextFieldStreet.setText("");
         TextFieldHouseNum.setText("");
-
         String MessageInformation = "All Fields Cleared";
         ma.MessageWithoutHeader("Cleared", MessageInformation);
     }
 
     @FXML
     void OnClickBtnSave(ActionEvent event) throws SQLException {
-
+        Util.InputsValidations iv = new InputsValidations();
         String MessageInformation = "";
 
         if (TextFieldPatientID.getLength() == 0) {
@@ -84,37 +72,45 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
             if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
             ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
         } else {
+            boolean isValid = iv.isPatientEditInputsValid(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFieldContactNum.getText(), TextFieldCity.getText(), TextFieldStreet.getText(), TextFieldHouseNum.getText());
 
-            MessageInformation += "Patient Edited Successfully :)";
-            list = pbh.selectAll();
-            for (Patient p : list) {
-                if (p.getID().equals(TextFieldPatientID.getText())) {
-                    p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-                    String ContactNum = TextFieldContactNum.getText();
-                    p.setContactNo(ContactNum);
-                    Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-                    p.setAddress(address);
-                    pbh.UpdatePatient(p);
-
+            if(isValid==true){
+                MessageInformation += "Patient Edited Successfully :)";
+                list = pbh.selectAll();
+                for (Patient p : list) {
+                    if (p.getID().equals(TextFieldPatientID.getText())) {
+                        p.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                        String ContactNum = TextFieldContactNum.getText();
+                        p.setContactNo(ContactNum);
+                        Address address = new Address(TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                        p.setAddress(address);
+                        pbh.UpdatePatient(p);
+                    }
                 }
+                ma.MessageWithoutHeader("Added", MessageInformation);
+                ChoicePatientName.getItems().clear();
+                JavafxChoiceFill();
             }
-            ma.MessageWithoutHeader("Added", MessageInformation);
+            else{
+                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            }
         }
-
     }
 
     //Overrided by implementing Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        try {
+            JavafxChoiceFill();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         CssStyler();
-
     }
 
     @FXML
     public void onEnter(ActionEvent ae) throws SQLException {
         String id = TextFieldPatientID.getText();
-
         list = pbh.selectAll();
 
         for (Patient p : list) {
@@ -126,7 +122,6 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
                 TextFieldStreet.setText(p.getAddress().getStreet());
                 TextFieldHouseNum.setText(Integer.toString(p.getAddress().getHouseNum()));
             }
-
         }
     }
 
@@ -137,16 +132,19 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
     }
 
     @Override
-    public void JavafxChoiceFill() {
-
+    public void JavafxChoiceFill() throws SQLException {
+        list = pbh.selectAll();
+        for (int i = 0; i < list.size(); i++) {
+            ChoicePatientName.getItems().add(list.get(i).getName());
+        }
     }
 
     @Override
-    public void JavafxDiagramFill() {
+    public void JavafxDiagramFill () {
 
     }
 
-    private void CssStyler() {
+    private void CssStyler () {
         FXMLLoader loader = new FXMLLoader();
         try {
             loader.load(getClass().getResource("/FXML/Settings.fxml").openStream());
@@ -167,6 +165,22 @@ public class EditPatientController implements Initializable, Util.JavafxPaneHand
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void onSelectPatient(ActionEvent event) throws SQLException {
+        String name = ChoicePatientName.getValue();
+        list = pbh.selectAll();
+
+        for (Patient p : list) {
+            if (p.getName().equals(name)) {
+                TextFieldPatientID.setText(p.getID());
+                TextFieldFirstName.setText(p.getFirstName());
+                TextFieldLastName.setText(p.getLasttName());
+                TextFieldContactNum.setText(p.getContactNo());
+                TextFieldCity.setText(p.getAddress().getCity());
+                TextFieldStreet.setText(p.getAddress().getStreet());
+                TextFieldHouseNum.setText(Integer.toString(p.getAddress().getHouseNum()));
+            }
+        }
     }
 }

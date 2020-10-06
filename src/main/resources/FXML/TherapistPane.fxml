@@ -38,11 +38,12 @@
                   </Label>
                </children>
             </Pane>
-            <Button fx:id="BtnRemoveNurse" layoutX="349.0" layoutY="617.0" mnemonicParsing="false" onAction="#OnClickRemove" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Remove Nurse" />
-            <Button fx:id="BtnNurseInvest" layoutX="349.0" layoutY="662.0" mnemonicParsing="false" onAction="#OnClickInvestigation" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Nurse Investigation" />
-            <Button fx:id="BtnNurseFile" layoutX="567.0" layoutY="617.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Export To File" />
-            <Button fx:id="BtnNurseXML" layoutX="566.0" layoutY="662.0" mnemonicParsing="false" onAction="#OnClickToXML" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Export To XML" />
-            <Button fx:id="BtnSpecNurseFile" layoutX="795.0" layoutY="617.0" mnemonicParsing="false" onAction="#OnClickSpecToFile" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Export Specific Therapist" />
+            <Button fx:id="BtnRemoveNurse" layoutX="425.0" layoutY="629.0" mnemonicParsing="false" onAction="#OnClickRemove" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Remove Nurse" />
+            <Button fx:id="BtnNurseInvest" layoutX="425.0" layoutY="674.0" mnemonicParsing="false" onAction="#OnClickInvestigation" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Nurse Investigation" />
+            <Button fx:id="BtnNurseFile" layoutX="643.0" layoutY="629.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Export To File" />
+            <Button fx:id="BtnNurseXML" layoutX="643.0" layoutY="722.0" mnemonicParsing="false" onAction="#OnClickToPDF" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Export To PDF" />
+            <Button fx:id="BtnSpecNurseFile" layoutX="643.0" layoutY="674.0" mnemonicParsing="false" onAction="#OnClickSpecToFile" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Export Specific Therapist" />
+            <Button fx:id="BtnPdfWithSched" layoutX="425.0" layoutY="722.0" mnemonicParsing="false" onAction="#OnClickBtnPdfWithSched" prefHeight="28.0" prefWidth="210.0" styleClass="Button" text="Export PDF With Working Schedule" />
          </children>
       </Pane>
    </children>

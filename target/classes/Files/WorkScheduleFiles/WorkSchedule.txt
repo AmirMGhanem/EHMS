@@ -1,0 +1,16 @@
+ Therapist ID                 Therapist Name                   Day                      Shift 
+------------------------------------------------------------------------------------------------
+
+208913236          /          alam aslan          /          Monday           /           1
+208913236          /          alam aslan          /          Tuesday           /           1
+208913236          /          alam aslan          /          Wednesday           /           1
+208913236          /          alam aslan          /          Thursday           /           1
+208913236          /          alam aslan          /          Friday           /           1
+208913236          /          alam aslan          /          Saturday           /           1
+252587963          /          amir ghanem          /          Sunday           /           3
+252587963          /          amir ghanem          /          Monday           /           3
+252587963          /          amir ghanem          /          Tuesday           /           3
+252587963          /          amir ghanem          /          Wednesday           /           3
+252587963          /          amir ghanem          /          Thursday           /           3
+252587963          /          amir ghanem          /          Friday           /           3
+252587963          /          amir ghanem          /          Saturday           /           3

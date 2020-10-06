@@ -1,11 +1,10 @@
 package Controller;
 
-import Controller.TherapistPaneController;
 import DBH.adressDAO;
 import DBH.personDAO;
 import DBH.therapistDAO;
 import Model.*;
-import Model.Person;
+import Util.InputsValidations;
 import Util.MessageAlerter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,51 +17,44 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddNurseController extends TherapistPaneController implements Initializable, Util.JavafxPaneHandler {
     ObservableList GenderList = FXCollections.observableArrayList();
     ObservableList ThreeDigitsList = FXCollections.observableArrayList();
     static TherapistPaneController therapistPaneController = null;
-
-    @FXML
-    private TextField TextFieldFirstName;
-    @FXML
-    private TextField TextFieldAddressCode;
-    @FXML
-    private TextField TextFieldLastName;
-    @FXML
-    private TextField TextFieldID;
-    @FXML
-    private ChoiceBox<String> ChoiceGender;
-    @FXML
-    private DatePicker DatePickerBirthdate;
-    @FXML
-    private DatePicker DatePickerWorkDateStart;
-    @FXML
-    private TextField TextFieldContactNum;
-    @FXML
-    private ChoiceBox<?> Choice3DigitsNum;
-    @FXML
-    private TextField TextFieldCity;
-    @FXML
-    private TextField TextFieldStreet;
-    @FXML
-    private TextField TextFieldHouseNum;
-    @FXML
-    private Button BtnAdd;
     MessageAlerter ma = new MessageAlerter();
+    ArrayList<Person> persons = new ArrayList<>();
+
+    DBH.adressDAO ado = new adressDAO();
+    DBH.personDAO pdo = new personDAO();
+    DBH.therapistDAO tpo = new therapistDAO();
+
+    @FXML private TextField TextFieldFirstName;
+    @FXML private TextField TextFieldAddressCode;
+    @FXML private TextField TextFieldLastName;
+    @FXML private TextField TextFieldID;
+    @FXML private ChoiceBox<String> ChoiceGender;
+    @FXML private DatePicker DatePickerBirthdate;
+    @FXML private DatePicker DatePickerWorkDateStart;
+    @FXML private TextField TextFieldContactNum;
+    @FXML private ChoiceBox<?> Choice3DigitsNum;
+    @FXML private TextField TextFieldCity;
+    @FXML private TextField TextFieldStreet;
+    @FXML private TextField TextFieldHouseNum;
+    @FXML private Button BtnAdd;
 
     @FXML
     void OnClickAdd(ActionEvent event) throws IOException, SQLException {
+        Util.InputsValidations iv = new InputsValidations();
         String MessageInformation = "";
+        persons = pdo.selectAll();
+        boolean isExist = false ;
+
 
         if ((TextFieldFirstName.getLength() == 0) || (TextFieldLastName.getLength() == 0) || (TextFieldID.getLength() == 0) || (DatePickerBirthdate.getValue() == null) || (DatePickerWorkDateStart.getValue() == null) || (Choice3DigitsNum.getValue() == null) || (TextFieldContactNum.getLength() == 0) || (TextFieldAddressCode.getLength() == 0) || (TextFieldCity.getLength() == 0) || (TextFieldStreet.getLength() == 0) || (TextFieldHouseNum.getLength() == 0)) {
             MessageInformation += "Missing Information : \n";
@@ -78,34 +70,48 @@ public class AddNurseController extends TherapistPaneController implements Initi
             if (TextFieldStreet.getLength() == 0) MessageInformation += "* Street \n";
             if (TextFieldHouseNum.getLength() == 0) MessageInformation += "* House Number \n";
             ma.ShowErrorMessage("Unexpected Error", "Missing Information", MessageInformation);
-        } else {
-            MessageInformation += "Nursing Added Successfully :)";
-            Therapist t = new Therapist();
+        }
+        else {
+            boolean isValid = iv.isNurseAddingInputsValid(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFieldID.getText(), java.sql.Date.valueOf(DatePickerBirthdate.getValue()), java.sql.Date.valueOf(DatePickerWorkDateStart.getValue()), TextFieldContactNum.getText(), TextFieldAddressCode.getText(), TextFieldCity.getText(), TextFieldStreet.getText(), TextFieldHouseNum.getText());
+            if(isValid==true){
+                MessageInformation += "Nursing Added Successfully :)";
+                Therapist t = new Therapist();
 
-            t.setID(TextFieldID.getText());
-            t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
-            t.setGender(ChoiceGender.getValue().toString());
-            String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
-            t.setContactNo(ContactNum);
-            Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
-            t.setAddress(address);
+                t.setID(TextFieldID.getText());
+                t.setName(TextFieldFirstName.getText() + " " + TextFieldLastName.getText());
+                t.setGender(ChoiceGender.getValue().toString());
+                String ContactNum = Choice3DigitsNum.getValue().toString() + TextFieldContactNum.getText();
+                t.setContactNo(ContactNum);
+                Address address = new Address(Integer.parseInt(TextFieldAddressCode.getText()), TextFieldCity.getText(), TextFieldStreet.getText(), Integer.parseInt(TextFieldHouseNum.getText()));
+                t.setAddress(address);
 
-            java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthdate.getValue());
-            t.setDate(sqlDate);
+                java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthdate.getValue());
+                t.setDate(sqlDate);
 
-            java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
-            t.setWorkDateStart(sqlWorkDate);
+                java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
+                t.setWorkDateStart(sqlWorkDate);
 
-            System.out.println("Constructor TESTER TOSTRING " + t.toString());
-            sendTherapist(t);
+                System.out.println("Constructor TESTER TOSTRING " + t.toString());
+                sendTherapist(t);
 
-            DBH.adressDAO ado = new adressDAO();
-            DBH.personDAO pdo = new personDAO();
-            DBH.therapistDAO tpo = new therapistDAO();
-            ado.insertAddress(address);
-            pdo.insertperson(t);
-            tpo.insertherapist(t);
-            ma.MessageWithoutHeader("Added", MessageInformation);
+                for(Person pe : persons)
+                {
+                    if(t.getID().equals(pe.getID()))
+                        isExist = true ;
+                }
+
+                if(!isExist){
+                    ado.insertAddress(address);
+                    pdo.insertperson(t);
+                    tpo.insertherapist(t);
+                    ma.MessageWithoutHeader("Added", MessageInformation);
+                }
+                else
+                    ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
+            }
+            else{
+                ma.MessageWithoutHeader("Unsuccessful", "Incorrect Inputs");
+            }
         }
     }
 
@@ -146,14 +152,12 @@ public class AddNurseController extends TherapistPaneController implements Initi
         String _054 = "054";
         ThreeDigitsList.setAll(_050, _052, _054);
         Choice3DigitsNum.setItems(ThreeDigitsList);
-
     }
 
     @Override
     public void JavafxDiagramFill() {
 
     }
-
 
     private void CssStyler() {
         FXMLLoader loader = new FXMLLoader();
@@ -176,6 +180,5 @@ public class AddNurseController extends TherapistPaneController implements Initi
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

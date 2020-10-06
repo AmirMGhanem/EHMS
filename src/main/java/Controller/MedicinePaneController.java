@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -31,6 +32,7 @@ import javafx.stage.StageStyle;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -55,7 +57,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     DBH.medicineDAO MDH = new DBH.medicineDAO();
     ObservableList Choicelist = FXCollections.observableArrayList();
 
-
     //defining lists for Allergies and patient-allergy
     ObservableList allergyOvservableList = FXCollections.observableArrayList();
     ArrayList<Allergy> allergyArrayList = new ArrayList<Allergy>();
@@ -69,100 +70,73 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
     @FXML
     private Pane parent;
-
     @FXML
-    private
-    ChoiceBox<String> ChoicePatient;
-
+    private ChoiceBox<String> ChoicePatient;
     @FXML
     private Label LabelPatientID;
-
     @FXML
     private TableView<Medicine> MedTable;
-
     @FXML
     private TableColumn<Medicine, Number> ColMedNum;
-
     @FXML
     private TableColumn<Medicine, String> ColMedName;
-
     @FXML
     private TableColumn<Medicine, String> ColMedType;
     //---------------------------------
-
     @FXML
     private TableView<patient_medicine> TablePatientMedicines;
-
     @FXML
     private TableColumn<patient_medicine, String> ColID;
-
-
     @FXML
     private TableColumn<patient_medicine, Number> ColMedNO;
-
     @FXML
     private TableColumn<patient_medicine, Number> colTimesPerDay;
-
     @FXML
     private TableColumn<patient_medicine, Number> ColDuration;
-
-
     @FXML
     private Button BtnRemoveMed;
-
     @FXML
     private Button BtnExportMedPDF;
-
     @FXML
     private Button BtnExportMedFile;
-
     @FXML
     private Button BtnAttachMed;
-
     @FXML
     Button BtnLoadAll;
-
     @FXML
     private TableView<Allergy> AllergyTable;
-
     @FXML
     private TableColumn<Allergy, String> ColAllergyName;
-
-
     @FXML
     private TableColumn<Allergy, String> ColMedicine;
-
     @FXML
     private Button BtnRemoveAllergy;
-
     @FXML
     private Button BtnExportAllergyPDF;
-
     @FXML
     private Button BtnExportAllergyFile;
-
     @FXML
     private Button BtnAttachAllergy;
-
     @FXML
     private Button BtnDetachAllergy;
     @FXML
     private Label LabelPatientIDAllergy;
     @FXML
     private Button BtnLoadIDAllergy;
-
     @FXML
     private Label LabelUpdateAttach;
-
     @FXML
     private Label LabelLoadUpdate;
     @FXML
     private ChoiceBox<String> ChoicePatientAllergy;
     @FXML
     private Button BtnDetachMed;
-
     @FXML
     private Button BtnLoadID;
+    @FXML
+    private TextField TextFieldSearchMedByNum;
+    @FXML
+    private ChoiceBox<String> ChoiceSearchMedByName;
 
     static int mednum;
     static String patientID;
@@ -183,7 +157,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         this.mednum = mednum;
     }
 
-
     @FXML
     void OnClickBtnDetachMed(ActionEvent event) throws SQLException {
         if (TablePatientMedicines.getSelectionModel().getSelectedItem() != null) {
@@ -194,9 +167,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             ma.MessageWithoutHeader("Detached", "Medicine Detached From Selected Patient Successfully");
         } else
             ma.MessageWithoutHeader("Unexpected", "Please Select Row From The Right Table \n in order to detach");
-
     }
-
 
     @FXML
     void OnClickBtnAttachMed(ActionEvent event) throws IOException {
@@ -236,7 +207,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             p1.add("\n");
 
         //Printing Chunk Text on the pdf
-
         p1.add("#        Medicine Name        Medicine Type        ");
         p1.add("\n--------------------------------------------------------------------------------------------\n");
         font = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
@@ -246,7 +216,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             p1.add(chunk);
             p1.add("\n");
         }
-
 
         //Drawing an image from the resources folder
         Image img = Image.getInstance("src/main/resources/Images/banner.png");
@@ -265,7 +234,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         document.add(p1);
         document.close();
         writer.close();
-
         ma.MessageWithoutHeader("Exported", "Medicines Exported To PDF Successfully :)");
     }
 
@@ -301,7 +269,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
                 TablePatientMedicines.getItems().add(pm);
             }
         }
-
     }
 
 
@@ -312,13 +279,13 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         ColMedType.setCellValueFactory(new PropertyValueFactory<Medicine, String>("type"));
 
 
+
+
         //patient_medicine Table init
         ColID.setCellValueFactory(new PropertyValueFactory<patient_medicine, String>("patientid"));
         ColMedNO.setCellValueFactory(new PropertyValueFactory<patient_medicine, Number>("medicinenum"));
         colTimesPerDay.setCellValueFactory(new PropertyValueFactory<patient_medicine, Number>("timesperday"));
         ColDuration.setCellValueFactory(new PropertyValueFactory<patient_medicine, Number>("duration"));
-
-
         ColAllergyName.setCellValueFactory(new PropertyValueFactory<Allergy, String>("name"));
         ColMedicine.setCellValueFactory(CellData -> new SimpleStringProperty(CellData.getValue().getMedicines().getName()));
         JavafxTableFill();
@@ -435,9 +402,9 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
     //Initilaizable and javafx handler implement
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         try {
             CssStyler();
             TableInit();
@@ -448,9 +415,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-
     }
-
 
     @Override
     public void JavafxTableFill() throws SQLException {
@@ -461,13 +426,10 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         PA = paDAO.selectAll();
         allergyOvservableList = Ado.selectAllObservable();
         allergyArrayList = Ado.selectAll();
-
-
     }
 
     @Override
     public void JavafxChoiceFill() throws SQLException {
-
         Choicelist.removeAll();
         for (Patient p : Patients) {
             Choicelist.add(p.getName());
@@ -475,6 +437,11 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
         ChoicePatient.setValue("Choose Patient");
         ChoicePatient.getItems().addAll(Choicelist);
         ChoicePatientAllergy.getItems().setAll(Choicelist);
+        ChoiceSearchMedByName.getItems().clear();
+        ChoiceSearchMedByName.getItems().add("search Medicine by name");
+        ChoiceSearchMedByName.getSelectionModel().select(0);
+        for (Medicine m : Medicines)
+            ChoiceSearchMedByName.getItems().add(m.getName());
     }
 
     @Override
@@ -534,8 +501,8 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     @FXML
     void onSelectPatientAllergy(ActionEvent event) throws SQLException {
 
-//        ChoicePatientAllergy.getSelectionModel().select(-1);
-  //      ChoicePatientAllergy.setValue(name);
+        //      ChoicePatientAllergy.getSelectionModel().select(-1);
+        //      ChoicePatientAllergy.setValue(name);
 
     }
 
@@ -561,5 +528,35 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             e.printStackTrace();
         }
 
+    }
+
+    public void onEnterSearchMedByNumber(ActionEvent event) throws SQLException {
+        JavafxTableFill();
+        MedTable.getItems().clear();
+        MedTable.getItems().removeAll();
+        for (Medicine m : Medicines) {
+            if (TextFieldSearchMedByNum.getText().equals(Integer.toString(m.getMedicineNum()))) {
+                MedTable.getItems().add(m);
+                break;
+            } else if (TextFieldSearchMedByNum.getText().equals("")) {
+                MedTable.setItems(Medicines);
+                break;
+            }
+        }
+    }
+
+    public void onSelectMedicine(ActionEvent event) throws SQLException {
+        JavafxTableFill();
+        if(ChoiceSearchMedByName.getSelectionModel().getSelectedIndex()==0)
+        {
+            MedTable.setItems(Medicines);
+        }
+
+        for (Medicine m : Medicines) {
+            if (ChoiceSearchMedByName.getValue().equals(m.getName())) {
+                MedTable.getItems().clear();
+                MedTable.getItems().add(m);
+            }
+        }
     }
 }
