@@ -90,9 +90,7 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
     ArrayList<Medicine> MedicineArrayList = new ArrayList<Medicine>();
     ObservableList allergyOvservableList = FXCollections.observableArrayList();
     ArrayList<Allergy> allergyArrayList = new ArrayList<Allergy>();
-
     MessageAlerter ma = new MessageAlerter();
-
 
     @FXML
     public void onEnterE(ActionEvent ae) throws SQLException {
@@ -127,7 +125,6 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             mbh.insertMedicine(m);
             ma.MessageWithoutHeader("Added", "Medicine Added Successfully :)");
         }
-
     }
 
     @FXML
@@ -142,7 +139,6 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
             mbh.UpdateMedicine(m);
             ma.MessageWithoutHeader("Edited", "Medicine Edited Successfullt :)");
         }
-
     }
 
 
@@ -185,7 +181,7 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
 
     @FXML
     void OnClickBtnAddAllergy(ActionEvent event) throws SQLException {
-        if (nameValidation(TextFieldAddAllergyName.getText()))
+        if (!nameValidation(TextFieldAddAllergyName.getText()))
             ma.ShowErrorMessage("Error", "Incorrect Input", "Please make sure that you inserting legal allergy name \n allergy name must contains characters only");
         else {
             ArrayList<Medicine> mlist = new ArrayList<Medicine>();
@@ -204,7 +200,7 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
 
     @FXML
     void OnClickBtnEditAllergySubmit(ActionEvent event) throws SQLException {
-        if (nameValidation(TextFieldNewAllergyName.getText()))
+        if (!nameValidation(TextFieldNewAllergyName.getText()))
             ma.ShowErrorMessage("Error", "Incorrect Input", "Please make sure that you inserting legal allergy name \n allergy name must contains characters only");
         else {
             Allergy a = new Allergy();
@@ -214,7 +210,6 @@ public class MedicineCRUDController implements Initializable, Util.JavafxPaneHan
                     a.setMedicines(m);
             Ado.UpdateAllergy(a, ChoiceEditAllergyName.getValue().toString());
             ma.MessageWithoutHeader("Edited", "Allergy Edited Successfullt :)");
-
         }
     }
 

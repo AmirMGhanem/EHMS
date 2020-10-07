@@ -87,7 +87,7 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
         boolean isExist = false;
         if (!(numValidation(TextFieldID.getText(), 9))) {
             ma.ShowErrorMessage("Error", "ID is incorrect!!", "Please Use The 0-9 NUM PAD IF YOU WANT TO ADD -.-");
-        } else if (!(nameValidation(TextFieldFirstName.getText())) && nameValidation(TextFieldLastName.getText()) && numValidation(TextFieldContactNum.getText(), 7)) {
+        } else if (!(nameValidation(TextFieldFirstName.getText()) && nameValidation(TextFieldLastName.getText()) && numValidation(TextFieldContactNum.getText(), 7))) {
             ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
         } else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText()))) {
             ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
