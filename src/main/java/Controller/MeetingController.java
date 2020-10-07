@@ -163,7 +163,7 @@ public class MeetingController implements Initializable, JavafxPaneHandler, IVal
             ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Name You \n Inserted Contains Text Only");
         else if (!(numValidation(LabelHR.getText()))&&numValidation(LabelMin.getText()))
             ma.ShowWarningMessage("Error", "You Didn't chhosed time", "Please Select The Desired Time");
-        else if (!(nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText())))
+        else if (!(numValidation(TextFieldAddressCode.getText()) && nameValidation(TextFieldCity.getText()) && nameValidation(TextFieldStreet.getText()) && numValidation(TextFieldHouseNum.getText())))
             ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure Of The Address You Inserted \n it must contain A-Z characters only");
         else {
             Date d = java.sql.Date.valueOf(DatePicker.getValue());

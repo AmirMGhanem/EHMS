@@ -91,14 +91,13 @@ public class SettingsController implements Initializable, IValidations {
 
     @FXML
     void OnClickBtnRegister(ActionEvent event) throws SQLException {
-        if (!(nameValidation(TextFieldRegisterUser.getText())) && nameValidation(TextFieldRegisterPass.getText()))
+        if (!(nameValidation(TextFieldRegisterUser.getText()) && nameValidation(TextFieldRegisterPass.getText())))
             ma.ShowErrorMessage("Error", "Incorrect Inputs", "Please Make Sure That The Registering Information You \n Inserted Contains Text Only");
         else {
             UserInfo ui = new UserInfo(TextFieldRegisterUser.getText(), TextFieldRegisterPass.getText());
             uiDAo.inserUser(ui);
             ma.MessageWithoutHeader("Successfully", "Registered Successfully");
         }
-
     }
 
     @FXML
