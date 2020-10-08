@@ -1,5 +1,4 @@
 package Controller;
-
 import DBH.adressDAO;
 import DBH.personDAO;
 import DBH.therapistDAO;
@@ -16,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -59,7 +57,6 @@ public class AddNurseController extends TherapistPaneController implements Initi
     private TextField TextFieldHouseNum;
     @FXML
     private Button BtnAdd;
-
     @FXML
     void OnClickAdd(ActionEvent event) throws IOException, SQLException {
         persons = pdo.selectAll();

@@ -4,10 +4,7 @@ import DBH.patientDAO;
 import DBH.therapistDAO;
 import DBH.userInfoDAO;
 import Model.UserInfo;
-import Util.FxmlLoader;
-import Util.MessageAlerter;
-import Util.PdfExporter;
-import Util.Service;
+import Util.*;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -148,7 +145,9 @@ public class MainController implements Initializable {
 
 
     @FXML
-    void OnClickLogin(ActionEvent event) throws InterruptedException, IOException {
+    void OnClickLogin(ActionEvent event) throws InterruptedException, IOException, SQLException, ClassNotFoundException {
+
+
         for (UserInfo ui : users) {
             if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {
                 ProgressBarLoading.setVisible(true);

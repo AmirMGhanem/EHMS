@@ -2,6 +2,7 @@ package Controller;
 
 import Util.DatabaseConnector;
 import Util.MessageAlerter;
+import Util.SQLExporter;
 import Util.Service;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DatabaseInformationController implements Initializable {
@@ -58,13 +60,26 @@ public class DatabaseInformationController implements Initializable {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
+
+    @FXML
+    void onClickBtnChooseDir1(ActionEvent event) {
+
+        try {
+            SQLExporter sqlExporter = new SQLExporter();
+            sqlExporter.export();
+        }catch(Exception e )
+        {
+            messageAlerter.ShowErrorMessage("ERROR!!!", "Directory Path is null", "***Please Choose A Directory in order\n to save the SQL Template ");
+        }
+
+    }
     @FXML
     void onClickBtnChooseDir(ActionEvent event) throws IOException {
         Service s = new Service();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File selectedDirectory = directoryChooser.showDialog(null);
         File source = new File("ehms.sql");
-        File dest = new File(selectedDirectory.getPath() + "/ehmsCopy.sql");
+        File dest = new File(selectedDirectory.getPath() + "/TemplateEHMS.sql");
         if (selectedDirectory != null) {
             s.copyFileUsingChannel(source, dest);
         } else {
