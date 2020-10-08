@@ -137,7 +137,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     private TextField TextFieldSearchMedByNum;
     @FXML
     private ChoiceBox<String> ChoiceSearchMedByName;
-
+    Util.FilesHandler fh;
     static int mednum;
     static String patientID;
 
@@ -185,7 +185,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
     @FXML
     void OnClickBtnExportMedFile(ActionEvent event) throws IOException {
-        Util.FilesHandler fh = new FilesHandler();
+
         fh.SaveMedicines();
         ma.MessageWithoutHeader("Exported", "Medicines Exported To File Successfully :)");
     }
@@ -296,7 +296,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
 
     @FXML
     void onClickBtnExportAllergyFile(ActionEvent event) throws IOException {
-        Util.FilesHandler fh = new FilesHandler();
+
         fh.SaveAllergies();
         ma.MessageWithoutHeader("Exported", "Allergies Exported To File Successfully :)");
     }
@@ -406,6 +406,7 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
+             fh = new FilesHandler();
             CssStyler();
             TableInit();
             JavafxDiagramFill();

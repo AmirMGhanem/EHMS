@@ -66,7 +66,9 @@ public class Address {
         this.houseNum = houseNum;
     }
 
-
+public String getAddressOrganized(){
+        return getAddresscode()+"|"+getCity()+"|"+getStreet()+"|"+getHouseNum();
+}
 
 
     //--------------------Equals And Hash Code----------------------

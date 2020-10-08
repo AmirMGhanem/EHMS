@@ -47,7 +47,7 @@
                   <Font name="System Bold Italic" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="69.0" layoutY="370.0" text="Export Database Template Here - &gt;" textFill="WHITE">
+            <Label layoutX="19.0" layoutY="370.0" text="Export Database Template Here - &gt;" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
@@ -65,6 +65,12 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Button>
+            <Button fx:id="BtnChooseDir1" layoutX="397.0" layoutY="397.0" mnemonicParsing="false" onAction="#onClickBtnChooseDir1" prefHeight="36.0" prefWidth="149.0" styleClass="Button" text="Choose Directory" />
+            <Label layoutX="16.0" layoutY="402.0" text="Export Database Template+Data Here - &gt;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

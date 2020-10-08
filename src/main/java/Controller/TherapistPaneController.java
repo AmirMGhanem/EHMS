@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import javax.imageio.ImageIO;
@@ -85,7 +86,7 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     private Button BtnNurseXML;
     @FXML
     private Button BtnSpecNurseFile;
-
+    Util.FilesHandler fh;
     @FXML
     void OnClickInvestigation(ActionEvent event) throws IOException {
         FxmlLoader object = new FxmlLoader();
@@ -93,9 +94,7 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
         Stage stage = new Stage();
         stage.setTitle("Therapist Working Schedule Window");
         stage.setScene(new Scene(view, 1254, 800));
-        //stage.setX(297);
-        //stage.setY(35);
-        // stage.initStyle(StageStyle.UNDECORATED);
+         stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
@@ -113,7 +112,7 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
     @FXML
     void OnClickSpecToFile(ActionEvent event) {
-        Util.FilesHandler fh = new FilesHandler();
+
         String id = "";
         try {
             id = NurseTable.getSelectionModel().getSelectedItem().getID();
@@ -129,7 +128,7 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
     @FXML
     void OnClickToFile(ActionEvent event) throws IOException {
-        Util.FilesHandler fh = new FilesHandler();
+
         fh.SaveNurse();
         ma.MessageWithoutHeader("Exported", "Therapists Exported To FILE");
     }
@@ -178,6 +177,7 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
 
         CssStyler();
         try {
+            fh = new FilesHandler();
             TableInit();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -117,6 +117,9 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
     @FXML
     private Label LblPatientID;
 
+    Util.FilesHandler fh;
+
+
     @FXML
     void onSelectPatient(ActionEvent event) throws SQLException {
         for (Patient p : Patients) {
@@ -172,7 +175,7 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
 
     @FXML
     void OnClickSpecToFile(ActionEvent event) {
-        Util.FilesHandler fh = new FilesHandler();
+
         String id = "";
         try {
             id = PatientTable.getSelectionModel().getSelectedItem().getID();
@@ -188,8 +191,8 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
 
 
     @FXML
-    void OnClickToFile(ActionEvent event) throws IOException {
-        Util.FilesHandler fh = new FilesHandler();
+    void OnClickToFile(ActionEvent event) throws IOException, SQLException {
+
         fh.SavePatient();
         ma.MessageWithoutHeader("Exported", "Patients Exported To FILE");
     }
@@ -200,6 +203,7 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
+             fh = new FilesHandler();
             TableInit();
         } catch (SQLException e) {
             e.printStackTrace();
