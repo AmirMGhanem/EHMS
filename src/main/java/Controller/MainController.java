@@ -1,7 +1,4 @@
 package Controller;
-
-import DBH.patientDAO;
-import DBH.therapistDAO;
 import DBH.userInfoDAO;
 import Model.UserInfo;
 import Util.*;
@@ -12,8 +9,6 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -42,8 +37,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-
-
 
 public class MainController implements Initializable {
     @FXML
@@ -146,7 +139,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickLogin(ActionEvent event) throws InterruptedException, IOException, SQLException, ClassNotFoundException {
-
 
         for (UserInfo ui : users) {
             if (ui.getUsername().equals(TextFieldUsername.getText()) && ui.getPassword().equals(TextFieldPassword.getText())) {

@@ -35,7 +35,7 @@
                </columns>
             </TableView>
             <Button fx:id="BtnPatientFile" layoutX="741.0" layoutY="541.0" mnemonicParsing="false" onAction="#OnClickToFile" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Export To File" />
-            <Button fx:id="BtnPatientXML" layoutX="739.0" layoutY="628.0" mnemonicParsing="false" onAction="#OnClickPatientXML" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Export To PDF" />
+            <Button fx:id="BtnPatientXML" layoutX="739.0" layoutY="628.0" mnemonicParsing="false" onAction="#OnClickPatientPDF" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Export To PDF" />
             <Button fx:id="BtnRemovePatient" layoutX="741.0" layoutY="498.0" mnemonicParsing="false" onAction="#OnClickRemovePatient" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Remove Patient" />
             <Label layoutX="76.0" layoutY="457.0" text="Choose Patient :" textOverrun="CLIP">
                <font>
@@ -61,7 +61,6 @@
                   <Font name="Guttman Yad" size="17.0" />
                </font>
             </Label>
-            <Button fx:id="BtnPrint" layoutX="741.0" layoutY="668.0" mnemonicParsing="false" onAction="#OnClickPrint" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Print Patient Chart" />
             <Button fx:id="BtnSpecPatientFile" layoutX="740.0" layoutY="584.0" mnemonicParsing="false" onAction="#OnClickSpecToFile" prefHeight="30.0" prefWidth="180.0" styleClass="Button" text="Export Specific" />
          </children>
       </Pane>

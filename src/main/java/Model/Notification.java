@@ -11,9 +11,6 @@ public class Notification {
     private String isTreated;
     private Therapist therapist;
 
-
-
-
     public Notification() {
 
     }

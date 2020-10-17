@@ -176,7 +176,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
     }
 
 
-    public void BarChartInitilizer() {
+        public void BarChartInitilizer() {
         patientwaterdata = new BarChart.Data("Today", 0);
         patiermealdata = new BarChart.Data("Today", 0);
         patienttoiletdata = new BarChart.Data("Today", 0);
@@ -202,12 +202,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         BarChartNotifications.getData().addAll(chart.getData());
     }
 
-    public static void TerminateThread() {
-        if (t.isAlive()) {
-            t.stop();
-            System.out.println(t.getName() + "- terminated!!");
-        }
-    }
+
 
     public static void LaunchThread() {
         t.start();
@@ -233,8 +228,6 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
 
     public void manualRefreshingTable() throws SQLException {
-
-
         notificationArrayList = nDAO.selectAll();
         Collections.reverse(notificationArrayList);
         notificationObservable.setAll(notificationArrayList);
@@ -246,10 +239,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
         int mealcount = 0;
         int toiletcount = 0;
         int emergencycount = 0;
-
-
         for (Notification n : notificationArrayList) {
-
             if (n.getRequest().getType().equals("Critical Urgency"))
                 highcount++;
             if (n.getRequest().getType().equals("Low Urgency"))
@@ -264,8 +254,6 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
                 toiletcount++;
             if (n.getRequest().returnReq().equals("YOU"))
                 emergencycount++;
-
-
         }
 
 

@@ -13,7 +13,7 @@ public class Address {
         setCity(city);
     }
 
-    public Address(int addresscode,String city, String street, int houseNum) {
+    public Address(int addresscode, String city, String street, int houseNum) {
         setAddresscode(addresscode);
         setCity(city);
         setStreet(street);
@@ -24,7 +24,7 @@ public class Address {
 
     }
 
-    public Address(String city , String street , int houseNum){
+    public Address(String city, String street, int houseNum) {
         setCity(city);
         setStreet(street);
         setHouseNum(houseNum);
@@ -49,7 +49,6 @@ public class Address {
     }
 
 
-
     public String getStreet() {
         return street;
     }
@@ -66,9 +65,9 @@ public class Address {
         this.houseNum = houseNum;
     }
 
-public String getAddressOrganized(){
-        return getAddresscode()+"|"+getCity()+"|"+getStreet()+"|"+getHouseNum();
-}
+    public String getAddressOrganized() {
+        return getAddresscode() + "|" + getCity() + "|" + getStreet() + "|" + getHouseNum();
+    }
 
 
     //--------------------Equals And Hash Code----------------------
@@ -99,3 +98,4 @@ public String getAddressOrganized(){
                 '}';
     }
 }
+
