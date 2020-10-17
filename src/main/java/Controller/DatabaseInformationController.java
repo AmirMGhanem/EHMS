@@ -12,13 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
-
-
 import java.io.*;
 import java.net.URL;
-import java.nio.channels.FileChannel;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DatabaseInformationController implements Initializable {
@@ -47,12 +42,13 @@ public class DatabaseInformationController implements Initializable {
 
     @FXML
     void onClickBtnSave(ActionEvent event) {
-        //String url = "jdbc:mysql://localhost:" + TextfieldDBport.getText() + "/" + TextfieldName.getText();
-        //String user = TextfieldDBuser.getText();
-        //String pass = TextfieldPassword.getText();
-        //DatabaseConnector.setUser(user);
-        //DatabaseConnector.setPass(pass);
-        //DatabaseConnector.setUrl(url);
+        String url = "jdbc:mysql://localhost:" + TextfieldDBport.getText() + "/" + TextfieldName.getText();
+        String user = TextfieldDBuser.getText();
+        String pass = TextfieldPassword.getText();
+        DatabaseConnector.setUser(user);
+        DatabaseConnector.setPass(pass);
+        DatabaseConnector.setUrl(url);
+        System.out.println(DatabaseConnector.getUrl());
     }
 
     @FXML

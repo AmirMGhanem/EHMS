@@ -226,8 +226,7 @@ public class SettingsController implements Initializable, IValidations {
                 "has been disarmed \n" +
                 "you are using the default [Css/lightmode.css] style");
     }
-
-    public void OnClickSave(ActionEvent event) throws IOException, URISyntaxException {
+@FXML public void OnClickSave(ActionEvent event) throws IOException, URISyntaxException {
         CssFile cssfile = new CssFile();
         String url = ("src/main/resources/Css/userDesign.css");
         //------------------------------------------

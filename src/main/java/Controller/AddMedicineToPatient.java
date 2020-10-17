@@ -6,28 +6,20 @@ import DBH.patient_medicineDAO;
 import Model.Medicine;
 import Model.Patient;
 import Model.patient_medicine;
-import Util.FxmlLoader;
 import Util.MessageAlerter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static javafx.fxml.FXMLLoader.load;
 
 public class AddMedicineToPatient implements Initializable {
     MessageAlerter messageAlerter = new MessageAlerter();
@@ -54,8 +46,6 @@ public class AddMedicineToPatient implements Initializable {
 
     @FXML
     void onClickBtnAdd(ActionEvent event) throws IOException, SQLException {
-
-
         FXMLLoader loader = new FXMLLoader();
         loader.load(getClass().getResource("/FXML/MedicinePane.fxml").openStream());
         MedicinePaneController medicinePaneController = loader.getController();

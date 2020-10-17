@@ -5,22 +5,14 @@ import DBH.*;
 import Model.*;
 
 import Util.FilesHandler;
-
-import Util.FooterPageEvent;
 import Util.MessageAlerter;
 import Util.PdfExporter;
 import com.itextpdf.text.*;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -29,22 +21,13 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.Robot;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 public class PatientPaneController implements Initializable, Util.JavafxPaneHandler {
 
@@ -142,21 +125,17 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
 
 
     @FXML
-    void OnClickPatientXML(ActionEvent event) throws IOException, SQLException, InterruptedException, DocumentException {
+    void OnClickPatientPDF(ActionEvent event) throws IOException, SQLException, InterruptedException, DocumentException {
         if (ChoicePatient.getValue().equals("ALL")) {
             pdfExporter.Snapshotter(PatientBarChart.getLayoutX(), PatientBarChart.getLayoutY(), PatientBarChart.getWidth(), PatientBarChart.getHeight());
             ma.MessageWithoutHeader("Exported", "Patients Exported To PDF");
             pdfExporter.SavePatientPDF();
             //----------------------------------------PDF CREATE ↓↓↓↓↓------------------------------
         } else
-            System.out.println("Barchart Not Screenshotted , please choose all before exporting");
-    }
-
-
-    @FXML
-    void OnClickPrint(ActionEvent event) {
+            ma.MessageWithoutHeader("Barchart Not Screenshotted", "please choose all before exporting");
 
     }
+
 
     @FXML
     void OnClickRemovePatient(ActionEvent event) throws SQLException {
@@ -235,13 +214,6 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
         JavafxTableFill();
         PatientTable.setItems(Patients);
 
-
-        /*
-        //Table Init
-
-        JavafxTableFill();
-        NurseTable.setItems(Therapist);
-         */
     }
 
     //Overrided by implementing JavafxPaneHandler

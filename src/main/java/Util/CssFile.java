@@ -4,7 +4,7 @@ import java.io.*;
 
 public class CssFile {
 
-    public void CreateFile(String url, String design) {
+        public void CreateFile(String url, String design) {
 
         try {
             FileWriter fw = new FileWriter(url);

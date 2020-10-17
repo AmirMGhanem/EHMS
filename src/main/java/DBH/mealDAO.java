@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class mealDAO implements JPQLHandler {
+public class mealDAO  {
 
     static Connection con = DatabaseConnector.getConnection();
-
-
 
 
     public int insertMeal(Meal m) throws SQLException {
@@ -107,33 +105,6 @@ public class mealDAO implements JPQLHandler {
             numberRow = rs.getInt("count(*)");
         }
         return numberRow;
-    }
-
-
-
-    @Override
-    public void SelectQuery() {
-
-    }
-
-    @Override
-    public void InsertQuery() {
-
-    }
-
-    @Override
-    public void RemoveQuery() {
-
-    }
-
-    @Override
-    public int CountQuery() {
-        return 0;
-    }
-
-    @Override
-    public List SelectAllQuery() {
-        return null;
     }
 
 

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllergyDAO implements JPQLHandler {
+public class AllergyDAO  {
 
     static Connection con = DatabaseConnector.getConnection();
 
@@ -117,21 +117,6 @@ public class AllergyDAO implements JPQLHandler {
         ps.executeUpdate();
         ps.close();
     }
-    @Override
-    public void SelectQuery() {
-
-    }
-
-    @Override
-    public void InsertQuery() {
-
-    }
-
-    @Override
-    public void RemoveQuery() {
-
-    }
-
 
     public int getCount() throws SQLException {
         int numberRow = 0;
@@ -142,17 +127,6 @@ public class AllergyDAO implements JPQLHandler {
             numberRow = rs.getInt("count(*)");
         }
         return numberRow;
-    }
-
-
-    @Override
-    public int CountQuery() {
-        return 0;
-    }
-
-    @Override
-    public List SelectAllQuery() {
-        return null;
     }
 
 

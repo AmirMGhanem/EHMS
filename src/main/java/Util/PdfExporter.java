@@ -27,7 +27,6 @@ import java.util.Date;
 
 public class PdfExporter {
 
-
     public void ScreenShot(String url) throws AWTException, IOException {
         Date d = new Date();
         Robot robot = new Robot();
@@ -55,7 +54,7 @@ public class PdfExporter {
         }
     }
 
-    public void SaveTherapistPDF() throws IOException, DocumentException, SQLException {
+        public void SaveTherapistPDF() throws IOException, DocumentException, SQLException {
         DBH.therapistDAO TDBH = new DBH.therapistDAO();
         //Create PDF, Initilaize and Open
         Document document = new Document();
