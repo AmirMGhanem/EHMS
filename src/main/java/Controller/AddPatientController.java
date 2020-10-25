@@ -105,7 +105,7 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
             java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
             p.setDate(sqlDate);
 
-            System.out.println("TEST " + p.toString());
+
 
             for (Person pe : persons) {
                 if (p.getID().equals(pe.getID()))

@@ -167,14 +167,13 @@ public class MainController implements Initializable {
     }
 
     public void OnClickEHMS(MouseEvent event) throws IOException {
-        System.out.println("Dashboard Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("SignInPane");
         BorderMainPane.setCenter(view);
     }
 
     public void OpenDashBoardManual() throws IOException {
-        System.out.println("Dashboard Clicked");
+
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("SignInPane");
         BorderMainPane.setCenter(view);
@@ -247,7 +246,6 @@ public class MainController implements Initializable {
 
     @FXML
     void LogoHomeClicked(MouseEvent event) throws IOException {
-        System.out.println("LOGOOOOOOOO Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("MainPane");
         BorderMainPane.setCenter(view);
@@ -255,7 +253,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickMeals(ActionEvent event) throws IOException {
-        System.out.println("Meals Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Meals");
         BorderMainPane.setCenter(view);
@@ -263,7 +260,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickMed(ActionEvent event) throws IOException {
-        System.out.println("Medicine Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("MedicinePane");
         BorderMainPane.setCenter(view);
@@ -271,7 +267,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickNursing(ActionEvent event) throws IOException, SQLException {
-        System.out.println("Nursing Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("TherapistPane");
         BorderMainPane.setCenter(view);
@@ -279,7 +274,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickPatient(ActionEvent event) throws IOException, SQLException {
-        System.out.println("Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("PatientManagementPane");
         BorderMainPane.setCenter(view);
@@ -288,7 +282,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickSettings(ActionEvent event) throws IOException {
-        System.out.println("Settings Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("Settings");
         BorderMainPane.setCenter(view);
@@ -296,7 +289,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickMeeting(ActionEvent event) throws IOException {
-        System.out.println("meeting Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("meeting");
         BorderMainPane.setCenter(view);
@@ -304,7 +296,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickAddNurse(ActionEvent event) throws IOException {
-        System.out.println("EditNurse Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("addNurse");
         BorderMainPane.setCenter(view);
@@ -312,7 +303,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickAddPatient(ActionEvent event) throws IOException {
-        System.out.println("Add Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("addPatient");
         BorderMainPane.setCenter(view);
@@ -320,7 +310,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickCrudMed(ActionEvent event) throws IOException {
-        System.out.println("CRUD Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("AddMedPane");
         BorderMainPane.setCenter(view);
@@ -329,7 +318,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickEditNurse(ActionEvent event) throws IOException {
-        System.out.println("EditNurse Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("editNurse");
         BorderMainPane.setCenter(view);
@@ -338,7 +326,6 @@ public class MainController implements Initializable {
 
     @FXML
     void OnClickEditPatient(ActionEvent event) throws IOException {
-        System.out.println("Add Patient Clicked");
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPage("editPatient");
         BorderMainPane.setCenter(view);
@@ -359,7 +346,6 @@ public class MainController implements Initializable {
             ManualSetCloseNav();
             drawerAction();
             users = uiDAO.SelectAll();
-            System.out.println(users);
             ProgressBarLoading.setVisible(false);
             LabelLoading.setVisible(false);
         } catch (SQLException | InterruptedException e) {
@@ -419,7 +405,6 @@ public class MainController implements Initializable {
 
         if (selectedDirectory != null) {
             pdfExporter.ScreenShot(selectedDirectory.getAbsolutePath());
-            System.out.println(selectedDirectory.getAbsolutePath());
         } else {
             messageAlerter.ShowErrorMessage("ERROR!!!", "Directory Path is null", "***Please Choose A Directory in order\n to save the Project Screenshot");
         }

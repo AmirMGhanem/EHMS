@@ -48,7 +48,6 @@ public class DatabaseInformationController implements Initializable {
         DatabaseConnector.setUser(user);
         DatabaseConnector.setPass(pass);
         DatabaseConnector.setUrl(url);
-        System.out.println(DatabaseConnector.getUrl());
     }
 
     @FXML

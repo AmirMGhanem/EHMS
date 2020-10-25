@@ -85,7 +85,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
             t.setDate(sqlDate);
             java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
             t.setWorkDateStart(sqlWorkDate);
-            System.out.println("Constructor TESTER TOSTRING " + t.toString());
+
             for (Person pe : persons) {
                 if (t.getID().equals(pe.getID()))
                     isExist = true;

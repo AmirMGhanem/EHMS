@@ -141,10 +141,6 @@ public class PatientPaneController implements Initializable, Util.JavafxPaneHand
     void OnClickRemovePatient(ActionEvent event) throws SQLException {
         String id = PatientTable.getSelectionModel().getSelectedItem().getID();
         int addressCode = PatientTable.getSelectionModel().getSelectedItem().getAddress().getAddresscode();
-
-        System.out.println(id);
-        System.out.println(addressCode);
-
         PDH.removePatientByID(id, addressCode);
         PatientTable.getItems().removeAll(PatientTable.getSelectionModel().getSelectedItem());
 

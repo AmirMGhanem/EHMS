@@ -206,7 +206,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
 
     public static void LaunchThread() {
         t.start();
-        System.out.println(t.getName() + "- Started!!");
+
 
     }
 
@@ -430,7 +430,7 @@ public class MainPaneController implements Initializable, Util.JavafxPaneHandler
                         manualRefreshingTable();
                         MediaPlayerBeep();
                         BarChartRefresher();
-                        TimeUnit.SECONDS.sleep(3);
+                        TimeUnit.SECONDS.sleep(2);
                     } catch (SQLException | InterruptedException e) {
                         e.printStackTrace();
                     }

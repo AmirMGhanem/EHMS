@@ -98,8 +98,6 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
     void OnClickRemove(ActionEvent event) throws SQLException {
         String id = NurseTable.getSelectionModel().getSelectedItem().getID();
         int addressCode = NurseTable.getSelectionModel().getSelectedItem().getAddress().getAddresscode();
-        System.out.println(id);
-        System.out.println(addressCode);
         TDBH.removeTherapistByID(id, addressCode);
         NurseTable.getItems().removeAll(NurseTable.getSelectionModel().getSelectedItem());
 
@@ -156,15 +154,6 @@ public class TherapistPaneController implements Initializable, Util.JavafxPaneHa
         }
     }
 
-    public void transferMessage(Therapist t) throws SQLException {
-        ALTHERAPIST.add(t);
-        NurseTable.getItems().clear();
-        NurseTable.getItems().addAll(ALTHERAPIST);
-        NurseTable.setItems(Therapist);
-        for (Therapist t1 : ALTHERAPIST)
-            System.out.println("TESTTTTTTTTTT" + t1.toString());
-        JavafxTableFill();
-    }
 
     //Overrided by implementing Initializable
     @Override

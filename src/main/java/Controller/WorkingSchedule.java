@@ -248,10 +248,7 @@ public class WorkingSchedule implements Initializable, JavafxPaneHandler {
 
         for (Therapist t : therapistArrayList) {
             if (ChoiceAdd.getValue().equals(t.getName())) {
-
                 workScheduleArrayList = wsDAO.SelectAllByID(t.getID());
-                System.out.println("workarraylist ------------------> " + workScheduleArrayList);
-
                 if (workScheduleArrayList.size() == 0) {
                     wsDAO.insertWorkSched(t.getID(), personalWorkSchedules);
                 } else {
@@ -335,8 +332,6 @@ public class WorkingSchedule implements Initializable, JavafxPaneHandler {
     void onClickDeleteSpShift(ActionEvent event) throws SQLException {
         String shift = ChoiceDeleteSpShift.getValue();
         String[] splited = shift.split(" ");
-        System.out.println(splited[0]);
-        System.out.println(splited[1]);
         wsDAO.removeWorkSceduleByShift(splited[0], Integer.parseInt(splited[1]));
         ListViewFill();
     }
@@ -949,7 +944,6 @@ public class WorkingSchedule implements Initializable, JavafxPaneHandler {
         ChoiceDeleteSpDay.getItems().clear();
         ChoiceDeleteSpPatient.getItems().clear();
         ChoiceDeleteSpShift.getItems().clear();
-        ;
 
         for (Therapist t : therapistArrayList) {
             ChoiceAdd.getItems().add(t.getName());
