@@ -65,7 +65,6 @@ public class patient_medicineDAO {
     public ArrayList<Model.patient_medicine> selectAll() throws SQLException {
         ArrayList<Model.patient_medicine> list = new ArrayList<Model.patient_medicine>();
 
-        System.out.println(list);
 
         String sql = "select * from patient_medicine";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -76,7 +75,6 @@ public class patient_medicineDAO {
             list.add(pm);
         }
 
-        System.out.println(list);
 
         ps.close();
         rs.close();

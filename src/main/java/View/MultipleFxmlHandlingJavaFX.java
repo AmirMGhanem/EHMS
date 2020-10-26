@@ -1,5 +1,9 @@
 package View;
 
+import DBH.adressDAO;
+import DBH.patientDAO;
+import DBH.personDAO;
+import Model.Address;
 import Network.ApplicationNetwork;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -41,6 +45,9 @@ public class MultipleFxmlHandlingJavaFX extends Application {
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
+        DBH.adressDAO ado = new adressDAO();
+        DBH.personDAO pdo = new personDAO();
+        DBH.patientDAO pado = new patientDAO();
 
         Server.start();
 

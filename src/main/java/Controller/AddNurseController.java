@@ -85,7 +85,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
             t.setDate(sqlDate);
             java.sql.Date sqlWorkDate = java.sql.Date.valueOf(DatePickerWorkDateStart.getValue());
             t.setWorkDateStart(sqlWorkDate);
-            System.out.println("Constructor TESTER TOSTRING " + t.toString());
+
             for (Person pe : persons) {
                 if (t.getID().equals(pe.getID()))
                     isExist = true;
@@ -94,6 +94,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
                 ado.insertAddress(address);
                 pdo.insertperson(t);
                 tpo.insertherapist(t);
+                ma.MessageWithoutHeader("successfully added","the nurse has been added successfully");
             } else
                 ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
         }

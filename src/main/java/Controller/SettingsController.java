@@ -129,9 +129,7 @@ public class SettingsController implements Initializable, IValidations {
             @Override
             public void handle(ActionEvent event) {
                 String c = String.valueOf(ColorPickerThemeDesgin.getValue());
-                System.out.println(c);
                 SettingPanel.setStyle("-fx-background-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7));
-                System.out.println("fx-background-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7));
             }
         });
 
@@ -139,9 +137,7 @@ public class SettingsController implements Initializable, IValidations {
             @Override
             public void handle(ActionEvent event) {
                 String c = String.valueOf(ColorPickerButtonColor.getValue());
-                System.out.println(c);
                 BtnSetDefault.setStyle("-fx-background-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7));
-                System.out.println("fx-background-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7));
             }
         });
 
@@ -149,9 +145,7 @@ public class SettingsController implements Initializable, IValidations {
             @Override
             public void handle(ActionEvent event) {
                 String c = String.valueOf(ColorPickerTopPaneColor.getValue());
-                System.out.println(c);
                 TopPanel.setStyle("-fx-background-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7));
-                System.out.println("fx-background-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7));
             }
         });
 
@@ -162,7 +156,6 @@ public class SettingsController implements Initializable, IValidations {
                 String textColor = "-fx-text-fill: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7);
                 //or txtSearch.setStyle("-fx-text-fill: #BA55D3;");
                 BtnSetDefault.setStyle(textColor);
-                System.out.println(textColor);
             }
         });
 
@@ -170,11 +163,9 @@ public class SettingsController implements Initializable, IValidations {
             @Override
             public void handle(ActionEvent event) {
                 String c = String.valueOf(ColorPickerBorderColor.getValue());
-                System.out.println(c);
                 String color = "-fx-border-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7);
                 TablPaneThemeDesign.setStyle(color);
                 TabPaneSystem.setStyle(color);
-                System.out.println("fx-background-color: #" + c.charAt(2) + c.charAt(3) + c.charAt(4) + c.charAt(5) + c.charAt(6) + c.charAt(7));
             }
         });
 
@@ -183,14 +174,11 @@ public class SettingsController implements Initializable, IValidations {
             public void handle(ActionEvent event) {
                 if (ToggleBtnDarkMode.isSelected()) {
                     ToggleBtnDarkMode.setText("On");
-                    System.out.println("Toggle On");
                     SettingPanel.getStylesheets().clear();
                     flagtoggle = true;
                     String css = this.getClass().getResource("/Css/darkmode.css").toExternalForm();
                     SettingPanel.getStylesheets().add(css);
-                    System.out.println(css);
                 } else {
-                    System.out.println("Toggle Off");
                     ToggleBtnDarkMode.setText("Off");
                     SettingPanel.getStylesheets().clear();
                     flagtoggle = false;
@@ -211,6 +199,7 @@ public class SettingsController implements Initializable, IValidations {
         BtnSetDefault.setFont(Font.font(font));
     }
 
+    //Arm Button
     @FXML
     void OnClickBtnSetCustom(ActionEvent event) {
         setCustomeDesignFlag(true);
@@ -218,7 +207,7 @@ public class SettingsController implements Initializable, IValidations {
                 "has been Armed to the project, " +
                 "to disarm please press disarm");
     }
-
+    //DisArm button
     @FXML
     void OnClickDefault(ActionEvent event) throws IOException {
         setCustomeDesignFlag(false);

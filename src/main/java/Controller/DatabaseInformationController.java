@@ -40,16 +40,6 @@ public class DatabaseInformationController implements Initializable {
     private TextField TextfieldDBport;
     MessageAlerter messageAlerter = new MessageAlerter();
 
-    @FXML
-    void onClickBtnSave(ActionEvent event) {
-        String url = "jdbc:mysql://localhost:" + TextfieldDBport.getText() + "/" + TextfieldName.getText();
-        String user = TextfieldDBuser.getText();
-        String pass = TextfieldPassword.getText();
-        DatabaseConnector.setUser(user);
-        DatabaseConnector.setPass(pass);
-        DatabaseConnector.setUrl(url);
-        System.out.println(DatabaseConnector.getUrl());
-    }
 
     @FXML
     void onClickBtnClose(ActionEvent event) {

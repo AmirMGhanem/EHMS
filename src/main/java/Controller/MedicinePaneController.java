@@ -490,7 +490,6 @@ public class MedicinePaneController implements Initializable, Util.JavafxPaneHan
             if (pa.getPatientid().equals(LabelPatientIDAllergy.getText())) {
                 for (Allergy a : allergyArrayList) {
                     if (pa.getAllergyName().equals(a.getName())) {
-                        System.out.println("EQUAL");
                         AllergyTable.getItems().add(a);
                     }
                 }

@@ -124,9 +124,9 @@ public class MealsController implements Initializable, JavafxPaneHandler, IValid
             String patientid = TablePatient.getSelectionModel().getSelectedItem().getID();
             patient_meal pm = new patient_meal(patientid, mealname);
             if (pmDAO.insertToPatient_meal(pm) == 0)
-                System.out.println("Unsuccesffully");
+                ma.ShowWarningMessage("Warning","Unsuccessfully Attached","The meal cannot be attached");
             else {
-                System.out.println("Successfully attached");
+                ma.MessageWithoutHeader("Successfully Attached","The Meal has been attached successfully");
                 ListViewMeals.getItems().add(pm);
             }
 
@@ -141,9 +141,7 @@ public class MealsController implements Initializable, JavafxPaneHandler, IValid
         String[] strline;
         strline = str.split(" ");
         String id = strline[1];
-        System.out.println(id);
         String name = strline[3];
-        System.out.println(name);
         patient_meal pm = new patient_meal(id, name);
         pmDAO.removeByMealName(pm);
         ListViewMeals.getItems().removeAll(ListViewMeals.getSelectionModel().getSelectedItem());

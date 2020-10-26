@@ -3,7 +3,7 @@ package Util;
 public interface IValidations {
 
 	default boolean nameValidation(String str) {
-		String expression = "[A-Za-z]+";
+		String expression = "[A-Za-z\\s]+";
 		return str.matches(expression);
 	}
 

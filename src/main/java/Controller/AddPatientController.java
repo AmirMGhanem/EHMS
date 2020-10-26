@@ -105,7 +105,7 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
             java.sql.Date sqlDate = java.sql.Date.valueOf(DatePickerBirthDate.getValue());
             p.setDate(sqlDate);
 
-            System.out.println("TEST " + p.toString());
+
 
             for (Person pe : persons) {
                 if (p.getID().equals(pe.getID()))
@@ -115,6 +115,7 @@ public class AddPatientController implements Initializable, Util.JavafxPaneHandl
                 ado.insertAddress(address);
                 pdo.insertperson(p);
                 pado.insertPatient(p);
+                ma.MessageWithoutHeader("successfully added","the patient  has been added successfully");
             } else
                 ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
         }
