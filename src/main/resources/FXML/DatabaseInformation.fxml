@@ -18,10 +18,10 @@
       </ImageView>
       <Pane prefHeight="465.0" prefWidth="832.0" stylesheets="@../Css/lightmode.css">
          <children>
-            <TextField fx:id="TextfieldPassword" layoutX="266.0" layoutY="179.0" promptText="Password" />
-            <TextField fx:id="TextfieldDBuser" layoutX="267.0" layoutY="134.0" promptText="root" />
-            <TextField fx:id="TextfieldName" layoutX="266.0" layoutY="225.0" promptText="Database Name" />
-            <TextField fx:id="TextfieldURL" layoutX="266.0" layoutY="324.0" prefHeight="25.0" prefWidth="337.0" promptText="jdbc:mysql://localhost:[port]/[Database Name]&quot;" />
+            <TextField fx:id="TextfieldPassword" editable="false" layoutX="266.0" layoutY="179.0" promptText="Password" />
+            <TextField fx:id="TextfieldDBuser" editable="false" layoutX="267.0" layoutY="134.0" promptText="root" />
+            <TextField fx:id="TextfieldName" editable="false" layoutX="266.0" layoutY="225.0" promptText="Database Name" />
+            <TextField fx:id="TextfieldURL" editable="false" layoutX="266.0" layoutY="324.0" prefHeight="25.0" prefWidth="337.0" promptText="jdbc:mysql://localhost:[port]/[Database Name]&quot;" />
             <Label layoutX="77.0" layoutY="131.0" text="DataBase Username" textFill="RED">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
@@ -53,13 +53,12 @@
                </font>
             </Label>
             <Button fx:id="BtnChooseDir" layoutX="397.0" layoutY="361.0" mnemonicParsing="false" onAction="#onClickBtnChooseDir" prefHeight="36.0" prefWidth="149.0" styleClass="Button" text="Choose Directory" />
-            <TextField fx:id="TextfieldDBport" layoutX="266.0" layoutY="274.0" promptText=" Port" />
+            <TextField fx:id="TextfieldDBport" editable="false" layoutX="266.0" layoutY="274.0" promptText=" Port" />
             <Label layoutX="73.0" layoutY="271.0" text="DB Port" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="BtnSave" layoutX="548.0" layoutY="361.0" mnemonicParsing="false" onAction="#onClickBtnSave" prefHeight="36.0" prefWidth="149.0" styleClass="Button" text="Save Changes" />
             <Button fx:id="BtnClose" layoutX="617.0" layoutY="11.0" mnemonicParsing="false" onAction="#onClickBtnClose" prefHeight="52.0" prefWidth="98.0" style="-fx-background-color: #801b1e;" styleClass="Button" stylesheets="@../Css/lightmode.css" text="Close" textFill="WHITE">
                <font>
                   <Font name="System Bold Italic" size="18.0" />

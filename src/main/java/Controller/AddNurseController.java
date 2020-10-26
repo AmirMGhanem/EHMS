@@ -94,6 +94,7 @@ public class AddNurseController extends TherapistPaneController implements Initi
                 ado.insertAddress(address);
                 pdo.insertperson(t);
                 tpo.insertherapist(t);
+                ma.MessageWithoutHeader("successfully added","the nurse has been added successfully");
             } else
                 ma.MessageWithoutHeader("Fail To Add", "This Person ID Already Exist In Our System");
         }

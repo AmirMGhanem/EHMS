@@ -51,7 +51,7 @@ public class patient_allergyDAO {
     public ArrayList<Model.patient_allergy> selectAll() throws SQLException {
         ArrayList<Model.patient_allergy> list = new ArrayList<Model.patient_allergy>();
 
-        System.out.println(list);
+
 
         String sql = "select * from patient_allergy";
         PreparedStatement ps = con.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class patient_allergyDAO {
             list.add(pa);
         }
 
-        System.out.println(list);
+
 
         ps.close();
         rs.close();

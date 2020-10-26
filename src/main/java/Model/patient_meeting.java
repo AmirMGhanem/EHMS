@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class patient_meeting {
     private String patientid;
     private int meetingnum;
@@ -8,8 +10,8 @@ public class patient_meeting {
     }
 
     public patient_meeting(String patientid, int meetingnum) {
-      setPatientid(patientid);
-      setMeetingnum(meetingnum);
+        setPatientid(patientid);
+        setMeetingnum(meetingnum);
     }
 
     public String getPatientid() {
@@ -30,9 +32,8 @@ public class patient_meeting {
 
     @Override
     public String toString() {
-        return "patient_meeting{" +
-                "patientid='" + patientid + '\'' +
-                ", meetingnum=" + meetingnum +
-                '}';
+        return  "patientid='" + patientid + '\'' +
+                ", meetingnum=" + meetingnum;
     }
 }
+

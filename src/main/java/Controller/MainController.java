@@ -147,7 +147,7 @@ public class MainController implements Initializable {
                 ManualSetOpenNav();
                 setEnableAllButtons();
                 ProgressBarLoading.progressProperty().bind(thread.progressProperty());
-                thread.start();
+                thread.restart();
                 thread.workDoneProperty().addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {

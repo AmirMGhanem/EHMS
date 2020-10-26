@@ -116,7 +116,6 @@ public class patientDAO {
             list.add(p);
         }
 
-
         ps.close();
         rs.close();
 

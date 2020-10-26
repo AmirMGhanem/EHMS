@@ -111,8 +111,6 @@ public class therapistDAO {
             list.add(t);
         }
 
-        System.out.println(list);
-
         ps.close();
         rs.close();
 

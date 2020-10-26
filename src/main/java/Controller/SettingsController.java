@@ -199,6 +199,7 @@ public class SettingsController implements Initializable, IValidations {
         BtnSetDefault.setFont(Font.font(font));
     }
 
+    //Arm Button
     @FXML
     void OnClickBtnSetCustom(ActionEvent event) {
         setCustomeDesignFlag(true);
@@ -206,7 +207,7 @@ public class SettingsController implements Initializable, IValidations {
                 "has been Armed to the project, " +
                 "to disarm please press disarm");
     }
-
+    //DisArm button
     @FXML
     void OnClickDefault(ActionEvent event) throws IOException {
         setCustomeDesignFlag(false);

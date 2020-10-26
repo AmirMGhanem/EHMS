@@ -146,6 +146,9 @@ public class PdfExporter {
         document.add(pNew5Lines);
         document.add(p1);
         document.add(pNew5Lines);
+        document.add(pNew5Lines);
+        document.add(pNew5Lines);
+        document.add(pNew5Lines);
         document.add(new Paragraph("The Following Chart Diagram Shows Meetings , Medicines , Allergies , Meals Count. \n "));
         document.add(ScreenShotParagraph);
         document.close();
